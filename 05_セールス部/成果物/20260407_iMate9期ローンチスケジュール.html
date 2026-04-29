@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iMate 9期 ローンチスケジュール</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f0f;
+      --bg2: #1a1a1a;
+      --bg3: #242424;
+      --text: #f0f0f0;
+      --muted: #888;
+      --p1: #6366f1;
+      --p2: #f59e0b;
+      --p3: #10b981;
+      --p4: #ef4444;
+      --p5: #8b5cf6;
+      --border: #2e2e2e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1030 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 24px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .header-badge {
+      display: inline-block;
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.4);
+      color: #a5b4fc;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: clamp(24px, 5vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    h1 span { color: var(--p1); }
+    .subtitle {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 28px;
+      letter-spacing: 0.05em;
+    }
+    .countdown {
+      display: inline-flex;
+      gap: 16px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 28px;
+      margin-top: 8px;
+    }
+    .countdown-item { text-align: center; }
+    .countdown-num {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--p1);
+      display: block;
+      line-height: 1;
+    }
+    .countdown-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+      letter-spacing: 0.05em;
+    }
+    .countdown-sep {
+      font-size: 24px;
+      color: var(--border);
+      align-self: center;
+    }
+    .countdown-ended {
+      color: var(--p5);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 12px 0;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15,15,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    nav::-webkit-scrollbar { display: none; }
+    .nav-item {
+      flex-shrink: 0;
+      padding: 14px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .nav-item:hover { color: var(--text); }
+    .nav-item.active { color: var(--text); border-bottom-color: var(--p1); }
+
+    /* ===== MAIN ===== */
+    main { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
+
+    section { margin-bottom: 60px; }
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--p1), var(--p2), var(--p3), var(--p4), var(--p5));
+      border-radius: 2px;
+    }
+
+    .phase-card {
+      position: relative;
+      margin-bottom: 32px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .phase-card:hover {
+      border-color: rgba(255,255,255,0.1);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+    .phase-card.current {
+      border-color: rgba(99,102,241,0.5);
+      box-shadow: 0 0 0 1px rgba(99,102,241,0.2), 0 4px 32px rgba(99,102,241,0.1);
+    }
+    .phase-card.current::after {
+      content: '▶ 進行中';
+      position: absolute;
+      top: 16px; right: 16px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--p1);
+      background: rgba(99,102,241,0.12);
+      border: 1px solid rgba(99,102,241,0.3);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .phase-dot {
+      position: absolute;
+      left: -36px;
+      top: 24px;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      border: 3px solid var(--bg);
+      flex-shrink: 0;
+    }
+
+    .phase-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .phase-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .phase-meta { flex: 1; }
+    .phase-name {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .phase-period {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .phase-body { padding: 20px; }
+    .phase-desc {
+      font-size: 14px;
+      color: #b0b0b0;
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+
+    .tasks { display: flex; flex-direction: column; gap: 8px; }
+    .task {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 13.5px;
+      padding: 8px 12px;
+      background: var(--bg3);
+      border-radius: 8px;
+    }
+    .task-icon { flex-shrink: 0; margin-top: 1px; }
+
+    .milestones { margin-top: 16px; display: flex; flex-direction: column; gap: 6px; }
+    .milestone {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+    }
+    .milestone-star { font-size: 14px; flex-shrink: 0; }
+    .milestone-date {
+      font-size: 12px;
+      font-weight: 600;
+      flex-shrink: 0;
+      min-width: 40px;
+      opacity: 0.7;
+    }
+    .milestone-text { flex: 1; }
+    .milestone-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    /* ===== TRACKER ===== */
+    .tracker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+    }
+    .tracker-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .tracker-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tracker-icon { font-size: 18px; }
+    .status-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+    }
+    .status-pending   { background: rgba(136,136,136,0.15); color: #888; border: 1px solid rgba(136,136,136,0.3); }
+    .status-working   { background: rgba(245,158,11,0.15);  color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+    .status-waiting   { background: rgba(99,102,241,0.15);  color: #a5b4fc; border: 1px solid rgba(99,102,241,0.3); }
+    .status-revising  { background: rgba(239,68,68,0.15);   color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+    .status-done      { background: rgba(16,185,129,0.15);  color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+
+    .tracker-deadline {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .tracker-deadline span { color: var(--text); }
+
+    /* ===== WEEKLY VIEW ===== */
+    .week-block {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .week-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--bg2);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+    .week-header:hover { background: var(--bg3); }
+    .week-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      min-width: 50px;
+    }
+    .week-dates {
+      font-size: 13px;
+      font-weight: 600;
+      flex: 1;
+    }
+    .week-phase-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .week-toggle {
+      color: var(--muted);
+      font-size: 12px;
+      transition: transform 0.2s;
+    }
+    .week-block.open .week-toggle { transform: rotate(180deg); }
+    .week-body {
+      display: none;
+      padding: 16px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+    .week-block.open .week-body { display: block; }
+    .week-tasks { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .week-tasks li {
+      font-size: 13px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .week-tasks li:last-child { border-bottom: none; }
+    .week-deadline-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: rgba(239,68,68,0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(239,68,68,0.3);
+      flex-shrink: 0;
+      align-self: center;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    footer strong { color: var(--p1); }
+
+    /* ===== PRINT ===== */
+    @media print {
+      body { background: #fff; color: #000; font-size: 11pt; }
+      nav, .week-toggle { display: none; }
+      .phase-card { break-inside: avoid; border: 1px solid #ccc; box-shadow: none; }
+      .week-body { display: block !important; }
+      header { background: #fff; border-bottom: 2px solid #333; }
+      .countdown { display: none; }
+      h1 span { color: #4338ca; }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .phase-header { flex-direction: column; gap: 8px; }
+      .tracker-grid { grid-template-columns: 1fr; }
+      .countdown { gap: 8px; padding: 12px 16px; }
+      .countdown-num { font-size: 22px; }
+    }
+
+    /* ===== SCROLL ANIMATION ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-badge">iMate 9期 / 2025</div>
+  <h1>ローンチ<span>スケジュール</span></h1>
+  <p class="subtitle">2025.4.13（キックオフ）→ 6.29（募集締切）</p>
+  <div id="countdown-wrapper">
+    <div class="countdown" id="countdown">
+      <div class="countdown-item"><span class="countdown-num" id="cd-days">--</span><div class="countdown-label">DAYS</div></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-item"><span class="countdown-num" id="cd-hours">--</span><div class="countdown-label">HOURS</div></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-item"><span class="countdown-num" id="cd-mins">--</span><div class="countdown-label">MINS</div></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-item"><span class="countdown-num" id="cd-secs">--</span><div class="countdown-label">SECS</div></div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:8px;">ローンチ当日（6/26）まで</p>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-item active" onclick="scrollTo('#timeline')">タイムライン</div>
+  <div class="nav-item" onclick="scrollTo('#tracker')">成果物トラッカー</div>
+  <div class="nav-item" onclick="scrollTo('#weekly')">週別ビュー</div>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+  <!-- TIMELINE -->
+  <section id="timeline">
+    <div class="section-title">フェーズ別タイムライン</div>
+    <div class="timeline">
+
+      <!-- Phase 1 -->
+      <div class="phase-card fade-in" id="phase1" data-start="2025-04-13" data-end="2025-04-20">
+        <div class="phase-dot" style="background:var(--p1)"></div>
+        <div class="phase-header">
+          <div class="phase-num" style="background:rgba(99,102,241,0.15);color:var(--p1)">Phase 1</div>
+          <div class="phase-meta">
+            <div class="phase-name" style="color:var(--p1)">キックオフ &amp; マインドセット</div>
+            <div class="phase-period">4月13日（日）〜 4月20日（日）</div>
+          </div>
+        </div>
+        <div class="phase-body">
+          <p class="phase-desc">ローンチ全体像を把握し、iMateとして必要な準備を整える最初の1週間。キックオフ説明会でチームと同じ認識を持ち、すぐにインプットへ移行する。</p>
+          <div class="tasks">
+            <div class="task"><span class="task-icon">📋</span>キックオフ説明会への参加（4/13）</div>
+            <div class="task"><span class="task-icon">🗺️</span>ローンチ全体像・スケジュールの確認と共有</div>
+            <div class="task"><span class="task-icon">🎯</span>iMateとしての役割・心構えの確認</div>
+            <div class="task"><span class="task-icon">📚</span>投稿作成に関する教材インプット開始（〜4/20完了目標）</div>
+          </div>
+          <div class="milestones">
+            <div class="milestone">
+              <span class="milestone-star">⭐</span>
+              <span class="milestone-date">4/13</span>
+              <span class="milestone-text">キックオフ説明会</span>
+              <span class="milestone-tag" style="background:rgba(99,102,241,0.15);color:#a5b4fc;border:1px solid rgba(99,102,241,0.3)">スタート</span>
+            </div>
+            <div class="milestone">
+              <span class="milestone-star">⭐</span>
+              <span class="milestone-date">4/20</span>
+              <span class="milestone-text">投稿教材インプット完了</span>
+              <span class="milestone-tag" style="background:rgba(99,102,241,0.15);color:#a5b4fc;border:1px solid rgba(99,102,241,0.3)">締切</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase-card fade-in" id="phase2" data-start="2025-04-21" data-end="2025-05-11">
+        <div class="phase-dot" style="background:var(--p2)"></div>
+        <div class="phase-header">
+          <div class="phase-num" style="background:rgba(245,158,11,0.15);color:var(--p2)">Phase 2</div>
+          <div class="phase-meta">
+            <div class="phase-name" style="color:var(--p2)">投稿作成期間</div>
+            <div class="phase-period">4月21日（月）〜 5月11日（日）</div>
+          </div>
+        </div>
+        <div class="phase-body">
+          <p class="phase-desc">リール2本・フィード2本を3週間で完成させる。2本ずつ並行制作しFBサイクルを効率化。しゃけからのフィードバック（3〜5日）を見越したスケジュールで進める。</p>
+          <div class="tasks">
+            <div class="task"><span class="task-icon">🎬</span>【第1週 4/21〜4/27】リール1本目・フィード1本目の初稿作成・提出</div>
+            <div class="task"><span class="task-icon">🔄</span>【第2週 4/28〜5/4】①のFB受領→修正 ＋ リール2本目・フィード2本目の初稿作成・提出</div>
+            <div class="task"><span class="task-icon">✅</span>【第3週 5/5〜5/11】②のFB受領→修正 → 全4本 最終完成</div>
+            <div class="task"><span class="task-icon">📝</span>各投稿：企画・撮影/デザイン・キャプション作成・初稿提出→FB→修正→完成</div>
+          </div>
+          <div class="milestones">
+            <div class="milestone">
+              <span class="milestone-star">⭐</span>
+              <span class="milestone-date">4/27</span>
+              <span class="milestone-text">投稿セット①（リール1＋フィード1）初稿提出</span>
+              <span class="milestone-tag" style="background:rgba(245,158,11,0.15);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)">締切</span>
+            </div>
+            <div class="milestone">
+              <span class="milestone-star">⭐</span>
+              <span class="milestone-date">5/4</span>
+              <span class="milestone-text">投稿セット②初稿提出 ＋ セット①FB修正完了</span>
+              <span class="milestone-tag" style="background:rgba(245,158,11,0.15);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)">締切</span>
+            </div>
+            <div class="milestone">
+              <span class="milestone-star">⭐</span>
+              <span class="milestone-date">5/11</span>
+              <span class="milestone-text">全4本投稿 最終完成</span>
+              <span class="milestone-tag" style="background:rgba(245,158,11,0.15);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)">完成</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase-card fade-in" id="phase3" data-start="2025-05-05" data-end="2025-05-16">
+        <div class="phase-dot" style="background:var(--p3)"></div>
+        <div class="phase-header">
+          <div class="phase-num" style="background:rgba(16,185,129,0.15);color:var(--p3)">Phase 3</div>
+          <div class="phase-meta">
+            <div class="phase-name" style="color:var(--p3)">ラジオ収録 &amp; ストーリーズ準備</div>
+            <div class="phase-period">5月5日（月）〜 5月16日（金）※Phase 2後半と並行</div>
+          </div>
+        </div>
+        <div class="phase-body">
+          <p class="phase-desc">Phase 2の最終週と並行してラジオ収録・ストーリーズ準備を進める。ストーリーズ開始（5/17）までに全準備を完了させることが絶対条件。</p>
+          <div class="tasks">
+            <div class="task"><span class="task-icon">🎙️</span>ラジオ台本作成（自身の過去・変化のストーリー）</div>
+            <div class="task"><span class="task-icon">⏺️</span>ラジオ収録・編集（収録完了目標：5/14）</div>
+            <div class="task"><span class="task-icon">📖</span>ストーリーズ教材インプット（1時間×3本 ＝ 計3時間）</div>
+            <div class="task"><span class="task-icon">📅</span>40日間ストーリーズ計画の読み込み・自分ジャンルへの落とし込み</div>
+          </div>
+          <div class="milestones">
+            <div class="milestone">
+              <span class="milestone-star">⭐</span>
+              <span class="milestone-date">5/11</span>
+              <span class="milestone-text">ラジオ台本完成</span>
+              <span class="milestone-tag" style="background:rgba(16,185,129,0.15);color:#6ee7b7;border:1px solid rgba(16,185,129,0.3)">締切</span>
+            </div>
+            <div class="milestone">
+              <span class="milestone-star">⭐</span>
+              <span class="milestone-date">5/14</span>
+              <span class="milestone-text">ラジオ収録完了</span>
+              <span class="milestone-tag" style="background:rgba(16,185,129,0.15);color:#6ee7b7;border:1px solid rgba(16,185,129,0.3)">締切</span>
+            </div>
+            <div class="milestone">
+              <span class="milestone-star">⭐</span>
+              <span class="milestone-date">5/16</span>
+              <span class="milestone-text">ストーリーズ教材インプット完了・計画落とし込み完了</span>
+              <span class="milestone-tag" style="background:rgba(16,185,129,0.15);color:#6ee7b7;border:1px solid rgba(16,185,129,0.3)">完了</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 4 -->
+      <div class="phase-card fade-in" id="phase4" data-start="2025-05-17" data-end="2025-06-26">
+        <div class="phase-dot" style="background:var(--p4)"></div>
+        <div class="phase-header">
+          <div class="phase-num" style="background:rgba(239,68,68,0.15);color:var(--p4)">Phase 4</div>
+          <div class="phase-meta">
+            <div class="phase-name" style="color:var(--p4)">ローンチストーリーズ実施</div>
+            <div class="phase-period">5月17日（土）〜 6月26日（木）　約40日間</div>
+          </div>
+        </div>
+        <div class="phase-body">
+          <p class="phase-desc">40日間のストーリーズローンチを継続実行。3ステップで潜在層を顕在化し、ローンチ当日に「申し込みたい！」という状態に仕上げる。</p>
+          <div class="tasks">
+            <div class="task"><span class="task-icon">😟</span>STEP 1：悩みを自覚してもらうストーリーズ投稿（前半）</div>
+            <div class="task"><span class="task-icon">✨</span>STEP 2：理想の未来を望んでもらうストーリーズ投稿（中盤）</div>
+            <div class="task"><span class="task-icon">🙋</span>STEP 3：自分ごと化してもらうストーリーズ投稿（後半〜直前）</div>
+            <div class="task"><span class="task-icon">📊</span>週1回：進捗確認・しゃけへの相談タイム</div>
+            <div class="task"><span class="task-icon">🔥</span>ローンチ直前（6/20〜）：熱量MAX・告知強化期間</div>
+          </div>
+          <div class="milestones">
+            <div class="milestone">
+              <span class="milestone-star">⭐</span>
+              <span class="milestone-date">5/17</span>
+              <span class="milestone-text">ストーリーズローンチ開始</span>
+              <span class="milestone-tag" style="background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.3)">スタート</span>
+            </div>
+            <div class="milestone">
+              <span class="milestone-star">⭐</span>
+              <span class="milestone-date">6/26</span>
+              <span class="milestone-text">ローンチ当日（勉強会兼説明会）</span>
+              <span class="milestone-tag" style="background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.3)">本番</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 5 -->
+      <div class="phase-card fade-in" id="phase5" data-start="2025-06-26" data-end="2025-06-29">
+        <div class="phase-dot" style="background:var(--p5)"></div>
+        <div class="phase-header">
+          <div class="phase-num" style="background:rgba(139,92,246,0.15);color:var(--p5)">Phase 5</div>
+          <div class="phase-meta">
+            <div class="phase-name" style="color:var(--p5)">ローンチ本番</div>
+            <div class="phase-period">6月26日（木）〜 6月29日（日）　4日間限定</div>
+          </div>
+        </div>
+        <div class="phase-body">
+          <p class="phase-desc">いよいよローンチ本番。40日間の準備の集大成。リール・フィード投稿も公開し、説明会→募集という流れで最大の成果を出す。</p>
+          <div class="tasks">
+            <div class="task"><span class="task-icon">🎉</span>6/26：勉強会兼説明会の実施</div>
+            <div class="task"><span class="task-icon">📢</span>6/26〜6/29：4日間限定募集スタート</div>
+            <div class="task"><span class="task-icon">🎬</span>リール・フィード投稿の公開タイミング管理</div>
+            <div class="task"><span class="task-icon">💬</span>DM・コメント対応・フォローアップ</div>
+            <div class="task"><span class="task-icon">🙏</span>6/29：募集締切・クロージング</div>
+          </div>
+          <div class="milestones">
+            <div class="milestone">
+              <span class="milestone-star">⭐</span>
+              <span class="milestone-date">6/26</span>
+              <span class="milestone-text">勉強会兼説明会 ＋ 募集開始</span>
+              <span class="milestone-tag" style="background:rgba(139,92,246,0.15);color:#c4b5fd;border:1px solid rgba(139,92,246,0.3)">🎊 本番</span>
+            </div>
+            <div class="milestone">
+              <span class="milestone-star">⭐</span>
+              <span class="milestone-date">6/29</span>
+              <span class="milestone-text">4日間限定募集 締切</span>
+              <span class="milestone-tag" style="background:rgba(139,92,246,0.15);color:#c4b5fd;border:1px solid rgba(139,92,246,0.3)">最終</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /timeline -->
+  </section>
+
+  <!-- TRACKER -->
+  <section id="tracker">
+    <div class="section-title">成果物トラッカー（サンプル）</div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">※ 実際の進捗管理はNotionなどで運用想定。ここはステータス確認のサンプル表示です。</p>
+    <div class="tracker-grid">
+
+      <div class="tracker-card fade-in">
+        <div class="tracker-title"><span class="tracker-icon">🎬</span>リール 1本目</div>
+        <div><span class="status-badge status-pending">未着手</span></div>
+        <div class="tracker-deadline">初稿締切：<span>4月27日</span></div>
+      </div>
+
+      <div class="tracker-card fade-in">
+        <div class="tracker-title"><span class="tracker-icon">🎬</span>リール 2本目</div>
+        <div><span class="status-badge status-pending">未着手</span></div>
+        <div class="tracker-deadline">初稿締切：<span>5月4日</span></div>
+      </div>
+
+      <div class="tracker-card fade-in">
+        <div class="tracker-title"><span class="tracker-icon">🖼️</span>フィード投稿 1本目</div>
+        <div><span class="status-badge status-pending">未着手</span></div>
+        <div class="tracker-deadline">初稿締切：<span>4月27日</span></div>
+      </div>
+
+      <div class="tracker-card fade-in">
+        <div class="tracker-title"><span class="tracker-icon">🖼️</span>フィード投稿 2本目</div>
+        <div><span class="status-badge status-pending">未着手</span></div>
+        <div class="tracker-deadline">初稿締切：<span>5月4日</span></div>
+      </div>
+
+      <div class="tracker-card fade-in">
+        <div class="tracker-title"><span class="tracker-icon">🎙️</span>音声ラジオ</div>
+        <div><span class="status-badge status-pending">未着手</span></div>
+        <div class="tracker-deadline">収録完了締切：<span>5月14日</span></div>
+      </div>
+
+      <div class="tracker-card fade-in">
+        <div class="tracker-title"><span class="tracker-icon">📚</span>ストーリーズ教材 インプット</div>
+        <div><span class="status-badge status-pending">未着手</span></div>
+        <div class="tracker-deadline">完了締切：<span>5月16日</span>（計3時間）</div>
+      </div>
+
+    </div>
+    <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;font-size:12px;">
+      <span class="status-badge status-pending">未着手</span>
+      <span class="status-badge status-working">作成中</span>
+      <span class="status-badge status-waiting">FB待ち</span>
+      <span class="status-badge status-revising">修正中</span>
+      <span class="status-badge status-done">完成</span>
+    </div>
+  </section>
+
+  <!-- WEEKLY VIEW -->
+  <section id="weekly">
+    <div class="section-title">週別ビュー（折りたたみ）</div>
+    <div id="week-list"></div>
+  </section>
+
+</main>
+
+<footer>
+  <p>powered by <strong>iCircle PRO+</strong></p>
+  <p style="margin-top:4px;font-size:12px">最終更新日：2026年4月7日</p>
+</footer>
+
+<script>
+  // ===== COUNTDOWN =====
+  const launchDate = new Date('2025-06-26T10:00:00+09:00');
+  function updateCountdown() {
+    const now = new Date();
+    const diff = launchDate - now;
+    if (diff <= 0) {
+      document.getElementById('countdown').innerHTML = '<div class="countdown-ended">🎊 ローンチ日を迎えました！</div>';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ===== CURRENT PHASE HIGHLIGHT =====
+  const today = new Date();
+  document.querySelectorAll('.phase-card').forEach(card => {
+    const s = new Date(card.dataset.start + 'T00:00:00+09:00');
+    const e = new Date(card.dataset.end   + 'T23:59:59+09:00');
+    if (today >= s && today <= e) card.classList.add('current');
+  });
+
+  // ===== NAV SMOOTH SCROLL =====
+  function scrollTo(id) {
+    const el = document.querySelector(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+  }
+
+  // ===== WEEKLY DATA =====
+  const weeks = [
+    { num:'W1',  dates:'4/13〜4/19', phase:'p1', color:'var(--p1)',
+      tasks:['キックオフ説明会（4/13）', 'ローンチスケジュール共有・役割確認', '投稿作成教材インプット開始'],
+      deadlines:['4/13 キックオフ説明会'] },
+    { num:'W2',  dates:'4/20〜4/26', phase:'p2', color:'var(--p2)',
+      tasks:['投稿教材インプット完了（4/20）', 'リール1本目：企画・撮影・編集開始', 'フィード1本目：デザイン・キャプション作成開始'],
+      deadlines:['4/20 投稿教材インプット完了'] },
+    { num:'W3',  dates:'4/27〜5/3',  phase:'p2', color:'var(--p2)',
+      tasks:['リール1本目・フィード1本目　初稿提出（4/27）', 'しゃけからのFBを待ちながら → リール2本目・フィード2本目の企画開始'],
+      deadlines:['4/27 投稿セット①初稿提出'] },
+    { num:'W4',  dates:'5/4〜5/10',  phase:'p2', color:'var(--p2)',
+      tasks:['セット①FBを受領→修正', 'リール2本目・フィード2本目　初稿提出（5/4）', 'Phase 3開始：ラジオ台本作成開始'],
+      deadlines:['5/4 投稿セット②初稿提出 ＋ セット①FB修正完了'] },
+    { num:'W5',  dates:'5/11〜5/16', phase:'p3', color:'var(--p3)',
+      tasks:['全4本投稿　最終完成（5/11）', 'ラジオ台本完成（5/11）', 'ラジオ収録・編集（〜5/14）', 'ストーリーズ教材インプット（1時間×3本）', '40日ストーリーズ計画の自分ジャンル落とし込み（〜5/16）'],
+      deadlines:['5/11 全投稿完成・ラジオ台本完成', '5/14 ラジオ収録完了', '5/16 ストーリーズ準備完了'] },
+    { num:'W6',  dates:'5/17〜5/23', phase:'p4', color:'var(--p4)',
+      tasks:['🔴 ストーリーズローンチ開始（5/17）', 'STEP1：悩みを自覚してもらう投稿（Week1）', '週次進捗確認・しゃけ相談'],
+      deadlines:['5/17 ストーリーズ開始'] },
+    { num:'W7',  dates:'5/24〜5/30', phase:'p4', color:'var(--p4)',
+      tasks:['STEP1継続：悩みを深掘りする投稿', '週次進捗確認・相談タイム'] },
+    { num:'W8',  dates:'5/31〜6/6',  phase:'p4', color:'var(--p4)',
+      tasks:['STEP2：理想の未来を望んでもらう投稿（Week1）', '週次進捗確認・相談タイム'] },
+    { num:'W9',  dates:'6/7〜6/13',  phase:'p4', color:'var(--p4)',
+      tasks:['STEP2継続：理想の未来・ビフォーアフター訴求', '週次進捗確認・相談タイム'] },
+    { num:'W10', dates:'6/14〜6/20', phase:'p4', color:'var(--p4)',
+      tasks:['STEP3：自分ごと化してもらう投稿スタート', '週次進捗確認・相談タイム'] },
+    { num:'W11', dates:'6/21〜6/26', phase:'p4', color:'var(--p4)',
+      tasks:['STEP3継続・ローンチ直前の告知強化', '6/26：勉強会兼説明会 ＋ 募集スタート', 'リール・フィード投稿公開'],
+      deadlines:['6/26 ローンチ当日'] },
+    { num:'W12', dates:'6/27〜6/29', phase:'p5', color:'var(--p5)',
+      tasks:['4日間限定募集期間（6/26〜6/29）', 'DM・コメント対応・フォローアップ', '6/29：募集締切・クロージング'],
+      deadlines:['6/29 募集締切'] },
+  ];
+
+  const list = document.getElementById('week-list');
+  weeks.forEach((w, i) => {
+    const dlHTML = (w.deadlines || []).map(d =>
+      `<span class="week-deadline-badge">🚩 ${d}</span>`
+    ).join('');
+    const tasksHTML = w.tasks.map(t =>
+      `<li><span style="color:${w.color};flex-shrink:0">▸</span><span>${t}</span></li>`
+    ).join('');
+    const block = document.createElement('div');
+    block.className = 'week-block' + (i === 0 ? ' open' : '');
+    block.innerHTML = `
+      <div class="week-header" onclick="this.closest('.week-block').classList.toggle('open')">
+        <span class="week-num">${w.num}</span>
+        <span class="week-dates">${w.dates} ${dlHTML}</span>
+        <span class="week-phase-dot" style="background:${w.color}"></span>
+        <span class="week-toggle">▼</span>
+      </div>
+      <div class="week-body"><ul class="week-tasks">${tasksHTML}</ul></div>
+    `;
+    list.appendChild(block);
+  });
+
+  // ===== SCROLL ANIMATION =====
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ===== NAV ACTIVE ON SCROLL =====
+  const sections = document.querySelectorAll('section[id]');
+  const navItems = document.querySelectorAll('.nav-item');
+  const sectionMap = { timeline: 0, tracker: 1, weekly: 2 };
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) current = s.id;
+    });
+    if (current && sectionMap[current] !== undefined) {
+      navItems.forEach(n => n.classList.remove('active'));
+      navItems[sectionMap[current]].classList.add('active');
+    }
+  });
+</script>
+</body>
+</html>

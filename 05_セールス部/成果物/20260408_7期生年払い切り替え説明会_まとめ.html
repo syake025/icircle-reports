@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iCircle 7期生 年払い切り替え説明会 企画まとめ</title>
+  <style>
+    :root {
+      --primary: #E85D75;
+      --primary-light: #FDE8EC;
+      --primary-mid: #F5B0BC;
+      --secondary: #5B72E8;
+      --secondary-light: #EBF0FD;
+      --accent: #F5A623;
+      --accent-light: #FEF4E0;
+      --green: #3DBE8E;
+      --green-light: #E0F8F0;
+      --gray-dark: #2D2D3A;
+      --gray-mid: #6B6B80;
+      --gray-light: #F4F4F8;
+      --border: #E0E0EE;
+      --white: #FFFFFF;
+      --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--gray-dark);
+      background: #F0F0F6;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, #C0395A 100%);
+      color: white;
+      padding: 40px 48px 36px;
+    }
+    .header-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 26px;
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 14px;
+    }
+    .header-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+    .header-meta span { display: flex; align-items: center; gap: 6px; }
+    .header-meta .dot { width: 6px; height: 6px; background: rgba(255,255,255,0.6); border-radius: 50%; }
+
+    /* ===== NAV ===== */
+    .nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .nav ul {
+      display: flex;
+      list-style: none;
+      gap: 0;
+      overflow-x: auto;
+    }
+    .nav ul li a {
+      display: block;
+      padding: 14px 20px;
+      text-decoration: none;
+      color: var(--gray-mid);
+      font-size: 13px;
+      font-weight: 600;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .nav ul li a:hover {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    /* ===== CONTAINER ===== */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 36px 24px;
+    }
+
+    /* ===== SECTION ===== */
+    .section {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+    .section-header {
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .icon-red { background: var(--primary-light); }
+    .icon-blue { background: var(--secondary-light); }
+    .icon-green { background: var(--green-light); }
+    .icon-orange { background: var(--accent-light); }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--gray-dark);
+    }
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--gray-mid);
+      margin-top: 2px;
+    }
+    .section-body { padding: 24px 28px; }
+
+    /* ===== OVERVIEW GRID ===== */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 700px) { .overview-grid { grid-template-columns: 1fr; } }
+    .overview-card {
+      background: var(--gray-light);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .overview-card .label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-mid);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .overview-card .value {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--gray-dark);
+    }
+    .overview-card .value.highlight { color: var(--primary); }
+
+    /* ===== TABLE ===== */
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    thead th {
+      background: var(--gray-light);
+      color: var(--gray-mid);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--gray-light); }
+    tbody td {
+      padding: 12px 14px;
+      vertical-align: top;
+      color: var(--gray-dark);
+      line-height: 1.6;
+    }
+    td.time-col {
+      font-weight: 700;
+      color: var(--primary);
+      white-space: nowrap;
+      font-size: 13px;
+    }
+    td.phase-col {
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    /* ===== PHASE BADGE ===== */
+    .phase-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .phase-a { background: #FDE8EC; color: var(--primary); }
+    .phase-b { background: #EBF0FD; color: var(--secondary); }
+    .phase-c { background: #E0F8F0; color: var(--green); }
+
+    /* ===== TAG ===== */
+    .tag {
+      display: inline-block;
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .tag-red { background: var(--primary-light); color: var(--primary); }
+    .tag-blue { background: var(--secondary-light); color: var(--secondary); }
+    .tag-green { background: var(--green-light); color: var(--green); }
+    .tag-orange { background: var(--accent-light); color: #B07A1A; }
+    .tag-gray { background: #EBEBF5; color: var(--gray-mid); }
+
+    /* ===== BENEFIT CARDS ===== */
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 700px) { .benefit-grid { grid-template-columns: 1fr; } }
+    .benefit-card {
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      position: relative;
+    }
+    .benefit-card.recommended {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .rec-label {
+      position: absolute;
+      top: -10px;
+      left: 16px;
+      background: var(--primary);
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 10px;
+      border-radius: 10px;
+    }
+    .benefit-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-mid);
+      margin-bottom: 4px;
+    }
+    .benefit-title {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--gray-dark);
+    }
+    .benefit-card.recommended .benefit-title { color: var(--primary); }
+    .benefit-desc {
+      font-size: 12px;
+      color: var(--gray-mid);
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    .benefit-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* ===== COST INDICATOR ===== */
+    .cost {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .cost-dots { display: flex; gap: 3px; }
+    .cost-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+    .cost-dot.filled { background: var(--primary); }
+
+    /* ===== TOP PACKAGES ===== */
+    .package-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 800px) { .package-grid { grid-template-columns: 1fr; } }
+    .package-card {
+      border-radius: 14px;
+      padding: 20px;
+      border: 2px solid var(--border);
+    }
+    .package-card.top1 {
+      border-color: var(--primary);
+      background: linear-gradient(160deg, var(--primary-light) 0%, #FFF 60%);
+    }
+    .package-card.top2 {
+      border-color: var(--secondary);
+      background: linear-gradient(160deg, var(--secondary-light) 0%, #FFF 60%);
+    }
+    .package-card.top3 {
+      border-color: var(--green);
+      background: linear-gradient(160deg, var(--green-light) 0%, #FFF 60%);
+    }
+    .package-rank {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .top1 .package-rank { color: var(--primary); }
+    .top2 .package-rank { color: var(--secondary); }
+    .top3 .package-rank { color: var(--green); }
+    .package-name {
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 14px;
+      color: var(--gray-dark);
+    }
+    .package-items { list-style: none; margin-bottom: 14px; }
+    .package-items li {
+      font-size: 12px;
+      padding: 6px 0;
+      border-bottom: 1px dashed var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .package-items li:last-child { border-bottom: none; }
+    .check { font-size: 13px; flex-shrink: 0; }
+    .check.existing { color: var(--gray-mid); }
+    .check.new-benefit { color: var(--primary); }
+
+    /* ===== COMPARISON TABLE ===== */
+    .compare-table thead th { text-align: center; }
+    .compare-table tbody td { text-align: center; }
+    .compare-table tbody td:first-child { text-align: left; font-weight: 700; }
+    .star { color: var(--accent); font-size: 14px; }
+    .rank-best { background: #FDE8EC; font-weight: 800; color: var(--primary); }
+
+    /* ===== PROMPT CARDS ===== */
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 0;
+    }
+    .prompt-row {
+      display: grid;
+      grid-template-columns: 48px 1fr 200px 180px;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      align-items: stretch;
+    }
+    .prompt-row:last-child { border-bottom: none; }
+    .prompt-row:first-child { border-radius: 0; }
+    .prompt-num {
+      background: var(--primary);
+      color: white;
+      font-size: 18px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .prompt-main { padding: 16px 20px; }
+    .prompt-name { font-size: 14px; font-weight: 800; margin-bottom: 4px; }
+    .prompt-desc { font-size: 12px; color: var(--gray-mid); line-height: 1.6; }
+    .prompt-target { padding: 16px; border-left: 1px solid var(--border); }
+    .prompt-target-label { font-size: 10px; font-weight: 700; color: var(--gray-mid); letter-spacing: 0.08em; margin-bottom: 6px; }
+    .prompt-target-text { font-size: 12px; color: var(--gray-dark); line-height: 1.5; }
+    .prompt-step { padding: 16px; border-left: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
+    @media (max-width: 750px) {
+      .prompt-row { grid-template-columns: 40px 1fr; }
+      .prompt-target, .prompt-step { display: none; }
+    }
+
+    /* ===== FLOW SECTION ===== */
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0;
+    }
+    @media (max-width: 900px) { .flow-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 600px) { .flow-grid { grid-template-columns: repeat(2, 1fr); } }
+    .flow-step {
+      padding: 16px 12px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .flow-step:last-child { border-right: none; }
+    .flow-icon { font-size: 22px; margin-bottom: 6px; }
+    .flow-label { font-size: 11px; font-weight: 700; color: var(--gray-mid); margin-bottom: 4px; }
+    .flow-text { font-size: 12px; font-weight: 800; color: var(--gray-dark); }
+
+    /* ===== CALLOUT ===== */
+    .callout {
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .callout-pink { background: var(--primary-light); border-left: 4px solid var(--primary); }
+    .callout-blue { background: var(--secondary-light); border-left: 4px solid var(--secondary); }
+    .callout-green { background: var(--green-light); border-left: 4px solid var(--green); }
+    .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .callout-text { font-size: 13px; line-height: 1.6; }
+    .callout-text strong { font-weight: 800; }
+
+    /* ===== ANNOUNCEMENT ===== */
+    .announcement {
+      background: var(--gray-light);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      font-size: 13px;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+
+    /* ===== PREPARATION TABLE ===== */
+    .prep-badge {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 12px;
+      color: var(--gray-mid);
+    }
+
+    /* ===== UTILITY ===== */
+    .text-primary { color: var(--primary); }
+    .text-bold { font-weight: 800; }
+    .mt8 { margin-top: 8px; }
+    .mt16 { margin-top: 16px; }
+    .mt24 { margin-top: 24px; }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-badge">セールス部 | 企画書まとめ</div>
+  <h1>iCircle 7期生<br>年払い切り替え説明会 企画まとめ</h1>
+  <div class="header-meta">
+    <span><span class="dot"></span>作成日：2026年4月8日</span>
+    <span><span class="dot"></span>開催日：2026年4月15日（水）</span>
+    <span><span class="dot"></span>対象：7期生全員（30〜40名）</span>
+    <span><span class="dot"></span>形式：オンライン（Zoom）</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <ul>
+    <li><a href="#overview">📋 概要</a></li>
+    <li><a href="#part1">🎯 Part 1：企画</a></li>
+    <li><a href="#timeline">⏱ タイムライン</a></li>
+    <li><a href="#prep">📅 準備スケジュール</a></li>
+    <li><a href="#part2">🎁 Part 2：特典案</a></li>
+    <li><a href="#packages">🏆 TOP3パッケージ</a></li>
+    <li><a href="#prompts">🤖 AIプロンプト集</a></li>
+    <li><a href="#flow">🔗 連動設計</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+  <!-- ===== OVERVIEW ===== -->
+  <div class="section" id="overview">
+    <div class="section-header">
+      <div class="section-icon icon-red">📋</div>
+      <div>
+        <div class="section-title">企画概要</div>
+        <div class="section-subtitle">今回の説明会のキーサマリー</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="overview-grid">
+        <div class="overview-card">
+          <div class="label">企画コンセプト</div>
+          <div class="value">「学ぶ場」ではなく<br>「手を動かす場」</div>
+        </div>
+        <div class="overview-card">
+          <div class="label">前半イベント名</div>
+          <div class="value">みんなで一緒にやる！<br>アカウント設計60分チャレンジ</div>
+        </div>
+        <div class="overview-card">
+          <div class="label">解決する課題</div>
+          <div class="value">6期生の失敗再現を防ぐ<br>「年払い説明会」単体告知をやめる</div>
+        </div>
+        <div class="overview-card">
+          <div class="label">参加人数</div>
+          <div class="value highlight">30〜40名</div>
+        </div>
+        <div class="overview-card">
+          <div class="label">運営体制</div>
+          <div class="value highlight">6名（1グループに1名ずつ）</div>
+        </div>
+        <div class="overview-card">
+          <div class="label">総所要時間</div>
+          <div class="value highlight">約100〜110分</div>
+        </div>
+      </div>
+      <div class="callout callout-pink">
+        <div class="callout-icon">💡</div>
+        <div class="callout-text">
+          <strong>iCircleコアメッセージとの連動：</strong>「ノウハウに価値はない。大事なのは環境」——前半ワークで「一緒にやると手が動く」を体感させ、後半の年払い説明で「この環境を1年続けるか」を問う設計。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PART 1 ===== -->
+  <div class="section" id="part1">
+    <div class="section-header">
+      <div class="section-icon icon-red">🎯</div>
+      <div>
+        <div class="section-title">Part 1：抱き合わせ企画</div>
+        <div class="section-subtitle">全7期生を引き込むための前半イベント設計</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:700; white-space:nowrap;">企画名</td>
+              <td>みんなで一緒にやる！アカウント設計 60分チャレンジ</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700; white-space:nowrap;">参加対象</td>
+              <td>7期生全員（月払い・年払い関係なし）</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700; white-space:nowrap;">コンセプト</td>
+              <td>講座で学んだアカウント設計を「みんなで一斉にやる」体験に変える。一人で悩むのではなく、60分でアカウント設計→プロフィール完成まで全員で駆け抜ける。</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700; white-space:nowrap;">なぜ今刺さるか</td>
+              <td>4ヶ月目の最大の壁「学んだけど、自分に落とし込めない」を解消。みんなで一斉にやると手が動く。30〜40名に6名が入る手厚い体制で1グループ1名の運営が担保できる。</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700; white-space:nowrap;">事前課題（必須）</td>
+              <td>①自己分析（講座の該当パート参照）　②競合アカウント3つのリサーチ（講座の該当パート参照）</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700; white-space:nowrap;">事前配布物</td>
+              <td>アカウント設計シート（Googleスプレッドシート or Notionテンプレート）</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700; white-space:nowrap;">参加者成果物</td>
+              <td>①アカウント設計シート（記入済み）　②プロフィール文の下書き　③運営メンバーからのフィードバック「それでいこう！」のお墨付き</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt24">
+        <div style="font-weight:800; margin-bottom:12px; font-size:14px;">年払い説明会への導線設計</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>段階</th>
+                <th>体験</th>
+                <th>年払いへの接続</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="white-space:nowrap;"><span class="phase-badge phase-a">前半ワーク</span></td>
+                <td>みんなで一斉にアカウント設計する楽しさ</td>
+                <td>「年払いoVice交流会では、毎月こうやって一緒に作業できます」</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap;"><span class="phase-badge phase-a">ブレイクアウト</span></td>
+                <td>運営から直接フィードバック、同期との交流</td>
+                <td>「この距離感が、年払いメンバーだけの"同期の部室"では毎月続きます」</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap;"><span class="phase-badge phase-b">橋渡し</span></td>
+                <td>「環境の力」を実感</td>
+                <td>「今日みたいな体験が、年払いを選ぶと日常になる」</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap;"><span class="phase-badge phase-c">特典紹介①</span></td>
+                <td>oVice交流会の説明</td>
+                <td>「今日のこの場が、毎月ある。しかも同期だけ」</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap;"><span class="phase-badge phase-c">特典紹介②</span></td>
+                <td>AIプロンプト集の説明</td>
+                <td>「今日のワークの続きを、AIと一緒にできる。プロフィール作成まで全部」</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap;"><span class="phase-badge phase-c">クロージング</span></td>
+                <td>即時価値の訴求</td>
+                <td>「今日切り替えたら、今日からプロンプト集が使えます。来月からoVice交流会にも参加できます」</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mt24" id="announcement">
+        <div style="font-weight:800; margin-bottom:12px; font-size:14px;">告知文案</div>
+        <div class="announcement">【7期生全員集合】4/15（水）みんなで一緒にやる！アカウント設計60分チャレンジ
+
+iCircleに入って4ヶ月。
+
+「投稿してるけど、この方向性でいいのかな...」
+「アカウント設計、やらなきゃと思いつつ後回しにしてる...」
+
+その気持ち、めちゃくちゃ分かります。
+
+でもね、一人で考えてると止まるけど、
+みんなで一斉にやると、不思議と手が動く。
+
+4/15は、7期生みんなで同時にアカウント設計を完成させる日。
+しゃけ＋運営メンバーがリアルタイムでサポートするから、
+60分後には「よし、これでいこう！」って思えるプロフィールが出来上がってます。
+
+しかも少人数のブレイクアウトルームで、
+運営メンバーが一人ひとりにフィードバックします。
+
+【事前にやってきてね】
+・自己分析（講座○○参照）
+・競合3アカウントのリサーチ（講座○○参照）
+
+※この2つをやってきてくれるだけでOK。当日はそこからスタートします。
+
+月払い・年払い関係なく、7期生なら誰でも参加OK！
+後半には、これからのiCircle生活がもっと充実するお知らせもあります。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TIMELINE ===== -->
+  <div class="section" id="timeline">
+    <div class="section-header">
+      <div class="section-icon icon-orange">⏱</div>
+      <div>
+        <div class="section-title">タイムライン（全体）</div>
+        <div class="section-subtitle">約100〜110分の進行スケジュール</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>時間</th>
+              <th>フェーズ</th>
+              <th>内容</th>
+              <th>形式</th>
+              <th>担当</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="time-col">0:00–0:05</td>
+              <td><span class="phase-badge phase-a">前半</span></td>
+              <td>オープニング・趣旨説明</td>
+              <td><span class="tag tag-gray">全体</span></td>
+              <td>しゃけ</td>
+            </tr>
+            <tr>
+              <td class="time-col">0:05–0:10</td>
+              <td><span class="phase-badge phase-a">前半</span></td>
+              <td>設計の流れ解説（画面共有でシート記入例を見せる）</td>
+              <td><span class="tag tag-gray">全体</span></td>
+              <td>しゃけ</td>
+            </tr>
+            <tr>
+              <td class="time-col">0:10–0:35</td>
+              <td><span class="phase-badge phase-a">前半</span></td>
+              <td><strong>ワークタイム（25分）</strong>　全員でアカウント設計シートを記入。BGM流しながらしゃけがペースメーカー。チャット質問に運営がリアルタイム回答。
+                <br><br>記入項目：①ターゲット　②発信テーマ　③ポジショニング　④アカウント名・肩書き　⑤プロフィール文　⑥ハイライト構成</td>
+              <td><span class="tag tag-gray">各自作業</span></td>
+              <td>全員</td>
+            </tr>
+            <tr>
+              <td class="time-col">0:35–1:05</td>
+              <td><span class="phase-badge phase-a">後半</span></td>
+              <td><strong>少人数フィードバック（30分）</strong>　30〜40名を6グループ（5〜7名）に分割。運営1名が各グループに常駐。一人4〜5分でフィードバック。
+                <br><br>進め方：①シートを見せてもらう　②良いところを先に伝える　③改善点1つだけ具体的に　④「自信持っていこう！」と締める</td>
+              <td><span class="tag tag-blue">ブレイクアウト</span></td>
+              <td>各グループ運営1名</td>
+            </tr>
+            <tr>
+              <td class="time-col">1:05–1:10</td>
+              <td><span class="phase-badge phase-b">橋渡し</span></td>
+              <td>しゃけのブリッジメッセージ「これが"環境の力"。この先もこういう環境の中で成長していきたい人に、大事なお知らせがあります」</td>
+              <td><span class="tag tag-gray">全体</span></td>
+              <td>しゃけ</td>
+            </tr>
+            <tr>
+              <td class="time-col">1:10–1:15</td>
+              <td><span class="phase-badge phase-c">後半</span></td>
+              <td>年払いの概要説明（月額12,800円→9,800円、年間36,000円お得）</td>
+              <td><span class="tag tag-gray">全体</span></td>
+              <td>しゃけ</td>
+            </tr>
+            <tr>
+              <td class="time-col">1:15–1:25</td>
+              <td><span class="phase-badge phase-c">後半</span></td>
+              <td>年払い特典の紹介（既存3特典＋新特典：oVice交流会＋AIプロンプト集）</td>
+              <td><span class="tag tag-gray">全体</span></td>
+              <td>しゃけ</td>
+            </tr>
+            <tr>
+              <td class="time-col">1:25–1:35</td>
+              <td><span class="phase-badge phase-c">後半</span></td>
+              <td>しゃけからのメッセージ＋Q&A「1年一緒に走ると決めてくれた人には、僕らも本気で応えたい」</td>
+              <td><span class="tag tag-gray">全体</span></td>
+              <td>しゃけ</td>
+            </tr>
+            <tr>
+              <td class="time-col">1:35–1:40</td>
+              <td><span class="phase-badge phase-c">後半</span></td>
+              <td>クロージング・手続き案内</td>
+              <td><span class="tag tag-gray">全体</span></td>
+              <td>運営</td>
+            </tr>
+            <tr>
+              <td class="time-col">1:40–1:50</td>
+              <td><span class="phase-badge phase-c">任意</span></td>
+              <td>（任意）残りたい人の質問タイム</td>
+              <td><span class="tag tag-gray">任意参加</span></td>
+              <td>運営</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PREP SCHEDULE ===== -->
+  <div class="section" id="prep">
+    <div class="section-header">
+      <div class="section-icon icon-orange">📅</div>
+      <div>
+        <div class="section-title">運営準備スケジュール（4/8〜4/15）</div>
+        <div class="section-subtitle">本番までの1週間タスク管理</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>日付</th>
+              <th>タスク</th>
+              <th>担当</th>
+              <th>優先度</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="time-col">4/8–9</td>
+              <td>アカウント設計シートのテンプレート作成（Googleスプレッドシート or Notion）</td>
+              <td>運営1名</td>
+              <td><span class="tag tag-red">高</span></td>
+            </tr>
+            <tr>
+              <td class="time-col">4/9–10</td>
+              <td>記入例（しゃけ or 運営メンバーの実例）の作成</td>
+              <td>しゃけ</td>
+              <td><span class="tag tag-red">高</span></td>
+            </tr>
+            <tr>
+              <td class="time-col">4/10</td>
+              <td>告知文作成・第1回配信（コミュニティ内）</td>
+              <td>しゃけ</td>
+              <td><span class="tag tag-red">高</span></td>
+            </tr>
+            <tr>
+              <td class="time-col">4/11–12</td>
+              <td>事前課題（自己分析・競合調査）のリマインド配信</td>
+              <td>運営</td>
+              <td><span class="tag tag-orange">中</span></td>
+            </tr>
+            <tr>
+              <td class="time-col">4/13</td>
+              <td>ブレイクアウトルームのグループ分け・運営担当決め</td>
+              <td>運営全員</td>
+              <td><span class="tag tag-orange">中</span></td>
+            </tr>
+            <tr>
+              <td class="time-col">4/14</td>
+              <td>リマインド最終配信・Zoom設定（ブレイクアウトルーム準備）</td>
+              <td>運営</td>
+              <td><span class="tag tag-red">高</span></td>
+            </tr>
+            <tr>
+              <td class="time-col">4/15</td>
+              <td>本番開催（全運営6名参加）</td>
+              <td>全運営6名</td>
+              <td><span class="tag tag-red">高</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PART 2 ===== -->
+  <div class="section" id="part2">
+    <div class="section-header">
+      <div class="section-icon icon-blue">🎁</div>
+      <div>
+        <div class="section-title">Part 2：年払い新特典案（全6案）</div>
+        <div class="section-subtitle">方針：「絆を深める体験」と「即使えるツール」で差別化。低工数・限定コンテンツなし。</div>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <!-- BENEFIT CARDS -->
+      <div class="benefit-grid">
+        <!-- 特典1 -->
+        <div class="benefit-card recommended">
+          <div class="rec-label">おすすめ</div>
+          <div class="benefit-num">特典案1</div>
+          <div class="benefit-title">年払い × 期生限定 oVice交流会</div>
+          <div class="benefit-desc">年払いに切り替えた同じ期の仲間だけが集まるoVice交流会を月1回開催。前半30分もくもく作業会＋後半30〜60分フリー交流。「行けば誰かいる同期の部室」。運営1名が持ち回りで参加するだけ。</div>
+          <div class="benefit-meta">
+            <span class="tag tag-red">毎月1回・60〜90分</span>
+            <span class="tag tag-green">運営コスト：低</span>
+            <span class="tag tag-orange">oVice既存契約活用</span>
+          </div>
+        </div>
+
+        <!-- 特典2 -->
+        <div class="benefit-card">
+          <div class="benefit-num">特典案2</div>
+          <div class="benefit-title">年払いメンバー限定オープンチャット</div>
+          <div class="benefit-desc">年払いだけのLINEオープンチャット。A「今日の投稿見て！」シェアスレッド、B「しゃけに聞きたいこと」質問ボックス（回答はラジオで全体向けに）、C運営のゆるい投稿。</div>
+          <div class="benefit-meta">
+            <span class="tag tag-blue">常時開放</span>
+            <span class="tag tag-green">運営コスト：低</span>
+          </div>
+        </div>
+
+        <!-- 特典3 -->
+        <div class="benefit-card">
+          <div class="benefit-num">特典案3</div>
+          <div class="benefit-title">年払い記念日お祝いメッセージ</div>
+          <div class="benefit-desc">切り替えから1年後にCanvaカードで手書き風メッセージを送付。「○○さん、1年間ありがとう！」コスト極低なのに感情インパクト大。更新率向上に直結。</div>
+          <div class="benefit-meta">
+            <span class="tag tag-blue">年1回</span>
+            <span class="tag tag-green">運営コスト：極低</span>
+          </div>
+        </div>
+
+        <!-- 特典4 -->
+        <div class="benefit-card recommended">
+          <div class="rec-label">おすすめ</div>
+          <div class="benefit-num">特典案4</div>
+          <div class="benefit-title">アカウント設計 AIプロンプト集（5種類）</div>
+          <div class="benefit-desc">ChatGPT無料版でコピペするだけで、プロコンサル並みのアカウント設計が進む5本のプロンプト。作成コスト1回きり、運用コストゼロ。4ヶ月目の7期生にドンピシャ。</div>
+          <div class="benefit-meta">
+            <span class="tag tag-red">切り替え時に即配布</span>
+            <span class="tag tag-green">運営コスト：極低</span>
+            <span class="tag tag-orange">作成済み</span>
+          </div>
+        </div>
+
+        <!-- 特典5 -->
+        <div class="benefit-card">
+          <div class="benefit-num">特典案5</div>
+          <div class="benefit-title">年払いメンバーは交流会でプチ特別扱い</div>
+          <div class="benefit-desc">既存の年払い限定Zoom交流会で①質問を優先回答　②運営と同じグループに入りやすい枠設定　③交流会後に要約&アクションアイテム送付。既存仕組みにルール追加だけ。</div>
+          <div class="benefit-meta">
+            <span class="tag tag-blue">毎月（既存交流会内）</span>
+            <span class="tag tag-green">運営コスト：極低</span>
+          </div>
+        </div>
+
+        <!-- 特典6 -->
+        <div class="benefit-card">
+          <div class="benefit-num">特典案6</div>
+          <div class="benefit-title">運営メンバーとの少人数おしゃべり会</div>
+          <div class="benefit-desc">運営1名×年払い3〜5名の超少人数Zoom（各30分）を月2〜3枠。持ち回り制で「推し運営」に会える楽しさ。テーマなし・雑談OK。</div>
+          <div class="benefit-meta">
+            <span class="tag tag-blue">月2〜3枠・各30分</span>
+            <span class="tag tag-orange">運営コスト：低〜中</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BENEFIT COMPARISON TABLE -->
+      <div class="mt24">
+        <div style="font-weight:800; margin-bottom:12px; font-size:14px;">特典案 比較一覧</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>特典案</th>
+                <th>内容（一言）</th>
+                <th>頻度</th>
+                <th>運営コスト</th>
+                <th>絆の訴求力</th>
+                <th>即時価値</th>
+                <th>前半連動</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tag tag-red">特典1 ★★★</span></td>
+                <td>oVice 同期限定交流会</td>
+                <td>月1回</td>
+                <td><span class="tag tag-green">低</span></td>
+                <td>★★★★★</td>
+                <td>★★★</td>
+                <td>★★★★★</td>
+              </tr>
+              <tr>
+                <td><span class="tag tag-gray">特典2</span></td>
+                <td>限定オープンチャット</td>
+                <td>常時</td>
+                <td><span class="tag tag-green">低</span></td>
+                <td>★★★★</td>
+                <td>★★★</td>
+                <td>★★</td>
+              </tr>
+              <tr>
+                <td><span class="tag tag-gray">特典3</span></td>
+                <td>記念日お祝いメッセージ</td>
+                <td>年1回</td>
+                <td><span class="tag tag-green">極低</span></td>
+                <td>★★★★★</td>
+                <td>★</td>
+                <td>★</td>
+              </tr>
+              <tr>
+                <td><span class="tag tag-red">特典4 ★★★</span></td>
+                <td>AIプロンプト集（5種）</td>
+                <td>即時配布</td>
+                <td><span class="tag tag-green">極低</span></td>
+                <td>★★</td>
+                <td>★★★★★</td>
+                <td>★★★★★</td>
+              </tr>
+              <tr>
+                <td><span class="tag tag-gray">特典5</span></td>
+                <td>交流会プチ特別扱い</td>
+                <td>毎月</td>
+                <td><span class="tag tag-green">極低</span></td>
+                <td>★★★</td>
+                <td>★★</td>
+                <td>★★</td>
+              </tr>
+              <tr>
+                <td><span class="tag tag-gray">特典6</span></td>
+                <td>少人数おしゃべり会</td>
+                <td>月2〜3枠</td>
+                <td><span class="tag tag-orange">低〜中</span></td>
+                <td>★★★★</td>
+                <td>★★</td>
+                <td>★</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOP 3 PACKAGES ===== -->
+  <div class="section" id="packages">
+    <div class="section-header">
+      <div class="section-icon icon-red">🏆</div>
+      <div>
+        <div class="section-title">おすすめパッケージ TOP3</div>
+        <div class="section-subtitle">特典の組み合わせ案と選定理由</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="package-grid">
+        <!-- TOP1 -->
+        <div class="package-card top1">
+          <div class="package-rank">TOP 1 最推奨</div>
+          <div class="package-name">絆の場＋即使えるツール</div>
+          <ul class="package-items">
+            <li><span class="check existing">✓</span><span>既存1：月額23%OFF（9,800円/月）</span></li>
+            <li><span class="check existing">✓</span><span>既存2：30分個別Zoomコンサル無料</span></li>
+            <li><span class="check existing">✓</span><span>既存3：年払い限定Zoom交流会（全期合同）</span></li>
+            <li><span class="check new-benefit">★</span><span><strong>新 特典1：年払い×期生限定oVice交流会（毎月）</strong></span></li>
+            <li><span class="check new-benefit">★</span><span><strong>新 特典4：AIプロンプト集（5種類）</strong></span></li>
+          </ul>
+          <div class="benefit-meta">
+            <span class="tag tag-red">運営工数：最低</span>
+            <span class="tag tag-green">4/15即告知可</span>
+          </div>
+        </div>
+
+        <!-- TOP2 -->
+        <div class="package-card top2">
+          <div class="package-rank">TOP 2 絆の完成形</div>
+          <div class="package-name">三層構造で長期LTVを確保</div>
+          <ul class="package-items">
+            <li><span class="check existing">✓</span><span>既存1〜3（同上）</span></li>
+            <li><span class="check new-benefit">★</span><span><strong>新 特典1：年払い×期生限定oVice交流会</strong></span></li>
+            <li><span class="check new-benefit">★</span><span><strong>新 特典3：年払い記念日お祝いメッセージ</strong></span></li>
+            <li><span class="check new-benefit">★</span><span><strong>新 特典4：AIプロンプト集（5種類）</strong></span></li>
+          </ul>
+          <div class="benefit-meta">
+            <span class="tag tag-blue">運営工数：極低</span>
+            <span class="tag tag-green">更新率UP効果</span>
+          </div>
+        </div>
+
+        <!-- TOP3 -->
+        <div class="package-card top3">
+          <div class="package-rank">TOP 3 居場所充実型</div>
+          <div class="package-name">リアルタイム＋日常のつながり</div>
+          <ul class="package-items">
+            <li><span class="check existing">✓</span><span>既存1〜3（同上）</span></li>
+            <li><span class="check new-benefit">★</span><span><strong>新 特典1：年払い×期生限定oVice交流会</strong></span></li>
+            <li><span class="check new-benefit">★</span><span><strong>新 特典2：年払い限定オープンチャット</strong></span></li>
+            <li><span class="check new-benefit">★</span><span><strong>新 特典4：AIプロンプト集（5種類）</strong></span></li>
+          </ul>
+          <div class="benefit-meta">
+            <span class="tag tag-green">運営工数：低</span>
+            <span class="tag tag-orange">月払い層への訴求も可</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMPARISON TABLE -->
+      <div class="mt24">
+        <div style="font-weight:800; margin-bottom:12px; font-size:14px;">パッケージ比較一覧</div>
+        <div class="table-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>評価軸</th>
+                <th style="color:var(--primary)">TOP1（最推奨）</th>
+                <th style="color:var(--secondary)">TOP2（絆の完成形）</th>
+                <th style="color:var(--green)">TOP3（居場所充実）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>運営工数</td>
+                <td class="rank-best">最低</td>
+                <td>極低</td>
+                <td>低</td>
+              </tr>
+              <tr>
+                <td>「絆」の訴求力</td>
+                <td>高</td>
+                <td class="rank-best">最高</td>
+                <td>最高</td>
+              </tr>
+              <tr>
+                <td>即時報酬（切替直後の満足度）</td>
+                <td class="rank-best">最高（プロンプト即配布）</td>
+                <td>最高</td>
+                <td>最高</td>
+              </tr>
+              <tr>
+                <td>準備期間</td>
+                <td class="rank-best">最短（4/15即告知可）</td>
+                <td>最短</td>
+                <td>やや必要</td>
+              </tr>
+              <tr>
+                <td>前半企画との連動</td>
+                <td class="rank-best">最高</td>
+                <td>最高</td>
+                <td>最高</td>
+              </tr>
+              <tr>
+                <td>年払い更新率への効果</td>
+                <td>高</td>
+                <td class="rank-best">最高（記念日の力）</td>
+                <td>高</td>
+              </tr>
+              <tr>
+                <td>月払い層への訴求力</td>
+                <td>高</td>
+                <td>高</td>
+                <td class="rank-best">最高（ラジオで質問紹介）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="callout callout-pink mt16">
+        <div class="callout-icon">🎯</div>
+        <div class="callout-text">
+          <strong>総合提言：4/15はTOP1（oVice交流会＋AIプロンプト集）でスタートを推奨。</strong><br>
+          前半企画との連動が完璧で、プロンプト集は作成済み・PDF配布するだけ、oViceは既存契約でエリア設定のみ。記念日メッセージやオープンチャットは後から追加しやすいため、まずは核となる2つで始め、反応を見て段階的に拡充するのが現実的。
+        </div>
+      </div>
+
+      <div class="callout callout-blue mt16">
+        <div class="callout-icon">💬</div>
+        <div class="callout-text">
+          <strong>説明会での伝え方（しゃけのトーク例）：</strong><br>
+          「年払いに切り替えるって、"1年間、ここで頑張る"っていう決断だと思うんです。だからこそ、僕らも覚悟を持って応えたい。まず、年払いを選んでくれた7期のメンバーだけが集まれるoVice交流会を毎月やります。作業しながら、悩みを共有しながら、一緒に走る"同期の部室"です。そしてもう一つ。今日みんながやったアカウント設計、もっと深掘りしたいと思った人もいるよね。年払いメンバーには、AIを使ってアカウント設計を加速させるプロンプト集をプレゼントします。自己分析の深掘り、ジャンル提案、プロフィール自動作成...ChatGPTにコピペするだけで、プロに相談してるみたいにアカウント設計が進みます。今日のワークの続きを、AIと一緒にできるイメージ。」
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== AI PROMPTS ===== -->
+  <div class="section" id="prompts">
+    <div class="section-header">
+      <div class="section-icon icon-green">🤖</div>
+      <div>
+        <div class="section-title">年払い特典：アカウント設計 AIプロンプト集（全5種）</div>
+        <div class="section-subtitle">ChatGPT無料版でコピペするだけ。iCircleのアカウント設計6ステップをAIで加速。</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="callout callout-green" style="margin-bottom:20px;">
+        <div class="callout-icon">📌</div>
+        <div class="callout-text">
+          <strong>このプロンプト集の特徴：</strong>iCircleの「アカウント設計6ステップ」「3C分析」「4象限マトリクス」を完全に反映。ChatGPT（無料版）またはClaudeにコピペするだけ。作成コスト1回きり、運用コストゼロ。
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:48px;">#</th>
+              <th>プロンプト名</th>
+              <th>できること</th>
+              <th>こんな人に</th>
+              <th>使い方</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align:center; font-weight:900; font-size:18px; color:var(--primary);">1</td>
+              <td style="font-weight:800;">自己分析 深掘りプロンプト</td>
+              <td>自己分析の結果から「自分でも気づいていなかった強み」を引き出す。好き×経験×得意の掛け合わせで面白い組み合わせを5パターン提案。</td>
+              <td>自己分析はやったけど「本当にこれが強みなの？」と自信が持てない人</td>
+              <td>自己分析結果をコピペ→AIが強みを抽出・深掘り</td>
+            </tr>
+            <tr>
+              <td style="text-align:center; font-weight:900; font-size:18px; color:var(--primary);">2</td>
+              <td style="font-weight:800;">発信ジャンル提案プロンプト</td>
+              <td>自分の強み×ニーズから最適な発信ジャンル候補を5つ提案。需要・競合・マネタイズ可能性まで★評価付きで整理。</td>
+              <td>「じゃあ何を発信すればいいの？」が決まらない人</td>
+              <td>強み・興味・NGを入力→ジャンル5案を比較表で出力</td>
+            </tr>
+            <tr>
+              <td style="text-align:center; font-weight:900; font-size:18px; color:var(--primary);">3</td>
+              <td style="font-weight:800;">コンセプト設計プロンプト</td>
+              <td>競合3アカウントの空きポジション分析→自分だけの切り口を5つ提案。「誰の・何の悩みを・どう解決するか」を言語化。</td>
+              <td>ジャンルは決まったけど「自分だけの切り口」が見つからない人</td>
+              <td>競合3アカウントの情報を入力→差別化コンセプト5案</td>
+            </tr>
+            <tr>
+              <td style="text-align:center; font-weight:900; font-size:18px; color:var(--primary);">4</td>
+              <td style="font-weight:800;">プロフィール自動作成プロンプト</td>
+              <td>アカウント設計の結果からInstagramプロフィール文を5パターン自動生成。アカウント名候補5案＋ハイライト構成案も提案。</td>
+              <td>設計は固まったけどプロフィール文が書けない・150文字に収まらない人</td>
+              <td>ターゲット・ジャンル・コンセプトを入力→プロフ5案出力</td>
+            </tr>
+            <tr>
+              <td style="text-align:center; font-weight:900; font-size:18px; color:var(--primary);">5</td>
+              <td style="font-weight:800;">アカウント設計まるごと壁打ちプロンプト</td>
+              <td>対話形式でゼロからアカウント設計を完成させる。ターゲット→ジャンル→コンセプト→プロフィールまで全7ステップをAIコーチが伴走。書き換え不要でそのままコピペOK。</td>
+              <td>何から始めたらいいか分からない人・対話形式で一気に進めたい人</td>
+              <td>そのままコピペ→AIの質問に答えるだけで設計シートが完成</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt16">
+        <div class="callout callout-blue">
+          <div class="callout-icon">💡</div>
+          <div class="callout-text">
+            <strong>おすすめの使い方：</strong>プロンプト5（壁打ち）で全体像を作る → プロンプト4（プロフィール）で仕上げる。または事前課題の自己分析結果をプロンプト1に入れて深掘り → そのままプロンプト2でジャンル提案まで進める。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FLOW ===== -->
+  <div class="section" id="flow">
+    <div class="section-header">
+      <div class="section-icon icon-green">🔗</div>
+      <div>
+        <div class="section-title">企画 × 特典の連動設計（全体の流れ）</div>
+        <div class="section-subtitle">前半ワーク → 年払い説明 → 特典使用 → 継続、一本の線で繋がる設計</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="flow-grid">
+        <div class="flow-step">
+          <div class="flow-icon">📝</div>
+          <div class="flow-label">事前</div>
+          <div class="flow-text">自己分析＋競合調査（+プロンプト1・2活用）</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon">🏃</div>
+          <div class="flow-label">4/15 前半</div>
+          <div class="flow-text">全員でアカウント設計60分チャレンジ</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon">💬</div>
+          <div class="flow-label">4/15 中盤</div>
+          <div class="flow-text">ブレイクアウトで運営から1on1フィードバック</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon">🌉</div>
+          <div class="flow-label">4/15 橋渡し</div>
+          <div class="flow-text">「環境の力」を実感させてから年払い説明へ</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon">✅</div>
+          <div class="flow-label">4/15 後半</div>
+          <div class="flow-text">年払い切り替え＋プロンプト集を即日配布</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon">🏠</div>
+          <div class="flow-label">翌月〜</div>
+          <div class="flow-text">月1回oVice同期交流会で継続的な絆を形成</div>
+        </div>
+      </div>
+
+      <div class="callout callout-pink mt16">
+        <div class="callout-icon">🔑</div>
+        <div class="callout-text">
+          <strong>この設計のポイント：</strong>「今日やったアカウント設計ワーク → AIプロンプト集でさらに深掘り → oVice交流会で同期と共有」が自然な流れで繋がる。切り替え直後から使えるもの（プロンプト集）と毎月続くもの（oVice交流会）の両方があることで、即時報酬と継続価値の両面を押さえている。
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  iCircle セールス部 | 作成日：2026年4月8日 | 開催日：2026年4月15日（水）
+</div>
+
+</body>
+</html>

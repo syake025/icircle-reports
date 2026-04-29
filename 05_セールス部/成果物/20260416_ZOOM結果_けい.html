@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iメイト深堀り会 ZOOM結果まとめ｜けい（@oitaonsen_lets_go）</title>
+<style>
+  :root {
+    --primary: #2D3436;
+    --accent: #0984E3;
+    --accent-light: #E8F4FD;
+    --bg: #FAFAFA;
+    --card: #FFFFFF;
+    --border: #E0E0E0;
+    --text: #2D3436;
+    --text-light: #636E72;
+    --success: #00B894;
+    --warning: #FDCB6E;
+    --danger: #D63031;
+    --info: #0984E3;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; background:var(--bg); color:var(--text); line-height:1.8; }
+  .header { background: linear-gradient(135deg, #0984E3 0%, #74B9FF 100%); color:#fff; padding:40px 24px; text-align:center; }
+  .header h1 { font-size:26px; font-weight:700; margin-bottom:8px; }
+  .header .subtitle { font-size:15px; opacity:.85; }
+  .header .account { display:inline-block; background:rgba(255,255,255,.2); padding:6px 16px; border-radius:20px; margin-top:12px; font-size:14px; }
+  .header .meta { font-size:13px; opacity:.75; margin-top:8px; }
+  .container { max-width:900px; margin:0 auto; padding:24px 16px; }
+  .section { margin-bottom:36px; }
+  .section-title { font-size:20px; font-weight:700; padding:12px 0; border-bottom:3px solid var(--accent); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+  .section-title .icon { font-size:24px; }
+  .card { background:var(--card); border-radius:12px; padding:24px; box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:16px; border-left:4px solid var(--accent); }
+  .card h3 { font-size:16px; color:var(--accent); margin-bottom:10px; }
+  .card p, .card li { font-size:14px; }
+  .card ul { padding-left:20px; }
+  .card ul li { margin-bottom:6px; }
+  .highlight-box { background:var(--accent-light); border:2px solid var(--accent); border-radius:12px; padding:20px 24px; margin-bottom:16px; }
+  .highlight-box h3 { color:var(--accent); font-size:16px; margin-bottom:8px; }
+  .highlight-box .big-phrase { font-size:18px; font-weight:700; color:#0767B3; line-height:1.6; margin-bottom:8px; }
+  .highlight-box p { font-size:14px; }
+  table { width:100%; border-collapse:collapse; font-size:14px; margin-bottom:16px; }
+  th { background:var(--primary); color:#fff; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); vertical-align:top; }
+  tr:nth-child(even) td { background:#F8F8F8; }
+  .phrase-list { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0; }
+  .phrase { background:var(--accent-light); color:#0767B3; padding:8px 16px; border-radius:20px; font-size:13px; font-weight:600; border:1px solid var(--accent); }
+  .episode-card { background:var(--card); border-radius:16px; padding:24px; box-shadow:0 4px 12px rgba(9,132,227,.12); margin-bottom:20px; border:2px solid var(--accent); }
+  .episode-card .episode-badge { display:inline-block; background:var(--accent); color:#fff; font-size:12px; font-weight:700; padding:4px 12px; border-radius:12px; margin-bottom:12px; }
+  .episode-card h3 { font-size:17px; font-weight:700; margin-bottom:12px; color:var(--primary); }
+  .episode-card .episode-detail { font-size:14px; line-height:1.85; }
+  .episode-card .episode-detail li { margin-bottom:8px; }
+  .episode-card .key-insight { background:var(--accent-light); border-left:4px solid var(--accent); padding:12px 16px; border-radius:0 8px 8px 0; margin-top:12px; font-size:14px; font-weight:600; color:#0767B3; }
+  .persona-highlight { background:linear-gradient(135deg, #E8F4FD 0%, #fff 100%); border:2px solid var(--accent); border-radius:16px; padding:24px; margin-bottom:16px; }
+  .persona-highlight h3 { color:var(--accent); font-size:17px; margin-bottom:12px; }
+  .persona-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px; }
+  .persona-attr { background:#fff; padding:12px 16px; border-radius:8px; font-size:13px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  .persona-attr strong { color:#0767B3; display:block; margin-bottom:4px; }
+  .step-flow { display:flex; flex-direction:column; gap:0; margin:16px 0; }
+  .step-item { background:var(--card); border-radius:12px; padding:20px; border-left:4px solid var(--accent); box-shadow:0 2px 6px rgba(0,0,0,.05); }
+  .step-arrow { text-align:center; font-size:24px; color:var(--accent); padding:4px 0; }
+  .step-num { background:var(--accent); color:#fff; width:28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; margin-right:8px; flex-shrink:0; }
+  .step-item h4 { font-size:15px; margin-bottom:10px; display:flex; align-items:center; }
+  .step-item p { font-size:14px; }
+  .step-item .hook-text { background:var(--accent-light); border-left:3px solid var(--accent); padding:10px 14px; border-radius:0 8px 8px 0; margin-top:10px; font-size:13px; font-weight:600; color:#0767B3; }
+  .action-list { display:flex; flex-direction:column; gap:12px; }
+  .action-item { background:var(--card); border-radius:12px; padding:20px; border-left:4px solid var(--accent); display:flex; align-items:flex-start; gap:16px; box-shadow:0 2px 6px rgba(0,0,0,.05); }
+  .action-item.urgent { border-left-color: var(--danger); }
+  .action-num { background:var(--accent); color:#fff; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex-shrink:0; }
+  .action-item.urgent .action-num { background:var(--danger); }
+  .action-body h4 { font-size:15px; font-weight:700; margin-bottom:4px; }
+  .action-body p { font-size:13px; color:var(--text-light); }
+  .action-body .tag { display:inline-block; background:#FFF5F5; color:var(--danger); border:1px solid var(--danger); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:600; margin-top:4px; }
+  .keyphrase-block { background:linear-gradient(135deg, #0984E3 0%, #74B9FF 100%); border-radius:12px; padding:20px 24px; margin:12px 0; color:#fff; }
+  .keyphrase-block h4 { font-size:14px; opacity:.85; margin-bottom:8px; }
+  .keyphrase-block .phrases { display:flex; flex-wrap:wrap; gap:8px; }
+  .keyphrase-block .kp { background:rgba(255,255,255,.25); padding:6px 14px; border-radius:16px; font-size:13px; font-weight:600; }
+  .note-label { font-size:12px; color:var(--text-light); margin-bottom:4px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; }
+  @media(max-width:600px) { .persona-grid { grid-template-columns:1fr; } .header h1 { font-size:20px; } table { font-size:13px; } th, td { padding:8px 10px; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>iメイト深堀り会 ZOOM結果まとめ｜けい（@oitaonsen_lets_go）</h1>
+  <div class="subtitle">大分県温泉スポット紹介アカウント</div>
+  <div class="account">@oitaonsen_lets_go｜フォロワー3.6万人</div>
+  <div class="meta">作成日：2026年4月16日</div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: 決定した理想の未来 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F31F;</span> SECTION 1：決定した理想の未来</div>
+
+    <div class="highlight-box">
+      <div class="big-phrase">「旅行代が無料になりながら、パート収入以上のお金の余裕ができる」</div>
+      <p>これが、けいさんのフォロワーに最も刺さる「理想の未来」として確定。</p>
+    </div>
+
+    <div class="card">
+      <h3>具体的なビジョン（確定）</h3>
+      <p style="font-size:15px; font-weight:600; margin-bottom:12px;">会社を辞めるのではなく——</p>
+      <p style="font-size:15px; line-height:1.9;">「今の仕事を続けながら、好きな温泉・旅行を発信するだけで毎月1回旅行が無料で行けて、プラス月5万〜10万の余裕ができる」</p>
+      <ul style="margin-top:12px;">
+        <li>会社を辞めるリスクを取らなくていい</li>
+        <li>今の安定はそのままに「余裕」を手に入れる</li>
+        <li>好きな温泉に行くこと自体が収入につながる</li>
+      </ul>
+    </div>
+
+    <div class="keyphrase-block">
+      <h4>キーフレーズ（この言葉を軸に訴求を組み立てる）</h4>
+      <div class="phrases">
+        <span class="kp">旅行に行きながら旅行代が無料、しかもそれが収入にもなる</span>
+        <span class="kp">好きなことをまとめるだけ</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>コスパ訴求（切り返しの核心）</h3>
+      <p>子供の習い事の費用と同額で、大学・予備校（100〜120万円）と同等の内容が学べる。</p>
+      <p style="margin-top:8px; font-size:13px; color:var(--text-light);">フォロワー層（氷河期世代・子供の学費不安あり）に強烈に刺さるコスパ比較。</p>
+    </div>
+  </div>
+
+  <!-- SECTION 2: ペルソナ修正 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F464;</span> SECTION 2：ペルソナ修正（重要な発見）</div>
+
+    <div class="highlight-box">
+      <h3>ZOOMで判明：メインターゲットは48歳前後の氷河期世代女性</h3>
+      <p>インサイト分析データ：最多層 45〜54歳（女性34%、全体31%）</p>
+    </div>
+
+    <div class="persona-highlight">
+      <h3>修正後ペルソナ：48歳前後・氷河期世代女性</h3>
+      <div class="persona-grid">
+        <div class="persona-attr">
+          <strong>世代・背景</strong>
+          氷河期世代。コスパ重視。定年が見え始めて将来への漠然とした不安。
+        </div>
+        <div class="persona-attr">
+          <strong>家族・お金</strong>
+          子供が高校・中学生。学費の不安が出始める時期。月の自由なお金は少ない。
+        </div>
+        <div class="persona-attr">
+          <strong>1日のスケジュール</strong>
+          昼は仕事、夜は子供の送迎・夕飯・お風呂。22時まで隙間なし。
+        </div>
+        <div class="persona-attr">
+          <strong>唯一の癒し</strong>
+          温泉・旅行が「唯一の癒し」。けいさんのアカウントとぴったり合致。
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>なぜこのペルソナがけいさんにはまるのか</h3>
+      <ul>
+        <li>けいさんのフォロワーの最多層（45〜54歳女性34%）と完全一致</li>
+        <li>温泉・旅行が「頑張った自分へのご褒美」として刺さっている</li>
+        <li>「旅行代が無料になるだけでも十分」という訴求が、稼ぐ系より受け入れられやすい</li>
+        <li>コスパ重視な世代なので「習い事と同額で大学レベルの内容」比較が効く</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Before エピソード -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F4D6;</span> SECTION 3：Before エピソード（確定）</div>
+
+    <div class="episode-card">
+      <div class="episode-badge">最重要・唯一無二のエピソード</div>
+      <h3>Card 1 ｜ 母の話</h3>
+      <ul class="episode-detail">
+        <li>母親が48〜49歳頃に若年性認知症を発症</li>
+        <li>11年間の介護の末、59歳で逝去</li>
+        <li>母は元教師で長く働き続けた人だった</li>
+        <li>「もう一緒に何かできない」という心の穴</li>
+        <li>母の病床日記を読み漁り、「温泉が好き」という記述を発見</li>
+      </ul>
+      <div class="key-insight">
+        「母が好きだった場所を自分が訪ねることで、まだ繋がっている感がある」<br>
+        → これがけいさんの温泉発信の原点
+      </div>
+    </div>
+
+    <div class="episode-card">
+      <div class="episode-badge" style="background:#E17055;">インパクト大</div>
+      <h3>Card 2 ｜ 脱サラ宣言</h3>
+      <ul class="episode-detail">
+        <li>31歳、4歳と1歳の子供2人を持つ家族4人の大黒柱なのに、5ヶ月前に仕事を辞めた</li>
+        <li>インスタで一度も家族の存在を公表していなかった→ <strong>初公開のインパクト</strong></li>
+        <li>初月は収入ゼロ → 2ヶ月目に103万円の売り上げ達成</li>
+        <li>企業PR・撮影代行・商工会案件に拡大</li>
+      </ul>
+      <div class="key-insight">
+        「え、家族いたの！？」の驚きが集客フック
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: After/転換点 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F680;</span> SECTION 4：After / 転換点（確定）</div>
+
+    <div class="step-flow">
+      <div class="step-item">
+        <h4><span class="step-num">1</span>iサークルとの出会い</h4>
+        <p>普通なら100〜120万かかるスクール。でも子供の習い事と同額で入会できた。</p>
+        <div class="hook-text">「子供の習い事のお金で、自分の人生が動き出した」</div>
+      </div>
+      <div class="step-arrow">&#x25BC;</div>
+      <div class="step-item">
+        <h4><span class="step-num">2</span>5ヶ月後に脱サラ</h4>
+        <p>入会から5ヶ月後、家族4人の大黒柱なのに会社を辞める決断。</p>
+        <div class="hook-text">「家族にも、インスタのフォロワーにも、誰にも言っていなかった」</div>
+      </div>
+      <div class="step-arrow">&#x25BC;</div>
+      <div class="step-item">
+        <h4><span class="step-num">3</span>現在の生活</h4>
+        <p>ゆこゆこ等企業PR / 撮影代行 / 商工会案件。旅行しながら旅行代が無料＋収入も得る生活が現実に。</p>
+        <div class="hook-text">「好きな温泉に行くことが、仕事になった」</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: 投稿構成 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F4F1;</span> SECTION 5：投稿構成（確定）</div>
+
+    <div class="card">
+      <h3>投稿1｜コラボライブ告知リール</h3>
+      <ul>
+        <li>「5ヶ月前に仕事辞めました」</li>
+        <li>「31歳4人家族の大黒柱なのに」</li>
+        <li>コラボライブで収入すべて公開するという予告</li>
+      </ul>
+      <p style="margin-top:10px; font-size:13px; color:var(--text-light);">目的：「え、家族いたの！？」の驚き → コラボライブへの興味喚起</p>
+    </div>
+
+    <div class="card">
+      <h3>投稿2｜母の話リール（勉強会誘導）</h3>
+      <ul>
+        <li>「なぜ私はこの温泉アカウントを作っているのか」</li>
+        <li>母の話 → 伸びなかった時期 → iサークル → 今 → 40〜50代メンバーの実績 → 勉強会CTA</li>
+      </ul>
+      <p style="margin-top:10px; font-size:13px; color:var(--text-light);">目的：感情移入 → 共感 → 「私にもできるかも」の希望喚起 → 勉強会申し込み</p>
+    </div>
+
+    <div class="card">
+      <h3>投稿3｜フィード（勉強会誘導）</h3>
+      <ul>
+        <li>リールの要素を凝縮</li>
+        <li>コスパ比較を前面に（大学120万 vs iサークル月額）</li>
+      </ul>
+      <p style="margin-top:10px; font-size:13px; color:var(--text-light);">目的：理性的な説得 + 保存してもらい、後から見返してもらう</p>
+    </div>
+  </div>
+
+  <!-- SECTION 6: 切り返し -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F4AC;</span> SECTION 6：切り返し（確定）</div>
+
+    <table>
+      <tr>
+        <th>想定される反応・不安</th>
+        <th>切り返し（確定）</th>
+      </tr>
+      <tr>
+        <td>「若いからできたんでしょ」</td>
+        <td>自分の話より50代メンバーの実例を複数（4〜5人）紹介する</td>
+      </tr>
+      <tr>
+        <td>「お金がかかりそう」</td>
+        <td>「子供の習い事と同額。大学なら100〜120万のところ」</td>
+      </tr>
+      <tr>
+        <td>「本当に稼げる？」</td>
+        <td>「旅行代が無料になるだけでも十分。プラス月5万の余裕ができたら？」</td>
+      </tr>
+      <tr>
+        <td>「次の勉強会いつ？」</td>
+        <td>「次回は半年〜1年先。今回が最後の機会かもしれない」</td>
+      </tr>
+    </table>
+
+    <div class="highlight-box">
+      <h3>切り返しの核心</h3>
+      <div class="big-phrase" style="font-size:16px;">「稼ぐ」ではなく「旅行が無料になる」訴求が最強</div>
+      <p>けいさんのフォロワー（48歳前後・氷河期世代）に対しては、「お金を稼ぐ」よりも「旅行代が無料になる」という具体的で小さな変化の方が、受け入れられやすく行動につながりやすい。</p>
+    </div>
+  </div>
+
+  <!-- SECTION 7: 次のアクション -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x2705;</span> SECTION 7：次のアクション</div>
+
+    <div class="action-list">
+      <div class="action-item urgent">
+        <div class="action-num">1</div>
+        <div class="action-body">
+          <h4>3投稿の台本初稿を今週末（日曜）までに提出</h4>
+          <p>投稿1・2・3の台本を書き起こす。まず「母の話リール」から着手を推奨。</p>
+          <span class="tag">最優先</span>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">2</div>
+        <div class="action-body">
+          <h4>40〜50代の成果メンバーのスクリーンショット収集</h4>
+          <p>「若いからできた」の切り返しに使う。4〜5人分を集める。</p>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">3</div>
+        <div class="action-body">
+          <h4>いつきさんFB → しゃけ最終チェック</h4>
+          <p>台本提出後、いつきさんにフィードバックをもらい、しゃけが最終チェックを行う。</p>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">4</div>
+        <div class="action-body">
+          <h4>コラボライブ準備</h4>
+          <p>収入公開の内容・構成を準備。告知リールの投稿タイミングと連動させる。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  /* ===== SECTION A: 深掘り切り口 ===== */
+  .warning-banner {
+    background: linear-gradient(135deg, #E17055 0%, #D63031 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 16px 24px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .03em;
+  }
+  .warning-banner .w-icon { font-size: 22px; flex-shrink: 0; }
+
+  .warning-intro {
+    background: #FFF5F3;
+    border: 2px solid #E17055;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--text);
+  }
+
+  .deepdive-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  details.deepdive-card {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(214,48,49,.10);
+    border-left: 4px solid #E17055;
+    overflow: hidden;
+  }
+  details.deepdive-card summary {
+    padding: 16px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary);
+    user-select: none;
+  }
+  details.deepdive-card summary::-webkit-details-marker { display: none; }
+  details.deepdive-card summary::after {
+    content: '▶';
+    margin-left: auto;
+    font-size: 12px;
+    color: #E17055;
+    transition: transform .2s;
+  }
+  details.deepdive-card[open] summary::after { transform: rotate(90deg); }
+  details.deepdive-card summary .dd-badge {
+    display: inline-block;
+    background: #E17055;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+  .deepdive-body {
+    padding: 0 20px 20px;
+    border-top: 1px solid #FFE0DB;
+  }
+  .deepdive-body .q-list {
+    list-style: none;
+    padding: 12px 0 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .deepdive-body .q-list li {
+    font-size: 13px;
+    padding: 8px 14px;
+    background: #FFF5F3;
+    border-radius: 8px;
+    border-left: 3px solid #E17055;
+  }
+  .deepdive-body .q-list li::before {
+    content: 'Q. ';
+    font-weight: 700;
+    color: #E17055;
+  }
+  .deepdive-effect {
+    margin-top: 14px;
+    background: linear-gradient(135deg, #E17055 0%, #D63031 100%);
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .deepdive-effect::before { content: '効果｜'; opacity: .75; }
+
+  /* ===== SECTION B: 投稿台本 ===== */
+  .script-intro {
+    background: var(--accent-light);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 18px 24px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 1.85;
+  }
+  .script-subtitle {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent);
+    border-left: 4px solid var(--accent);
+    padding-left: 14px;
+    margin: 24px 0 16px;
+  }
+  .reel-step {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.06);
+    margin-bottom: 12px;
+    display: flex;
+    gap: 0;
+    overflow: hidden;
+  }
+  .reel-step .rs-num {
+    background: var(--accent);
+    color: #fff;
+    width: 60px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 8px;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.4;
+    gap: 2px;
+  }
+  .reel-step .rs-num .rs-frame {
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .reel-step .rs-body {
+    padding: 14px 18px;
+    flex: 1;
+  }
+  .reel-step .rs-body h5 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .reel-step .rs-body .rs-scene {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 6px;
+  }
+  .reel-step .rs-body .rs-scene::before { content: '画面｜'; font-weight: 600; }
+  .reel-step .rs-body .rs-line {
+    font-size: 14px;
+    line-height: 1.7;
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    padding: 8px 12px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 8px;
+  }
+  .reel-step .rs-body .rs-aim {
+    font-size: 12px;
+    color: var(--text-light);
+  }
+  .reel-step .rs-body .rs-aim::before { content: '狙い｜'; font-weight: 600; color: var(--accent); }
+
+  .feed-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 14px;
+  }
+  .feed-page {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(9,132,227,.10);
+    border-top: 4px solid var(--accent);
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .feed-page .fp-num {
+    background: var(--accent);
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .feed-page h5 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .feed-page .fp-body {
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--text);
+    flex: 1;
+  }
+  .feed-page .fp-aim {
+    font-size: 12px;
+    color: var(--text-light);
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+  }
+  .feed-page .fp-aim::before { content: '狙い｜'; font-weight: 700; color: var(--accent); }
+
+  @media(max-width:600px) {
+    .deepdive-grid { grid-template-columns: 1fr; }
+    .feed-grid { grid-template-columns: 1fr; }
+    .reel-step .rs-num { width: 48px; font-size: 11px; }
+  }
+  @media print {
+    details.deepdive-card { break-inside: avoid; }
+    details.deepdive-card[open] { break-inside: auto; }
+    .reel-step { break-inside: avoid; }
+    .feed-page { break-inside: avoid; }
+  }
+</style>
+
+<div class="container">
+
+  <!-- SECTION A: 深掘り切り口 -->
+  <div class="section">
+    <div class="section-title" style="border-color:#E17055;">
+      <span class="icon">&#x26A0;&#xFE0F;</span>
+      【伸びる投稿のための深掘り切り口】「本人も思い出せなかった、でも確かにあった」を引き出す
+    </div>
+
+    <div class="warning-banner">
+      <span class="w-icon">&#x1F525;</span>
+      <span>CRITICAL｜これはバズるコンテンツの根幹です。この深掘りなしに投稿台本は書けません。</span>
+    </div>
+
+    <div class="warning-intro">
+      伸びる投稿の正体は「え？！この人がそんな経験を？」と読者を思考停止させる衝撃。まえさんの「死産・流産」「子供にけがをさせた」「ぼくママと遊んだこと一度もない」のような、本人が封印していた記憶を掘り起こすことが鍵。下記の質問をZOOMで本人にぶつけてください。
+    </div>
+
+    <div class="deepdive-grid">
+
+      <!-- Card 1 -->
+      <details class="deepdive-card">
+        <summary>
+          <span class="dd-badge">CARD 1</span>
+          母の若年性認知症発症の瞬間
+        </summary>
+        <div class="deepdive-body">
+          <ul class="q-list">
+            <li>お母さんの異変に最初に気づいた瞬間は？</li>
+            <li>診断を受けた日の家族の様子は？</li>
+            <li>「あの時もっと早く気づいていれば」と思う瞬間は？</li>
+            <li>お母さんに伝えられなかった言葉は？</li>
+          </ul>
+          <div class="deepdive-effect">読者が涙する核心エピソード。共有しないと前に進めない深い経験</div>
+        </div>
+      </details>
+
+      <!-- Card 2 -->
+      <details class="deepdive-card">
+        <summary>
+          <span class="dd-badge">CARD 2</span>
+          11年介護の生々しい日常
+        </summary>
+        <div class="deepdive-body">
+          <ul class="q-list">
+            <li>介護中に一番辛かった瞬間は？</li>
+            <li>お母さんに対して「ひどい」と思ったことを後悔している？</li>
+            <li>介護を理由に諦めたことは？（仕事/友人関係/結婚）</li>
+            <li>誰にも言えなかった介護の本音は？</li>
+          </ul>
+          <div class="deepdive-effect">介護経験者層への深い共感</div>
+        </div>
+      </details>
+
+      <!-- Card 3 -->
+      <details class="deepdive-card">
+        <summary>
+          <span class="dd-badge">CARD 3</span>
+          お母さんの病床日記の発見シーン
+        </summary>
+        <div class="deepdive-body">
+          <ul class="q-list">
+            <li>日記を見つけた瞬間の場所/時間は？</li>
+            <li>最初に開いたページに何が書いてあった？</li>
+            <li>「温泉が好き」を見た時の気持ちは？</li>
+            <li>その日記は今どこにある？</li>
+          </ul>
+          <div class="deepdive-effect">最も視覚的に映像化できる転換点。リール冒頭で使える</div>
+        </div>
+      </details>
+
+      <!-- Card 4 -->
+      <details class="deepdive-card">
+        <summary>
+          <span class="dd-badge">CARD 4</span>
+          脱サラ前夜の不安
+        </summary>
+        <div class="deepdive-body">
+          <ul class="q-list">
+            <li>退職届を書いた日の気持ちは？</li>
+            <li>夫/家族に伝えた瞬間の反応は？</li>
+            <li>初月収入ゼロの時の家での会話は？</li>
+            <li>2ヶ月目103万円の通知を見た瞬間は？</li>
+          </ul>
+          <div class="deepdive-effect">生活と決断のリアル。多くの「会社辞めたい層」に刺さる</div>
+        </div>
+      </details>
+
+      <!-- Card 5 -->
+      <details class="deepdive-card">
+        <summary>
+          <span class="dd-badge">CARD 5</span>
+          家族を隠してきた理由
+        </summary>
+        <div class="deepdive-body">
+          <ul class="q-list">
+            <li>なぜインスタで家族を隠してきた？</li>
+            <li>隠していて辛かった瞬間は？</li>
+            <li>隠すことに葛藤を感じた瞬間は？</li>
+            <li>今、初公開する決断をした理由は？</li>
+          </ul>
+          <div class="deepdive-effect">初公開の意味付け。フォロワーへの誠実さが伝わる</div>
+        </div>
+      </details>
+
+      <!-- Card 6 -->
+      <details class="deepdive-card">
+        <summary>
+          <span class="dd-badge">CARD 6</span>
+          スキルなし会社員時代の屈辱
+        </summary>
+        <div class="deepdive-body">
+          <ul class="q-list">
+            <li>会社員時代に「自分には何もない」と感じた具体的瞬間は？</li>
+            <li>上司や同僚に劣等感を感じた瞬間は？</li>
+            <li>「このまま終わるのか」と思った日は？</li>
+            <li>退職を決めた本当の理由は？</li>
+          </ul>
+          <div class="deepdive-effect">会社員から離れたい層の共感を生む</div>
+        </div>
+      </details>
+
+    </div>
+  </div><!-- /SECTION A -->
+
+  <!-- SECTION B: 投稿台本サンプル -->
+  <div class="section">
+    <div class="section-title">
+      <span class="icon">&#x1F3AC;</span>
+      【投稿台本サンプル】PDF「まえさん」のローンチ投稿構成を参考に作成
+    </div>
+
+    <div class="script-intro">
+      iサークルPRO+講座「PRO_13-1ローンチ用フィード投稿」「PRO_13-2ローンチ用リール」に沿った構成。ヒーローズジャーニー型でけいさん独自のエピソードを当てはめた。ZOOMで台本を磨き込んでいきましょう。
+    </div>
+
+    <!-- B1: リール台本 -->
+    <div class="script-subtitle">B-1｜リール台本（人生ビフォアフ型）</div>
+
+    <div class="reel-step">
+      <div class="rs-num"><span class="rs-frame">1</span>冒頭フック<br>0-3秒</div>
+      <div class="rs-body">
+        <h5>冒頭フック（0-3秒）</h5>
+        <div class="rs-scene">温泉の湯気→母の写真の一瞬</div>
+        <div class="rs-line">「私が温泉を発信している、本当の理由を話します」</div>
+        <div class="rs-aim">謎を提示→続きが気になる構造</div>
+      </div>
+    </div>
+
+    <div class="reel-step">
+      <div class="rs-num"><span class="rs-frame">2</span>驚愕の事実<br>3-7秒</div>
+      <div class="rs-body">
+        <h5>驚愕の事実（3-7秒）</h5>
+        <div class="rs-scene">家族写真</div>
+        <div class="rs-line">31歳、4歳と1歳の子供を持つ母。5ヶ月前に、4人家族の大黒柱なのに会社を辞めました</div>
+        <div class="rs-aim">初公開の家族＋脱サラ</div>
+      </div>
+    </div>
+
+    <div class="reel-step">
+      <div class="rs-num"><span class="rs-frame">3</span>原点①<br>7-18秒</div>
+      <div class="rs-body">
+        <h5>原点①（7-18秒）</h5>
+        <div class="rs-scene">母の写真/病院の風景</div>
+        <div class="rs-line">10数年前、母が48歳で若年性認知症になりました。小学校の先生として、ずっと働き続けた母。11年介護した末、母は59歳で天国に逝きました。何もできなかった、「もう、一緒に温泉にも行けない」、胸に大きな穴が開きました</div>
+        <div class="rs-aim">映画のような感情の濁流</div>
+      </div>
+    </div>
+
+    <div class="reel-step">
+      <div class="rs-num"><span class="rs-frame">4</span>転換のきっかけ<br>18-28秒</div>
+      <div class="rs-body">
+        <h5>転換のきっかけ（18-28秒）</h5>
+        <div class="rs-scene">日記をめくる手元</div>
+        <div class="rs-line">母の遺品の整理をしていた時、病床日記を見つけました。震える手でページをめくると、そこに書いてあったのは「温泉が、好き」。その一言を見た瞬間、スイッチが入りました</div>
+        <div class="rs-aim">視覚的に映像化できる転換点</div>
+      </div>
+    </div>
+
+    <div class="reel-step">
+      <div class="rs-num"><span class="rs-frame">5</span>挑戦<br>28-38秒</div>
+      <div class="rs-body">
+        <h5>挑戦（28-38秒）</h5>
+        <div class="rs-scene">投稿画面</div>
+        <div class="rs-line">「母が好きだった場所を、私が訪ねたら、まだ繋がっていられる気がする」。大分の温泉を発信し始めました。でも、最初は全く伸びませんでした。スクールを調べたら、どこも100〜120万円。4人家族の大黒柱の私には払えなかった</div>
+        <div class="rs-aim">まえさん型の挫折＋現実</div>
+      </div>
+    </div>
+
+    <div class="reel-step">
+      <div class="rs-num"><span class="rs-frame">6</span>出会い<br>38-48秒</div>
+      <div class="rs-body">
+        <h5>出会い（38-48秒）</h5>
+        <div class="rs-scene">YouTube/iサークル画面</div>
+        <div class="rs-line">そんな時に出会ったのが、りこぴんさん。子供の習い事と同じくらいの月額で、大学クラスの内容が学べるiサークルに入りました。5ヶ月後、私は会社を辞める決断ができました</div>
+        <div class="rs-aim">具体的な数字＋決断</div>
+      </div>
+    </div>
+
+    <div class="reel-step">
+      <div class="rs-num"><span class="rs-frame">7</span>今の姿<br>48-58秒</div>
+      <div class="rs-body">
+        <h5>今の姿（48-58秒）</h5>
+        <div class="rs-scene">旅先での仕事風景</div>
+        <div class="rs-line">今は、旅行に行きながら、旅行代が無料になる。ゆこゆこさん（大手温泉サイト）からのお仕事、企業PR、撮影代行、商工会案件。初月ゼロから、2ヶ月目で103万円の売上ができました</div>
+        <div class="rs-aim">具体的な実績数字</div>
+      </div>
+    </div>
+
+    <div class="reel-step">
+      <div class="rs-num"><span class="rs-frame">8</span>メッセージ<br>58-65秒</div>
+      <div class="rs-body">
+        <h5>メッセージ（58-65秒）</h5>
+        <div class="rs-scene">温泉の風景</div>
+        <div class="rs-line">「スキルもない、ただの一般人」だった私が変われた。あなたの「好きなこと」も、必ず仕事になります</div>
+        <div class="rs-aim">本人ストーリーから読者への橋渡し</div>
+      </div>
+    </div>
+
+    <div class="reel-step">
+      <div class="rs-num"><span class="rs-frame">9</span>CTA<br>65-70秒</div>
+      <div class="rs-body">
+        <h5>CTA（65-70秒）</h5>
+        <div class="rs-line">「いきたい」とコメントしてください。無料勉強会の詳細をDMでお送りします（次回はいつになるかわかりません）</div>
+        <div class="rs-aim">緊急性</div>
+      </div>
+    </div>
+
+    <!-- B2: フィード台本 -->
+    <div class="script-subtitle">B-2｜フィード台本（10ページ構成）</div>
+
+    <div class="feed-grid">
+
+      <div class="feed-page">
+        <div class="fp-num">P1</div>
+        <h5>表紙</h5>
+        <div class="fp-body">
+          <strong>「温泉発信を始めた、本当の理由を話します」</strong><br>
+          31歳、4人家族の大黒柱の私が会社を辞めた理由
+        </div>
+        <div class="fp-aim">謎＋驚愕で読みたくさせる</div>
+      </div>
+
+      <div class="feed-page">
+        <div class="fp-num">P2</div>
+        <h5>私の真実</h5>
+        <div class="fp-body">大分の温泉を毎日発信している、けいです。楽しそうに旅をしているように見えるかもしれません。でも私には、2年間、誰にも話してこなかった本当の理由があります</div>
+        <div class="fp-aim">まえさん型「実は本当の私は全然違います」</div>
+      </div>
+
+      <div class="feed-page">
+        <div class="fp-num">P3</div>
+        <h5>隠していたこと</h5>
+        <div class="fp-body">実は私、4歳と1歳の子供を持つ母です。夫と4人家族で、5ヶ月前に、家族4人の大黒柱なのに会社を辞めました。インスタでは、これまで一度も家族のことを話してきませんでした</div>
+        <div class="fp-aim">初公開の連鎖→驚き</div>
+      </div>
+
+      <div class="feed-page">
+        <div class="fp-num">P4</div>
+        <h5>原点①</h5>
+        <div class="fp-body">なぜ温泉を発信しているのか。10数年前、母が48歳で若年性認知症になりました。小学校の先生として、長年、子供たちのために働き続けた母。「これからゆっくりできるね」そう話していた矢先のことでした</div>
+        <div class="fp-aim">時系列で物語る</div>
+      </div>
+
+      <div class="feed-page">
+        <div class="fp-num">P5</div>
+        <h5>原点②</h5>
+        <div class="fp-body">11年間、家族で介護しました。だんだんと話すこともできなくなり、だんだんと笑顔も消えていき、59歳で、母は天国に逝きました。「もう、一緒に何もできない」「もう、温泉にも行けない」胸に、大きな大きな穴が開きました</div>
+        <div class="fp-aim">感情の最深部</div>
+      </div>
+
+      <div class="feed-page">
+        <div class="fp-num">P6</div>
+        <h5>日記の発見</h5>
+        <div class="fp-body">母の遺品を整理していた時、病床日記を見つけました。震える手でページをめくった時、そこに書いてあったのは「温泉が、好き」。たった一言、でも、その一言を見た瞬間、私の中でスイッチが入りました</div>
+        <div class="fp-aim">視覚的・感情的な転換点</div>
+      </div>
+
+      <div class="feed-page">
+        <div class="fp-num">P7</div>
+        <h5>挑戦と挫折</h5>
+        <div class="fp-body">「母が好きだった場所を、私が訪ねたら、まだ繋がっていられる気がする」大分の温泉を発信し始めました。でも、最初は全く伸びませんでした。スクールを調べたら、どこも100〜120万円。4人家族の大黒柱の私には、どう考えても払えない金額でした</div>
+        <div class="fp-aim">現実の壁</div>
+      </div>
+
+      <div class="feed-page">
+        <div class="fp-num">P8</div>
+        <h5>きっかけ</h5>
+        <div class="fp-body">そんな時にYouTubeで、りこぴんさんに出会いました。iサークルは子供の習い事と同じくらいの月額で大学レベルの内容が学べる。「これなら、私でもできる」5ヶ月後、私は会社を辞める決断ができました</div>
+        <div class="fp-aim">具体的な数字×決断</div>
+      </div>
+
+      <div class="feed-page">
+        <div class="fp-num">P9</div>
+        <h5>今の生活</h5>
+        <div class="fp-body">今は、好きな温泉に行くだけで、旅行代が無料、ゆこゆこさん（大手温泉サイト）からの仕事、企業PR、撮影代行、商工会案件。初月ゼロから2ヶ月目で103万円の売上ができました。母が好きだった温泉を、母の代わりに見て、感じて、伝える、それが私の「仕事」になりました</div>
+        <div class="fp-aim">After+精神的な意味付け</div>
+      </div>
+
+      <div class="feed-page">
+        <div class="fp-num">P10</div>
+        <h5>コラボライブ告知</h5>
+        <div class="fp-body">
+          りこぴんさんとのコラボライブを開催します。<br>
+          ✅ 31歳・4人家族の大黒柱の私が5ヶ月で脱サラできた本当の理由<br>
+          ✅ 好きなことが旅行代を無料にする仕組み<br>
+          ✅ 初月ゼロ→2ヶ月目103万円の収入推移を全部公開。<br>
+          もちろん無料。「いきたい」とコメントしてくれた人だけ、詳細をDMでお送りします
+        </div>
+        <div class="fp-aim">CTA</div>
+      </div>
+
+    </div>
+
+  </div><!-- /SECTION B -->
+
+</div>
+</body>
+</html>

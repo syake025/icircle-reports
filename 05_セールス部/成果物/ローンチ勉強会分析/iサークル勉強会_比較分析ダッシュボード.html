@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iCircle勉強会 比較分析ダッシュボード</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --primary: #1E2761;
+  --secondary: #CADCFC;
+  --accent: #3b82f6;
+  --accent-red: #EF4444;
+  --bg: #F8FAFC;
+  --card: #FFFFFF;
+  --text: #1E293B;
+  --muted: #64748B;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --sidebar-w: 260px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans JP', system-ui, -apple-system, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed; left: 0; top: 0; width: var(--sidebar-w); height: 100vh;
+  background: var(--primary); color: #fff; overflow-y: auto; z-index: 100;
+  padding: 24px 0;
+}
+.sidebar-logo { text-align: center; padding: 0 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.15); margin-bottom: 12px; }
+.sidebar-logo h2 { font-size: 15px; font-weight: 700; letter-spacing: 0.5px; }
+.sidebar-logo p { font-size: 11px; color: var(--secondary); margin-top: 4px; }
+.sidebar a {
+  display: block; padding: 9px 20px; color: rgba(255,255,255,0.7);
+  text-decoration: none; font-size: 13px; transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+.sidebar a:hover, .sidebar a.active {
+  color: #fff; background: rgba(255,255,255,0.08); border-left-color: var(--accent);
+}
+.sidebar a .nav-num { display: inline-block; width: 22px; font-weight: 700; color: var(--accent); font-size: 11px; }
+
+/* Main */
+.main { margin-left: var(--sidebar-w); }
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, #2d3a8c 50%, #3b4cc0 100%);
+  color: #fff; padding: 60px 48px 48px; position: relative; overflow: hidden;
+}
+.hero::after {
+  content: ''; position: absolute; right: -80px; top: -80px;
+  width: 300px; height: 300px; border-radius: 50%;
+  background: rgba(59,130,246,0.12);
+}
+.hero h1 { font-size: 30px; font-weight: 900; margin-bottom: 8px; position: relative; z-index: 1; }
+.hero .sub { font-size: 14px; color: var(--secondary); font-weight: 400; position: relative; z-index: 1; }
+.hero .date { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 12px; position: relative; z-index: 1; }
+
+/* Content */
+.content { max-width: 1100px; margin: 0 auto; padding: 40px 32px 80px; }
+section { margin-bottom: 56px; scroll-margin-top: 24px; }
+.section-title {
+  font-size: 22px; font-weight: 700; color: var(--primary);
+  border-bottom: 3px solid var(--accent); padding-bottom: 8px;
+  margin-bottom: 28px; display: flex; align-items: center; gap: 10px;
+}
+.section-title .num {
+  background: var(--accent); color: #fff; width: 32px; height: 32px;
+  border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0;
+}
+
+/* Cards */
+.card {
+  background: var(--card); border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  padding: 24px; margin-bottom: 20px; transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.06); }
+.card h3 { font-size: 16px; color: var(--primary); margin-bottom: 16px; font-weight: 700; }
+
+/* KPI Grid */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.kpi-card { background: var(--card); border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); text-align: center; }
+.kpi-card .label { font-size: 12px; color: var(--muted); letter-spacing: 0.5px; }
+.kpi-card .value { font-size: 36px; font-weight: 900; margin: 4px 0; line-height: 1; }
+.kpi-card .sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
+.kpi-card.up .value { color: var(--success); }
+.kpi-card.down .value { color: var(--danger); }
+.kpi-card.neutral .value { color: var(--accent); }
+
+/* Chart container */
+.chart-container { position: relative; height: 380px; margin-bottom: 16px; }
+.chart-container.small { height: 280px; }
+.chart-container.medium { height: 320px; }
+.chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 900px) { .chart-row { grid-template-columns: 1fr; } }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: var(--primary); color: #fff; padding: 10px 14px; text-align: right; font-weight: 600; font-size: 13px; }
+td { padding: 10px 14px; text-align: right; border-bottom: 1px solid #E2E8F0; }
+th:first-child, td:first-child { text-align: left; }
+tr:nth-child(even) td { background: #F8FAFC; }
+tr:hover td { background: #EFF6FF; }
+.highlight-row td { background: #FEF3C7 !important; font-weight: 600; }
+.danger-cell { color: var(--danger); font-weight: 700; }
+.success-cell { color: var(--success); font-weight: 700; }
+
+/* Insight box */
+.insight { background: #EFF6FF; border-left: 4px solid var(--accent); padding: 16px 20px; margin: 16px 0; border-radius: 0 8px 8px 0; font-size: 14px; }
+.insight.warning { background: #FFFBEB; border-color: var(--warning); }
+.insight.danger { background: #FEF2F2; border-color: var(--danger); }
+.insight.success { background: #ECFDF5; border-color: var(--success); }
+.insight strong { display: block; margin-bottom: 4px; font-size: 15px; }
+
+/* Tags / Badges */
+.badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+.badge-s { background: #EF4444; color: #fff; }
+.badge-a { background: #F59E0B; color: #fff; }
+.badge-b { background: #3b82f6; color: #fff; }
+.badge-c { background: #64748B; color: #fff; }
+
+/* Dot markers */
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+.dot-used { background: var(--accent); }
+.dot-empty { background: #E2E8F0; }
+
+/* Rating cells */
+.rate-best { background: #D1FAE5 !important; color: #065F46; font-weight: 700; }
+.rate-good { background: #ECFDF5 !important; color: #059669; }
+.rate-fair { background: #FEF3C7 !important; color: #92400E; }
+.rate-poor { background: #FEE2E2 !important; color: #991B1B; font-weight: 700; }
+
+/* Gantt-like table */
+.gantt-cell { font-size: 11px; line-height: 1.4; text-align: left !important; }
+.gantt-header { font-size: 11px; text-align: center !important; }
+
+/* Footer */
+.footer { text-align: center; padding: 24px; color: var(--muted); font-size: 12px; border-top: 1px solid #E2E8F0; margin-top: 32px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .hero { padding: 32px 20px; }
+  .hero h1 { font-size: 22px; }
+  .content { padding: 20px 16px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+  .chart-row { grid-template-columns: 1fr; }
+}
+
+/* Scroll active highlight */
+.sidebar a.current { color: #fff; background: rgba(255,255,255,0.12); border-left-color: var(--accent); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <h2>勉強会 比較分析</h2>
+    <p>iCircle 3期〜8期</p>
+  </div>
+  <a href="#summary"><span class="nav-num">1</span>エグゼクティブサマリー</a>
+  <a href="#scorecard"><span class="nav-num">2</span>期別スコアカード</a>
+  <a href="#education"><span class="nav-num">3</span>教育パートの変遷</a>
+  <a href="#cause"><span class="nav-num">4</span>N1不安払拭の対応度</a>
+  <a href="#funnel"><span class="nav-num">5</span>ファネル推移</a>
+  <a href="#channel"><span class="nav-num">6</span>流入経路分析（参考）</a>
+  <a href="#annual"><span class="nav-num">7</span>年払い×継続率</a>
+  <a href="#roadmap"><span class="nav-num">8</span>9期改善ロードマップ</a>
+  <a href="#simulation"><span class="nav-num">9</span>9期目標シミュレーション</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<div class="main">
+
+<div class="hero">
+  <h1>iCircle勉強会 比較分析ダッシュボード</h1>
+  <div class="sub">3期〜8期の勉強会コンテンツ評価・変遷・9期改善ロードマップ</div>
+  <div class="date">作成日: 2026-04-06 | 作成者: しゃけ（Claude分析支援）</div>
+</div>
+
+<div class="content">
+
+<!-- ============ 1. EXECUTIVE SUMMARY ============ -->
+<section id="summary">
+<h2 class="section-title"><span class="num">1</span>エグゼクティブサマリー</h2>
+
+<div class="kpi-grid">
+  <div class="kpi-card up"><div class="label">歴代最高評価</div><div class="value">6期（82点）</div><div class="sub">教育刷新＋4名スピーチで感情曲線が最良</div></div>
+  <div class="kpi-card neutral"><div class="label">歴代最低評価</div><div class="value">8期（72点）</div><div class="sub">スピーチ8分・核心の希薄化が重なった</div></div>
+  <div class="kpi-card down"><div class="label">最大の内容的弱点</div><div class="value">スピーチ時間</div><div class="sub">15分→8分に半減（7-8期）</div></div>
+  <div class="kpi-card down"><div class="label">6期連続で構造的未対応</div><div class="value">2大不安</div><div class="sub">「怪しさ払拭」「家族に内緒」</div></div>
+</div>
+
+<div class="card">
+  <h3>最重要ファインディング（勉強会コンテンツ評価）</h3>
+  <div class="insight danger">
+    <strong>スピーチ時間短縮（15分→8分）が成約率と最も強く相関</strong>
+    6期でスピーチを20分に拡大した期（+なみ登壇）は唯一の成約率回復（+2.7pt）。7-8期で8-10分に激減し再び下落。感情的信頼構築の時間が半減したことが最大の内容的問題。
+  </div>
+  <div class="insight warning">
+    <strong>「怪しさへの警戒」「家族に内緒」が全6期で構造的に未対応</strong>
+    N1不安1位（5名）と3位タイ（4名）の2大不安に対し、専用の払拭パートが一度も設けられていない。勉強会コンテンツとして最大の「穴」。
+  </div>
+  <div class="insight">
+    <strong>教育パート品質は全6期を通じて高水準を維持</strong>
+    3ステップの論理構成・事例・フレームワークは一貫して機能。6期の全面刷新（A評価）も8期の入口拡張も、「深さの維持」という観点で優劣がある。
+  </div>
+  <div class="insight success">
+    <strong>9期の最優先改善は「勉強会の中身」：①スピーチ12分回復 ②怪しさ直接払拭 ③家族に内緒OK明言</strong>
+    いずれも台本追加だけで実装可能。外部施策（LP復活等）より先に取り組むべき高ROI施策。
+  </div>
+</div>
+</section>
+
+<!-- ============ 2. FUNNEL TREND ============ -->
+<section id="funnel">
+<h2 class="section-title"><span class="num">5</span>ファネル推移（3期〜8期）</h2>
+
+<div class="card">
+  <h3>成約率推移（対着席）</h3>
+  <div class="chart-container"><canvas id="cvrTrend"></canvas></div>
+</div>
+
+<div class="card">
+  <h3>申込者・着席者・成約者の推移</h3>
+  <div class="chart-container"><canvas id="funnelVolume"></canvas></div>
+</div>
+
+<div class="card">
+  <h3>ファネル遷移率推移</h3>
+  <div class="chart-container"><canvas id="funnelRates"></canvas></div>
+</div>
+
+<div class="card">
+  <h3>ファネル数値一覧</h3>
+  <table>
+    <thead><tr><th>指標</th><th>3期</th><th>4期</th><th>5期</th><th>6期</th><th>7期</th><th>8期</th></tr></thead>
+    <tbody>
+      <tr><td>申込者数</td><td>540</td><td>388</td><td>367</td><td>278</td><td>550</td><td>781</td></tr>
+      <tr><td>着席者数</td><td>332</td><td>271</td><td>274</td><td>194</td><td>420</td><td>559</td></tr>
+      <tr><td>成約者数</td><td>229</td><td>169</td><td>113</td><td>85</td><td>161</td><td class="danger-cell">141</td></tr>
+      <tr><td>着席率</td><td>61.6%</td><td>69.9%</td><td>74.7%</td><td>69.6%</td><td>76.3%</td><td>71.6%</td></tr>
+      <tr class="highlight-row"><td>成約率（対着席）</td><td>68.9%</td><td>62.3%</td><td>41.2%</td><td>43.9%</td><td>38.4%</td><td class="danger-cell">25.2%</td></tr>
+      <tr class="highlight-row"><td>成約率（対申込）</td><td>42.4%</td><td>43.5%</td><td>30.8%</td><td>30.5%</td><td>29.3%</td><td class="danger-cell">18.1%</td></tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<!-- ============ 3. CHANNEL ANALYSIS ============ -->
+<section id="channel">
+<h2 class="section-title"><span class="num">6</span>流入経路分析（8期・参考）</h2>
+
+<div class="chart-row">
+  <div class="card">
+    <h3>流入経路別CVR比較</h3>
+    <div class="chart-container small"><canvas id="channelCvr"></canvas></div>
+  </div>
+  <div class="card">
+    <h3>コラボ先別CVR</h3>
+    <div class="chart-container small"><canvas id="collabCvr"></canvas></div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>8期 流入経路別詳細</h3>
+  <table>
+    <thead><tr><th>経路</th><th>申込</th><th>着席</th><th>購入</th><th>購入/着席</th></tr></thead>
+    <tbody>
+      <tr><td>まりりん</td><td>273</td><td>216</td><td>52</td><td>24.1%</td></tr>
+      <tr><td>ハマノ</td><td>159</td><td>103</td><td>20</td><td class="danger-cell">19.4%</td></tr>
+      <tr><td>せろと</td><td>79</td><td>63</td><td>12</td><td class="danger-cell">19.0%</td></tr>
+      <tr><td>いつき</td><td>49</td><td>33</td><td>10</td><td>30.3%</td></tr>
+      <tr><td>うる</td><td>44</td><td>32</td><td>10</td><td>31.3%</td></tr>
+      <tr><td>YouTube</td><td>83</td><td>60</td><td>20</td><td class="success-cell">33.3%</td></tr>
+      <tr><td>LP</td><td>32</td><td>23</td><td>12</td><td class="success-cell">52.2%</td></tr>
+      <tr><td>りこぴんLINE</td><td>8</td><td>6</td><td>4</td><td class="success-cell">66.7%</td></tr>
+    </tbody>
+  </table>
+  <div class="insight warning">
+    <strong>コラボ5名合計CVR 23.3% vs 自社チャネル 38.2%</strong>
+    自社チャネル（LP・YouTube・りこぴんLINE）は高CVR。コラボ経由はLP省略の影響もあり温度感が低い。
+  </div>
+</div>
+</section>
+
+<!-- ============ 2. SCORECARD ============ -->
+<section id="scorecard">
+<h2 class="section-title"><span class="num">2</span>期別 勉強会総合評価スコアカード</h2>
+
+<div class="card">
+  <h3>6軸評価（各100点満点 / 重み付き総合スコア）</h3>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">A.教育品質(20%) B.感情的共鳴(20%) C.スピーチ信頼力(20%) D.不安払拭(20%) E.価値伝達(10%) F.Q&A充実度(10%)</p>
+  <div class="chart-container"><canvas id="scorecardRadar"></canvas></div>
+</div>
+
+<div class="card">
+  <h3>期別総合スコア比較</h3>
+  <div class="chart-container"><canvas id="scorecardBar"></canvas></div>
+</div>
+
+<div class="card">
+  <h3>スコア詳細表</h3>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr><th>評価軸</th><th>重み</th><th>3期</th><th>4期</th><th>5期</th><th>6期</th><th>7期</th><th>8期</th></tr></thead>
+    <tbody>
+      <tr><td>A. 教育パートの品質</td><td>20%</td><td>80</td><td>78</td><td>78</td><td class="success-cell">90</td><td>82</td><td>75</td></tr>
+      <tr><td>B. 感情的共鳴度</td><td>20%</td><td>85</td><td>80</td><td>78</td><td>88</td><td class="success-cell">90</td><td>80</td></tr>
+      <tr><td>C. 運営スピーチ信頼構築力</td><td>20%</td><td>90</td><td>88</td><td>88</td><td class="success-cell">92</td><td class="danger-cell">55</td><td class="danger-cell">55</td></tr>
+      <tr><td>D. 不安払拭の網羅性</td><td>20%</td><td>65</td><td>65</td><td>65</td><td>67</td><td>65</td><td class="danger-cell">62</td></tr>
+      <tr><td>E. 価値伝達の明確さ</td><td>10%</td><td>70</td><td>70</td><td>72</td><td>72</td><td>72</td><td class="success-cell">78</td></tr>
+      <tr><td>F. Q&Aの充実度</td><td>10%</td><td>75</td><td class="danger-cell">50</td><td>78</td><td>72</td><td class="success-cell">85</td><td class="success-cell">85</td></tr>
+      <tr class="highlight-row"><td><strong>総合スコア</strong></td><td></td><td>80</td><td>75</td><td>77</td><td class="success-cell"><strong>82</strong></td><td>74</td><td class="danger-cell"><strong>72</strong></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="insight warning">
+    <strong>C軸（スピーチ信頼構築力）の急落（92→55）が7-8期の総合スコア低下の最大要因</strong>
+    スピーチ時間の15分→8分への短縮が、6期からの巻き戻しを生み出している。D軸（不安払拭）は全6期を通じて最低域（62-67点）で構造的な課題として残る。
+  </div>
+</div>
+
+<div class="card">
+  <h3>スピーチ時間 vs 成約率の相関</h3>
+  <div class="chart-container small"><canvas id="speechCorrelation"></canvas></div>
+  <div class="insight">
+    <strong>6期でスピーチ20分に拡大→唯一の成約率回復（+2.7pt）</strong>
+    7-8期でスピーチ8-10分に激減→成約率が急落。スピーチ時間は勉強会内で最も成約率と相関する変数。
+  </div>
+</div>
+</section>
+
+<!-- ============ 3. EDUCATION PART ============ -->
+<section id="education">
+<h2 class="section-title"><span class="num">3</span>教育パートの変遷</h2>
+
+<div class="card">
+  <h3>3ステップの変遷マトリクス</h3>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr><th style="min-width:100px;"></th><th>3期</th><th>4期</th><th>5期</th><th>6期</th><th>7期</th><th>8期</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ステップ1</strong></td><td>マイナス感情に共感</td><td>自己分析</td><td>弱みから専門家</td><td>弱みから専門家</td><td>マイナス感情共感</td><td>経験談</td></tr>
+      <tr><td><strong>ステップ2</strong></td><td>AだけどB構文</td><td>AだけどB構文</td><td>AだけどB構文</td><td>常識破壊AだけどB</td><td>AだけどB構文</td><td>AだけどB構文</td></tr>
+      <tr><td><strong>ステップ3</strong></td><td>導入2秒+想像の一歩先</td><td>対義語活用</td><td>対義語活用</td><td>対義語で常識破壊</td><td>導入2秒+想像一歩先</td><td>バズリール構成</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="insight">
+    <strong>AだけどB構文は全6期で不変の鉄板フレームワーク</strong>
+    ステップ1は期ごとに入口を変えているが核心（自己分析）は共通。6期で全面刷新したが成約率への影響は限定的（+2.7pt）。
+  </div>
+</div>
+
+<div class="card">
+  <h3>事例の使用履歴</h3>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr><th>事例</th><th style="text-align:center;">3期</th><th style="text-align:center;">4期</th><th style="text-align:center;">5期</th><th style="text-align:center;">6期</th><th style="text-align:center;">7期</th><th style="text-align:center;">8期</th><th>使用回数</th></tr></thead>
+    <tbody id="caseTable"></tbody>
+  </table>
+  </div>
+  <div class="insight warning">
+    <strong>6期で事例を全面入替、7-8期はタピキチ・マリモが主力</strong>
+    つくしさんは5期間使用の最多事例。事例の鮮度維持が課題。
+  </div>
+</div>
+</section>
+
+<!-- ============ (参考) CAUSE ANALYSIS ============ -->
+<section id="cause-ref">
+<h2 class="section-title"><span class="num" style="background:#64748B">参</span>成約率低下の原因分析（補足）</h2>
+
+<div class="chart-row">
+  <div class="card">
+    <h3>寄与度の内訳（推定ポイント影響）</h3>
+    <div class="chart-container small"><canvas id="causeDonut"></canvas></div>
+  </div>
+  <div class="card">
+    <h3>原因の分類</h3>
+    <div style="margin-top:12px;">
+      <div class="insight danger" style="margin-top:8px;"><strong>勉強会「前」：約31pp</strong>流入経路の質変化（~20pp）+ LP省略（~8pp）+ 事前コミュニケーション不足（~3pp）</div>
+      <div class="insight warning" style="margin-top:8px;"><strong>勉強会「内」：約11pp</strong>教育パート変化（~3pp）+ セールスパート変化（~5pp）+ 規模拡大の品質低下（~3pp）</div>
+      <div class="insight" style="margin-top:8px;"><strong>勉強会「後」：約2pp</strong>フォローアップ不足（~2pp）</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>仮説の影響度評価</h3>
+  <table>
+    <thead><tr><th>仮説</th><th>検証結果</th><th>影響度</th><th>対処可能性</th></tr></thead>
+    <tbody>
+      <tr><td>教育パートの品質低下</td><td>棄却</td><td>-</td><td>-</td></tr>
+      <tr><td>特典の訴求力不足</td><td>棄却</td><td>-</td><td>-</td></tr>
+      <tr><td>価格設定の問題</td><td>棄却</td><td>-</td><td>-</td></tr>
+      <tr class="highlight-row"><td>参加者の温度感低下（集客経路）</td><td class="danger-cell">強く支持</td><td class="danger-cell">最大（50-60%寄与）</td><td class="success-cell">高</td></tr>
+      <tr class="highlight-row"><td>オプトインLP省略</td><td class="danger-cell">支持</td><td class="danger-cell">大（20-25%寄与）</td><td class="success-cell">高</td></tr>
+      <tr><td>大規模化による一体感希薄化</td><td>部分的に支持</td><td>中（10-15%寄与）</td><td>中</td></tr>
+      <tr class="highlight-row"><td>紹介導線の活用不足</td><td class="danger-cell">支持</td><td class="danger-cell">大（15-20%寄与）</td><td class="success-cell">高</td></tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<!-- ============ 6. ANNUAL PAYMENT ============ -->
+<section id="annual">
+<h2 class="section-title"><span class="num">7</span>年払い × 継続率分析</h2>
+
+<div class="card">
+  <h3>年払い vs 月払い 1年継続率（期別）</h3>
+  <div class="chart-container"><canvas id="retentionChart"></canvas></div>
+</div>
+
+<div class="card">
+  <h3>LTVシミュレーション（9期 成約150名想定）</h3>
+  <table>
+    <thead><tr><th>シナリオ</th><th>年払い率</th><th>年払い数</th><th>月払い数</th><th>合計LTV</th></tr></thead>
+    <tbody>
+      <tr><td>現状維持 80%</td><td>80%</td><td>120</td><td>30</td><td>15,763,200円</td></tr>
+      <tr class="highlight-row"><td>改善目標 85%</td><td>85%</td><td>128</td><td>22</td><td>16,263,680円</td></tr>
+      <tr><td>ストレッチ 90%</td><td>90%</td><td>135</td><td>15</td><td>16,701,600円</td></tr>
+    </tbody>
+  </table>
+  <div class="insight success">
+    <strong>年払い率を80%から90%に引き上げると約94万円/期のLTV改善</strong>
+    年払いデフォルト化+継続率データの訴求が有効。
+  </div>
+</div>
+</section>
+
+<!-- ============ 4. N1 INSIGHTS / 不安払拭 ============ -->
+<section id="cause">
+<h2 class="section-title"><span class="num">4</span>N1不安払拭の対応度（勉強会コンテンツ評価）</h2>
+
+<div class="card">
+  <h3>不安払拭の対応度（N1の5大不安 × 6期）</h3>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr><th>N1不安項目</th><th style="text-align:center;">3期</th><th style="text-align:center;">4期</th><th style="text-align:center;">5期</th><th style="text-align:center;">6期</th><th style="text-align:center;">7期</th><th style="text-align:center;">8期</th></tr></thead>
+    <tbody>
+      <tr><td>怪しさへの警戒（5名）</td><td class="rate-fair" style="text-align:center;">○ 間接的</td><td class="rate-fair" style="text-align:center;">○ 間接的</td><td class="rate-fair" style="text-align:center;">○ 間接的</td><td class="rate-fair" style="text-align:center;">○ 間接的</td><td class="rate-fair" style="text-align:center;">○ 間接的</td><td class="rate-fair" style="text-align:center;">○ 間接的</td></tr>
+      <tr><td>価格への不安（4名）</td><td class="rate-best" style="text-align:center;">◎ 十分</td><td class="rate-best" style="text-align:center;">◎ 十分</td><td class="rate-best" style="text-align:center;">◎ 十分</td><td class="rate-best" style="text-align:center;">◎ 十分</td><td class="rate-best" style="text-align:center;">◎ 十分</td><td class="rate-best" style="text-align:center;">◎ 十分</td></tr>
+      <tr><td>家族に内緒（4名）</td><td class="rate-poor" style="text-align:center;">× 未対応</td><td class="rate-poor" style="text-align:center;">× 未対応</td><td class="rate-poor" style="text-align:center;">× 未対応</td><td class="rate-fair" style="text-align:center;">△ 子連れ言及</td><td class="rate-fair" style="text-align:center;">△ 顔出し不要</td><td class="rate-poor" style="text-align:center;">× 未対応</td></tr>
+      <tr><td>自分にできるか（3名）</td><td class="rate-best" style="text-align:center;">◎ 十分</td><td class="rate-best" style="text-align:center;">◎ 十分</td><td class="rate-best" style="text-align:center;">◎ 十分</td><td class="rate-best" style="text-align:center;">◎ 十分</td><td class="rate-best" style="text-align:center;">◎ 十分</td><td class="rate-best" style="text-align:center;">◎ 十分</td></tr>
+      <tr><td>同期チーム不安（2名）</td><td class="rate-good" style="text-align:center;">○ 概要</td><td class="rate-good" style="text-align:center;">○ 概要</td><td class="rate-good" style="text-align:center;">○ 概要</td><td class="rate-good" style="text-align:center;">○ 概要</td><td class="rate-good" style="text-align:center;">○ 概要</td><td class="rate-good" style="text-align:center;">○ 概要</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="insight danger">
+    <strong>「怪しさ」は全6期で直接払拭ゼロ、「家族に内緒」は実質未対応</strong>
+    N1の上位不安2項目が構造的に放置されている。9期で初めて正面から対応予定。
+  </div>
+</div>
+
+<div class="card">
+  <h3>入会後価値の事前伝達度</h3>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr><th>N1価値体験</th><th style="text-align:center;">3-5期</th><th style="text-align:center;">6期</th><th style="text-align:center;">7期</th><th style="text-align:center;">8期</th></tr></thead>
+    <tbody>
+      <tr><td>oVice（5名）</td><td class="rate-poor" style="text-align:center;">× 未言及</td><td class="rate-poor" style="text-align:center;">× 未言及</td><td class="rate-poor" style="text-align:center;">× 未言及</td><td class="rate-good" style="text-align:center;">○ 概要のみ</td></tr>
+      <tr><td>同期制度（6名）</td><td class="rate-best" style="text-align:center;">◎ 詳細</td><td class="rate-best" style="text-align:center;">◎ 詳細</td><td class="rate-best" style="text-align:center;">◎ 詳細</td><td class="rate-best" style="text-align:center;">◎ 詳細</td></tr>
+      <tr><td>先輩交流（5名）</td><td class="rate-good" style="text-align:center;">○ 概要</td><td class="rate-good" style="text-align:center;">○ 概要</td><td class="rate-good" style="text-align:center;">○ 概要</td><td class="rate-best" style="text-align:center;">◎ 詳細</td></tr>
+      <tr><td>講座（4名）</td><td class="rate-best" style="text-align:center;">◎ 詳細</td><td class="rate-best" style="text-align:center;">◎ 詳細</td><td class="rate-best" style="text-align:center;">◎ 詳細</td><td class="rate-best" style="text-align:center;">◎ 詳細</td></tr>
+      <tr><td>ライブ配信（4名）</td><td class="rate-best" style="text-align:center;">◎ 詳細</td><td class="rate-best" style="text-align:center;">◎ 詳細</td><td class="rate-best" style="text-align:center;">◎ 詳細</td><td class="rate-best" style="text-align:center;">◎ 詳細</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="insight">
+    <strong>oVice（N1入会後価値1位）は8期で初めて言及、まだ概要レベル</strong>
+    9期ではoViceデモ動画を追加し「体験できるレベル」に格上げ予定。
+  </div>
+</div>
+</section>
+
+<!-- ============ 8. ROADMAP ============ -->
+<section id="roadmap">
+<h2 class="section-title"><span class="num">8</span>9期改善ロードマップ</h2>
+
+<div class="card">
+  <h3>改善施策の優先度マトリクス（成約率影響 × LTV影響）</h3>
+  <div class="chart-container"><canvas id="priorityMatrix"></canvas></div>
+</div>
+
+<div class="card">
+  <h3>優先度別施策一覧（勉強会コンテンツ改善を最優先）</h3>
+  <table>
+    <thead><tr><th>施策</th><th>カテゴリ</th><th>成約率影響</th><th>実装容易さ</th><th>優先度</th></tr></thead>
+    <tbody>
+      <tr class="highlight-row"><td><strong>怪しさへの直接共感パート新設</strong></td><td>🎯 勉強会内</td><td>中（+1.0-1.5pt）</td><td>高（台本2-3分追加）</td><td><span class="badge badge-s">S</span></td></tr>
+      <tr class="highlight-row"><td><strong>運営スピーチ時間回復（12分以上）</strong></td><td>🎯 勉強会内</td><td>大（+1.0-2.0pt）</td><td>高（時間配分の調整のみ）</td><td><span class="badge badge-s">S</span></td></tr>
+      <tr class="highlight-row"><td><strong>家族に内緒でOKの明言</strong></td><td>🎯 勉強会内</td><td>中（+0.5-1.0pt）</td><td>高（台本1-2分追加）</td><td><span class="badge badge-s">S</span></td></tr>
+      <tr class="highlight-row"><td><strong>紹介者の推薦動画＋冒頭感謝</strong></td><td>🎯 勉強会内</td><td>大（+1.0-2.0pt）</td><td>中（動画撮影が必要）</td><td><span class="badge badge-s">S</span></td></tr>
+      <tr class="highlight-row"><td>オプトインLP復活</td><td>📌 勉強会外</td><td>大（+2.0-3.0pt）</td><td>中（LP制作2-3週間）</td><td><span class="badge badge-s">S</span></td></tr>
+      <tr class="highlight-row"><td>コラボ紹介ガイドライン</td><td>📌 勉強会外</td><td>大（+1.5-2.5pt）</td><td>中（ガイドライン＋MTG）</td><td><span class="badge badge-s">S</span></td></tr>
+      <tr><td>oViceデモ動画追加</td><td>🎯 勉強会内</td><td>小（+0.3-0.5pt）</td><td>中（動画制作）</td><td><span class="badge badge-a">A</span></td></tr>
+      <tr><td>年払い訴求の強化（継続率データ）</td><td>🎯 勉強会内</td><td>小（LTV向上）</td><td>高（台本追加）</td><td><span class="badge badge-a">A</span></td></tr>
+      <tr><td>事前LINE配信設計</td><td>📌 勉強会外</td><td>中（+0.5-1.0pt）</td><td>中</td><td><span class="badge badge-a">A</span></td></tr>
+      <tr><td>フォローアップLINE設計</td><td>📌 勉強会外</td><td>大（+1.0-2.0pt）</td><td>中</td><td><span class="badge badge-a">A</span></td></tr>
+      <tr><td>事例の入替（公務員・内緒組）</td><td>🎯 勉強会内</td><td>中</td><td>中（該当者の発掘）</td><td><span class="badge badge-b">B</span></td></tr>
+    </tbody>
+  </table>
+  <div class="insight success">
+    <strong>🎯 勉強会内の上位4施策はすべて「台本修正レベル」で実装可能 — コスト最小・効果最大</strong>
+    外部施策（LP復活等）より先に着手することを推奨。
+  </div>
+</div>
+
+<div class="card">
+  <h3>8週間ガントチャート（5月第1週〜6月最終週）</h3>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead>
+      <tr>
+        <th style="min-width:100px;">カテゴリ</th>
+        <th class="gantt-header" style="min-width:110px;">5/5-5/9</th>
+        <th class="gantt-header" style="min-width:110px;">5/12-5/16</th>
+        <th class="gantt-header" style="min-width:110px;">5/19-5/23</th>
+        <th class="gantt-header" style="min-width:110px;">5/26-5/30</th>
+        <th class="gantt-header" style="min-width:110px;">6/2-6/6</th>
+        <th class="gantt-header" style="min-width:110px;">6/9-6/13</th>
+        <th class="gantt-header" style="min-width:110px;">6/16-6/20</th>
+        <th class="gantt-header" style="min-width:110px;">6/23-6/27</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>勉強会</strong></td>
+        <td class="gantt-cell" style="background:#DBEAFE;">台本設計書作成</td>
+        <td class="gantt-cell" style="background:#DBEAFE;">教育パート完成</td>
+        <td class="gantt-cell" style="background:#DBEAFE;">セールスパート完成</td>
+        <td class="gantt-cell" style="background:#DBEAFE;">社内レビュー</td>
+        <td class="gantt-cell" style="background:#DBEAFE;">事例インタビュー</td>
+        <td class="gantt-cell" style="background:#BFDBFE;">リハーサル1回目</td>
+        <td class="gantt-cell" style="background:#BFDBFE;">リハーサル2回目</td>
+        <td class="gantt-cell" style="background:#FEE2E2; font-weight:700;">本番</td>
+      </tr>
+      <tr>
+        <td><strong>導線</strong></td>
+        <td class="gantt-cell" style="background:#D1FAE5;">LP要件定義</td>
+        <td class="gantt-cell" style="background:#D1FAE5;">LP制作</td>
+        <td class="gantt-cell" style="background:#D1FAE5;">LP初稿完成</td>
+        <td class="gantt-cell" style="background:#D1FAE5;">LP最終化</td>
+        <td class="gantt-cell" style="background:#D1FAE5;">事前LINE制作</td>
+        <td class="gantt-cell" style="background:#D1FAE5;">フォローLINE制作</td>
+        <td class="gantt-cell" style="background:#D1FAE5;">テスト送信</td>
+        <td class="gantt-cell" style="background:#D1FAE5;">LP公開・配信</td>
+      </tr>
+      <tr>
+        <td><strong>コラボ</strong></td>
+        <td class="gantt-cell" style="background:#FEF3C7;">候補リストアップ</td>
+        <td class="gantt-cell" style="background:#FEF3C7;">ガイドライン作成</td>
+        <td class="gantt-cell" style="background:#FEF3C7;">テンプレ動画制作</td>
+        <td class="gantt-cell" style="background:#FEF3C7;">導線テスト</td>
+        <td class="gantt-cell" style="background:#FEF3C7;">個別MTG開始</td>
+        <td class="gantt-cell" style="background:#FEF3C7;">MTG完了</td>
+        <td class="gantt-cell" style="background:#FEF3C7;">スケジュール確認</td>
+        <td class="gantt-cell" style="background:#FEF3C7;">紹介投稿公開</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+</section>
+
+<!-- ============ 9. SIMULATION ============ -->
+<section id="simulation">
+<h2 class="section-title"><span class="num">9</span>9期目標シミュレーション</h2>
+
+<div class="kpi-grid">
+  <div class="kpi-card neutral"><div class="label">基準シナリオ 成約率</div><div class="value">30%</div><div class="sub">8期25.2%から+4.8pt改善</div></div>
+  <div class="kpi-card neutral"><div class="label">基準シナリオ 成約目標</div><div class="value">150名</div><div class="sub">8期141名から+6.4%</div></div>
+  <div class="kpi-card neutral"><div class="label">必要着席数</div><div class="value">500名</div><div class="sub">着席率73%想定</div></div>
+  <div class="kpi-card up"><div class="label">推定LTV（基準）</div><div class="value">17.1M</div><div class="sub">年払い率85%想定</div></div>
+</div>
+
+<div class="card">
+  <h3>3シナリオの逆算</h3>
+  <table>
+    <thead><tr><th>シナリオ</th><th>成約率</th><th>成約目標</th><th>必要着席</th><th>必要申込</th><th>年払い率</th><th>推定LTV</th></tr></thead>
+    <tbody>
+      <tr><td>悲観（改善小）</td><td>28%</td><td>140</td><td>500</td><td>694</td><td>80%</td><td>14.9M</td></tr>
+      <tr class="highlight-row"><td>基準（改善中）</td><td>30%</td><td>150</td><td>500</td><td>685</td><td>85%</td><td>17.1M</td></tr>
+      <tr><td>楽観（改善大）</td><td>35%</td><td>180</td><td>514</td><td>686</td><td>87%</td><td>19.2M</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h3>シナリオ別の想定</h3>
+  <div class="chart-container medium"><canvas id="scenarioChart"></canvas></div>
+  <div class="insight">
+    <strong>悲観シナリオ</strong>: LP復活と紹介品質標準化のみ実装。成約率28%で140名成約。
+  </div>
+  <div class="insight success">
+    <strong>基準シナリオ</strong>: 外部要因+勉強会内改善を全て実装。成約率30%で150名成約。申込数685人（LP復活による絞り込み）。
+  </div>
+  <div class="insight" style="background:#F0F9FF; border-color:#0EA5E9;">
+    <strong>楽観シナリオ</strong>: 全施策+フォローアップが奏功。コラボ経由CVR30%超に回復、全体成約率35%で180名成約。
+  </div>
+</div>
+</section>
+
+<div class="footer">
+  iCircle勉強会 比較分析ダッシュボード | 作成日: 2026-04-06 | 作成者: しゃけ（Claude分析支援）
+</div>
+
+</div><!-- /content -->
+</div><!-- /main -->
+
+<script>
+// === Common Config ===
+const LABELS = ['3期','4期','5期','6期','7期','8期'];
+const COLORS = {
+  primary: '#1E2761',
+  accent: '#3b82f6',
+  success: '#10B981',
+  danger: '#EF4444',
+  warning: '#F59E0B',
+  purple: '#8B5CF6',
+  pink: '#EC4899',
+  teal: '#14B8A6',
+  orange: '#F97316',
+  slate: '#64748B'
+};
+
+Chart.defaults.font.family = "'Noto Sans JP', system-ui, sans-serif";
+Chart.defaults.font.size = 12;
+
+// === SCORECARD: Radar Chart ===
+new Chart(document.getElementById('scorecardRadar'), {
+  type: 'radar',
+  data: {
+    labels: ['A.教育品質', 'B.感情的共鳴', 'C.スピーチ信頼力', 'D.不安払拭', 'E.価値伝達', 'F.Q&A充実度'],
+    datasets: [
+      { label: '3期', data: [80,85,90,65,70,75], borderColor: COLORS.accent, backgroundColor: 'rgba(59,130,246,0.08)', pointBackgroundColor: COLORS.accent, borderWidth: 2 },
+      { label: '6期（最高）', data: [90,88,92,67,72,72], borderColor: COLORS.success, backgroundColor: 'rgba(16,185,129,0.12)', pointBackgroundColor: COLORS.success, borderWidth: 2.5 },
+      { label: '7期', data: [82,90,55,65,72,85], borderColor: COLORS.orange, backgroundColor: 'rgba(249,115,22,0.08)', pointBackgroundColor: COLORS.orange, borderWidth: 2 },
+      { label: '8期（最低）', data: [75,80,55,62,78,85], borderColor: COLORS.danger, backgroundColor: 'rgba(239,68,68,0.08)', pointBackgroundColor: COLORS.danger, borderWidth: 2.5 },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: { r: { min: 40, max: 100, ticks: { stepSize: 20 }, pointLabels: { font: { size: 13 } } } },
+    plugins: { legend: { position: 'bottom' } }
+  }
+});
+
+// === SCORECARD: Bar Chart ===
+new Chart(document.getElementById('scorecardBar'), {
+  type: 'bar',
+  data: {
+    labels: LABELS,
+    datasets: [
+      { label: '総合スコア', data: [80, 75, 77, 82, 74, 72],
+        backgroundColor: [COLORS.accent, COLORS.slate, COLORS.slate, COLORS.success, COLORS.orange, COLORS.danger],
+        borderRadius: 6 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: { y: { min: 60, max: 90, title: { display: true, text: '総合スコア（/100）' } } },
+    plugins: {
+      legend: { display: false },
+      annotation: { annotations: {} }
+    }
+  }
+});
+
+// === SCORECARD: Speech vs CVR Correlation ===
+new Chart(document.getElementById('speechCorrelation'), {
+  type: 'bar',
+  data: {
+    labels: LABELS,
+    datasets: [
+      {
+        label: 'スピーチ時間（分）',
+        data: [15, 15, 15, 20, 9, 9],
+        backgroundColor: 'rgba(59,130,246,0.7)',
+        borderRadius: 4,
+        yAxisID: 'y'
+      },
+      {
+        label: '成約率（%）',
+        data: [68.9, 62.3, 41.2, 43.9, 38.4, 25.2],
+        type: 'line',
+        borderColor: COLORS.danger,
+        backgroundColor: 'rgba(239,68,68,0.1)',
+        pointBackgroundColor: COLORS.danger,
+        pointRadius: 6,
+        borderWidth: 2.5,
+        fill: false,
+        yAxisID: 'y2'
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: {
+      y: { position: 'left', title: { display: true, text: 'スピーチ時間（分）' }, min: 0, max: 25 },
+      y2: { position: 'right', title: { display: true, text: '成約率（%）' }, min: 0, max: 80, grid: { drawOnChartArea: false } }
+    },
+    plugins: { legend: { position: 'bottom' } }
+  }
+});
+
+// === 1. CVR Trend (Line) ===
+new Chart(document.getElementById('cvrTrend'), {
+  type: 'line',
+  data: {
+    labels: LABELS,
+    datasets: [{
+      label: '成約率（対着席）',
+      data: [68.9, 62.3, 41.2, 43.9, 38.4, 25.2],
+      borderColor: COLORS.danger,
+      backgroundColor: 'rgba(239,68,68,0.1)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 6,
+      pointBackgroundColor: COLORS.danger,
+      pointBorderColor: '#fff',
+      pointBorderWidth: 2,
+      borderWidth: 3
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => `成約率: ${ctx.parsed.y}%`
+        }
+      }
+    },
+    scales: {
+      y: {
+        min: 0, max: 80,
+        ticks: { callback: v => v + '%' },
+        title: { display: true, text: '成約率（%）' }
+      }
+    }
+  }
+});
+
+// === 2. Funnel Volume (Bar) ===
+new Chart(document.getElementById('funnelVolume'), {
+  type: 'bar',
+  data: {
+    labels: LABELS,
+    datasets: [
+      { label: '申込', data: [540,388,367,278,550,781], backgroundColor: 'rgba(59,130,246,0.7)' },
+      { label: '着席', data: [332,271,274,194,420,559], backgroundColor: 'rgba(20,184,166,0.7)' },
+      { label: '成約', data: [229,169,113,85,161,141], backgroundColor: 'rgba(139,92,246,0.7)' }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      tooltip: { mode: 'index', intersect: false }
+    },
+    scales: {
+      y: { beginAtZero: true, title: { display: true, text: '人数' } }
+    }
+  }
+});
+
+// === 3. Funnel Rates (Line, dual axis) ===
+new Chart(document.getElementById('funnelRates'), {
+  type: 'line',
+  data: {
+    labels: LABELS,
+    datasets: [
+      {
+        label: '着席率',
+        data: [61.6, 69.9, 74.7, 69.6, 76.3, 71.6],
+        borderColor: COLORS.accent,
+        backgroundColor: 'rgba(59,130,246,0.08)',
+        fill: false,
+        tension: 0.3,
+        pointRadius: 5,
+        borderWidth: 2,
+        yAxisID: 'y'
+      },
+      {
+        label: '成約率（対着席）',
+        data: [68.9, 62.3, 41.2, 43.9, 38.4, 25.2],
+        borderColor: COLORS.danger,
+        fill: false,
+        tension: 0.3,
+        pointRadius: 5,
+        borderWidth: 2,
+        yAxisID: 'y'
+      },
+      {
+        label: '成約率（対申込）',
+        data: [42.4, 43.5, 30.8, 30.5, 29.3, 18.1],
+        borderColor: COLORS.warning,
+        borderDash: [5,5],
+        fill: false,
+        tension: 0.3,
+        pointRadius: 5,
+        borderWidth: 2,
+        yAxisID: 'y'
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      tooltip: {
+        mode: 'index',
+        intersect: false,
+        callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}%` }
+      }
+    },
+    scales: {
+      y: {
+        min: 0, max: 85,
+        ticks: { callback: v => v + '%' },
+        title: { display: true, text: '割合（%）' }
+      }
+    }
+  }
+});
+
+// === 4. Channel CVR (Horizontal Bar) ===
+new Chart(document.getElementById('channelCvr'), {
+  type: 'bar',
+  data: {
+    labels: ['コラボ5名', '自社チャネル', 'タグ無し/その他'],
+    datasets: [{
+      label: 'CVR（対着席）',
+      data: [23.3, 38.2, 40.5],
+      backgroundColor: [COLORS.danger, COLORS.success, COLORS.accent],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => `CVR: ${ctx.parsed.x}%` } }
+    },
+    scales: {
+      x: { min: 0, max: 50, ticks: { callback: v => v + '%' } }
+    }
+  }
+});
+
+// === 5. Collab CVR (Horizontal Bar) ===
+new Chart(document.getElementById('collabCvr'), {
+  type: 'bar',
+  data: {
+    labels: ['いつき', 'うる', 'まりりん', 'せろと', 'ハマノ'],
+    datasets: [{
+      label: 'CVR（対着席）',
+      data: [30.3, 31.3, 24.1, 19.0, 19.4],
+      backgroundColor: [COLORS.success, COLORS.success, COLORS.warning, COLORS.danger, COLORS.danger],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => `CVR: ${ctx.parsed.x}%` } }
+    },
+    scales: {
+      x: { min: 0, max: 40, ticks: { callback: v => v + '%' } }
+    }
+  }
+});
+
+// === 6. Cause Donut ===
+new Chart(document.getElementById('causeDonut'), {
+  type: 'doughnut',
+  data: {
+    labels: [
+      '流入経路の質変化 (~20pp)',
+      'LP省略 (~8pp)',
+      '事前コミュニケーション (~3pp)',
+      '教育パート変化 (~3pp)',
+      'セールスパート変化 (~5pp)',
+      '規模拡大の品質低下 (~3pp)',
+      'フォローアップ不足 (~2pp)'
+    ],
+    datasets: [{
+      data: [20, 8, 3, 3, 5, 3, 2],
+      backgroundColor: [
+        '#EF4444', '#F97316', '#F59E0B',
+        '#8B5CF6', '#6366F1', '#A78BFA',
+        '#94A3B8'
+      ],
+      borderWidth: 2,
+      borderColor: '#fff'
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: '55%',
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 8, boxWidth: 12 } },
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            const total = ctx.dataset.data.reduce((a,b)=>a+b,0);
+            const pct = Math.round(ctx.parsed / total * 100);
+            return `${ctx.label}: ${pct}%`;
+          }
+        }
+      }
+    }
+  }
+});
+
+// === 7. Retention Chart ===
+new Chart(document.getElementById('retentionChart'), {
+  type: 'bar',
+  data: {
+    labels: ['0期','1期','2期','3期','4期','5期'],
+    datasets: [
+      {
+        label: '月払い 1年継続率',
+        data: [35, 35, 40, 44, 23, 19],
+        backgroundColor: 'rgba(239,68,68,0.6)',
+        borderRadius: 4
+      },
+      {
+        label: '年払い 1年継続率',
+        data: [82, 62, 57, 59, 62, 61],
+        backgroundColor: 'rgba(16,185,129,0.6)',
+        borderRadius: 4
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      tooltip: {
+        mode: 'index',
+        intersect: false,
+        callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}%` }
+      }
+    },
+    scales: {
+      y: {
+        min: 0, max: 100,
+        ticks: { callback: v => v + '%' },
+        title: { display: true, text: '1年継続率（%）' }
+      }
+    }
+  }
+});
+
+// === 8. Priority Matrix (Scatter) ===
+new Chart(document.getElementById('priorityMatrix'), {
+  type: 'scatter',
+  data: {
+    datasets: [
+      {
+        label: 'S優先',
+        data: [
+          { x: 2.5, y: 1.5, label: 'LP復活' },
+          { x: 2.0, y: 1.5, label: '紹介ガイドライン' },
+          { x: 1.5, y: 0.5, label: '紹介者推薦動画' },
+          { x: 1.25, y: 0.5, label: '怪しさ共感パート' },
+          { x: 0.75, y: 0.5, label: '家族に内緒OK' }
+        ],
+        backgroundColor: 'rgba(239,68,68,0.8)',
+        pointRadius: 10,
+        pointHoverRadius: 14
+      },
+      {
+        label: 'A優先',
+        data: [
+          { x: 0.75, y: 0.5, label: '事前LINE配信' },
+          { x: 0.8, y: 0.5, label: '事例入替' },
+          { x: 0.5, y: 1.0, label: '不安払拭パート' }
+        ],
+        backgroundColor: 'rgba(245,158,11,0.8)',
+        pointRadius: 10,
+        pointHoverRadius: 14
+      },
+      {
+        label: 'B優先',
+        data: [
+          { x: 0.3, y: 2.5, label: '年払いデフォルト化' },
+          { x: 0.4, y: 0.3, label: '運営スピーチ' },
+          { x: 1.5, y: 0.3, label: 'フォローアップ' }
+        ],
+        backgroundColor: 'rgba(59,130,246,0.8)',
+        pointRadius: 10,
+        pointHoverRadius: 14
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            const d = ctx.raw;
+            return `${d.label} (成約率+${d.x}pt, LTV影響${d.y})`;
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        min: 0, max: 3.5,
+        title: { display: true, text: '成約率への影響（pt）' }
+      },
+      y: {
+        min: 0, max: 3,
+        title: { display: true, text: 'LTVへの影響' }
+      }
+    }
+  }
+});
+
+// === 9. Scenario Chart ===
+new Chart(document.getElementById('scenarioChart'), {
+  type: 'bar',
+  data: {
+    labels: ['悲観（28%）', '基準（30%）', '楽観（35%）'],
+    datasets: [
+      {
+        label: '成約者数',
+        data: [140, 150, 180],
+        backgroundColor: ['rgba(239,68,68,0.6)', 'rgba(59,130,246,0.6)', 'rgba(16,185,129,0.6)'],
+        borderRadius: 4,
+        yAxisID: 'y'
+      },
+      {
+        label: '推定LTV（百万円）',
+        data: [14.9, 17.1, 19.2],
+        type: 'line',
+        borderColor: COLORS.purple,
+        backgroundColor: COLORS.purple,
+        pointRadius: 6,
+        pointBackgroundColor: COLORS.purple,
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        borderWidth: 3,
+        yAxisID: 'y1'
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      tooltip: {
+        mode: 'index',
+        intersect: false,
+        callbacks: {
+          label: ctx => {
+            if (ctx.dataset.label.includes('LTV')) return `推定LTV: ${ctx.parsed.y}M円`;
+            return `成約者数: ${ctx.parsed.y}名`;
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        position: 'left',
+        min: 0, max: 200,
+        title: { display: true, text: '成約者数（名）' }
+      },
+      y1: {
+        position: 'right',
+        min: 10, max: 25,
+        title: { display: true, text: '推定LTV（百万円）' },
+        grid: { drawOnChartArea: false }
+      }
+    }
+  }
+});
+
+// === Case Usage Table (Dot Matrix) ===
+const cases = [
+  { name: 'つくしさん', periods: [1,1,1,0,1,1] },
+  { name: 'いとさん', periods: [1,1,1,0,1,1] },
+  { name: 'まえさん', periods: [1,1,1,0,1,1] },
+  { name: 'おとぱぱさん', periods: [1,1,1,0,0,0] },
+  { name: 'グミさん', periods: [1,1,1,0,0,0] },
+  { name: 'マーさん', periods: [1,1,1,0,0,0] },
+  { name: 'めぐさん', periods: [0,0,0,1,0,0] },
+  { name: 'ワンさん', periods: [0,0,0,1,1,1] },
+  { name: 'ピコマルさん', periods: [0,0,0,1,0,0] },
+  { name: '有子さん', periods: [0,0,0,1,0,0] },
+  { name: 'タピキチさん', periods: [0,0,0,0,1,1] },
+  { name: 'マリモさん', periods: [0,0,0,0,1,1] }
+];
+
+const caseTableBody = document.getElementById('caseTable');
+cases.forEach(c => {
+  const count = c.periods.reduce((a,b)=>a+b,0);
+  const row = document.createElement('tr');
+  row.innerHTML = `<td>${c.name}</td>` +
+    c.periods.map(p => `<td style="text-align:center;"><span class="dot ${p ? 'dot-used' : 'dot-empty'}"></span></td>`).join('') +
+    `<td style="text-align:center; font-weight:700;">${count}</td>`;
+  caseTableBody.appendChild(row);
+});
+
+// === Scroll Spy ===
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.sidebar a[href^="#"]');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('current'));
+      const active = document.querySelector(`.sidebar a[href="#${entry.target.id}"]`);
+      if (active) active.classList.add('current');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

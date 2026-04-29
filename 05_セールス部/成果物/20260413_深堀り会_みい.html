@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>深堀り会｜みい（@mii_excel）</title>
+<style>
+  :root {
+    --primary: #2D3436;
+    --accent: #6C5CE7;
+    --accent-light: #F0EDFF;
+    --bg: #FAFAFA;
+    --card: #FFFFFF;
+    --border: #E0E0E0;
+    --text: #2D3436;
+    --text-light: #636E72;
+    --success: #00B894;
+    --warning: #FDCB6E;
+    --danger: #D63031;
+    --info: #0984E3;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; background:var(--bg); color:var(--text); line-height:1.8; }
+  .header { background: linear-gradient(135deg, #6C5CE7 0%, #A29BFE 100%); color:#fff; padding:40px 24px; text-align:center; }
+  .header h1 { font-size:28px; margin-bottom:8px; }
+  .header .subtitle { font-size:15px; opacity:.85; }
+  .header .account { display:inline-block; background:rgba(255,255,255,.2); padding:6px 16px; border-radius:20px; margin-top:12px; font-size:14px; }
+  .purpose-bar { background: var(--primary); color:#fff; padding:20px 24px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+  .purpose-bar .goal { background:rgba(255,255,255,.12); padding:10px 18px; border-radius:8px; font-size:14px; display:flex; align-items:center; gap:8px; }
+  .purpose-bar .goal-num { background:var(--accent); width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; }
+  .container { max-width:900px; margin:0 auto; padding:24px 16px; }
+  .section { margin-bottom:32px; }
+  .section-title { font-size:20px; font-weight:700; padding:12px 0; border-bottom:3px solid var(--accent); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+  .section-title .icon { font-size:24px; }
+  .card { background:var(--card); border-radius:12px; padding:24px; box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:16px; border-left:4px solid var(--accent); }
+  .card h3 { font-size:16px; color:var(--accent); margin-bottom:10px; }
+  .card p, .card li { font-size:14px; }
+  .card ul { padding-left:20px; }
+  .card ul li { margin-bottom:6px; }
+  .highlight-box { background:var(--accent-light); border:2px solid var(--accent); border-radius:12px; padding:20px 24px; margin-bottom:16px; }
+  .highlight-box h3 { color:var(--accent); font-size:16px; margin-bottom:8px; }
+  .highlight-box p { font-size:15px; font-weight:600; }
+  table { width:100%; border-collapse:collapse; font-size:14px; margin-bottom:16px; }
+  th { background:var(--primary); color:#fff; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); }
+  tr:nth-child(even) td { background:#F8F8F8; }
+  .phrase-list { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0; }
+  .phrase { background:var(--accent-light); color:#5441C0; padding:8px 16px; border-radius:20px; font-size:13px; font-weight:600; border:1px solid var(--accent); }
+  .ng-box { background:#FFF5F5; border:2px solid var(--danger); border-radius:12px; padding:20px 24px; margin-bottom:16px; }
+  .ng-box h3 { color:var(--danger); font-size:16px; margin-bottom:8px; }
+  .step-flow { display:flex; flex-direction:column; gap:0; margin:16px 0; }
+  .step-item { background:var(--card); border-radius:12px; padding:20px; border-left:4px solid var(--accent); }
+  .step-arrow { text-align:center; font-size:24px; color:var(--accent); padding:4px 0; }
+  .step-num { background:var(--accent); color:#fff; width:28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; margin-right:8px; }
+  .step-item h4 { font-size:15px; margin-bottom:8px; display:flex; align-items:center; }
+  .step-item blockquote { background:var(--accent-light); border-left:3px solid var(--accent); padding:12px 16px; border-radius:0 8px 8px 0; margin-top:8px; font-size:13px; line-height:1.7; }
+  .persona-card { background:linear-gradient(135deg, var(--accent-light) 0%, #FFF 100%); border:2px solid var(--accent); border-radius:16px; padding:24px; margin-bottom:24px; }
+  .persona-card h3 { font-size:18px; color:var(--accent); margin-bottom:12px; }
+  .persona-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .persona-attr { background:#fff; padding:10px 14px; border-radius:8px; font-size:13px; }
+  .persona-attr strong { color:#5441C0; }
+  .deep-insight { background:#F0F0F0; border-radius:8px; padding:14px 18px; margin:8px 0; font-size:14px; }
+  .deep-insight em { color:var(--accent); font-style:normal; font-weight:700; }
+  .agenda-section { background:linear-gradient(135deg, #DFE6E9 0%, #B2BEC3 100%); border-radius:12px; padding:24px; margin-bottom:16px; }
+  .agenda-section h3 { font-size:18px; margin-bottom:16px; color:var(--primary); }
+  .agenda-item { background:#fff; border-radius:8px; padding:16px; margin-bottom:12px; border-left:4px solid var(--info); }
+  .agenda-item h4 { color:var(--info); font-size:15px; margin-bottom:6px; }
+  .agenda-item .question { background:#E8F4FD; padding:8px 12px; border-radius:6px; font-size:13px; margin-top:6px; color:var(--primary); }
+  .note-area { background:var(--card); border:2px dashed var(--border); border-radius:12px; padding:20px; margin-bottom:16px; }
+  .note-area h4 { color:var(--text-light); font-size:14px; margin-bottom:8px; }
+  .note-area textarea { width:100%; min-height:100px; border:1px solid var(--border); border-radius:8px; padding:12px; font-size:14px; font-family:inherit; resize:vertical; line-height:1.7; }
+  .funnel { display:flex; flex-direction:column; align-items:center; gap:2px; margin:16px 0; }
+  .funnel-step { padding:10px 20px; text-align:center; font-size:13px; color:#fff; font-weight:600; border-radius:6px; }
+  .funnel-arrow { font-size:18px; color:var(--text-light); }
+  .timeline { position:relative; padding-left:30px; margin:16px 0; }
+  .timeline::before { content:''; position:absolute; left:12px; top:0; bottom:0; width:2px; background:var(--accent); }
+  .timeline-item { position:relative; margin-bottom:16px; padding:12px 16px; background:var(--card); border-radius:8px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  .timeline-item::before { content:''; position:absolute; left:-24px; top:16px; width:10px; height:10px; border-radius:50%; background:var(--accent); border:2px solid #fff; }
+  .timeline-item .time { font-size:12px; color:var(--accent); font-weight:700; }
+  .timeline-item .desc { font-size:13px; margin-top:2px; }
+  @media(max-width:600px) { .persona-grid { grid-template-columns:1fr; } .purpose-bar { flex-direction:column; align-items:center; } .header h1 { font-size:22px; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>iメイト深堀り会</h1>
+  <div class="subtitle">ZOOM 1on1 セッション資料</div>
+  <div class="account">みい｜@mii_excel｜30代ワーママPC時短術</div>
+</div>
+
+<div class="purpose-bar">
+  <div class="goal"><span class="goal-num">1</span>フォロワーに刺さる「理想の未来」を決める</div>
+  <div class="goal"><span class="goal-num">2</span>それを証明する「自分のエピソード」を決める</div>
+  <div class="goal"><span class="goal-num">3</span>投稿作成のイメージを掴む</div>
+  <div class="goal"><span class="goal-num">4</span>フォロワーの不安への切り返しを準備する</div>
+  <div class="goal"><span class="goal-num">5</span>投稿スケジュールの大枠を決める</div>
+</div>
+
+<div class="container">
+
+  <!-- 訴求戦略レポート -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F3AF;</span> 訴求戦略レポート</div>
+
+    <div class="highlight-box">
+      <h3>核心メッセージ（これが全ての軸）</h3>
+      <p>「PC苦手だった私が教える側になれた。あなたのExcelの知識、インスタで発信するだけで副収入になるって知ってた？」</p>
+    </div>
+
+    <div class="card">
+      <h3>なぜこのメッセージが刺さるのか</h3>
+      <ul>
+        <li>フォロワーは「仕事を楽にしたい」が入口だが、深層に「働き方を変えたい」願望がある</li>
+        <li>「今学んでいるExcel時短ワザ＝発信コンテンツ＝副収入」の三段変換が最も響く</li>
+        <li>みいさん自身が「中卒・正社員経験ゼロ・派遣切り3回→Excel発信で人生が変わった」生きた証拠</li>
+        <li>「教える側になれる」は、自己肯定感が低いフォロワーにとって最大の理想</li>
+      </ul>
+    </div>
+
+    <table>
+      <tr><th>フォロワーの表面の欲求</th><th>深層の欲求</th></tr>
+      <tr><td>Excelの時短ワザを知りたい</td><td>「仕事ができる自分」になって認められたい</td></tr>
+      <tr><td>残業を減らしたい</td><td>子どものお迎えに余裕を持ちたい＝罪悪感から解放されたい</td></tr>
+      <tr><td>PCスキルを上げたい</td><td>「在宅ワーク」という選択肢を持ちたい</td></tr>
+    </table>
+
+    <div class="card"><h3>訴求の3ステップ</h3></div>
+    <div class="step-flow">
+      <div class="step-item">
+        <h4><span class="step-num">1</span>共感を得る</h4>
+        <p>みいさんの壮絶な過去を赤裸々に。「私だって何もなかった」を証明する。</p>
+        <blockquote>「中卒・正社員経験ゼロ・派遣切り3回。"仕事ができない人間"だと思ってた。会議で50人の前で社長にミスを指摘されて謝罪を強要された。朝、体が動かなくなった。"もうこんな働き方はイヤ"って心の底から思った」</blockquote>
+      </div>
+      <div class="step-arrow">&#x25BC;</div>
+      <div class="step-item">
+        <h4><span class="step-num">2</span>発信＝仕事になる可能性を見せる</h4>
+        <p>「保存してくれるあなた」に直接語りかける。</p>
+        <blockquote>「"上司に褒められた"って保存してくれるあなたへ。そのExcelの知識、実はインスタで発信するだけで副収入になるって知ってた？私もPC苦手から始めた。特別じゃない。ただ"教わったことを発信した"だけ」</blockquote>
+      </div>
+      <div class="step-arrow">&#x25BC;</div>
+      <div class="step-item">
+        <h4><span class="step-num">3</span>勉強会へ誘導する</h4>
+        <p>「在宅」「スマホ」「ワーママでも」のキーワードでハードルを下げる。</p>
+        <blockquote>「"好きなこと"や"得意なこと"を発信するだけで、ゼロからフォロワー1万人達成できた人が200人以上いるコミュニティがある。しかも、その方法を無料で教えてもらえる勉強会があるみたい。在宅でスマホでできる。ワーママでも続けられる。気になったらストーリーズ見て」</blockquote>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>刺さるフレーズ集</h3>
+      <div class="phrase-list">
+        <span class="phrase">あなたが保存したその時短ワザ、発信するだけで収入になるって知ってた？</span>
+        <span class="phrase">PC苦手だった私が、教える側になれた理由</span>
+        <span class="phrase">残業0にする方法を教えてたら、副収入まで生まれた</span>
+        <span class="phrase">在宅で、スマホで、子どもの隣でもできる仕事がある</span>
+        <span class="phrase">"マネするだけ"で始められる。発信も同じ</span>
+        <span class="phrase">中卒でも、正社員経験ゼロでも、人生は変えられる</span>
+        <span class="phrase">子どもに"ママすごい"って言ってもらえる仕事がある</span>
+      </div>
+    </div>
+
+    <div class="ng-box">
+      <h3>NG訴求（絶対に避けること）</h3>
+      <ul>
+        <li>「簡単に稼げる」系の怪しいワード</li>
+        <li>「起業」「独立」等のスケールの大きい言葉（ワーママには遠すぎる）</li>
+        <li>「自由」「好きなことだけ」等の現実離れした表現</li>
+        <li>「今すぐ会社を辞めて」等の極端な提案</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ターゲット深堀り -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F464;</span> ターゲット深堀り（ブラッシュアップ版）</div>
+
+    <div class="persona-card">
+      <h3>ペルソナ：さき（37歳・既婚ワーママ）</h3>
+      <div class="persona-grid">
+        <div class="persona-attr"><strong>年齢：</strong>37歳既婚、子ども2人（7歳・5歳）</div>
+        <div class="persona-attr"><strong>住所：</strong>地方都市在住</div>
+        <div class="persona-attr"><strong>仕事：</strong>総合職フルタイム会社員</div>
+        <div class="persona-attr"><strong>年収：</strong>300万円（夫400万、世帯700万）</div>
+        <div class="persona-attr"><strong>夫：</strong>営業職、帰宅22時以降→ほぼワンオペ</div>
+        <div class="persona-attr"><strong>悩み：</strong>PC/Excel苦手→残業→お迎えギリギリ</div>
+        <div class="persona-attr"><strong>SNS：</strong>寝る前・通勤中に時短術/在宅ワーク系を保存</div>
+        <div class="persona-attr"><strong>本音：</strong>在宅ワークに憧れるが「私にはスキルがない」</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>さきの1日（フォロワーの日常を理解する）</h3>
+      <div class="timeline">
+        <div class="timeline-item"><span class="time">6:00</span><span class="desc"> 起床→朝食準備＋子どもの支度＋自分の準備（同時進行）</span></div>
+        <div class="timeline-item"><span class="time">7:30</span><span class="desc"> 小学生を送り出す</span></div>
+        <div class="timeline-item"><span class="time">7:45</span><span class="desc"> 保育園へ送迎→そのまま出勤</span></div>
+        <div class="timeline-item"><span class="time">8:40</span><span class="desc"> 会社到着（始業前から準備）</span></div>
+        <div class="timeline-item"><span class="time">9:00-17:30</span><span class="desc"> フルタイム勤務（Excel作業に苦戦→効率が悪い→焦る）</span></div>
+        <div class="timeline-item"><span class="time">18:30</span><span class="desc"> 退勤（毎日約1時間残業してしまう）</span></div>
+        <div class="timeline-item" style="border-left:3px solid var(--danger);"><span class="time" style="color:var(--danger);">19:00</span><span class="desc"> 保育園お迎え（いつもギリギリ→「さみしい」と言われる→罪悪感）</span></div>
+        <div class="timeline-item"><span class="time">20:00</span><span class="desc"> 帰宅→夕食→お風呂→宿題→翌日準備→寝かしつけ（ノンストップ）</span></div>
+        <div class="timeline-item"><span class="time">23:00</span><span class="desc"> やっと自分時間→でも疲れ切って何もできない→スマホでインスタ見て寝落ち</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>深層心理（言語化できていない本当の気持ち）</h3>
+      <div class="deep-insight"><em>「仕事も家庭も中途半端」</em>：毎日頑張ってるのに達成感がない。良い母にも良い社員にもなれていない自責。</div>
+      <div class="deep-insight"><em>「子どもの言葉が刺さる」</em>：「いつもお迎え最後でさみしい」が胸に突き刺さっている。でもどうしようもない。</div>
+      <div class="deep-insight"><em>「女性としての自分を失いつつある」</em>：結婚前はネイル・ジム通いしていた。今は鏡を見る時間もない。</div>
+      <div class="deep-insight"><em>「聞けない恐怖」</em>：「こんなことも分からないの？」と思われるのが怖い→自己流の非効率が続く悪循環。</div>
+      <div class="deep-insight"><em>「在宅ワークへの憧れ」</em>：インスタで時短術・在宅ワーク系を保存する＝「今の働き方を変えたい」無意識のSOS。</div>
+    </div>
+
+    <div class="card">
+      <h3>悩みの構造</h3>
+      <table>
+        <tr><th>表面の悩み</th><th>深い悩み（言語化できていない）</th></tr>
+        <tr><td>Excel/PCが遅い→残業になる</td><td>お迎えギリギリ→子どもに寂しい思いをさせる罪悪感</td></tr>
+        <tr><td>今さら人に聞けない</td><td>「仕事ができない人」と思われる恐怖</td></tr>
+        <tr><td>毎日頑張ってるのに認められない</td><td>ママ/妻/社員の役割だけで「自分」が消えている</td></tr>
+        <tr><td>このままの働き方は無理</td><td>代替手段がない→将来への絶望</td></tr>
+        <tr><td>在宅ワークに憧れる</td><td>「私には特別なスキルがない」→実はExcelが立派なスキル</td></tr>
+      </table>
+    </div>
+
+    <div class="highlight-box">
+      <h3>さきがiサークルに入る「決定的な理由」</h3>
+      <p>「今のExcelスキルを教える側になれる」と気づいた時。</p>
+      <p style="font-size:14px; font-weight:400; margin-top:8px;">「仕事を楽にする」→「楽にした方法を発信する」→「それが副収入になる」の三段階。在宅でスマホでできる＝育児との両立が可能。「子どもに"ママすごい"と言ってもらえる」が最強のモチベーション。</p>
+    </div>
+
+    <div class="card">
+      <h3>伸びるキーワードから見えるフォロワー心理</h3>
+      <div class="phrase-list">
+        <span class="phrase">上司に褒められた</span><span class="phrase">驚かれた</span><span class="phrase">助かった！</span>
+        <span class="phrase">え？早っ！</span><span class="phrase">もうできたの？</span><span class="phrase">簡単に</span>
+        <span class="phrase">自動化</span><span class="phrase">時短ワザ</span><span class="phrase">残業0</span>
+        <span class="phrase">PC苦手でもできる</span><span class="phrase">マネするだけ</span><span class="phrase">すぐ使える</span>
+        <span class="phrase">明日から使える</span><span class="phrase">知らないと損</span><span class="phrase">在宅</span>
+      </div>
+      <ul style="margin-top:12px;">
+        <li>「上司に褒められた」「驚かれた」＝職場での承認欲求が強い</li>
+        <li>「PC苦手でもできる」「マネするだけ」＝ハードルの低さに反応する</li>
+        <li>「残業0」「時短」＝時間を取り戻したい切実な願い</li>
+        <li>「在宅」＝働き方を変えたいという深い願望</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>フォロワーがiサークルに入るまでの心理ステップ</h3>
+      <div class="funnel">
+        <div class="funnel-step" style="background:#6C5CE7; width:100%;">1.「みいさんの時短ワザ、マジで助かる！毎回保存してる」（ファン）</div>
+        <div class="funnel-arrow">&#x25BC;</div>
+        <div class="funnel-step" style="background:#A29BFE; width:90%;">2.「え、このExcelの知識を発信するだけで収入になるの？」（驚き）</div>
+        <div class="funnel-arrow">&#x25BC;</div>
+        <div class="funnel-step" style="background:#0984E3; width:80%;">3.「私もExcel覚えたし...発信できるかも？」（希望）</div>
+        <div class="funnel-arrow">&#x25BC;</div>
+        <div class="funnel-step" style="background:#636E72; width:70%;">4.「でも時間ないし、子育て中だし、私にできる？」（不安）</div>
+        <div class="funnel-arrow">&#x25BC;</div>
+        <div class="funnel-step" style="background:#00B894; width:60%;">5.「みいさんも中卒からスタート。スマホでできるなら...」（安心）</div>
+        <div class="funnel-arrow">&#x25BC;</div>
+        <div class="funnel-step" style="background:#E17055; width:50%;">6.「無料の勉強会、まず聞いてみよう」（行動）</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZOOM 深堀りアジェンダ -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F4DD;</span> ZOOM深堀りアジェンダ</div>
+
+    <div class="agenda-section">
+      <h3>AGENDA 1：フォロワーに刺さる「理想の未来」を決める</h3>
+      <div class="agenda-item">
+        <h4>Q1. フォロワーさんが一番「みいさんみたいになりたい」と思っているのはどの部分？</h4>
+        <p style="font-size:13px; color:var(--text-light);">PC苦手を克服したこと？発信で人に教えられるようになったこと？在宅で仕事ができること？自信を持てるようになったこと？</p>
+        <div class="question">深堀り：DMやコメントで「私もそうなりたい」と言われるのはどんな投稿？</div>
+      </div>
+      <div class="agenda-item">
+        <h4>Q2. 以下の「理想の未来」候補の中で、フォロワーさんに最も響くのはどれ？</h4>
+        <ul style="font-size:14px; padding-left:20px; margin:8px 0;">
+          <li>A.「Excel知識を発信して副収入を得る未来」（知識→収入）</li>
+          <li>B.「定時退社→子どものお迎えに余裕→罪悪感から解放」（時間の自由）</li>
+          <li>C.「"仕事ができない人"から"教える側"に変われた」（自己肯定）</li>
+          <li>D.「子どもに"ママすごい"と言ってもらえる働き方」（家族の誇り）</li>
+        </ul>
+        <div class="question">深堀り：みいさん自身が一番伝えたい「変化」はどれ？</div>
+      </div>
+    </div>
+
+    <div class="note-area">
+      <h4>メモ欄：理想の未来（決定内容）</h4>
+      <textarea placeholder="ここにZOOM中のメモを記入..."></textarea>
+    </div>
+
+    <div class="agenda-section">
+      <h3>AGENDA 2：証明する「自分のエピソード」を決める</h3>
+      <div class="agenda-item">
+        <h4>Q3. Beforeストーリーで一番使えるエピソードは？</h4>
+        <p style="font-size:13px; color:var(--text-light);">以下の中から「フォロワーが一番共感する」ものを選ぶ：</p>
+        <ul style="font-size:13px; padding-left:20px; margin:6px 0;">
+          <li>A. 会議で50人の前で社長にミスを指摘・謝罪強要された話</li>
+          <li>B. パートなのに正社員以上に働かされ、給料は半分以下の話</li>
+          <li>C. 朝、体が動かなくなった・呼吸が荒くなった話</li>
+          <li>D. 派遣切り3回・「仕事ができない人間」と思い込んでいた話</li>
+          <li>E. 中卒・正社員経験ゼロ・バイトも続かなかった話</li>
+        </ul>
+        <div class="question">深堀り：どのエピソードが一番「感情が動く」？フォロワーの共感ポイントは？</div>
+      </div>
+      <div class="agenda-item">
+        <h4>Q4. 「子どもが生まれて変わった」転換点のストーリーは？</h4>
+        <p style="font-size:13px; color:var(--text-light);">「バカな親だと思われたくない」「かっこいい背中を見せたい」→具体的にどんな瞬間？</p>
+        <div class="question">深堀り：子どもに見せたい「ママの姿」はどんな姿？</div>
+      </div>
+      <div class="agenda-item">
+        <h4>Q5. iサークルとの出会い・インスタ発信で変わった瞬間は？</h4>
+        <p style="font-size:13px; color:var(--text-light);">Excel発信を始めたきっかけは？初めて「これが仕事になる」と実感した瞬間は？</p>
+        <div class="question">深堀り：独学で副業に挑戦して失敗した経験との違いは何だった？</div>
+      </div>
+      <div class="agenda-item" style="border-left-color:var(--warning);">
+        <h4 style="color:var(--warning);">Q5b.（重要）Afterストーリーを埋める</h4>
+        <p style="font-size:13px;">スプシのAfter欄が途中です。以下を具体化しましょう：</p>
+        <ul style="font-size:13px; padding-left:20px; margin:6px 0;">
+          <li>インスタ発信を始めてから、仕事・生活・心がどう変わった？</li>
+          <li>今の収入や働き方の変化は？（具体的な数字があれば）</li>
+          <li>子どもや家族との関係はどう変わった？</li>
+          <li>「自分に自信が持てるようになった」瞬間は？</li>
+        </ul>
+        <div class="question">深堀り：これが今日のZOOMで一番大事なポイント。Afterを具体的に言語化しよう</div>
+      </div>
+    </div>
+
+    <div class="note-area">
+      <h4>メモ欄：使うエピソード（決定内容）</h4>
+      <textarea placeholder="ここにZOOM中のメモを記入..."></textarea>
+    </div>
+
+    <div class="agenda-section">
+      <h3>AGENDA 3：投稿作成イメージ</h3>
+      <div class="agenda-item">
+        <h4>Q6. 投稿構成の確認</h4>
+        <table style="font-size:13px;">
+          <tr><th>投稿</th><th>内容</th><th>目的</th></tr>
+          <tr><td>1本目</td><td>過去の暴露（中卒・派遣切り・体が動かなくなった）</td><td>共感を得る</td></tr>
+          <tr><td>2本目</td><td>Excelとの出会い→発信→人生が変わった</td><td>可能性を見せる</td></tr>
+          <tr><td>ストーリーズ</td><td>コミュニティ紹介＋勉強会誘導</td><td>行動させる</td></tr>
+        </table>
+        <div class="question">確認：みいさんのアカウントは「PC時短術」が軸。訴求投稿のトーンを普段と合わせるか、少し変えるか？</div>
+      </div>
+      <div class="agenda-item">
+        <h4>Q7. 普段の投稿トーンとの整合性</h4>
+        <p style="font-size:13px; color:var(--text-light);">普段は「PC時短ワザ」の情報提供型。訴求投稿は自分のストーリーを語る「感情型」になる。このギャップをどう繋げる？</p>
+        <div class="question">案：「いつも時短ワザを教えてる私が、なぜこの発信を始めたか、聞いてほしい」で自然に繋げる</div>
+      </div>
+    </div>
+
+    <div class="note-area">
+      <h4>メモ欄：投稿イメージ（決定内容）</h4>
+      <textarea placeholder="ここにZOOM中のメモを記入..."></textarea>
+    </div>
+
+    <div class="agenda-section">
+      <h3>AGENDA 4：フォロワーの不安への切り返し</h3>
+      <div class="agenda-item">
+        <h4>Q8. フォロワーさんが感じる不安と、それへの回答を決める</h4>
+        <table style="font-size:13px;">
+          <tr><th>想定される不安</th><th>切り返しの方向性（案）</th></tr>
+          <tr><td>「子育て中で時間がない」</td><td>「私も子ども2人のワーママ。寝かしつけ後の30分から始めた」</td></tr>
+          <tr><td>「発信する自信がない」</td><td>「中卒で派遣切り3回の私にもできた。あなたならもっと早い」</td></tr>
+          <tr><td>「Excelの知識なんて需要ある？」</td><td>「"上司に褒められた"の保存数見て。みんな求めてる」</td></tr>
+          <tr><td>「怪しい副業じゃない？」</td><td>「やることはインスタで時短ワザを教えるだけ。怪しいことは何もない」</td></tr>
+          <tr><td>「私には特別なスキルがない」</td><td>「私もなかった。でもExcelを覚えて発信しただけ。それが特別なスキルだった」</td></tr>
+        </table>
+        <div class="question">深堀り：ワーママならではの不安で、他にありそうなものは？</div>
+      </div>
+    </div>
+
+    <div class="note-area">
+      <h4>メモ欄：切り返し（決定内容）</h4>
+      <textarea placeholder="ここにZOOM中のメモを記入..."></textarea>
+    </div>
+
+    <div class="agenda-section">
+      <h3>AGENDA 5：投稿スケジュール</h3>
+      <div class="agenda-item">
+        <h4>Q9. 投稿の順番とタイミング</h4>
+        <table style="font-size:13px;">
+          <tr><th>順序</th><th>種類</th><th>内容</th><th>推奨タイミング</th></tr>
+          <tr><td>1</td><td>フィード/リール</td><td>コラボライブ告知</td><td>ライブ数日前</td></tr>
+          <tr><td>2</td><td>フィード</td><td>過去の暴露（Before）→気づき</td><td>ローンチ開始後</td></tr>
+          <tr><td>3</td><td>リール</td><td>「Excel知識が仕事に」→勉強会誘導</td><td>ローンチ中盤</td></tr>
+          <tr><td>4</td><td>ストーリーズ</td><td>コミュニティの雰囲気＋勉強会リンク</td><td>継続的に</td></tr>
+        </table>
+        <div class="question">確認：ローンチ期間と各投稿の具体的な日付を決めましょう</div>
+      </div>
+    </div>
+
+    <div class="note-area">
+      <h4>メモ欄：スケジュール（決定内容）</h4>
+      <textarea placeholder="ここにZOOM中のメモを記入..."></textarea>
+    </div>
+  </div>
+
+  <!-- 最終まとめ -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x2705;</span> セッション最終まとめ</div>
+    <div class="note-area">
+      <h4>今日決まったこと</h4>
+      <textarea placeholder="1. 理想の未来：&#10;2. 使うエピソード（Before）：&#10;3. 使うエピソード（After）：&#10;4. 投稿構成：&#10;5. 切り返し：&#10;6. スケジュール：&#10;7. 次のアクション：" style="min-height:200px;"></textarea>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

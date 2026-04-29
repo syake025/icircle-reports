@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEP 1：自己分析を深掘りする | iサークル年払い特典</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="header">
+  <span class="deco-sparkle">✨</span>
+  <span class="deco-sparkle">💫</span>
+  <span class="deco-sparkle">⭐</span>
+  <span class="deco-sparkle">✨</span>
+  <div class="badge">STEP 1 / 5</div>
+  <h1><span class="accent">自己分析</span>を深掘りする</h1>
+  <p>「好き」×「経験」からあなただけの強みを発見💪</p>
+  <div class="hero-chars">
+    <div class="hero-char rikopin"><img src="images/rikopin_smile.png" alt=""></div>
+  </div>
+</div>
+
+<div class="progress-bar">
+  <div class="prog-step"><div class="prog-dot active" data-step="1">1</div><div class="prog-label">入力</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="2">2</div><div class="prog-label">プロンプト</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="3">3</div><div class="prog-label">結果貼付</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="4">4</div><div class="prog-label">レポート</div></div>
+</div>
+<div id="stepLabel">STEP 1：自己分析の結果を入力</div>
+
+<div class="container">
+
+
+<div class="char-intro rikopin">
+  <div class="avatar"><img src="images/rikopin_wink.png" alt="りこぴん"></div>
+  <div class="bubble">
+    <div class="name">りこぴん </div>
+    <p>ここが一番大事な土台だよ🍅✨<br>宿題シートの結果を貼り付けてね！AIと一緒に<strong>あなたの本当の強み</strong>を見つけよう✨</p>
+  </div>
+</div>
+
+<!-- ===== Section 1: Input ===== -->
+<div class="section active" id="section1">
+  <div class="card">
+    <div class="card-title"><span class="emoji">📝</span> 宿題シートの自己分析を入力</div>
+    <div class="card-subtitle">11日目〜12日目の結果を入力してください。全部でなくてOK！</div>
+    <div class="field">
+      <label>「好き」の深掘り結果（11日目）</label>
+      <textarea id="input_suki" placeholder="例）過去に時間をかけてきたこと、お金をかけてきたこと、これからやりたいことなど..." style="min-height:120px"></textarea>
+      <div class="field-hint">時間×過去/未来、お金×過去/未来の4項目をまとめて貼り付けてOK</div>
+    </div>
+    <div class="field">
+      <label>「経験」の深掘り結果（12日目）</label>
+      <textarea id="input_keiken" placeholder="例）長所、長時間やっても苦じゃないこと、コンプレックス、乗り越えた経験、周りからの評価など..." style="min-height:120px"></textarea>
+      <div class="field-hint">Q1〜Q8の回答をまとめて貼り付けてOK</div>
+    </div>
+    <div class="field">
+      <label>自分の年代・立場（任意）</label>
+      <input type="text" id="input_profile" placeholder="例）30代前半、会社員、2人の子どもがいる">
+    </div>
+  </div>
+  <button class="btn btn-primary" onclick="generatePrompt()">強み分析プロンプトを生成 🔍</button>
+</div>
+
+<!-- ===== Section 2: Prompt ===== -->
+<div class="section" id="section2">
+  <div class="card">
+    <div class="card-title"><span class="emoji">🔍</span> 強み分析プロンプト</div>
+    <div class="card-subtitle">AIが宿題シートの内容から、あなたの本当の強みを一気に分析します</div>
+    <div class="prompt-box" id="promptDisplay"></div>
+    <div class="copy-success" id="copySuccess">コピーしました！ ✅</div>
+    <button class="btn btn-copy" onclick="copyText('promptDisplay','copySuccess')">📋 コピーする</button>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="emoji">💡</span> Claude（おすすめ）、ChatGPT、Geminiに貼り付けて送信してください</div>
+    <div class="howto"><div class="howto-num">1</div><div class="howto-text">Claude（おすすめ）、ChatGPT、Geminiを開いてプロンプトを貼り付け</div></div>
+    <div class="howto"><div class="howto-num">2</div><div class="howto-text">AIがあなたの<strong>強みレポートを一気に出力</strong>してくれます</div></div>
+    <div class="howto"><div class="howto-num">3</div><div class="howto-text">結果が出たら<strong>全文コピー</strong>して次へ！</div></div>
+  </div>
+  <button class="btn btn-primary" onclick="goToStep(3)">結果が出た → 次へ進む</button>
+  <button class="btn btn-outline no-print" onclick="goToStep(1)">← 入力を修正する</button>
+</div>
+
+<!-- ===== Section 3: Paste Result ===== -->
+<div class="section" id="section3">
+  <div class="card">
+    <div class="card-title"><span class="emoji">📥</span> 強み分析の結果を貼り付け</div>
+    <div class="card-subtitle">AIから出てきた強みレポートを全文コピーして貼り付けてください</div>
+    <textarea id="resultText" placeholder="AIからの強みレポートをここに貼り付け..." style="min-height:200px"></textarea>
+  </div>
+  <button class="btn btn-primary" onclick="generateReport()">強みレポートを表示する 🎉</button>
+  <button class="btn btn-outline no-print" onclick="goToStep(2)">← 戻る</button>
+</div>
+
+<!-- ===== Section 4: Report ===== -->
+<div class="section" id="section4">
+  <canvas id="confetti"></canvas>
+  <div class="report-header">
+    <div class="badge">STEP 1 COMPLETE</div>
+    <h2>💪 あなたの強みレポート</h2>
+    <p>AIが深掘りして見つけた、あなたの本当の強み</p>
+  </div>
+  <div id="reportContent"></div>
+  <div class="next-step-banner">
+    <h3>🎯 次のステップ</h3>
+    <p>この強みレポートを使って、最適な発信ジャンルを見つけましょう！</p>
+    <a href="step2-genre-research.html" class="btn btn-next" style="display:inline-block;text-decoration:none;padding:14px 32px;">STEP 2 へ進む →</a>
+  </div>
+  <div class="save-options">
+    <div class="save-options-title">💾 レポートを保存・コピー</div>
+    <div class="save-options-grid">
+      <button class="save-btn image no-print" onclick="saveReportAsImage('STEP1_強みレポート')">
+        <span class="icon">🖼️</span>
+        <span class="label">画像で保存</span>
+      </button>
+      <button class="save-btn pdf no-print" onclick="saveReportAsPDF()">
+        <span class="icon">📄</span>
+        <span class="label">PDFで保存</span>
+      </button>
+      <button class="save-btn text no-print" onclick="copyReportAsText('step1')">
+        <span class="icon">📋</span>
+        <span class="label">テキスト<br>コピー</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+  <div class="top-link no-print" style="margin-top:20px;text-align:center">
+    <a href="index.html" class="top-link-btn">🏠 TOPページに戻る</a>
+  </div>
+
+</div>
+
+<script src="shared.js"></script>
+<script>
+window.stepLabels = {
+  1: 'STEP 1：自己分析の結果を入力',
+  2: '強み分析プロンプト',
+  3: '分析結果を貼り付け',
+  4: '強みレポート完成！'
+};
+
+function generatePrompt() {
+  const suki = document.getElementById('input_suki').value.trim();
+  const keiken = document.getElementById('input_keiken').value.trim();
+  const prof = document.getElementById('input_profile').value.trim();
+  if (!suki && !keiken) { alert('最低1つは入力してください！'); return; }
+
+  const prompt = `あなたはInstagramで収益化を目指す人のための「自己分析コーチ」です。
+iサークル（Instagram副業コミュニティ）の自己分析メソッドに沿って、以下の宿題シートの内容から、本人の本当の強みと発信の種を一気に分析してください。
+
+# 分析対象の情報
+${prof ? '【プロフィール】\n' + prof + '\n\n' : ''}【「好き」の深掘り結果（11日目：時間×過去/未来、お金×過去/未来）】
+${suki || '（未記入）'}
+
+【「経験」の深掘り結果（12日目：長所・苦じゃないこと・コンプレックス・乗り越えた経験・周りからの評価）】
+${keiken || '（未記入）'}
+
+# 分析で大事にしてほしいこと（iサークルの自己分析メソッド）
+1. **「好き」×「経験」の掛け合わせ**で強みが生まれる。片方だけでなく両方を交差させて見つける
+2. **マイナス経験・コンプレックスも強みになる**（離婚・借金・恋愛経験なし・挫折などは「一次情報」として価値が高い）
+3. **ヒーローズ・ジャーニー視点**：絶望体験→使命→旅立ち→修行→試練→ヒーローになった物語を探す
+4. **「伸びそうなジャンル」から逆算しない**。本人が好き/経験があるものを伸ばす順番が最重要
+5. **一次情報（本人の実体験）こそ価値が高い**。誰でも書ける二次情報ではなく、その人にしか書けないエピソードを重視
+
+# 出力形式（必ず以下のセクション区切りで出力）
+
+---SECTION:自己分析サマリー---
+この人の特徴を温かい言葉で4〜5行にまとめてください。
+「好き」と「経験」が交差するポイントを中心に、人物像が浮かぶように。
+
+---SECTION:本質的な強みTOP3---
+掛け合わせで生まれる強みを3つ、以下の形式で：
+
+■ 強み①：○○ ×（かける）○○
+根拠：〜〜（宿題シートのどの記述から読み取ったか）
+発信に活かすなら：〜〜（Instagramでの具体的な活用イメージ）
+
+■ 強み②：○○ × ○○
+（同様の構造）
+
+■ 強み③：○○ × ○○
+（同様の構造）
+
+---SECTION:助けられる人---
+あなたが助けられる人の具体像を3〜4つ箇条書きで。
+年代・立場・悩みを含む「〇〇で悩む◯代◯◯」の形式で具体的に。
+
+---SECTION:ユニークな視点---
+あなたならではの切り口・視点を3つ。
+他の人にはない「あなただけの角度」を言語化。一次情報性の高いものを優先。
+
+---SECTION:ストーリーの種---
+ヒーローズ・ジャーニー視点での物語の核を1〜2本提案。
+「◯◯で苦しんでいた私が、△△に出会い、□□になれた」型の100字前後のストーリー骨子。
+マイナス経験が強みに変わる物語を重視。
+
+---SECTION:注目キーワード---
+ジャンル選定（STEP2）で使えるキーワードの掛け合わせを5〜6個提案。
+例）○○ × ○○、◯◯で悩む人向け◯◯
+
+---SECTION:隠れた才能---
+本人がまだ気づいていない可能性が高い、潜在的な強みや才能を2つ提案。
+宿題シートの「周りからの評価」や「苦じゃないこと」から読み取る。
+
+それでは、上記の情報をもとに、温かく・でも鋭く分析してください。`;
+
+  document.getElementById('promptDisplay').textContent = prompt;
+  goToStep(2);
+}
+
+function generateReport() {
+  const raw = document.getElementById('resultText').value.trim();
+  if (!raw) { alert('強みレポートを貼り付けてください！'); return; }
+
+  const s = parseResult(raw);
+  const container = document.getElementById('reportContent');
+
+  if (Object.keys(s).length < 2) {
+    container.innerHTML = `<div class="report-card"><div class="report-card-label">AI REPORT</div><h3>結果</h3><p>${nl2br(escHtml(raw))}</p></div>
+    <div class="card" style="background:#FFF8E1;border-left:4px solid #FFD93D"><p style="font-size:13px">⚠️ セクションマーカーが検出できませんでした。AIの回答に「---SECTION:〜---」が含まれているか確認してください。</p></div>`;
+    saveReport('step1_report', raw);
+    goToStep(4); return;
+  }
+
+  let html = '';
+  html += makeReportCard('SUMMARY', '📊 あなたの自己分析サマリー', s['自己分析サマリー'], '');
+  html += makeReportCard('TOP 3 STRENGTHS', '💪 本質的な強み TOP3', s['本質的な強みTOP3'], 'purple');
+  html += makeReportCard('WHO YOU CAN HELP', '🎯 あなたが助けられる人', s['助けられる人'], 'green');
+  html += makeReportCard('UNIQUE ANGLE', '✨ あなたならではの視点', s['ユニークな視点'], '');
+  html += makeReportCard('STORY SEED', '📖 ストーリーの種', s['ストーリーの種'], 'orange');
+  html += makeReportCard('KEYWORDS', '🏷 注目キーワード', s['注目キーワード'], 'purple');
+  html += makeReportCard('HIDDEN TALENT', '🌟 隠れた才能', s['隠れた才能'], 'pink');
+
+  container.innerHTML = html;
+  saveReport('step1_report', raw);
+  goToStep(4);
+  setTimeout(launchConfetti, 300);
+}
+
+// Initialize auto-save on page load
+document.addEventListener('DOMContentLoaded', () => initAutoSave('step1'));
+</script>
+</body>
+</html>

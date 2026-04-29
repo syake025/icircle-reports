@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>リール1投稿目 台本改善提案 v2｜どな × りこぴん コラボライブ告知</title>
+<style>
+  :root {
+    --primary: #2D3436;
+    --accent: #00B894;
+    --accent-light: #E8FFF7;
+    --accent-dark: #00816A;
+    --bg: #FAFAFA;
+    --card: #FFFFFF;
+    --border: #E0E0E0;
+    --text: #2D3436;
+    --text-light: #636E72;
+    --warning: #FDCB6E;
+    --warning-bg: #FFFBEA;
+    --warning-text: #856404;
+    --danger: #D63031;
+    --danger-bg: #FFF5F5;
+    --info: #0984E3;
+    --info-bg: #E8F4FD;
+    --rico: #E84393;
+    --rico-light: #FFE8F2;
+    --rico-dark: #C03070;
+    --gold: #F39C12;
+    --gold-light: #FFF3DC;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; background:var(--bg); color:var(--text); line-height:1.8; }
+
+  /* ===== Header ===== */
+  .header {
+    background: linear-gradient(135deg, #00B894 0%, #00CEC9 50%, #E84393 100%);
+    color:#fff; padding:52px 24px; text-align:center;
+  }
+  .header .tag-line {
+    display:inline-block; background:rgba(255,255,255,.22);
+    padding:5px 16px; border-radius:20px; font-size:12px;
+    margin-bottom:16px; letter-spacing:1px; font-weight:600;
+  }
+  .header h1 { font-size:28px; margin-bottom:10px; font-weight:700; line-height:1.5; }
+  .header .version { display:inline-block; background:var(--gold); color:#fff; padding:2px 10px; border-radius:10px; font-size:12px; margin-left:8px; vertical-align:middle; }
+  .header .subtitle { font-size:15px; opacity:.95; margin-bottom:14px; }
+  .header .meta {
+    font-size:12px; opacity:.85; margin-top:10px;
+    display:inline-block; background:rgba(0,0,0,.15);
+    padding:6px 14px; border-radius:20px;
+  }
+
+  /* ===== Policy bar ===== */
+  .policy-bar {
+    background: var(--primary); color:#fff; padding:20px 24px;
+    display:flex; gap:12px; flex-wrap:wrap; justify-content:center;
+  }
+  .policy-bar .badge {
+    background:rgba(255,255,255,.14); padding:8px 16px; border-radius:8px;
+    font-size:13px; display:flex; align-items:center; gap:8px;
+  }
+  .policy-bar .badge-icon {
+    background:var(--accent); width:22px; height:22px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700;
+  }
+
+  /* ===== Layout ===== */
+  .container { max-width:960px; margin:0 auto; padding:28px 16px; }
+  .section { margin-bottom:44px; }
+  .section-title {
+    font-size:21px; font-weight:700; padding:12px 0;
+    border-bottom:3px solid var(--accent); margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .section-title .icon { font-size:24px; }
+  .section-title.rico-title { border-bottom-color: var(--rico); }
+  .section-intro {
+    background:#fff; border-radius:10px; padding:14px 18px; margin-bottom:20px;
+    box-shadow:0 2px 6px rgba(0,0,0,.04); font-size:14px; color:var(--text-light);
+    border-left:4px solid var(--info);
+  }
+
+  /* ===== Pinned change policy ===== */
+  .policy-card {
+    background:linear-gradient(135deg, var(--gold-light) 0%, #fff 100%);
+    border:2px solid var(--gold); border-radius:14px;
+    padding:20px 24px; margin-bottom:24px;
+  }
+  .policy-card h3 { color:#B57400; font-size:16px; margin-bottom:10px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .policy-card ul { padding-left:22px; }
+  .policy-card ul li { font-size:14px; margin-bottom:6px; color:#7D5000; }
+  .policy-card ul li strong { color:#8B4500; }
+
+  /* ===== Reward categories ===== */
+  .reward-category {
+    background:#fff; border-radius:14px; margin-bottom:16px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05); overflow:hidden;
+  }
+  .reward-category-header {
+    padding:14px 20px; font-weight:700; font-size:15px;
+    display:flex; align-items:center; gap:10px; color:#fff;
+  }
+  .reward-category-header .cnum {
+    background:rgba(255,255,255,.25); width:26px; height:26px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:12px;
+  }
+  .cat-money .reward-category-header { background:linear-gradient(135deg, #00B894, #00816A); }
+  .cat-value .reward-category-header { background:linear-gradient(135deg, #0984E3, #0066B3); }
+  .cat-age .reward-category-header { background:linear-gradient(135deg, #E17055, #B85538); }
+  .cat-relation .reward-category-header { background:linear-gradient(135deg, #E84393, #C03070); }
+  .cat-special .reward-category-header { background:linear-gradient(135deg, #F39C12, #B57400); }
+
+  .reward-list { padding:8px 0; }
+  .reward-row {
+    padding:12px 20px 12px 52px; position:relative;
+    border-top:1px solid #F0F0F0;
+  }
+  .reward-row:first-child { border-top:none; }
+  .reward-row::before {
+    content:'✓'; position:absolute; left:22px; top:14px;
+    color:var(--accent); font-weight:700; font-size:15px;
+  }
+  .reward-row strong { display:block; font-size:14px; margin-bottom:3px; color:var(--primary); }
+  .reward-row span { font-size:13px; color:var(--text-light); line-height:1.7; }
+  .reward-row .tip {
+    display:inline-block; background:var(--accent-light); color:var(--accent-dark);
+    font-size:11px; padding:2px 8px; border-radius:10px; margin-top:4px; font-weight:600;
+  }
+
+  /* ===== Top picks ===== */
+  .toppicks-box {
+    background:linear-gradient(135deg, #E8FFF7 0%, #FFE8F2 100%);
+    border:2px solid var(--rico); border-radius:14px;
+    padding:22px 26px; margin-top:20px;
+  }
+  .toppicks-box h3 {
+    color:var(--rico-dark); font-size:16px; margin-bottom:12px;
+    font-weight:700; display:flex; align-items:center; gap:8px;
+  }
+  .toppicks-box ol { padding-left:24px; }
+  .toppicks-box ol li { font-size:14px; margin-bottom:8px; line-height:1.8; }
+  .toppicks-box ol li strong { color:var(--rico-dark); }
+
+  /* ===== Block diagnosis ===== */
+  .block {
+    background:#fff; border-radius:14px; margin-bottom:22px;
+    box-shadow:0 2px 10px rgba(0,0,0,.06); overflow:hidden;
+    border-top:4px solid var(--accent);
+  }
+  .block.highlight-block { border-top-color: var(--rico); box-shadow:0 4px 18px rgba(232,67,147,.2); }
+  .block.critical-block { border-top-color: var(--danger); box-shadow:0 4px 18px rgba(214,48,49,.18); }
+
+  .block-header {
+    padding:14px 20px; background:#F8F8F8;
+    display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+    border-bottom:1px solid #EEE;
+  }
+  .block-num {
+    background:var(--primary); color:#fff; min-width:56px;
+    padding:6px 10px; border-radius:8px; text-align:center;
+    font-size:12px; font-weight:700;
+  }
+  .highlight-block .block-num { background:var(--rico); }
+  .critical-block .block-num { background:var(--danger); }
+  .block-title { font-size:15px; font-weight:700; color:var(--primary); flex:1; }
+  .block-tag {
+    display:inline-block; font-size:11px; font-weight:700;
+    padding:3px 10px; border-radius:10px;
+  }
+  .tag-good { background:#E8FFF7; color:var(--accent-dark); }
+  .tag-ok { background:var(--info-bg); color:var(--info); }
+  .tag-warn { background:var(--warning-bg); color:var(--warning-text); }
+  .tag-ng { background:var(--danger-bg); color:var(--danger); }
+  .tag-critical { background:var(--danger); color:#fff; }
+
+  .block-body { padding:20px 22px; }
+  .block-body .orig {
+    background:#F5F5F5; border-left:4px solid #BBB;
+    padding:14px 16px; border-radius:0 8px 8px 0;
+    font-size:14px; line-height:1.9; white-space:pre-line; margin-bottom:14px;
+    color:#444; font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  }
+  .block-body .orig-label {
+    display:inline-block; background:#888; color:#fff;
+    padding:2px 10px; border-radius:10px; font-size:11px; margin-bottom:6px; font-weight:700;
+  }
+  .diagnose-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+  .diag-issue, .diag-fix {
+    border-radius:10px; padding:14px 16px;
+  }
+  .diag-issue {
+    background:var(--danger-bg); border-left:4px solid var(--danger);
+  }
+  .diag-fix {
+    background:var(--accent-light); border-left:4px solid var(--accent);
+  }
+  .diag-issue h4, .diag-fix h4 {
+    font-size:13px; font-weight:700; margin-bottom:8px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .diag-issue h4 { color:var(--danger); }
+  .diag-fix h4 { color:var(--accent-dark); }
+  .diag-issue ul, .diag-fix ul { padding-left:18px; }
+  .diag-issue li, .diag-fix li { font-size:13px; margin-bottom:5px; line-height:1.7; }
+
+  .revised-box {
+    background:#FFF9E6; border:2px dashed var(--gold);
+    border-radius:10px; padding:14px 16px;
+    font-size:14px; line-height:1.9; white-space:pre-line;
+    color:var(--primary);
+  }
+  .revised-box-label {
+    display:inline-block; background:var(--gold); color:#fff;
+    padding:3px 12px; border-radius:12px; font-size:11px;
+    margin-bottom:8px; font-weight:700;
+  }
+  .revised-box em {
+    background:linear-gradient(transparent 60%, #FFE599 60%);
+    font-style:normal; font-weight:700;
+  }
+  .revised-box strong { color:var(--rico-dark); }
+
+  /* ===== CTA block rewrite options ===== */
+  .cta-option {
+    background:#fff; border-radius:12px; padding:18px 20px;
+    margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,.06);
+    border-left:4px solid var(--rico);
+  }
+  .cta-option-label {
+    display:inline-block; background:var(--rico); color:#fff;
+    padding:3px 10px; border-radius:10px; font-size:11px;
+    font-weight:700; margin-bottom:8px;
+  }
+  .cta-option h4 { font-size:15px; color:var(--rico-dark); margin-bottom:10px; }
+  .cta-text {
+    background:#FFF9FC; border:1px dashed var(--rico);
+    border-radius:8px; padding:12px 14px;
+    font-size:14px; line-height:1.9; white-space:pre-line;
+  }
+  .cta-text em {
+    background:linear-gradient(transparent 60%, var(--rico-light) 60%);
+    font-style:normal; font-weight:700; color:var(--rico-dark);
+  }
+
+  /* ===== Summary pillars ===== */
+  .pillar-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; margin-top:18px; }
+  .pillar {
+    background:#fff; border-radius:12px; padding:18px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    border-top:4px solid var(--accent);
+  }
+  .pillar h4 { font-size:14px; color:var(--accent-dark); margin-bottom:8px; font-weight:700; }
+  .pillar p { font-size:13px; line-height:1.7; }
+
+  .warning-box {
+    background:var(--warning-bg); border:2px solid var(--warning);
+    border-radius:12px; padding:18px 22px; margin:16px 0;
+  }
+  .warning-box h3 { color:var(--warning-text); font-size:15px; margin-bottom:8px; font-weight:700; }
+  .warning-box ul { padding-left:22px; }
+  .warning-box li { font-size:13px; color:var(--warning-text); margin-bottom:4px; }
+
+  /* ===== Footer ===== */
+  .footer {
+    background:var(--primary); color:#fff; padding:28px 24px;
+    text-align:center; font-size:13px; opacity:.95;
+  }
+  .footer .logo { font-weight:700; margin-bottom:6px; font-size:15px; }
+
+  /* ===== Responsive ===== */
+  @media(max-width:720px) {
+    .header h1 { font-size:22px; }
+    .policy-bar { flex-direction:column; align-items:stretch; }
+    .diagnose-grid { grid-template-columns:1fr; }
+    .pillar-grid { grid-template-columns:1fr; }
+    .reward-row { padding-left:44px; }
+    .reward-row::before { left:16px; }
+    .section-title { font-size:18px; }
+  }
+
+  /* Anchor navigation */
+  .toc {
+    background:#fff; border-radius:12px; padding:18px 22px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05); margin-bottom:24px;
+    border-left:4px solid var(--info);
+  }
+  .toc h3 { font-size:14px; color:var(--info); margin-bottom:10px; }
+  .toc ol { padding-left:22px; }
+  .toc ol li { font-size:13px; margin-bottom:4px; }
+  .toc a { color:var(--info); text-decoration:none; }
+  .toc a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="tag-line">RICOPIN × DONA｜コラボインスタライブ告知</div>
+  <h1>リール1投稿目 台本改善提案<span class="version">v2</span></h1>
+  <div class="subtitle">「参加したい！」が生まれる"ご褒美"設計 ＋ 元台本を活かした1ブロック1診断</div>
+  <div class="meta">作成日：2026年4月24日　作成者：しゃけ（セールス部）</div>
+</div>
+
+<div class="policy-bar">
+  <div class="badge"><span class="badge-icon">A</span>元台本の良さは残す</div>
+  <div class="badge"><span class="badge-icon">B</span>調整は最小限・狙い撃ち</div>
+  <div class="badge"><span class="badge-icon">C</span>ご褒美を多角的に大量提示</div>
+</div>
+
+<div class="container">
+
+  <!-- ============== 目次 ============== -->
+  <div class="toc">
+    <h3>📑 この提案の見出し</h3>
+    <ol>
+      <li><a href="#policy">今回の改善方針（抜本的に書き換えない）</a></li>
+      <li><a href="#rewards">フォロワーさんが「参加したい！」と思う"ご褒美"アイデア 全23個</a></li>
+      <li><a href="#toppicks">実際に台本で使う厳選7つ</a></li>
+      <li><a href="#diagnose">現台本9ブロックを1つずつ診断＆調整案</a></li>
+      <li><a href="#cta-rewrite">最重要：最後のCTAブロックだけ本気で書き直す（3案）</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </div>
+
+  <!-- ============== 改善方針 ============== -->
+  <div class="section" id="policy">
+    <div class="section-title"><span class="icon">🧭</span>1. 今回の改善方針</div>
+
+    <div class="policy-card">
+      <h3>⚠️ 前回の反省：抜本的に書き換えすぎた</h3>
+      <ul>
+        <li><strong>元台本のBefore→After構造は十分に強い。</strong>刷り込み→限界→打ち明け→変化→発信→今、のリズムは崩さない</li>
+        <li><strong>視聴者の感情に響いている部分はそのまま残す</strong>（特にブロック5「あんたは悪くない」の転換点）</li>
+        <li><strong>調整するのは "ライブ告知としての弱さ" が出ている箇所のみ</strong></li>
+        <li><strong>最大の問題はブロック9（告知部分）。ここに集中して修正する</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============== ご褒美アイデア大量 ============== -->
+  <div class="section" id="rewards">
+    <div class="section-title"><span class="icon">🎁</span>2. 参加の"ご褒美"アイデア 全23個</div>
+
+    <div class="section-intro">
+      フォロワーさんが「これが聞けるなら見逃せない！」と動く動機を、<strong>5つのカテゴリに分けて23個</strong>洗い出しました。すべて深堀り結果（ペルソナ：50代前半・就職氷河期世代・ゆかり）の深層心理から逆算しています。
+    </div>
+
+    <!-- Category 1: お金 -->
+    <div class="reward-category cat-money">
+      <div class="reward-category-header">
+        <span class="cnum">💰</span>【A】お金・仕事の不安への処方箋（ペルソナ最深部）
+      </div>
+      <div class="reward-list">
+        <div class="reward-row">
+          <strong>親のサポートが始まっても、収入が途絶えない働き方</strong>
+          <span>「パートに行けなくなったら収入ゼロ」という一番の恐怖への直接回答。</span>
+          <div class="tip">深堀り結果の最優先ニーズ</div>
+        </div>
+        <div class="reward-row">
+          <strong>在宅で・スマホ1つで・母の隣でもできる仕事の実像</strong>
+          <span>抽象的な「副業」ではなく、<strong>具体的な作業時間・作業内容・作業場所</strong>の話。</span>
+        </div>
+        <div class="reward-row">
+          <strong>どなさんが49歳から52歳までに"実際に変わった収入の道筋"</strong>
+          <span>金額は出さない。「道筋が見えた」「余裕が生まれた」レベルで十分説得力がある。</span>
+        </div>
+        <div class="reward-row">
+          <strong>顔出しなし／本名なしで企業のSNSお手伝いができる実例</strong>
+          <span>「顔出し怖い」「身バレ怖い」のハードルが一気に下がる。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 2: 経験を価値に -->
+    <div class="reward-category cat-value">
+      <div class="reward-category-header">
+        <span class="cnum">💎</span>【B】"スキルがない私"の経験を価値に変える方法
+      </div>
+      <div class="reward-list">
+        <div class="reward-row">
+          <strong>りこぴん直伝「自分の経験のキラッと光る部分」の見つけ方</strong>
+          <span>どなさんを救った核の手法を、当日りこぴん本人が解説する設計に。</span>
+          <div class="tip">コラボの必然性がここで生まれる</div>
+        </div>
+        <div class="reward-row">
+          <strong>「私には何もない」と思ってる人の経験が、なぜ価値になるのか</strong>
+          <span>深層心理に直撃。多くのフォロワーさんが持つ「スキルなし」コンプレックスへの処方箋。</span>
+        </div>
+        <div class="reward-row">
+          <strong>ブログで挫折しても、インスタでは結果が出た理由</strong>
+          <span>「私もまた失敗するのでは？」という不安への回答。</span>
+        </div>
+        <div class="reward-row">
+          <strong>50代からのインスタ発信で最初の3ヶ月にやった具体的なこと</strong>
+          <span>抽象論ではなく「49歳のどなが何から始めたか」のリアル。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 3: 年齢 -->
+    <div class="reward-category cat-age">
+      <div class="reward-category-header">
+        <span class="cnum">⏰</span>【C】「50代からでは遅い」という思い込みを解体する
+      </div>
+      <div class="reward-list">
+        <div class="reward-row">
+          <strong>就職氷河期世代・お金に慎重な人でも遅くない具体的根拠</strong>
+          <span>精神論ではない、データ・実績ベースの説得力。</span>
+        </div>
+        <div class="reward-row">
+          <strong>りこぴんさんも「元ITスキルゼロの主婦」だった話</strong>
+          <span>「あの人にできたんだから、自分にもできる」が生まれる。</span>
+        </div>
+        <div class="reward-row">
+          <strong>44歳で転職・引越し・新しい生活を始めたどなさんの決断プロセス</strong>
+          <span>「今さら変われる気がしない」人への具体的なロールモデル。</span>
+        </div>
+        <div class="reward-row">
+          <strong>「人生はいつから始めても遅くない」を、精神論じゃなく証明する話</strong>
+          <span>りこぴんさんのお母様（58歳で飲食店開業）の実話も引用できる。</span>
+          <div class="tip">りこぴんさんの母エピソードは強い補強材料</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 4: 関係・心理 -->
+    <div class="reward-category cat-relation">
+      <div class="reward-category-header">
+        <span class="cnum">💛</span>【D】心・人間関係のご褒美（深層欲求）
+      </div>
+      <div class="reward-list">
+        <div class="reward-row">
+          <strong>「役に立たなければ価値がない」の呪縛から抜ける方法</strong>
+          <span>同じ刷り込みを持つフォロワーさんの核心。どなさんしか話せないテーマ。</span>
+        </div>
+        <div class="reward-row">
+          <strong>仲良くない親と、無理せず関係を作り直す"たった1つの行動"</strong>
+          <span>母にLINEを送った日の話を、当日さらに深く展開予告。</span>
+        </div>
+        <div class="reward-row">
+          <strong>どなさんとりこぴんさんの"出会いの秘話"</strong>
+          <span>「誰かに出会うことで人生が変わる」のリアル体験。自分にもそれが起きるかも、という希望。</span>
+        </div>
+        <div class="reward-row">
+          <strong>「同じ悩みの人と画面越しに繋がる」1時間</strong>
+          <span>孤独に抱え込んでる50代女性の"ひとりじゃない"体感。</span>
+        </div>
+        <div class="reward-row">
+          <strong>不安を言語化して整理する時間（聞いてるだけで頭がクリアになる）</strong>
+          <span>「情報がほしい」ではなく「心を軽くしたい」深層ニーズへの対応。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 5: 限定・特別 -->
+    <div class="reward-category cat-special">
+      <div class="reward-category-header">
+        <span class="cnum">✨</span>【E】限定性・特別感・緊急性
+      </div>
+      <div class="reward-list">
+        <div class="reward-row">
+          <strong>「今まで誰にも言えなかったこと」初公開</strong>
+          <span>冒頭の引きと連動。見逃し＝損という心理を作る。</span>
+          <div class="tip">元台本の冒頭と呼応する</div>
+        </div>
+        <div class="reward-row">
+          <strong>りこぴんさんが直接解説するのは今回だけ</strong>
+          <span>普段聞けない「キラッと光る部分の見つけ方」を無料で。</span>
+        </div>
+        <div class="reward-row">
+          <strong>当日ライブ中に質問できる（コメントで直接）</strong>
+          <span>セミナー形式じゃない、双方向の時間。</span>
+        </div>
+        <div class="reward-row">
+          <strong>参加者限定の案内（勉強会・次回イベント先行）※要確認</strong>
+          <span>※りこぴん／運営側と調整して具体化できればさらに強力。</span>
+          <div class="tip">設計余地あり。差別化ポイントになり得る</div>
+        </div>
+        <div class="reward-row">
+          <strong>リアルタイム参加でしか感じられない"場の空気"</strong>
+          <span>アーカイブでは伝わらないライブ特有の熱量。</span>
+        </div>
+        <div class="reward-row">
+          <strong>親の年齢を考えると"今"動かないと間に合わない</strong>
+          <span>損失回避の心理。ただし押しつけがましくならないトーンで。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOP PICKS -->
+    <div class="toppicks-box" id="toppicks">
+      <h3>🎯 この23個から、実際に台本に入れる「厳選7つ」</h3>
+      <ol>
+        <li><strong>親のサポートが始まっても、収入が途絶えない働き方</strong>（A）</li>
+        <li><strong>"スキルがない私"の経験が誰かの救いになる仕組み</strong>（B）</li>
+        <li><strong>りこぴん直伝「キラッと光る部分の見つけ方」</strong>（B ※コラボの必然性）</li>
+        <li><strong>顔出しなしで企業のSNSお手伝いまでできた実例</strong>（A）</li>
+        <li><strong>「50代からでは遅い」という思い込みを解体する時間</strong>（C）</li>
+        <li><strong>どなさんとりこぴんさんの"出会いの秘話"</strong>（D ※ストーリーの引き）</li>
+        <li><strong>「今まで誰にも言えなかったこと」初公開</strong>（E ※冒頭フックと連動）</li>
+      </ol>
+      <p style="margin-top:12px; font-size:13px; color:var(--rico-dark);">※ 全部を詰め込むと重くなるので、<strong>CTAブロックで3〜4つを箇条書き提示</strong>。残りはキャプション／ストーリーズで補強する設計。</p>
+    </div>
+  </div>
+
+  <!-- ============== 9ブロック診断 ============== -->
+  <div class="section" id="diagnose">
+    <div class="section-title"><span class="icon">🔬</span>3. 現台本9ブロックを1つずつ診断＆調整案</div>
+
+    <div class="section-intro">
+      <strong>書き直すのではなく、1ブロックごとに「ここは残す／ここだけ調整」</strong>で丁寧に見ていきます。各ブロックには「原文」「問題点」「調整方針」「調整後の文」を全て載せています。
+    </div>
+
+    <!-- BLOCK 1 -->
+    <div class="block">
+      <div class="block-header">
+        <div class="block-num">BLOCK 1</div>
+        <div class="block-title">冒頭フック</div>
+        <span class="block-tag tag-warn">△ フックは強い、告知連動が弱い</span>
+      </div>
+      <div class="block-body">
+        <span class="orig-label">現台本</span>
+        <div class="orig">76歳の母と暮らして２年
+今まで誰にも言えなかったことをお話します</div>
+
+        <div class="diagnose-grid">
+          <div class="diag-issue">
+            <h4>⚠️ 問題点</h4>
+            <ul>
+              <li>「誰にも言えなかったこと」という引きは秀逸（視聴維持に効く）</li>
+              <li>ただし <strong>ライブ告知として見ると、"ただの告白動画"に見える</strong></li>
+              <li>最後まで見て初めて「ライブ告知だったの？」と気づく構造</li>
+            </ul>
+          </div>
+          <div class="diag-fix">
+            <h4>✅ 調整方針</h4>
+            <ul>
+              <li><strong>「お話します」を「りこぴんさんと一緒にお話します」に変更</strong>するだけで、冒頭で"コラボライブ告知"と伝わる</li>
+              <li>フックの強さは完全に維持</li>
+            </ul>
+          </div>
+        </div>
+
+        <span class="revised-box-label">調整後</span>
+        <div class="revised-box">76歳の母と暮らして2年
+今まで誰にも言えなかったことを、<em>りこぴんさんと一緒にお話します</em></div>
+      </div>
+    </div>
+
+    <!-- BLOCK 2 -->
+    <div class="block">
+      <div class="block-header">
+        <div class="block-num">BLOCK 2</div>
+        <div class="block-title">幼少期の刷り込み</div>
+        <span class="block-tag tag-good">○ ほぼそのままでOK</span>
+      </div>
+      <div class="block-body">
+        <span class="orig-label">現台本</span>
+        <div class="orig">子どもの頃の私は
+いつも母の顔色を伺ってた
+勉強を頑張ると、母が笑う
+家事を手伝うと、母が喜ぶ
+それが私の全てだった</div>
+
+        <div class="diagnose-grid">
+          <div class="diag-issue">
+            <h4>⚠️ 問題点</h4>
+            <ul>
+              <li>悪くない。共感の下地は十分</li>
+              <li>ただし「それが私の全てだった」が少し抽象的</li>
+              <li>深堀り資料の<strong>「役に立たなければ価値がない」</strong>という刷り込みの言語化があると、後の展開が効いてくる</li>
+            </ul>
+          </div>
+          <div class="diag-fix">
+            <h4>✅ 調整方針</h4>
+            <ul>
+              <li>最後の一文を<strong>「"役に立てたとき"だけ、私はここにいていい気がした」</strong>に差し替え</li>
+              <li>後半の「救われました」のDMで<strong>"存在していい理由を見つけた"に帰結させる伏線</strong>になる</li>
+            </ul>
+          </div>
+        </div>
+
+        <span class="revised-box-label">調整後</span>
+        <div class="revised-box">子どもの頃の私は
+いつも母の顔色を伺ってた
+勉強を頑張ると、母が笑う
+家事を手伝うと、母が喜ぶ
+<em>"役に立てたとき"だけ、私はここにいていい気がした</em></div>
+      </div>
+    </div>
+
+    <!-- BLOCK 3 -->
+    <div class="block">
+      <div class="block-header">
+        <div class="block-num">BLOCK 3</div>
+        <div class="block-title">大人になっても続く癖</div>
+        <span class="block-tag tag-ok">○ 看護師という強い属性を足す</span>
+      </div>
+      <div class="block-body">
+        <span class="orig-label">現台本</span>
+        <div class="orig">大人になってもその癖は抜けなかった
+同僚が嫌がることを引き受けて
+頼りにされることで
+「自分には価値がある」と思ってた</div>
+
+        <div class="diagnose-grid">
+          <div class="diag-issue">
+            <h4>⚠️ 問題点</h4>
+            <ul>
+              <li>文章は綺麗</li>
+              <li>ただし<strong>「看護師18年」という強い属性情報が消えている</strong></li>
+              <li>看護師という職業は医療系・ケア系ジャンルの共感層を一気に広げる</li>
+            </ul>
+          </div>
+          <div class="diag-fix">
+            <h4>✅ 調整方針</h4>
+            <ul>
+              <li>冒頭に<strong>「看護師になってからも」</strong>を一言追加</li>
+              <li>「同僚が嫌がること」を「<strong>誰もやりたがらない夜勤</strong>」に具体化</li>
+            </ul>
+          </div>
+        </div>
+
+        <span class="revised-box-label">調整後</span>
+        <div class="revised-box"><em>看護師になってからも</em>、その癖は抜けなかった
+<em>誰もやりたがらない夜勤</em>を引き受けて
+頼りにされることで
+「自分には価値がある」と思ってた</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 4 -->
+    <div class="block">
+      <div class="block-header">
+        <div class="block-num">BLOCK 4</div>
+        <div class="block-title">限界</div>
+        <span class="block-tag tag-ok">○ 感情の具体描写を1段深める</span>
+      </div>
+      <div class="block-body">
+        <span class="orig-label">現台本</span>
+        <div class="orig">40歳を目前に
+そんな働き方にも限界が来た
+気づけば
+月の残業時間は60時間を超えて
+家に帰ると涙が出る毎日だった</div>
+
+        <div class="diagnose-grid">
+          <div class="diag-issue">
+            <h4>⚠️ 問題点</h4>
+            <ul>
+              <li>数字（60時間）の具体性は◎</li>
+              <li>「家に帰ると涙が出る」はやや定型化されている</li>
+              <li><strong>深堀り資料のリアル描写</strong>（体調を崩しても出勤／メンタルダウンしても辞めなかった）を少しだけ入れると深みが出る</li>
+            </ul>
+          </div>
+          <div class="diag-fix">
+            <h4>✅ 調整方針</h4>
+            <ul>
+              <li>「家に帰ると涙が出る」を<strong>「お風呂で声を殺して泣く」</strong>など具体シーンに</li>
+              <li>ただし<strong>長くしすぎない</strong>（30秒内でテンポよく次へ）</li>
+            </ul>
+          </div>
+        </div>
+
+        <span class="revised-box-label">調整後</span>
+        <div class="revised-box">40歳を目前に
+そんな働き方にも限界が来た
+月の残業時間は60時間を超えて
+<em>夜、お風呂の中で声を殺して泣く日が続いていた</em></div>
+      </div>
+    </div>
+
+    <!-- BLOCK 5 -->
+    <div class="block">
+      <div class="block-header">
+        <div class="block-num">BLOCK 5</div>
+        <div class="block-title">転換点「あんたは悪くない」</div>
+        <span class="block-tag tag-good">◎ ほぼ完璧。視覚化の1語だけ追加</span>
+      </div>
+      <div class="block-body">
+        <span class="orig-label">現台本</span>
+        <div class="orig">そこで初めて、母に打ち明けた
+「子どもの頃からずっと、しんどかった」
+母から返ってきた言葉は
+「あんたは悪くない」
+その一言で、何かが変わった</div>
+
+        <div class="diagnose-grid">
+          <div class="diag-issue">
+            <h4>⚠️ 問題点</h4>
+            <ul>
+              <li><strong>このブロックは台本の核。ほぼ完成している</strong></li>
+              <li>強いて言えば「母から返ってきた言葉」が<strong>LINE</strong>だったという情報が抜けている</li>
+              <li>LINEだと伝えると、リール映像で<strong>画面を映せる</strong>（視覚化に強い）</li>
+            </ul>
+          </div>
+          <div class="diag-fix">
+            <h4>✅ 調整方針</h4>
+            <ul>
+              <li><strong>「母から返ってきた言葉は」→「母から返ってきたLINEには」</strong>にだけ変更</li>
+              <li>画面に"あんたは悪くない"のLINE画面風テロップを入れると、拡散力が上がる</li>
+            </ul>
+          </div>
+        </div>
+
+        <span class="revised-box-label">調整後</span>
+        <div class="revised-box">そこで初めて、母に打ち明けた
+「子どもの頃からずっと、しんどかった」
+<em>母から返ってきたLINEには</em>
+「あんたは悪くない」
+その一言で、何かが変わった</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 6 ★重要★ -->
+    <div class="block highlight-block">
+      <div class="block-header">
+        <div class="block-num">BLOCK 6</div>
+        <div class="block-title">変化の決意・同居</div>
+        <span class="block-tag tag-warn">△ ここに"ブログ挫折→りこぴん出会い"を足したい</span>
+      </div>
+      <div class="block-body">
+        <span class="orig-label">現台本</span>
+        <div class="orig">それから私は
+自分のために生きると決めて
+44歳で転職、引越しもした
+そして2年前、母と暮らし始めた</div>
+
+        <div class="diagnose-grid">
+          <div class="diag-issue">
+            <h4>⚠️ 問題点</h4>
+            <ul>
+              <li>事実が並んでいるだけで感情の振れ幅がない</li>
+              <li><strong>最大の問題：ここで「副業ブログの挫折」と「りこぴんとの出会い」が完全に省略されている</strong></li>
+              <li>深堀り資料では、ここが「ヒーローズジャーニーの谷と師との出会い」として確定している</li>
+              <li>この部分がないと、<strong>りこぴんさんがコラボに呼ばれる必然性が消える</strong></li>
+            </ul>
+          </div>
+          <div class="diag-fix">
+            <h4>✅ 調整方針</h4>
+            <ul>
+              <li>文字数は1.5倍くらいまでに抑えつつ、<strong>「でも副業は最初失敗した」→「その時、りこぴんさんに出会った」</strong>を挿入</li>
+              <li>「44歳で転職、引越し」のテンポは残す</li>
+              <li>このブロックを<strong>"りこぴん登場の地ならし"</strong>として使う</li>
+            </ul>
+          </div>
+        </div>
+
+        <span class="revised-box-label">調整後（重要な追加あり）</span>
+        <div class="revised-box">それから私は
+自分のために生きると決めて
+44歳で転職、引越しもした
+
+でも、副業で始めたブログは大失敗
+<em>「やっぱり私にはできないんだ」</em>
+また、自分を責める毎日だった
+
+そんな時、<strong>りこぴんさん</strong>に出会った
+<em>「あなたの経験には、キラッと光る部分がある」</em>
+その言葉で、もう一度だけやってみようと思えた</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 7 -->
+    <div class="block">
+      <div class="block-header">
+        <div class="block-num">BLOCK 7</div>
+        <div class="block-title">発信→DMが止まらない</div>
+        <span class="block-tag tag-ok">○ 感情の深さを1段上げる</span>
+      </div>
+      <div class="block-body">
+        <span class="orig-label">現台本</span>
+        <div class="orig">この様子をインスタで発信したら
+たくさんの方からメッセージをもらった
+「救われました」
+「私も同じです」
+私の発信が誰かの助けになってる</div>
+
+        <div class="diagnose-grid">
+          <div class="diag-issue">
+            <h4>⚠️ 問題点</h4>
+            <ul>
+              <li>最後の一文「誰かの助けになってる」が<strong>客観的で、感情が薄い</strong></li>
+              <li>BLOCK 2で伏線を張った「役に立てたときだけ、ここにいていい気がした」と<strong>回収できていない</strong></li>
+            </ul>
+          </div>
+          <div class="diag-fix">
+            <h4>✅ 調整方針</h4>
+            <ul>
+              <li>最後の一文を<strong>「"役に立たなければ価値がない"と思っていた私が、初めて、自分がここにいていい理由を見つけた」</strong>に変更</li>
+              <li>BLOCK 2との呼応で、視聴者が無意識に「この人の物語、回収された」と感じる構造に</li>
+            </ul>
+          </div>
+        </div>
+
+        <span class="revised-box-label">調整後</span>
+        <div class="revised-box">母との暮らしをインスタで発信したら
+たくさんの方からメッセージが届いた
+「救われました」
+「私も同じです」
+<em>"役に立たなければ価値がない"と思っていた私が
+初めて、自分がここにいていい理由を見つけた日でした</em></div>
+      </div>
+    </div>
+
+    <!-- BLOCK 8 -->
+    <div class="block">
+      <div class="block-header">
+        <div class="block-num">BLOCK 8</div>
+        <div class="block-title">今の姿</div>
+        <span class="block-tag tag-warn">△ 抽象的。"場所に縛られない"の具体絵が必要</span>
+      </div>
+      <div class="block-body">
+        <span class="orig-label">現台本</span>
+        <div class="orig">49歳からインスタを始めて
+あの頃には想像もできなかった未来に
+一歩踏み出せた</div>
+
+        <div class="diagnose-grid">
+          <div class="diag-issue">
+            <h4>⚠️ 問題点</h4>
+            <ul>
+              <li><strong>「想像もできなかった未来」が抽象的</strong>で、視聴者がイメージできない</li>
+              <li>深堀り会で確定した<strong>「旅先ホテル／スマホ／母の隣」</strong>の視覚的な今の姿が入っていない</li>
+              <li>物理的自由（場所）＋精神的自由（母との余裕）の両方を見せるチャンス</li>
+            </ul>
+          </div>
+          <div class="diag-fix">
+            <h4>✅ 調整方針</h4>
+            <ul>
+              <li><strong>今の生活の具体描写</strong>に差し替え（映像素材：旅先ホテル、スマホ作業）</li>
+              <li>「想像もできなかった」はそのまま残しつつ、<strong>何が変わったか</strong>を具体化</li>
+            </ul>
+          </div>
+        </div>
+
+        <span class="revised-box-label">調整後</span>
+        <div class="revised-box">49歳から始めたインスタが
+私の人生を変えてくれた
+
+今は、<em>旅先のホテルでも、母の隣でもスマホで仕事ができる</em>
+<em>顔出しなしで、企業さんのSNSのお手伝いまで</em>
+何より、母との時間にも余裕が生まれた</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 9 ★最重要★ -->
+    <div class="block critical-block">
+      <div class="block-header">
+        <div class="block-num">BLOCK 9</div>
+        <div class="block-title">告知＋CTA</div>
+        <span class="block-tag tag-critical">★最重要★ 最後のこのブロックは本気で書き直す</span>
+      </div>
+      <div class="block-body">
+        <span class="orig-label">現台本</span>
+        <div class="orig">40代50代からでも、遅くない
+母をサポートしながら
+人生を楽しめるようになったワケを
+6月18日、インスタライブでお話します</div>
+
+        <div class="diagnose-grid">
+          <div class="diag-issue">
+            <h4>🔥 問題点（最重要）</h4>
+            <ul>
+              <li><strong>"ワケ" が1つだけで、参加する理由として弱すぎる</strong></li>
+              <li><strong>りこぴんさんの話がゼロ</strong>。なぜコラボなのか不明</li>
+              <li><strong>CTA（コメント誘導等）がない</strong></li>
+              <li>「お話します」だけで、何が聞けるか／何を持ち帰れるか一切見えない</li>
+              <li>「40代50代からでも遅くない」が先に来て、具体ご褒美が後という順番も弱い</li>
+            </ul>
+          </div>
+          <div class="diag-fix">
+            <h4>✅ 調整方針（ご褒美3つを必ず箇条書きで）</h4>
+            <ul>
+              <li>ご褒美アイデア23個 → <strong>厳選7つ → CTAで3つに圧縮</strong></li>
+              <li><strong>りこぴんさんを「私を見つけてくれた人」として必ず登場させる</strong></li>
+              <li><strong>CTAで「気になる」コメント → DM</strong>を明示</li>
+              <li><strong>最後に"50代からでは遅いと思っている人へ"の一言で締める</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="background:var(--danger-bg); border:2px solid var(--danger); border-radius:10px; padding:14px 18px; color:var(--danger); font-size:14px; font-weight:600;">
+          このブロックの書き直し案は、次のセクション「4. CTAブロックだけ本気で書き直す（3案）」で詳しく提示します ↓
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============== CTA書き直し3案 ============== -->
+  <div class="section" id="cta-rewrite">
+    <div class="section-title rico-title"><span class="icon">🎯</span>4. BLOCK 9（CTA）の書き直し案 — 3パターン</div>
+
+    <div class="section-intro">
+      <strong>「ご褒美」と「りこぴん」と「CTA」を全部入れる</strong>ために、ここだけは少し長くなります。一番しっくりくる案をベースにどなさんの言葉で仕上げてください。
+    </div>
+
+    <!-- 案A -->
+    <div class="cta-option">
+      <span class="cta-option-label">案A｜ご褒美3つ箇条書き型（王道・おすすめ）</span>
+      <h4>構造：ご褒美3つ提示 → 誰に聞いてほしいか → CTA</h4>
+      <div class="cta-text">40代50代からでも、遅くない
+そんな私を見つけてくれた<em>りこぴんさん</em>と
+<em>6月18日、インスタライブをします</em>
+
+当日、お話しするのはこの3つ
+✅ <em>親のサポートが始まっても、収入が途絶えない働き方</em>
+✅ <em>"スキルがない私"の経験が、誰かの救いになる仕組み</em>
+✅ りこぴんさんが教えてくれる<em>"キラッと光る部分の見つけ方"</em>
+
+<em>"50代からでは遅い"</em>
+そう諦めかけている方に、絶対に聞いてほしい1時間です
+
+「気になる」とコメントしてください
+DMで詳細をお送りします🎁</div>
+    </div>
+
+    <!-- 案B -->
+    <div class="cta-option">
+      <span class="cta-option-label">案B｜共感先行型（どなさんのトーン強め）</span>
+      <h4>構造：ターゲットへの呼びかけ → コラボ紹介 → ご褒美 → CTA</h4>
+      <div class="cta-text">「親のサポートが始まったら、仕事はどうしよう」
+「私には、何もスキルがないから」
+<em>そう思って、諦めかけていませんか？</em>
+
+そんな私を救ってくれた<em>りこぴんさん</em>と
+<em>6月18日、インスタライブをすることになりました</em>
+
+当日、一緒にお話しするのは
+・親の隣でも収入が作れる、本当の働き方
+・<em>"何もない"と思ってる経験が、価値に変わる瞬間</em>
+・りこぴんさん直伝、あなたの<em>キラッと光る部分</em>の見つけ方
+
+「気になる」とコメントを
+詳細をDMでお送りします🎁</div>
+    </div>
+
+    <!-- 案C -->
+    <div class="cta-option">
+      <span class="cta-option-label">案C｜限定性・特別感強調型</span>
+      <h4>構造：今まで話していないこと宣言 → コラボ → ご褒美 → CTA</h4>
+      <div class="cta-text">冒頭で話した<em>「今まで誰にも言えなかったこと」</em>
+その<em>全部</em>を、<em>6月18日のインスタライブで初めて話します</em>
+
+しかも、一緒に登壇してくれるのは
+私を見つけてくれた<em>りこぴんさん</em>
+
+✅ <em>母のサポートと収入、両方を諦めない方法</em>
+✅ <em>「私なんて…」の先に見えた景色</em>
+✅ りこぴんさんが教えてくれる<em>"経験が価値に変わる"見つけ方</em>
+
+40代50代からでも、遅くない
+<em>その証拠を、2人の物語でお話しします</em>
+
+「気になる」とコメントを🎁</div>
+    </div>
+
+    <div class="warning-box">
+      <h3>⚠️ どの案でも共通で守ること</h3>
+      <ul>
+        <li>「介護」→「母のサポート／親のサポート」で統一</li>
+        <li>「月収◯万円」「ガッポリ稼ぐ」「自由」「独立」は絶対に入れない</li>
+        <li>りこぴんさんの紹介は<strong>"年商◯億"ではなく"私を見つけてくれた人"</strong>（就職氷河期世代の警戒心対策）</li>
+        <li>CTAは<strong>「気になる」とコメント → DM</strong>で統一（シンプルが勝つ）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============== まとめ ============== -->
+  <div class="section" id="summary">
+    <div class="section-title"><span class="icon">📌</span>5. まとめ</div>
+
+    <div class="pillar-grid">
+      <div class="pillar">
+        <h4>① 元台本は80点</h4>
+        <p>Before→After構造・感情の起伏・「あんたは悪くない」の核は強い。<strong>書き直しは不要</strong>。</p>
+      </div>
+      <div class="pillar">
+        <h4>② 調整は3箇所だけ</h4>
+        <p><strong>BLOCK 6（りこぴん登場）／BLOCK 8（今の姿の具体化）／BLOCK 9（ご褒美＋CTA）</strong>。他は表現微調整レベルで十分。</p>
+      </div>
+      <div class="pillar">
+        <h4>③ ご褒美は3つ×箇条書き</h4>
+        <p>23個のアイデアから厳選3つを、CTA内で<strong>✅ ✅ ✅</strong>で見える化。抽象論を排除。</p>
+      </div>
+    </div>
+
+    <div class="warning-box" style="margin-top:24px; background:#E8FFF7; border-color:var(--accent);">
+      <h3 style="color:var(--accent-dark);">💡 最後に</h3>
+      <ul style="color:var(--text);">
+        <li>この提案の「調整後」テキストは<strong>全部つなげると90秒弱</strong>。リールの尺としてやや長め</li>
+        <li>完成時に<strong>BLOCK 2〜4のどこかで2〜3秒削る</strong>と70秒前後に収まる</li>
+        <li>どなさんのリアルな語り口でさらに寄せるなら、「〜だった」を「〜でした」に揃えるのもアリ</li>
+        <li>参加者限定特典・アーカイブ有無は、りこぴんさんと要相談で決めてから最終CTAに反映</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="logo">iサークル｜セールス部 × iメイト支援</div>
+  <div>v2 作成：しゃけ　参照：PRO 13-1／PRO 13-2／20260416_ZOOM結果_どな.html／20260413_深堀り会_どな.html</div>
+  <div style="margin-top:6px; font-size:11px; opacity:.8;">前版（v1）はブロック構造を抜本的に書き換えていたため、本版ではご褒美アイデアを大幅に追加・元台本を活かす方針に改訂しました。</div>
+</div>
+
+</body>
+</html>

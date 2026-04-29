@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEP 4：プロフィールを作成する | iサークル年払い特典</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="header">
+  <span class="deco-sparkle">✨</span>
+  <span class="deco-sparkle">💫</span>
+  <span class="deco-sparkle">⭐</span>
+  <span class="deco-sparkle">✨</span>
+  <div class="badge">STEP 4 / 5</div>
+  <h1><span class="accent">プロフィール</span>を作成する</h1>
+  <p>コンセプトをもとに、フォローされるプロフィールを3パターン提案👓</p>
+  <div class="hero-chars">
+    <div class="hero-char rikopin"><img src="images/akkun_smile.png" alt=""></div>
+  </div>
+</div>
+
+<div class="progress-bar">
+  <div class="prog-step"><div class="prog-dot active" data-step="1">1</div><div class="prog-label">入力</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="2">2</div><div class="prog-label">プロンプト</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="3">3</div><div class="prog-label">結果貼付</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="4">4</div><div class="prog-label">レポート</div></div>
+</div>
+<div id="stepLabel">STEP 1：前ステップの結果と個人情報を入力</div>
+
+<div class="container">
+
+
+<div class="char-intro akkun">
+  <div class="avatar"><img src="images/akkun_cool.png" alt="あっくん"></div>
+  <div class="bubble">
+    <div class="name">あっくん </div>
+    <p>プロフィールはフォローしてもらえるかどうかの<strong>『判断の基準』</strong>になる部分💃<br>AIが3パターン用意するから、一番"あなた"っぽい表現を選んで磨いていこう✨</p>
+  </div>
+</div>
+
+<!-- ===== Section 1: Input ===== -->
+<div class="section active" id="section1">
+  <div class="card">
+    <div class="card-title"><span class="emoji">📥</span> STEP 3 のコンセプトレポートを入力</div>
+    <div class="card-subtitle">前ステップのレポートが自動で入ります。入っていない場合はコピペしてください。</div>
+    <div class="field">
+      <label>STEP 3：コンセプト設計レポート</label>
+      <textarea id="input_step3" placeholder="STEP 3のコンセプト設計レポートをここに貼り付け..." style="min-height:160px"></textarea>
+    </div>
+  </div>
+  <!-- 18日目①：コンセプトからキーワード抽出 -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">🏷️</span> 18日目①：コンセプトキーワード（任意）</div>
+    <div class="card-subtitle">宿題シート「18日目①」で抽出したキーワードがあれば貼り付け。なければSTEP3レポートからAIが抽出します。</div>
+
+    <div class="field">
+      <label>コンセプトから抽出したキーワード（箇条書き）</label>
+      <textarea id="input_keywords" placeholder="例）&#10;・30代ワーママ&#10;・時短&#10;・かわいい＞おしゃれ&#10;・週末垢抜け&#10;・子どもから『かわいいママ』と言われたい" style="min-height:100px"></textarea>
+    </div>
+  </div>
+
+  <!-- プロフィール基本情報 -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">👤</span> プロフィールに使う情報</div>
+    <div class="field">
+      <label>あなたの名前（ひらがな or カタカナ）</label>
+      <input type="text" id="input_name" placeholder="例）りこぴん、えれな、しゃけ">
+      <div class="field-hint">💡 Instagramで使う名前（ひらがな/カタカナ 2〜4文字 推奨）</div>
+    </div>
+    <div class="field">
+      <label>年齢・家族構成・職業など、プロフィールに載せてOKな情報</label>
+      <input type="text" id="input_personal" placeholder="例）30代前半、2児の母、元看護師">
+    </div>
+    <div class="field">
+      <label>数字で言える実績・ビフォーアフター（任意）</label>
+      <textarea id="input_achievement" placeholder="例）&#10;・元70kg → 160cm/47kg&#10;・月手取り16万 → 副業で月100万&#10;・年間100軒ホテル宿泊" style="min-height:70px"></textarea>
+      <div class="field-hint">💡 数字で権威性と具体性を強化（ネガティブな変化＝ビフォーアフターもOK）</div>
+    </div>
+    <div class="field">
+      <label>プロフィールの雰囲気</label>
+      <select id="input_tone">
+        <option value="かわいい・ほっこり系">かわいい・ほっこり系</option>
+        <option value="クール・スタイリッシュ系">クール・スタイリッシュ系</option>
+        <option value="元気・ポップ系">元気・ポップ系</option>
+        <option value="大人・上品系">大人・上品系</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" onclick="generatePrompt()">プロフィール作成プロンプトを生成 🔍</button>
+</div>
+
+<!-- ===== Section 2: Prompt ===== -->
+<div class="section" id="section2">
+  <div class="card">
+    <div class="card-title"><span class="emoji">🔍</span> プロフィール作成プロンプト</div>
+    <div class="card-subtitle">AIが3つのパターンのプロフィールを提案します</div>
+    <div class="prompt-box" id="promptDisplay"></div>
+    <div class="copy-success" id="copySuccess">コピーしました！ ✅</div>
+    <button class="btn btn-copy" onclick="copyText('promptDisplay','copySuccess')">📋 コピーする</button>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="emoji">💡</span> Claude（おすすめ）、ChatGPT、Geminiに貼り付けて送信してください</div>
+    <div class="howto"><div class="howto-num">1</div><div class="howto-text">Claude（おすすめ）、ChatGPT、Geminiを開いてプロンプトを貼り付け</div></div>
+    <div class="howto"><div class="howto-num">2</div><div class="howto-text">AIが<strong>3パターンのプロフィール</strong>を提案してくれます</div></div>
+    <div class="howto"><div class="howto-num">3</div><div class="howto-text">結果を全文コピーして次へ！</div></div>
+  </div>
+  <button class="btn btn-primary" onclick="goToStep(3)">結果が出た → 次へ進む</button>
+  <button class="btn btn-outline no-print" onclick="goToStep(1)">← 入力を修正する</button>
+</div>
+
+<!-- ===== Section 3: Paste Result ===== -->
+<div class="section" id="section3">
+  <div class="card">
+    <div class="card-title"><span class="emoji">📥</span> プロフィール作成の結果を貼り付け</div>
+    <div class="card-subtitle">AIから出てきたプロフィール結果を全文コピーして貼り付けてください</div>
+    <textarea id="resultText" placeholder="ChatGPTのプロフィール作成結果をここに貼り付け..." style="min-height:200px"></textarea>
+  </div>
+  <div class="card" style="background:#FFF8E1;border-left:4px solid #FFD93D;margin-top:8px">
+    <div class="card-title" style="font-size:14px"><span class="emoji">⚠️</span> レポートが表示されない時は</div>
+    <p style="font-size:13px;line-height:1.8">
+      AIの回答に <strong>「---セクション：〜---」</strong> という区切り線が含まれているか確認してください。<br>
+      もし英語の「SECTION」になっていたら、AIに <strong>「『---セクション：〜---』の形式で出し直して」</strong> とお願いするとうまくいきます✨
+    </p>
+  </div>
+  <button class="btn btn-primary" onclick="generateReport()">プロフィールレポートを表示する 🎉</button>
+  <button class="btn btn-outline no-print" onclick="goToStep(2)">← 戻る</button>
+</div>
+
+<!-- ===== Section 4: Report ===== -->
+<div class="section" id="section4">
+  <canvas id="confetti"></canvas>
+  <div class="report-header">
+    <div class="badge">STEP 4 COMPLETE</div>
+    <h2>📝 プロフィール作成レポート</h2>
+    <p>あなた専用のプロフィールが3パターン完成しました</p>
+  </div>
+  <div id="reportContent"></div>
+  <div class="next-step-banner">
+    <h3>🎯 次のステップ</h3>
+    <p>プロフィールが決まったら、いよいよ投稿計画を作りましょう！</p>
+    <a href="step5-content-plan.html" class="btn btn-next" style="display:inline-block;text-decoration:none;padding:14px 32px;">STEP 5 へ進む →</a>
+  </div>
+  <div class="save-options">
+    <div class="save-options-title">💾 レポートを保存・コピー</div>
+    <div class="save-options-grid">
+      <button class="save-btn image no-print" onclick="saveReportAsImage('STEP4_プロフィールレポート')">
+        <span class="icon">🖼️</span>
+        <span class="label">画像で保存</span>
+      </button>
+      <button class="save-btn pdf no-print" onclick="saveReportAsPDF()">
+        <span class="icon">📄</span>
+        <span class="label">PDFで保存</span>
+      </button>
+      <button class="save-btn text no-print" onclick="copyReportAsText('step4')">
+        <span class="icon">📋</span>
+        <span class="label">テキスト<br>コピー</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="top-link no-print" style="margin-top:20px;text-align:center">
+    <a href="index.html" class="top-link-btn">🏠 TOPページに戻る</a>
+  </div>
+
+</div>
+<script src="shared.js"></script>
+<script>
+window.stepLabels = {
+  1: 'STEP 1：前ステップの結果と個人情報を入力',
+  2: 'プロフィール作成プロンプト',
+  3: '作成結果を貼り付け',
+  4: 'プロフィールレポート完成！'
+};
+
+// Auto-load STEP 3 report
+window.addEventListener('DOMContentLoaded', function() {
+  const prev = loadReport('step3_report');
+  if (prev) document.getElementById('input_step3').value = prev;
+});
+
+function generatePrompt() {
+  const g = id => (document.getElementById(id)?.value || '').trim();
+  const step3 = g('input_step3');
+  const name = g('input_name');
+  const personal = g('input_personal');
+  const achievement = g('input_achievement');
+  const keywords = g('input_keywords');
+  const tone = g('input_tone');
+  if (!step3) { alert('STEP 3のコンセプトレポートを入力してください！'); return; }
+  if (!name) { alert('名前を入力してください！'); return; }
+
+  const prompt = `あなたは、Instagram副業で発信を始める人のための「プロフィール設計のプロ」です。
+STEP3のコンセプトをもとに、フォローされる＝売れるプロフィールを3パターン提案します。
+
+以下の前提①〜⑤を必ず守って設計してください。これはInstagramでフォローされるプロフィールの黄金ルールです。
+
+# 【前提①】プロフィールの絶対原則
+
+1. **「プロフィールはお店の看板」**
+   投稿がいくら良くても、プロフィールで取りこぼすと意味がない。投稿を見た人がプロフィールに飛んで3秒で判断する。「これは私のためのアカウントだ」と感じさせる必要がある。
+
+2. **最初の4行が全て**
+   Instagramのプロフィール文は4行目以降「…続きを読む」で折りたたまれる。最重要情報を4行以内に詰める。
+
+3. **メリットではなくベネフィット**
+   ❌「フォロワーが増える」は手段／メリット
+   ⭕「好きな人と好きな場所で暮らせる」がベネフィット（本当に得られる未来）
+
+4. **権威性は「一歩先を行く先輩」でOK**
+   資格・実績ゼロでもOK。「自分の方が少し経験がある／知識がある」レベルで十分。
+   むしろネガティブ経験（借金経験／離婚経験／挫折）も「権威性」として使える。
+
+5. **読みやすさが正義**
+   漢字：ひらがな＝3：7 の比率が理想。流し読みで理解できる文章が強い。
+
+# 【前提②】プロフィール4要素（必ず全部提案）
+
+### ① アイコン
+- **実写推奨**（投稿との乖離がない差別化になる）
+- 顔出しNGの時の選択肢（バリエーション豊富に提案）：
+  ・横顔／斜め顔／後ろ姿
+  ・首から下ショット／手元アップ
+  ・帽子・マスク・サングラスで隠し
+  ・鏡越し／シルエット
+  ・ぬいぐるみ・アイテムで隠し
+  ・遠景で人物を小さく
+  ・アイコン（似顔絵イラスト）でも可
+- **世界観とコンセプトに整合すること**（STEP3の世界観・トーンと合わせる）
+
+### ② ID（ユーザーネーム）
+- 「名前＋発信ジャンル」の組み合わせ
+- 英数字12字以内が目安（短く覚えやすく）
+- 例：ikuji_mama（育児ママ）、recipe_riko（レシピりこ）
+
+### ③ 名前表示
+- ひらがな or カタカナ 2〜4文字 ＋ 発信テーマ
+- 合計15字以内が絶対ルール
+- 例：「りこぴん｜時短レシピ」「しゃけ｜インスタ運用」
+
+### ④ プロフィール文
+- **150字厳守**（Instagramの最大文字数）
+- 最初の4行が最重要（4行目以降は折りたたまれる）
+- カテゴリ表示はOFF推奨（ONだと1行減る）
+
+# 【前提③】プロフィール文に必ず入れる4要素
+
+1. **得られる情報**：このアカウントをフォローすると何が具体的に分かるか
+2. **ベネフィット（理想の未来）**：メリットではなく "そうなれる未来" を見せる
+3. **共感ポイント**：「私もそうだった」系の一次情報（ネガティブ経験OK）
+4. **権威性**：「一歩先を行く先輩」レベルでOK。実績の数字化（「3ヶ月で○kg減」「1年で△△円達成」）
+
+# 【前提④】文章作りの5ポイント
+
+1. **1文 ＝ 1メッセージ**：情報を詰め込まない
+2. **1行を短く**：改行を意識、流し読みで理解できる長さに
+3. **数字で具体性**：「3ヶ月で5kg減」「年100軒ホテル宿泊」など必ず数値化
+4. **わかりやすい言葉**：専門用語・業界用語・造語は避ける
+5. **同じ言葉を繰り返さない**：最大2回まで、3回以上は別の言い換え
+
+# 【前提⑤】初心者がやりがちなミス（必ず避ける）
+
+- 複数の要素を詰め込みすぎてぼやける
+- 権威性がないと思い込んで何も書かない → ネガティブ経験を使う
+- 顔出し必須と勘違い → 多様な選択肢あり
+- カテゴリ表示ON → OFFにして1行多く使える
+- キャッチコピーが抽象的 → 具体的な数字を入れる
+
+# 【入力情報】
+## STEP 3：コンセプト設計レポート
+${step3}
+${keywords ? '\n## 18日目①：コンセプトから抽出したキーワード\n' + keywords : ''}
+
+## プロフィール情報
+- 名前（Instagramで使う名前）：${name}
+- 年齢・家族構成・職業など：${personal || '（未記入）'}
+- 数字で言える実績・ビフォーアフター：${achievement || '（未記入）'}
+- 希望の雰囲気：${tone}
+
+# 【3パターンの切り口】
+- **パターンA：共感重視型** — ターゲットの悩みに寄り添い「私もそうだった」で引き込む
+- **パターンB：ベネフィット重視型** — フォローで得られる未来を明確に打ち出す
+- **パターンC：ストーリー重視型** — ビフォーアフター（数字の変化）で興味を引く
+
+# 【出力ルール】
+- 3パターン全て、本人が「このまま使える」レベルの完成度で
+- 150字制限を厳守（カウントして明記）、最初の4行の配置も厳密に
+- 必ず下記の区切り記号（---セクション：〜---）を使って出力
+
+---セクション：アイコン提案---
+このコンセプト・世界観に合うアイコンを3パターン提案（優先順位つき）：
+
+■ 案①：実写（顔出しOK想定）
+・撮り方のコツ：背景／角度／表情／服装
+・避けたいNG：〜〜
+・期待効果：〜〜
+
+■ 案②：顔出しNG時のおすすめ
+・具体的な撮り方（例：横顔／手元／後ろ姿 など複数選択肢から）
+・小物の使い方：〜〜
+・期待効果：〜〜
+
+■ 案③：イラスト・アイコンの場合
+・似顔絵イラストの場合の注意点
+・ジャンルに合う色使い
+
+---セクション：プロフィールA---
+【パターンA：共感重視型】
+
+■ ID案（3つ）※英数字12字以内
+① ○○○ （意味：〜）
+② ○○○ （意味：〜）
+③ ○○○ （意味：〜）
+→ おすすめ：①／理由：〜〜
+
+■ 名前表示 ※合計15字以内
+${name}｜○○○○
+（文字数カウント：●字 / 15字）
+
+■ プロフィール文 ※150字厳守
+（改行込みで150字のプロフィール文を記載。実際に使える完成形で）
+（文字数カウント：●●字 / 150字）
+
+■ 重要な最初の4行（折りたたまれない部分）
+1行目：（キャッチコピー／何のアカウントか3秒で分かる）
+2行目：（権威性 or 共感ポイント）
+3行目：（得られる情報）
+4行目：（ベネフィット／理想の未来）
+
+■ 4要素チェック
+✅/❌ 得られる情報：（該当箇所を引用）
+✅/❌ ベネフィット：（該当箇所を引用）
+✅/❌ 共感ポイント：（該当箇所を引用）
+✅/❌ 権威性：（該当箇所を引用）
+
+■ 文章5ポイントチェック
+・1文1メッセージ：✅/❌
+・1行短く：✅/❌
+・数字で具体性：✅/❌ → 使った数字：〜〜
+・わかりやすい言葉：✅/❌
+・同じ言葉の繰り返しなし：✅/❌
+
+---セクション：プロフィールB---
+【パターンB：ベネフィット重視型】
+（パターンAと完全に同じ項目で、異なる切り口で作成）
+
+---セクション：プロフィールC---
+【パターンC：ストーリー重視型（ビフォーアフター）】
+（パターンAと完全に同じ項目で、本人のヒーローズジャーニーを軸に）
+
+---セクション：ハッシュタグ提案---
+プロフィール・投稿に使えるハッシュタグを3種類に分けて合計15〜20個：
+
+🏷️ ビッグワード（投稿数10万以上／3〜5個）
+　#○○、#○○、#○○
+　→ 競合多いが発見されやすい
+
+🏷️ ミドルワード（1〜10万／5〜7個）
+　#○○、#○○、#○○
+　→ バランス型。初期はここが主戦場
+
+🏷️ スモールワード（1万以下／5〜7個）
+　#○○、#○○、#○○
+　→ 上位表示されやすく、初期フォロワー獲得に有効
+
+---セクション：チェックリスト---
+良いプロフィールの条件を10項目で、各項目を ✅ or ❌ で3パターンそれぞれ評価：
+
+1. ✅✅✅ 3秒で何のアカウントか分かる
+2. ✅✅❌ 数字で実績や具体性を示している
+3. ✅✅✅ ベネフィット（理想の未来）が明確
+4. ✅✅❌ 共感ポイントが含まれている
+5. ✅✅✅ 一歩先の先輩としての権威性がある
+6. ✅✅❌ 最初の4行で重要情報が伝わる
+7. ✅✅✅ 文字数が150字以内
+8. ✅✅❌ 読みやすい改行・漢字比率
+9. ✅✅✅ 同じ言葉の繰り返しが少ない
+10. ✅✅❌ ターゲットが明確（誰向けか分かる）
+
+---セクション：使い分けアドバイス---
+3つのパターン「こんな人・こんな場面に向いている」を2〜3行ずつ：
+・パターンA（共感型）：〜〜な人・〜〜な場面に向いている
+・パターンB（ベネフィット型）：〜〜
+・パターンC（ストーリー型）：〜〜
+
+総合判断：このコンセプトと本人の強みから見て、パターン（A/B/C）が最もおすすめ。
+理由を3行で。
+
+---セクション：運用注意点---
+プロフィール公開後の注意点5つ：
+1. プロフィールは最低1ヶ月様子見（データを取るため一気に変えない）
+2. 反応を見て微修正（一気に全部変えず、1要素ずつ）
+3. 固定ストーリーズで自己紹介を補完（プロフィール150字の不足を埋める）
+4. 投稿内容とプロフィールの整合性を常にチェック
+5. アイコンを定期的に見直す（世界観とズレてきたら変える）
+
+---セクション：次のステップへの橋渡し---
+STEP5（投稿計画）に向けて、このプロフィールから派生させるべき3つの要素：
+1. プロフィール文で約束した「得られる情報」を投稿10本にどう割り振るか
+2. ベネフィットを体現する投稿の方向性
+3. 権威性を強化する投稿（実体験・数字の変化）をどこに入れるか
+
+それでは、「このまま使える」レベルの完成度で、3パターンのプロフィールを提案してください。`;
+
+  document.getElementById('promptDisplay').textContent = prompt;
+  goToStep(2);
+}
+
+function generateReport() {
+  const raw = document.getElementById('resultText').value.trim();
+  if (!raw) { alert('プロフィール結果を貼り付けてください！'); return; }
+
+  const s = parseResult(raw);
+  const container = document.getElementById('reportContent');
+
+  if (Object.keys(s).length < 2) {
+    container.innerHTML = `<div class="report-card"><div class="report-card-label">AI REPORT</div><h3>結果</h3><p>${nl2br(escHtml(raw))}</p></div>
+    <div class="card" style="background:#FFF8E1;border-left:4px solid #FFD93D"><p style="font-size:13px">⚠️ セクションマーカーが検出できませんでした。AIの回答に「---SECTION:〜---」が含まれているか確認してください。</p></div>`;
+    saveReport('step4_report', raw);
+    goToStep(4); return;
+  }
+
+  // Use profile-box class for profile sections
+  function makeProfileCard(label, title, content, colorClass) {
+    if (!content) return '';
+    return `<div class="report-card ${colorClass || ''}">
+      <div class="report-card-label">${escHtml(label)}</div>
+      <h3>${title}</h3>
+      <div class="profile-box">${nl2br(escHtml(content))}</div>
+    </div>`;
+  }
+
+  let html = '';
+  html += makeReportCard('ICON', '🖼️ アイコン提案', s['アイコン提案'], 'orange');
+  html += makeProfileCard('PATTERN A', '🅰️ 共感重視型プロフィール', s['プロフィールA'], 'purple');
+  html += makeProfileCard('PATTERN B', '🅱️ ベネフィット重視型プロフィール', s['プロフィールB'], 'green');
+  html += makeProfileCard('PATTERN C', '🅲️ ストーリー重視型プロフィール', s['プロフィールC'], 'pink');
+  html += makeReportCard('HASHTAGS', '🏷 ハッシュタグ提案', s['ハッシュタグ提案'], 'yellow');
+  html += makeReportCard('CHECKLIST', '✅ チェックリスト', s['チェックリスト'], '');
+  html += makeReportCard('ADVICE', '💡 使い分けアドバイス', s['使い分けアドバイス'], '');
+  html += makeReportCard('OPERATION', '⚠️ 運用注意点', s['運用注意点'], 'navy');
+  html += makeReportCard('NEXT STEP', '🚀 次のステップへの橋渡し', s['次のステップへの橋渡し'], 'green');
+
+  container.innerHTML = html;
+  saveReport('step4_report', raw);
+  goToStep(4);
+  setTimeout(launchConfetti, 300);
+}
+function exportStep4Excel() {
+  const data = collectExportData('step4', [
+    { id: 'input_step3', label: 'STEP3 コンセプトレポート（引継ぎ）' },
+    { id: 'input_name', label: '名前' },
+    { id: 'input_personal', label: '年齢・家族構成など' },
+    { id: 'input_tone', label: 'プロフィールの雰囲気' },
+    { id: 'resultText', label: 'AI回答（貼付）' },
+  ]);
+  downloadExcel('STEP4_プロフィール作成レポート', data);
+}
+document.addEventListener('DOMContentLoaded', () => initAutoSave('step4'));
+</script>
+</body>
+</html>

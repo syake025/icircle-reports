@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iメイト9期ローンチ｜ハマノさん MTGまとめ＆戦略書</title>
+<style>
+  :root {
+    --primary: #2D3436;
+    --accent: #E17055;
+    --accent-light: #FFF0EC;
+    --accent-deep: #C0392B;
+    --amber: #F39C12;
+    --bg: #FAFAFA;
+    --card: #FFFFFF;
+    --border: #E0E0E0;
+    --text: #2D3436;
+    --text-light: #636E72;
+    --success: #00B894;
+    --warning: #FDCB6E;
+    --danger: #D63031;
+    --info: #0984E3;
+    --purple: #6C5CE7;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.85;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #E17055 0%, #C0392B 100%);
+    color:#fff; padding:48px 24px; text-align:center;
+  }
+  .header h1 { font-size:28px; margin-bottom:10px; letter-spacing:.02em; }
+  .header .subtitle { font-size:15px; opacity:.9; line-height:1.7; }
+  .header .account {
+    display:inline-block; background:rgba(255,255,255,.18);
+    padding:8px 20px; border-radius:24px; margin-top:14px; font-size:14px;
+  }
+  .header .meta { margin-top:14px; font-size:13px; opacity:.85; }
+
+  .intro-bar {
+    background:var(--primary); color:#fff; padding:24px;
+    text-align:center; font-size:14px; line-height:1.9;
+  }
+  .intro-bar strong { color:var(--warning); }
+
+  .container { max-width:960px; margin:0 auto; padding:32px 16px; }
+
+  .section { margin-bottom:48px; }
+  .section-title {
+    font-size:22px; font-weight:700; padding:12px 0;
+    border-bottom:3px solid var(--accent); margin-bottom:20px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .section-title .icon { font-size:26px; }
+  .section-title .num {
+    background:var(--accent); color:#fff; width:36px; height:36px;
+    border-radius:50%; display:inline-flex; align-items:center;
+    justify-content:center; font-size:16px; font-weight:700;
+  }
+
+  .card {
+    background:var(--card); border-radius:12px; padding:24px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:16px;
+    border-left:4px solid var(--accent);
+  }
+  .card h3 { font-size:16px; color:var(--accent-deep); margin-bottom:12px; }
+  .card p, .card li { font-size:14px; color:var(--text); }
+  .card ul { padding-left:20px; }
+  .card ul li { margin-bottom:8px; }
+
+  .highlight-box {
+    background:linear-gradient(135deg, #FFF0EC 0%, #FFE5DD 100%);
+    border:2px solid var(--accent);
+    border-radius:12px; padding:26px; margin-bottom:16px;
+  }
+  .highlight-box h3 { color:var(--accent-deep); font-size:17px; margin-bottom:12px; }
+  .highlight-box .catch {
+    font-size:22px; font-weight:700; color:var(--primary);
+    line-height:1.7; padding:14px 0;
+  }
+  .highlight-box .note { font-size:13px; color:var(--text-light); }
+
+  .table-wrap { overflow-x:auto; margin-bottom:16px; }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th { background:var(--primary); color:#fff; padding:12px 14px; text-align:left; font-weight:600; }
+  td { padding:12px 14px; border-bottom:1px solid var(--border); vertical-align:top; }
+  tr:nth-child(even) td { background:#F8F8F8; }
+
+  .funnel-grid {
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));
+    gap:8px; margin-bottom:16px;
+  }
+  .funnel-cell {
+    background:#fff; border:2px solid var(--accent); border-radius:10px;
+    padding:14px 10px; text-align:center;
+  }
+  .funnel-cell .label { font-size:11px; color:var(--text-light); margin-bottom:4px; }
+  .funnel-cell .val { font-size:22px; font-weight:700; color:var(--accent-deep); }
+  .funnel-cell .rate { font-size:11px; color:var(--info); margin-top:2px; font-weight:600; }
+
+  .pivot-box {
+    display:grid; grid-template-columns:1fr 40px 1fr; gap:10px; margin-bottom:16px;
+    align-items:stretch;
+  }
+  .pivot-before, .pivot-after {
+    background:#fff; border-radius:10px; padding:16px 18px;
+    border:2px solid var(--border);
+  }
+  .pivot-before { border-color:var(--text-light); opacity:.7; }
+  .pivot-after { border-color:var(--success); background:#F0FFF4; }
+  .pivot-before h4 { font-size:13px; color:var(--text-light); margin-bottom:10px; }
+  .pivot-after h4 { font-size:13px; color:var(--success); margin-bottom:10px; font-weight:700; }
+  .pivot-body { font-size:14px; line-height:1.7; }
+  .pivot-arrow {
+    display:flex; align-items:center; justify-content:center;
+    font-size:24px; color:var(--accent);
+  }
+
+  .phrase-list { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0; }
+  .phrase {
+    background:var(--accent-light); color:var(--accent-deep);
+    padding:8px 16px; border-radius:20px; font-size:13px; font-weight:600;
+    border:1px solid var(--accent);
+  }
+
+  .ng-box {
+    background:#FFF5F5; border:2px solid var(--danger);
+    border-radius:12px; padding:22px 26px; margin-bottom:16px;
+  }
+  .ng-box h3 { color:var(--danger); font-size:16px; margin-bottom:10px; }
+  .ng-box ul { padding-left:20px; }
+  .ng-box li { font-size:14px; margin-bottom:8px; }
+
+  .step-flow { display:flex; flex-direction:column; gap:0; margin:16px 0; }
+  .step-item {
+    background:var(--card); border-radius:12px; padding:22px;
+    border-left:4px solid var(--accent);
+  }
+  .step-arrow { text-align:center; font-size:24px; color:var(--accent); padding:4px 0; }
+  .step-num {
+    background:var(--accent); color:#fff; width:28px; height:28px;
+    border-radius:50%; display:inline-flex; align-items:center;
+    justify-content:center; font-size:13px; font-weight:700; margin-right:10px;
+  }
+  .step-item h4 { font-size:16px; margin-bottom:8px; display:flex; align-items:center; }
+  .step-item blockquote {
+    background:var(--accent-light); border-left:3px solid var(--accent);
+    padding:14px 18px; border-radius:0 8px 8px 0; margin-top:10px;
+    font-size:14px; color:var(--text); line-height:1.8;
+  }
+
+  .schedule-table th { background:var(--accent-deep); }
+  .schedule-table .date { font-weight:700; color:var(--accent-deep); white-space:nowrap; }
+  .pill {
+    padding:3px 10px; border-radius:4px; font-size:12px; font-weight:700; white-space:nowrap;
+  }
+  .pill-reel { background:#FFEAA7; color:#8B6914; }
+  .pill-feed { background:#74B9FF; color:#fff; }
+  .pill-live { background:#FD79A8; color:#fff; }
+  .pill-story { background:#A29BFE; color:#fff; }
+  .pill-deadline { background:#D63031; color:#fff; }
+
+  .persona-card {
+    background:linear-gradient(135deg, #FFF0EC 0%, #FFF 100%);
+    border:2px solid var(--accent); border-radius:16px; padding:26px;
+    margin-bottom:16px;
+  }
+  .persona-card h3 { font-size:18px; color:var(--accent-deep); margin-bottom:14px; }
+  .persona-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .persona-attr {
+    background:#fff; padding:12px 16px; border-radius:8px; font-size:13px;
+  }
+  .persona-attr strong { color:var(--accent-deep); }
+
+  .voice-card {
+    background:#F8F9FA; border-left:4px solid var(--info);
+    padding:14px 18px; margin-bottom:10px; border-radius:0 8px 8px 0;
+    font-size:14px; font-style:italic; color:var(--text);
+  }
+  .voice-card:before { content: "\201C "; color:var(--info); font-size:22px; font-weight:700; }
+  .voice-card:after { content: " \201D"; color:var(--info); font-size:22px; font-weight:700; }
+  .voice-category {
+    font-size:13px; color:var(--text-light); font-weight:600;
+    margin:18px 0 8px 0; border-left:3px solid var(--info); padding-left:10px;
+  }
+
+  .faq-item {
+    background:#fff; border-radius:10px; padding:18px 20px;
+    margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,.04);
+    border-left:4px solid var(--success);
+  }
+  .faq-q { font-weight:700; color:var(--primary); margin-bottom:8px; font-size:15px; }
+  .faq-q:before { content:"Q. "; color:var(--accent-deep); }
+  .faq-a { font-size:14px; color:var(--text); line-height:1.8; }
+  .faq-a:before { content:"A. "; color:var(--success); font-weight:700; }
+
+  .action-list {
+    background:linear-gradient(135deg, #74B9FF 0%, #0984E3 100%);
+    color:#fff; border-radius:12px; padding:26px; margin-bottom:16px;
+  }
+  .action-list h3 { font-size:18px; margin-bottom:14px; }
+  .action-list ol { padding-left:24px; }
+  .action-list li { font-size:15px; margin-bottom:10px; line-height:1.7; }
+  .action-list .deadline {
+    background:rgba(255,255,255,.2); padding:2px 8px; border-radius:4px;
+    font-size:12px; font-weight:700; margin-left:6px;
+  }
+
+  .post-card {
+    background:#fff; border-radius:12px; padding:24px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08); margin-bottom:18px;
+    border-top:6px solid var(--accent);
+  }
+  .post-card .post-meta {
+    display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap;
+    align-items:center;
+  }
+  .post-card h3 { font-size:18px; color:var(--primary); margin:4px 0 10px 0; }
+  .post-card .goal {
+    background:var(--accent-light); padding:10px 14px; border-radius:8px;
+    font-size:13px; margin-bottom:14px;
+  }
+  .post-card .goal strong { color:var(--accent-deep); }
+  .post-card .structure {
+    background:#F8F9FA; border-radius:8px; padding:14px 18px; margin-top:10px;
+    font-size:13px; line-height:1.9;
+  }
+  .post-card .structure strong { color:var(--accent-deep); }
+
+  .warning-box {
+    background:#FFF9E6; border-left:4px solid var(--amber); border-radius:0 8px 8px 0;
+    padding:14px 18px; margin:12px 0; font-size:13px; line-height:1.7;
+  }
+  .warning-box strong { color:var(--amber); }
+
+  .success-box {
+    background:#E8FFF6; border-left:4px solid var(--success); border-radius:0 8px 8px 0;
+    padding:14px 18px; margin:12px 0; font-size:13px; line-height:1.7;
+  }
+  .success-box strong { color:var(--success); }
+
+  .footer {
+    background:var(--primary); color:#fff; padding:32px 20px;
+    text-align:center; font-size:13px; margin-top:40px;
+  }
+  .footer .brand { font-weight:700; color:var(--accent); font-size:16px; }
+
+  @media(max-width:600px) {
+    .persona-grid { grid-template-columns:1fr; }
+    .pivot-box { grid-template-columns:1fr; }
+    .pivot-arrow { transform:rotate(90deg); padding:8px 0; }
+    .header h1 { font-size:22px; }
+    .section-title { font-size:18px; }
+    .highlight-box .catch { font-size:17px; }
+  }
+
+  @media print {
+    body { font-size:12px; }
+    .header { padding:24px; }
+    .section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>iメイト9期ローンチ｜戦略まとめ</h1>
+  <div class="subtitle">
+    4/22 MTG決定事項 × 前回（8期）ローンチ振り返り × 訴求軸の大転換
+  </div>
+  <div class="account">ハマノ｜@asari_rooftopbar｜あさり〻50代の週7ベランダ飲み</div>
+  <div class="meta">作成日：2026年4月22日 ／ 作成：iサークル運営（しゃけ）</div>
+</div>
+
+<div class="intro-bar">
+  このドキュメントは、4/22のMTGで決まったことを<strong>ハマノさんが一目で把握</strong>できるようにまとめたものです。<br>
+  同時に送る <strong>「投稿台本たたき台.md」</strong> と一緒にご確認ください。
+</div>
+
+<div class="container">
+
+  <!-- ===== 0. 一枚まとめ ===== -->
+  <div class="section">
+    <div class="section-title"><span class="num">0</span>今日の結論</div>
+
+    <div class="highlight-box">
+      <h3>今回のローンチ、一言でいうと</h3>
+      <div class="catch">
+        「会社に人生を壊されかけた50代が、<br>"会社脱出装置"を手に入れた話」
+      </div>
+      <div class="note">
+        ※前回は「好きなことを仕事に」寄りの訴求でしたが、8期DM分析＋前回反応の深掘りで<strong>本当に刺さっていたのは「会社脱出」だった</strong>と判明。今回はその軸で一気通貫します。
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>前回（8期）からの3つの大きな変更</h3>
+      <ol style="padding-left:22px; line-height:2;">
+        <li><strong>訴求軸の修正</strong>：「好きなことで稼ぐ」→ <strong>「仕事に人生壊された、でも再奮起した」</strong>
+            <br><small style="color:var(--text-light);">※前回「好きなことで稼ぐ」が「楽して稼げる」と誤解されたDMが出たため</small></li>
+        <li><strong>ペルソナの修正</strong>：「独身50代キラキラ」→ <strong>「35〜44歳・既婚・仕事軸・会社辞めたい」</strong>
+            <br><small style="color:var(--text-light);">※8期アナリティクスで判明。独身キラキラ層よりも"仕事に人生壊された既婚層"が多数</small></li>
+        <li><strong>投稿本数のシュリンク</strong>：前回は多数 → <strong>リール2本＋フィード2本＋コラボライブ1本</strong> に集中
+            <br><small style="color:var(--text-light);">※ハマノさんの負担軽減＋1本あたりの濃度を上げる</small></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ===== 1. スケジュール ===== -->
+  <div class="section">
+    <div class="section-title"><span class="num">1</span>ローンチスケジュール</div>
+
+    <div class="card">
+      <h3>決定した日付（4/22 MTG合意済）</h3>
+      <div class="table-wrap">
+        <table class="schedule-table">
+          <tr>
+            <th>フェーズ</th>
+            <th>日付</th>
+            <th>何をする</th>
+            <th>誰が</th>
+          </tr>
+          <tr>
+            <td><span class="pill pill-deadline">〆切</span></td>
+            <td class="date">5/9（金）</td>
+            <td><strong>投稿3本＋ストーリーズ台本の完成</strong>（たたき台→ハマノさん風に調整済）</td>
+            <td>しゃけ→ハマノ</td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-story">STORY</span></td>
+            <td class="date">6/5（金）〜6（土）</td>
+            <td>匂わせストーリーズ開始<br><small>（質問箱で「副業のきっかけ聞きたい？」から自然にリコピン登場）</small></td>
+            <td>ハマノ</td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-reel">リール①</span></td>
+            <td class="date">6/11（木）〜12（金）</td>
+            <td><strong>インスタライブ告知のリール</strong>（ベランダ飲み＋"なんで昼から飲んでるの？公開します"）</td>
+            <td>ハマノ</td>
+          </tr>
+          <tr style="background:#FFF5F0;">
+            <td><span class="pill pill-live">LIVE</span></td>
+            <td class="date">6/17（水）</td>
+            <td>りこぴん×ハマノ コラボインスタライブ<br><small>（前回より軽め。収入公開＋本音トーク）</small></td>
+            <td>りこぴん＋ハマノ</td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-reel">リール②</span></td>
+            <td class="date">6/18（木）</td>
+            <td><strong>勉強会申込案内</strong>（人生ビフォアフリール／子宮全摘→再起）</td>
+            <td>ハマノ</td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-feed">フィード①</span></td>
+            <td class="date">6/19（金）</td>
+            <td><strong>勉強会申込案内</strong>（リール②を文章で深掘り／物語型）</td>
+            <td>ハマノ</td>
+          </tr>
+          <tr style="background:#FFF5F0;">
+            <td><span class="pill pill-story">STORY</span></td>
+            <td class="date">6/19〜6/25</td>
+            <td>勉強会への再告知・リマインド（朝・昼・晩＋3時間前通知）</td>
+            <td>ハマノ（パスさん相談可）</td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-deadline">ローンチ</span></td>
+            <td class="date">6/26（金）〜</td>
+            <td>iサークル9期ローンチ開始</td>
+            <td>運営</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="warning-box">
+      <strong>⚠ 着席率の改善が最重要KPI</strong>：前回は申込116人→着席66人（着席率57%・8期最低クラス）でロスが大きかったため、<strong>ストーリーズでの当日リマインドを朝・昼・晩＋3時間前の4回</strong>に強化します。
+    </div>
+  </div>
+
+  <!-- ===== 2. 訴求軸の大転換 ===== -->
+  <div class="section">
+    <div class="section-title"><span class="num">2</span>訴求軸の大転換（前回 vs 今回）</div>
+
+    <p style="margin-bottom:14px; font-size:14px;">
+      MTGでの一次情報と8期DM分析から判明した「本当に刺さっていた層」をもとに、訴求軸を修正します。
+    </p>
+
+    <h3 style="font-size:16px; color:var(--accent-deep); margin:20px 0 10px 0;">① ペルソナ</h3>
+    <div class="pivot-box">
+      <div class="pivot-before">
+        <h4>▼ 前回の想定</h4>
+        <div class="pivot-body">
+          <strong>48〜55歳・独身女性</strong><br>
+          独身キラキラに憧れ<br>
+          ベランダ飲み羨望<br>
+          「独身=自由で最高」を肯定されたい
+        </div>
+      </div>
+      <div class="pivot-arrow">→</div>
+      <div class="pivot-after">
+        <h4>▲ 今回の真実（8期実データ）</h4>
+        <div class="pivot-body">
+          <strong>35〜44歳が41%・既婚多数・仕事軸</strong><br>
+          子育てしてても「自分の人生のメインシナリオは仕事」と言う人が多い<br>
+          年収800万以上（楽天アフィリの高額商品が売れた）<br>
+          副業すらしていない層
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:16px; color:var(--accent-deep); margin:20px 0 10px 0;">② 核心メッセージ</h3>
+    <div class="pivot-box">
+      <div class="pivot-before">
+        <h4>▼ 前回</h4>
+        <div class="pivot-body">
+          「好きなお酒を飲んで、好きなことを発信して、それが仕事になった」<br>
+          <small style="color:var(--danger);">→「楽して稼げる」と誤解したDMが発生</small>
+        </div>
+      </div>
+      <div class="pivot-arrow">→</div>
+      <div class="pivot-after">
+        <h4>▲ 今回</h4>
+        <div class="pivot-body">
+          「会社に人生壊されかけた50代の、<strong>再奮起の話</strong>」<br>
+          <small>→「好き」より先に「会社に壊された」を前に出す</small>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:16px; color:var(--accent-deep); margin:20px 0 10px 0;">③ キーワード</h3>
+    <div class="pivot-box">
+      <div class="pivot-before">
+        <h4>▼ 前回（地球全敵系）</h4>
+        <div class="pivot-body">
+          「独身の自由」「ベランダで昼から」<br>
+          「好きなことで稼ぐ」<br>
+          「会社辞めた」
+        </div>
+      </div>
+      <div class="pivot-arrow">→</div>
+      <div class="pivot-after">
+        <h4>▲ 今回（会社脱出装置系）</h4>
+        <div class="pivot-body">
+          <strong>「会社に人生壊された」</strong><br>
+          <strong>「会社脱出装置」</strong><br>
+          <strong>「仕事で潰されたら会社の思うツボ」</strong><br>
+          「40代50代でも遅くない」
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 3. ペルソナ詳細 ===== -->
+  <div class="section">
+    <div class="section-title"><span class="num">3</span>今回刺すべきペルソナ（詳細）</div>
+
+    <div class="persona-card">
+      <h3>メインペルソナ（40代前半・既婚・仕事軸）</h3>
+      <div class="persona-grid">
+        <div class="persona-attr"><strong>年齢：</strong>35〜44歳が41%（次いで45〜54歳が35.5%）</div>
+        <div class="persona-attr"><strong>性別：</strong>女性90%（男性も10%はいる）</div>
+        <div class="persona-attr"><strong>婚姻：</strong>既婚多数（独身は少数派）</div>
+        <div class="persona-attr"><strong>年収：</strong>800万以上が最多層</div>
+        <div class="persona-attr"><strong>仕事：</strong>会社員、仕事を人生の主軸にしている</div>
+        <div class="persona-attr"><strong>生活軸：</strong>子供がいても「子供軸」ではなく「自分軸」</div>
+        <div class="persona-attr"><strong>副業：</strong>副業すらしていない（完全未経験が多い）</div>
+        <div class="persona-attr"><strong>SNS：</strong>ハマノのベランダ飲み投稿を見て癒される</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>深層心理（MTGでハマノさんが語った、前回ドサッと来たDMから）</h3>
+      <ul>
+        <li><strong>「会社辞めたいです」を初対面で打ち明ける</strong>：2月15日の週にストーリーズを始めて数日、見たこともないフォロワーから「会社辞めたいです」「明日にも行きたくない」系DMが<strong>日に2〜3件ドサッと</strong>来るようになった</li>
+        <li><strong>吐き出す場所を探していた</strong>：「誰かに聞いてもらいたい」だけで返信が返ってこなくてもいい、という層が分厚く存在</li>
+        <li><strong>仕事が嫌いなわけじゃない、"仕事のせいで"疲弊</strong>：「別に仕事は嫌いじゃない。でも歯車感がある」「人生の豊かさを感じてない」</li>
+        <li><strong>満員電車への憎悪</strong>：「満員電車に乗りたくない」が超絶刺さる（ストーリーズ反応の転換点になった）</li>
+      </ul>
+    </div>
+
+    <div class="success-box">
+      <strong>✓ フォロワー像の解釈変更：</strong>
+      ハマノさんのフォロワーは「独身キラキラライフを見たい人」ではなく、「<strong>歯車感のある生活を続けている既婚40代が、ベランダ飲み越しに"別の生き方"を覗き見している</strong>」層。この視点で投稿を作ります。
+    </div>
+  </div>
+
+  <!-- ===== 4. 前回（8期）の結果 ===== -->
+  <div class="section">
+    <div class="section-title"><span class="num">4</span>前回（8期）の実績と振り返り</div>
+
+    <div class="card">
+      <h3>8期ローンチファネル（ハマノさん実数）</h3>
+      <div class="funnel-grid">
+        <div class="funnel-cell">
+          <div class="label">コラボLINE</div>
+          <div class="val">322</div>
+        </div>
+        <div class="funnel-cell">
+          <div class="label">ライブ参加</div>
+          <div class="val">236</div>
+          <div class="rate">73%</div>
+        </div>
+        <div class="funnel-cell">
+          <div class="label">勉強会申込</div>
+          <div class="val">116</div>
+          <div class="rate">49%</div>
+        </div>
+        <div class="funnel-cell" style="border-color:var(--danger);">
+          <div class="label">勉強会着席</div>
+          <div class="val" style="color:var(--danger);">66</div>
+          <div class="rate" style="color:var(--danger);">57% ⚠</div>
+        </div>
+        <div class="funnel-cell" style="border-color:var(--success);">
+          <div class="label">成約</div>
+          <div class="val" style="color:var(--success);">20</div>
+          <div class="rate" style="color:var(--success);">30% ★8期2位</div>
+        </div>
+      </div>
+      <p style="font-size:13px; color:var(--text-light); margin-top:8px;">
+        ※8期iメイト5人中、成約数2位（1位まりも40人）。流入は十分、<strong>詰めの着席率だけが課題</strong>。
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>前回の投稿反応（実数）</h3>
+      <table>
+        <tr>
+          <th>投稿</th>
+          <th>テーマ</th>
+          <th>いいね</th>
+          <th>コメント</th>
+          <th>評価</th>
+        </tr>
+        <tr>
+          <td><strong>リール①</strong></td>
+          <td>子宮全摘→再起の話</td>
+          <td style="color:var(--success); font-weight:700;">2,148</td>
+          <td style="color:var(--success); font-weight:700;">806</td>
+          <td>★★★ 圧倒的バズ</td>
+        </tr>
+        <tr>
+          <td><strong>リール②</strong></td>
+          <td>会社員時代の話</td>
+          <td>930</td>
+          <td>348</td>
+          <td>★★ 堅実</td>
+        </tr>
+        <tr>
+          <td><strong>フィード①</strong></td>
+          <td>会社員辞めたわけ</td>
+          <td>746</td>
+          <td>257</td>
+          <td>★ 微妙</td>
+        </tr>
+        <tr style="background:#FFF5F5;">
+          <td><strong>フィード②</strong></td>
+          <td>会社員辞めたわけ</td>
+          <td style="color:var(--danger);">422</td>
+          <td style="color:var(--danger);">160</td>
+          <td style="color:var(--danger);">✕ ありきたりで刺さらず</td>
+        </tr>
+      </table>
+      <div class="warning-box" style="margin-top:14px;">
+        <strong>📊 学び：</strong>
+        圧倒的に「<strong>子宮全摘→再起のドラマ（リール①）</strong>」が強かった。今回はこの軸で全投稿を組み立てます。前回フィードは「会社員辞めた話」がありきたりで刺さらなかったため、今回は<strong>身体的エピソード＋左遷降格＋具体の痛み</strong>で差別化します。
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>前回ストーリーズの反省（MTGでハマノさん本人が語った）</h3>
+      <ul>
+        <li><strong>文章になりすぎた</strong>：「絵がない」「文章小説になってた」「力みすぎてた」</li>
+        <li><strong>閲覧数が最後1/3〜1/6まで落ちた</strong>：3,000〜4,000 → 1,000ちょいまで低下</li>
+        <li><strong>普段のベランダ飲みの絵を間に入れられなかった</strong>：「ワンクッションベランダ」が欠けていた</li>
+        <li><strong>「好きなことで稼ぐ」が「楽して稼ぐ」と誤解された</strong>：DMで1〜2件、誤解した層が発生</li>
+      </ul>
+      <div class="success-box" style="margin-top:12px;">
+        <strong>✓ 今回の打ち手：</strong>
+        ① 1枚目は必ず<strong>ベランダ飲み（グビグビ感のある実写）</strong>から入る ②3〜4枚に1枚は<strong>お酒の絵を挟む</strong>（閲覧数維持の"一休み"） ③「好き」より「会社に壊された」を先に出す
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 5. 今回の物語の骨 ===== -->
+  <div class="section">
+    <div class="section-title"><span class="num">5</span>今回の物語の骨（MTGで合意したストーリー）</div>
+
+    <p style="margin-bottom:14px; font-size:14px;">
+      MTGで、しゃけ＋ハマノさんで合意したストーリーの流れです。これを<strong>リール②とフィード①の両方</strong>で核として使います。
+    </p>
+
+    <div class="step-flow">
+      <div class="step-item">
+        <h4><span class="step-num">1</span>スタート：ベランダで昼ビール</h4>
+        <p>グビグビとベランダで飲んでいる絵から入る。閲覧数を落とさないための"普段の世界観"の入口。</p>
+        <blockquote>「いつもありがとうね グビグビ🍺 こんな感じで毎日飲んでるんだけど…」</blockquote>
+      </div>
+      <div class="step-arrow">▼</div>
+      <div class="step-item">
+        <h4><span class="step-num">2</span>どん底①：正社員へのコンプレックス</h4>
+        <p>時期生の時期があって「正社員」に固執した過去。そこが今の仕事中毒の原点。</p>
+        <blockquote>「実は私、非正規の時期があって。正社員にせっかくなれた、それを絶対手放したくないって思いだけで仕事に30代40代ぶち込んだ」</blockquote>
+      </div>
+      <div class="step-arrow">▼</div>
+      <div class="step-item">
+        <h4><span class="step-num">3</span>どん底②：左遷・降格・期待に応えたい</h4>
+        <p>ブラックロード・社長の愛人のミスを50人の前で謝罪・中卒発言・正社員経験ゼロ…などの屈辱。</p>
+        <blockquote>「左遷、降格、ブラックロード。でも"期待に応えたい"って気持ちに蓋をして、目の前の仕事にだけ打ち込んだ」</blockquote>
+      </div>
+      <div class="step-arrow">▼</div>
+      <div class="step-item">
+        <h4><span class="step-num">4</span>どん底③（最深）：子宮全摘</h4>
+        <p>接待の飲み会帰り、弾丸に打たれたような腹痛で運び込まれ、気づいたら子宮全摘。子供が産めない体になった。※前回リール①で<strong>いいね2,148・コメント806</strong>の圧倒的反応があった核エピソード。</p>
+        <blockquote>「接待の飲み会の帰り、弾丸に打たれたような腹痛で。運び込まれたら、子宮全摘。子供が産めない体になっていた。頭が真っ白になった」</blockquote>
+      </div>
+      <div class="step-arrow">▼</div>
+      <div class="step-item">
+        <h4><span class="step-num">5</span>転機：50代で「もう会社に頼らない」と決意</h4>
+        <p>ここまで潰されて「このまま壊れたら会社の思うツボ」と気づく。<strong>「会社以外で収入を得て、こんな会社潰れちまえ」</strong>の怒りが原動力に。</p>
+        <blockquote>「ここまでいいようにされて潰れたら、会社の思うツボだと思った。逆に、会社以外で収入を得てやる。こんな会社潰れちまえ、って」</blockquote>
+      </div>
+      <div class="step-arrow">▼</div>
+      <div class="step-item">
+        <h4><span class="step-num">6</span>壁：50代から副業は手遅れという絶望</h4>
+        <p>いろいろ挑戦したけど全部ダメ。ITプログラミングも手遅れ。副業情報は怪しいものばかり。</p>
+        <blockquote>「色々やった。向き不向きも分かった。でも50代からITやプログラミングは手遅れだった。"もう無理なのかも"って思ってた」</blockquote>
+      </div>
+      <div class="step-arrow">▼</div>
+      <div class="step-item">
+        <h4><span class="step-num">7</span>運命の出会い：りこぴん</h4>
+        <p>りこぴんに出会って「今までの経験が全部インスタで仕事になる」「年齢が高い人は有利」と聞いて世界が変わった。</p>
+        <blockquote>「そんな時にりこぴんさんに出会って、言われたの。『今までの経験が、全部、インスタで仕事になるよ。年齢が高い人こそ有利だよ』って」</blockquote>
+      </div>
+      <div class="step-arrow">▼</div>
+      <div class="step-item">
+        <h4><span class="step-num">8</span>アフター：40代50代でも遅くない</h4>
+        <p>実際にやってみたら、会社に頼らない収入ができた。ベランダで昼ビール飲む日常が取り戻せた。</p>
+        <blockquote>「40代50代でも遅くない。むしろ、これまでの経験がある私たちの方が強い。あの時言ってもらった言葉、本当だった」</blockquote>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 6. 投稿3本の概要 ===== -->
+  <div class="section">
+    <div class="section-title"><span class="num">6</span>投稿3本の概要（詳細は別MD）</div>
+
+    <div class="post-card">
+      <div class="post-meta">
+        <span class="pill pill-reel">リール①</span>
+        <span class="date" style="color:var(--accent-deep); font-weight:700;">6/11〜12 投稿</span>
+        <span style="color:var(--text-light); font-size:12px;">／ ライブ1週間前</span>
+      </div>
+      <h3>🎬 インスタライブ告知（軽め20秒）</h3>
+      <div class="goal">
+        <strong>ゴール：</strong>「この話、聞いてみたい」で6/17ライブへの参加予約を獲得
+      </div>
+      <p style="font-size:14px;">重い過去は話さない。<strong>普段のベランダ飲み＋"なんで昼から飲んでるの？"の謎かけ</strong>で、軽くライブ告知。本音トークを本番まで引っ張る。</p>
+      <div class="structure">
+        <strong>構成：</strong>ベランダ飲みグビグビ → 「よくDMで聞かれる"なんで昼から飲んでるの？""仕事何してるの？"」 → 「ぜんぶ来週のインスタライブで話します🍺」 → ゲスト：りこぴんさん
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-meta">
+        <span class="pill pill-reel">リール②</span>
+        <span class="date" style="color:var(--accent-deep); font-weight:700;">6/18 投稿</span>
+        <span style="color:var(--text-light); font-size:12px;">／ ライブ翌日・勉強会申込案内</span>
+      </div>
+      <h3>🎬 人生ビフォアフリール（子宮全摘→再起）</h3>
+      <div class="goal">
+        <strong>ゴール：</strong>「私にもできるかも」で勉強会申込へ誘導（コメント→LINE動線）
+      </div>
+      <p style="font-size:14px;">PRO講座「ローンチ用リール」の<strong>6ステップ人生ビフォアフ型</strong>。冒頭はハマノさんの勝ちパターン＝ベランダ飲み＋金額ギャップ。核は<strong>子宮全摘ドラマ</strong>（前回2,148いいね）。</p>
+      <div class="structure">
+        <strong>構成：</strong>①悩み（会社員時代の痛み）→ ②転機（倒れた／子宮全摘）→ ③挑戦（副業いろいろ）→ ④試練（50代では手遅れの絶望）→ ⑤成果（りこぴんと出会い／会社脱出）→ ⑥今の想い（40代50代でも遅くない）
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-meta">
+        <span class="pill pill-feed">フィード①</span>
+        <span class="date" style="color:var(--accent-deep); font-weight:700;">6/19 投稿</span>
+        <span style="color:var(--text-light); font-size:12px;">／ 勉強会申込案内・物語で深掘り</span>
+      </div>
+      <h3>📰 ヒーローズジャーニー型フィード（10枚）</h3>
+      <div class="goal">
+        <strong>ゴール：</strong>リールで興味を持った層にじっくり読ませてLINE登録→勉強会へ
+      </div>
+      <p style="font-size:14px;">PRO講座「ローンチ用フィード」の<strong>8ステップ型</strong>。リール②と同じ骨だけど、文章量の利を活かして「左遷・降格・50人の前で謝罪」まで具体化。<strong>前回フィードがありきたりで刺さらなかった反省</strong>を、具体ドラマで上書き。</p>
+      <div class="structure">
+        <strong>構成：</strong>①表紙（強フック）→ ②導入（なぜこの投稿）→ ③どん底（正社員コンプ→左遷→子宮全摘）→ ④壁と転機（副業全滅→りこぴん）→ ⑤変化（ベランダ飲み生活）→ ⑥証明（200人以上の仲間）→ ⑦使命（遠回りしてほしくない）→ ⑧オファー
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 7. 使えるフレーズ＆NG ===== -->
+  <div class="section">
+    <div class="section-title"><span class="num">7</span>使えるフレーズ集 & NGワード</div>
+
+    <div class="card">
+      <h3>✅ 今回使いたいキーフレーズ（MTGで抽出）</h3>
+      <div class="phrase-list">
+        <span class="phrase">会社に人生壊されかけた</span>
+        <span class="phrase">会社脱出装置</span>
+        <span class="phrase">潰されたら会社の思うツボ</span>
+        <span class="phrase">こんな会社潰れちまえ</span>
+        <span class="phrase">40代50代でも遅くない</span>
+        <span class="phrase">今までの経験が全部仕事になる</span>
+        <span class="phrase">年齢層が高い方が有利</span>
+        <span class="phrase">朝、革靴を履いた瞬間から逃げたくなる</span>
+        <span class="phrase">満員電車に乗りたくない</span>
+        <span class="phrase">仕事のせいで、人生の豊かさを感じてない</span>
+      </div>
+    </div>
+
+    <div class="ng-box">
+      <h3>🚫 今回使わないNGワード（前回の反省含む）</h3>
+      <ul>
+        <li><strong>「副業」「稼ぐ」「稼げる」</strong> → 怪しい副業アカと誤認される</li>
+        <li><strong>「好きなことで稼ぐ」</strong> → 前回"楽して稼ぐ"と誤解したDM発生</li>
+        <li><strong>「努力」「頑張る」「挑戦」</strong> → この層の心理的ハードル最高</li>
+        <li><strong>「月収◯万円」等の金額直接訴求</strong> → 年収800万以上の層には逆に警戒される</li>
+        <li><strong>「起業」「独立」</strong> → 既婚・会社員層には遠すぎる</li>
+        <li><strong>「スキルアップ」「学び」</strong> → 勉強感が出て行動が重くなる</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== 8. 切り返しFAQ ===== -->
+  <div class="section">
+    <div class="section-title"><span class="num">8</span>ストーリーズで先回りしたいFAQ</div>
+
+    <p style="margin-bottom:14px; font-size:14px;">
+      前回DMで実際に来ていた不安・疑問への切り返しです。ローンチ期間中のストーリーズで小出しにしておくと、勉強会の着席率・成約率が上がります。
+    </p>
+
+    <div class="faq-item">
+      <div class="faq-q">インスタで収入の話、本当なんですか？怪しくないですか？</div>
+      <div class="faq-a">私も最初そう思ってました。月◯万稼げる！みたいな話、正直嫌いです。今回の勉強会は無料で、「経験がどう仕事になるか」を実例で聞ける場です。合わないと思ったらスルーでOKです。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">50代からでも本当に間に合いますか？</div>
+      <div class="faq-a">むしろ「年齢が高い方が有利」とりこぴんさんに言われました。これまでの経験が全部コンテンツになるから。iサークルには50代の仲間もたくさんいます。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">会社員ですが、辞めるとき先のこと考えると不安じゃなかったですか？</div>
+      <div class="faq-a">めちゃくちゃ不安でした。でも、会社にいるほうが"このまま壊れる恐怖"のほうが大きかった。辞めるための準備期間として、会社員のうちからインスタを育てました。「いきなり辞めろ」とは絶対に言わないです。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">発信するものなんて何もないです。</div>
+      <div class="faq-a">私も同じこと思ってました。でも"お酒好き・猫好き・ちょっと良いものが好き"で、それが全部コンテンツになった。"普通の日常"こそが、他の人には"羨ましい日常"になります。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">動画編集とか、どうやって覚えたんですか？</div>
+      <div class="faq-a">iサークルに入ってから、動画の作り方・発信のコツを全部ゼロから教わりました。独学では絶対に続かなかったです。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">楽して稼げるってこと？</div>
+      <div class="faq-a">いえ、むしろ逆です。正しい型があれば"ムダな努力をしなくていい"だけで、「普段の日常を丁寧に言葉にする」作業は必要です。ただ、会社の理不尽に耐えるストレスに比べたら、全然マシです（笑）</div>
+    </div>
+  </div>
+
+  <!-- ===== 9. ハマノさんへ：次のアクション ===== -->
+  <div class="section">
+    <div class="section-title"><span class="num">9</span>ハマノさんへ：次のアクション</div>
+
+    <div class="action-list">
+      <h3>このあとお願いしたいこと（優先度順）</h3>
+      <ol>
+        <li><strong>投稿台本たたき台（別MD）を確認</strong><span class="deadline">随時</span><br>
+            <small style="opacity:.9;">リール①・リール②・フィード①の3本。「ここ違う」「この言葉は使わない」を遠慮なく</small></li>
+        <li><strong>物語の核（子宮全摘・左遷・倒れた日）の具体エピソードを確定</strong><span class="deadline">4/30までに</span><br>
+            <small style="opacity:.9;">MTGで話した内容を、台本に入れるときの「当時の具体シーン（何時・どこ・何を思った）」を追加</small></li>
+        <li><strong>台本の最終版確定</strong><span class="deadline">5/9（連休明け）</span><br>
+            <small style="opacity:.9;">ハマノさん風にリライト→しゃけ最終チェック→確定</small></li>
+        <li><strong>撮影・編集</strong><span class="deadline">5/10〜6/10</span><br>
+            <small style="opacity:.9;">リール2本・フィード1本。ベランダ飲みの絵を多めに仕込む</small></li>
+        <li><strong>ストーリーズ開始</strong><span class="deadline">6/5（金）</span><br>
+            <small style="opacity:.9;">質問箱で「副業のきっかけ聞きたい？」→自然にりこぴん登場の流れ</small></li>
+        <li><strong>6/17のインスタライブに向けて体調管理</strong><span class="deadline">6/17</span></li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>迷ったら、これを思い出してください</h3>
+      <ul style="font-size:15px;">
+        <li>✅ <strong>1枚目は必ずベランダ飲み（グビグビ感）</strong>から入る</li>
+        <li>✅ <strong>3〜4枚に1枚、お酒の絵を挟む</strong>（閲覧数維持の"一休み"）</li>
+        <li>✅ <strong>「副業」「稼ぐ」は使わない</strong>。代わりに「会社脱出装置」</li>
+        <li>✅ <strong>文章小説にしない</strong>。絵がある前提で文字は短く</li>
+        <li>✅ <strong>ハマノさんの口調（語尾・絵文字）を優先</strong>する。台本は叩き台</li>
+        <li>✅ <strong>「40代50代でも遅くない」</strong>を必ず入れる</li>
+      </ul>
+    </div>
+
+    <div class="success-box" style="margin-top:20px; padding:20px;">
+      <strong>💌 ハマノさんへ</strong><br>
+      前回、成約20人という8期2位の結果を出していただきました。数字としては十分成功。でも「着席率57%」「フィード②いいね422」という数字の裏にある"もう一歩"をMTGで一緒に言語化できたと思います。<br><br>
+      <strong>今回はハマノさんの"本物のドラマ"──子宮全摘・左遷・50代で再起──を、恥ずかしくてもいいので、そのまま言葉にしてください</strong>。それが、フォロワーさんにとっての「私にもできるかも」の希望になります。<br><br>
+      運営は全力でサポートします🍺
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="brand">iサークル運営チーム</div>
+  <div style="margin-top:8px;">ハマノさん、9期、一緒に成功させましょう🍺</div>
+  <div style="margin-top:12px; opacity:.6; font-size:11px;">本ドキュメントは4/22 MTGの合意内容・8期実績・フォロワーDM分析53件・PRO講座内容を統合した配布用資料です。</div>
+</div>
+
+</body>
+</html>

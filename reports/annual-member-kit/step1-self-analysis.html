@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEP 1：自己分析を深掘りする | iサークル年払い特典</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="header">
+  <span class="deco-sparkle">✨</span>
+  <span class="deco-sparkle">💫</span>
+  <span class="deco-sparkle">⭐</span>
+  <span class="deco-sparkle">✨</span>
+  <div class="badge">STEP 1 / 5</div>
+  <h1><span class="accent">自己分析</span>を深掘りする</h1>
+  <p>「好き」×「経験」からあなただけの強みを発見💪</p>
+  <div class="hero-chars">
+    <div class="hero-char rikopin"><img src="images/rikopin_smile.png" alt=""></div>
+  </div>
+</div>
+
+<div class="progress-bar">
+  <div class="prog-step"><div class="prog-dot active" data-step="1">1</div><div class="prog-label">入力</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="2">2</div><div class="prog-label">プロンプト</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="3">3</div><div class="prog-label">結果貼付</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="4">4</div><div class="prog-label">レポート</div></div>
+</div>
+<div id="stepLabel">STEP 1：自己分析の結果を入力</div>
+
+<div class="container">
+
+
+<div class="char-intro rikopin">
+  <div class="avatar"><img src="images/rikopin_wink.png" alt="りこぴん"></div>
+  <div class="bubble">
+    <div class="name">りこぴん </div>
+    <p>ここが一番大事な土台だよ🍅✨<br>宿題シートの結果を貼り付けてね！AIと一緒に<strong>あなたの本当の強み</strong>を見つけよう✨</p>
+  </div>
+</div>
+
+<!-- ===== Section 1: Input ===== -->
+<div class="section active" id="section1">
+
+  <div class="card">
+    <div class="card-title"><span class="emoji">📝</span> 宿題シートの結果を貼り付け</div>
+    <div class="card-subtitle">タブを切り替えて、<strong>11日目（好き）</strong>と<strong>12日目（経験）</strong>の結果を入力してください。全部でなくてOK！</div>
+
+    <!-- Day Tabs -->
+    <div class="day-tabs">
+      <button class="day-tab active" onclick="switchDay(11, this)">❤️ 11日目：「好き」</button>
+      <button class="day-tab" onclick="switchDay(12, this)">🎭 12日目：「経験」</button>
+    </div>
+
+    <!-- 11日目コンテンツ -->
+    <div class="day-content active" id="day11">
+      <div style="background:#FFF8E1;border-left:4px solid #FFD93D;padding:10px 14px;border-radius:10px;margin-bottom:16px;font-size:12px;line-height:1.7">
+        宿題シート「11日目」の <strong>4象限</strong>（時間×過去／未来、お金×過去／未来）をそれぞれ貼り付けてね！
+      </div>
+
+      <div class="field">
+        <label>① 時間 × 過去 <span style="color:var(--text-light);font-weight:500;font-size:11px">（今まで時間をかけてきたことは？それはなぜ？）</span></label>
+        <textarea id="input_suki_time_past" placeholder="例）①受験勉強：好きな先輩と同じ大学に入りたかったから&#10;②部活動（バレー）：授業終わりに部活に行くのが当たり前だったから&#10;③アルバイト：ゲームや漫画を買うお金が欲しかったから..." style="min-height:90px"></textarea>
+      </div>
+
+      <div class="field">
+        <label>② 時間 × 未来 <span style="color:var(--text-light);font-weight:500;font-size:11px">（これから時間をかけたいことは？それはなぜ？）</span></label>
+        <textarea id="input_suki_time_future" placeholder="例）①子供との時間を増やす：大切な絆を深めたいから&#10;②海外旅行：新しい文化や場所を経験し視野を広げたい..." style="min-height:90px"></textarea>
+      </div>
+
+      <div class="field">
+        <label>③ お金 × 過去 <span style="color:var(--text-light);font-weight:500;font-size:11px">（今までお金をかけてきたことは？それはなぜ？）</span></label>
+        <textarea id="input_suki_money_past" placeholder="例）①コスメ：自分が納得する自分になるために色々試した&#10;②脱毛：毛深いのがコンプレックスだったから..." style="min-height:90px"></textarea>
+      </div>
+
+      <div class="field">
+        <label>④ お金 × 未来 <span style="color:var(--text-light);font-weight:500;font-size:11px">（これからお金をかけたいことは？それはなぜ？）</span></label>
+        <textarea id="input_suki_money_future" placeholder="例）①家族との旅行：思い出を作りたいから&#10;②時短家電：家事の時間を減らしたいから..." style="min-height:90px"></textarea>
+      </div>
+    </div>
+
+    <!-- 12日目コンテンツ -->
+    <div class="day-content" id="day12">
+      <div style="background:#FFF8E1;border-left:4px solid #FFD93D;padding:10px 14px;border-radius:10px;margin-bottom:16px;font-size:12px;line-height:1.7">
+        宿題シート「12日目」の <strong>Q1〜Q8</strong> を各項目に貼り付けてね！年代（学生時代／20代／30代…）は混ぜてOK！
+      </div>
+
+      <div class="field">
+        <label>Q1. 自分の長所や得意なことは？</label>
+        <textarea id="input_keiken_q1" placeholder="例）細かい作業が得意／人と話すのが好きで相談されることが多い..." style="min-height:75px"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Q2. 気付いたらやってしまう・長時間やっても苦じゃないことは？</label>
+        <textarea id="input_keiken_q2" placeholder="例）インスタで海外のインテリアを眺める／作り置き料理をひたすら作る..." style="min-height:75px"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Q3. 嫌いなところ・コンプレックス・直したいことは？なぜそう感じる？</label>
+        <textarea id="input_keiken_q3" placeholder="例）優柔不断なところ／産後に体型が変わって自信を持てなくなった..." style="min-height:75px"></textarea>
+        <div class="field-hint">💡 ここが「共感の最大点」になる重要な項目</div>
+      </div>
+
+      <div class="field">
+        <label>Q4. 辛かった・悲しかった・失敗したと思ったことは？なぜそう感じた？</label>
+        <textarea id="input_keiken_q4" placeholder="例）仕事と育児の両立で限界／妊娠中に食べすぎて主治医に怒られた..." style="min-height:75px"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Q5. 上記をどうやって乗り越えた？</label>
+        <textarea id="input_keiken_q5" placeholder="例）旦那や両親のサポートを受けて少しずつ時間を取り戻した..." style="min-height:75px"></textarea>
+        <div class="field-hint">💡 ヒーローズ・ジャーニー（物語化）の鍵になる項目</div>
+      </div>
+
+      <div class="field">
+        <label>Q6. 周りからの評価・よく言われることは？</label>
+        <textarea id="input_keiken_q6" placeholder="例）「相談するとスッキリする」と言われる／旅行先をよく聞かれる..." style="min-height:75px"></textarea>
+        <div class="field-hint">💡 「隠れた才能」が見つかる宝庫</div>
+      </div>
+
+      <div class="field">
+        <label>Q7. あなたが思う自分はどんな人間？</label>
+        <textarea id="input_keiken_q7" placeholder="例）おしゃべり／誰とでも仲良くできる／真面目..." style="min-height:75px"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Q8. これまでに成し遂げた大きな成果は？</label>
+        <textarea id="input_keiken_q8" placeholder="例）2人の子供を育てながら仕事に復帰／資格を取得..." style="min-height:75px"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- プロフィール -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">👤</span> あなた自身について（任意）</div>
+    <div class="field">
+      <label>年代・立場・家族構成など</label>
+      <input type="text" id="input_profile" placeholder="例）30代前半、会社員、2人の子どもがいる">
+      <div class="field-hint">💡 書いておくとペルソナ設計の精度が上がります</div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" onclick="generatePrompt()">強み分析プロンプトを生成 🔍</button>
+</div>
+
+<!-- ===== Section 2: Prompt ===== -->
+<div class="section" id="section2">
+  <div class="card">
+    <div class="card-title"><span class="emoji">🔍</span> 強み分析プロンプト</div>
+    <div class="card-subtitle">AIが宿題シートの内容から、あなたの本当の強みを一気に分析します</div>
+    <div class="prompt-box" id="promptDisplay"></div>
+    <div class="copy-success" id="copySuccess">コピーしました！ ✅</div>
+    <button class="btn btn-copy" onclick="copyText('promptDisplay','copySuccess')">📋 コピーする</button>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="emoji">💡</span> Claude（おすすめ）、ChatGPT、Geminiに貼り付けて送信してください</div>
+    <div class="howto"><div class="howto-num">1</div><div class="howto-text">Claude（おすすめ）、ChatGPT、Geminiを開いてプロンプトを貼り付け</div></div>
+    <div class="howto"><div class="howto-num">2</div><div class="howto-text">AIがあなたの<strong>強みレポートを一気に出力</strong>してくれます</div></div>
+    <div class="howto"><div class="howto-num">3</div><div class="howto-text">結果が出たら<strong>全文コピー</strong>して次へ！</div></div>
+  </div>
+  <button class="btn btn-primary" onclick="goToStep(3)">結果が出た → 次へ進む</button>
+  <button class="btn btn-outline no-print" onclick="goToStep(1)">← 入力を修正する</button>
+</div>
+
+<!-- ===== Section 3: Paste Result ===== -->
+<div class="section" id="section3">
+  <div class="card">
+    <div class="card-title"><span class="emoji">📥</span> 強み分析の結果を貼り付け</div>
+    <div class="card-subtitle">AIから出てきた強みレポートを全文コピーして貼り付けてください</div>
+    <textarea id="resultText" placeholder="AIからの強みレポートをここに貼り付け..." style="min-height:200px"></textarea>
+  </div>
+  <div class="card" style="background:#FFF8E1;border-left:4px solid #FFD93D;margin-top:8px">
+    <div class="card-title" style="font-size:14px"><span class="emoji">⚠️</span> レポートが表示されない時は</div>
+    <p style="font-size:13px;line-height:1.8">
+      AIの回答に <strong>「---セクション：〜---」</strong> という区切り線が含まれているか確認してください。<br>
+      もし英語の「SECTION」になっていたら、AIに <strong>「『---セクション：〜---』の形式で出し直して」</strong> とお願いするとうまくいきます✨
+    </p>
+  </div>
+  <button class="btn btn-primary" onclick="generateReport()">強みレポートを表示する 🎉</button>
+  <button class="btn btn-outline no-print" onclick="goToStep(2)">← 戻る</button>
+</div>
+
+<!-- ===== Section 4: Report ===== -->
+<div class="section" id="section4">
+  <canvas id="confetti"></canvas>
+  <div class="report-header">
+    <div class="badge">STEP 1 COMPLETE</div>
+    <h2>💪 あなたの強みレポート</h2>
+    <p>AIが深掘りして見つけた、あなたの本当の強み</p>
+  </div>
+  <div id="reportContent"></div>
+  <div class="next-step-banner">
+    <h3>🎯 次のステップ</h3>
+    <p>この強みレポートを使って、最適な発信ジャンルを見つけましょう！</p>
+    <a href="step2-genre-research.html" class="btn btn-next" style="display:inline-block;text-decoration:none;padding:14px 32px;">STEP 2 へ進む →</a>
+  </div>
+  <div class="save-options">
+    <div class="save-options-title">💾 レポートを保存・コピー</div>
+    <div class="save-options-grid">
+      <button class="save-btn image no-print" onclick="saveReportAsImage('STEP1_強みレポート')">
+        <span class="icon">🖼️</span>
+        <span class="label">画像で保存</span>
+      </button>
+      <button class="save-btn pdf no-print" onclick="saveReportAsPDF()">
+        <span class="icon">📄</span>
+        <span class="label">PDFで保存</span>
+      </button>
+      <button class="save-btn text no-print" onclick="copyReportAsText('step1')">
+        <span class="icon">📋</span>
+        <span class="label">テキスト<br>コピー</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+  <div class="top-link no-print" style="margin-top:20px;text-align:center">
+    <a href="index.html" class="top-link-btn">🏠 TOPページに戻る</a>
+  </div>
+
+</div>
+
+<script src="shared.js"></script>
+<script>
+window.stepLabels = {
+  1: 'STEP 1：自己分析の結果を入力',
+  2: '強み分析プロンプト',
+  3: '分析結果を貼り付け',
+  4: '強みレポート完成！'
+};
+
+function generatePrompt() {
+  const g = id => (document.getElementById(id)?.value || '').trim();
+
+  // 11日目：「好き」の4象限
+  const suki_tp = g('input_suki_time_past');      // 時間×過去
+  const suki_tf = g('input_suki_time_future');    // 時間×未来
+  const suki_mp = g('input_suki_money_past');     // お金×過去
+  const suki_mf = g('input_suki_money_future');   // お金×未来
+
+  // 12日目：「経験」のQ1〜Q8
+  const q1 = g('input_keiken_q1');
+  const q2 = g('input_keiken_q2');
+  const q3 = g('input_keiken_q3');
+  const q4 = g('input_keiken_q4');
+  const q5 = g('input_keiken_q5');
+  const q6 = g('input_keiken_q6');
+  const q7 = g('input_keiken_q7');
+  const q8 = g('input_keiken_q8');
+
+  const prof = g('input_profile');
+
+  // 少なくとも1つの入力が必要
+  const allFields = [suki_tp, suki_tf, suki_mp, suki_mf, q1, q2, q3, q4, q5, q6, q7, q8];
+  if (allFields.every(v => !v)) { alert('最低1つは入力してください！'); return; }
+
+  // 埋まっているフィールドだけプロンプトに含める（「（未記入）」の羅列を避ける）
+  const sukiBlocks = [];
+  if (suki_tp) sukiBlocks.push('■ 時間 × 過去（今まで時間をかけてきたこと）\n' + suki_tp);
+  if (suki_tf) sukiBlocks.push('■ 時間 × 未来（これから時間をかけたいこと）\n' + suki_tf);
+  if (suki_mp) sukiBlocks.push('■ お金 × 過去（今までお金をかけてきたこと）\n' + suki_mp);
+  if (suki_mf) sukiBlocks.push('■ お金 × 未来（これからお金をかけたいこと）\n' + suki_mf);
+  const suki = sukiBlocks.length ? sukiBlocks.join('\n\n') : '（未記入）';
+
+  const keikenBlocks = [];
+  if (q1) keikenBlocks.push('■ Q1：自分の長所や得意なこと\n' + q1);
+  if (q2) keikenBlocks.push('■ Q2：気付いたらやってしまう・長時間やっても苦ではないこと\n' + q2);
+  if (q3) keikenBlocks.push('■ Q3：自分の嫌いなところ・コンプレックス（なぜそう感じる？）\n' + q3);
+  if (q4) keikenBlocks.push('■ Q4：辛かったこと・悲しかったこと・失敗（なぜそう感じた？）\n' + q4);
+  if (q5) keikenBlocks.push('■ Q5：上記をどうやって乗り越えたか（ヒーローズジャーニーの核）\n' + q5);
+  if (q6) keikenBlocks.push('■ Q6：周りからの評価・よく言われること（隠れた才能の宝庫）\n' + q6);
+  if (q7) keikenBlocks.push('■ Q7：自分が思う自分の人物像\n' + q7);
+  if (q8) keikenBlocks.push('■ Q8：これまでに成し遂げた大きな成果\n' + q8);
+  const keiken = keikenBlocks.length ? keikenBlocks.join('\n\n') : '（未記入）';
+
+  const prompt = `あなたは、Instagram副業で発信を始める人のための「発信コンテンツ発掘コーチ」です。
+
+# 【あなたの役割】
+これから入力される【分析対象の情報】は、本人が「前提①」「前提②」の視点に沿って自分自身を深く棚卸しした自己分析の結果です。
+あなたの役割は **この分析結果の中から「Instagramで発信できる物語／ユニークな視点／切り口／キーワード」を見つけ出し、発信のヒントに変換すること** です。
+本人が自分では気づいていない「発信の種」や「隠れた才能」を、温かく、でも鋭く掘り起こしてください。
+
+※前提①②は、本人が自己分析を行った時の前提条件です。あなたが自己分析を代行するのではなく、「この前提の元で書かれた入力データ」として読み解いてください。
+
+# 【前提①】この自己分析がどういう原則のもとで行われたか
+
+本人は以下の6つの原則を大事にして自分を棚卸ししました。
+
+1. **「ダイヤモンドの原石を捨てない」**
+   「Instagramで発信できなさそう」という先入観で判断せず、条件なしに「好き」「経験」を全て拾っている。
+
+2. **強み＝「人より優れていること」ではない**
+   普通の「好き」、失敗体験、コンプレックス、ネガティブな経験も強みの候補として拾っている。
+
+3. **一次情報（本人しか語れない実体験）こそ最強の武器**
+   特にマイナス経験・コンプレックス・失敗は「共感の最大点」として意識的に書き出されている。
+
+4. **「好き」×「経験」の掛け合わせで独自ポジションが生まれる**
+   一見関係ない2つを掛け算して差別化するのが狙い。
+   実例：「レシピ×ギャル」「片付け×農家の嫁」「料理×産後太り」「インテリア×旅行代理店経験」。
+
+5. **ヒーローズ・ジャーニーで物語化できる素材を探している**
+   「絶望・悩み」→「きっかけ」→「試行錯誤」→「変化」→「今、同じ悩みの人を助けられる」の構造。
+
+6. **完璧主義を捨て、組み合わせの試行錯誤を重視**
+
+# 【前提②】入力データの構造（どういう質問に答えて書かれているか）
+
+- **「好き」の深掘り**：「時間×過去／未来」「お金×過去／未来」の4象限で書き出されている
+- **「経験」の深掘り**：Q1〜Q8（長所／苦じゃないこと／コンプレックス／乗り越えた経験／周りからの評価 等）を総合
+- **「周りからの評価」欄**：本人が気づいていない才能の宝庫。ここから「隠れた才能」を読み取れる
+- **「なぜ好きか／なぜ辛かったか」**：理由まで書かれている場合は差別化の核になる
+
+# 【分析対象の情報】
+${prof ? '【プロフィール】\n' + prof + '\n\n' : ''}【「好き」の深掘り結果（11日目：時間×過去/未来、お金×過去/未来の4象限）】
+${suki}
+
+【「経験」の深掘り結果（12日目：Q1〜Q8）】
+${keiken}
+
+# 【あなたが出力すべきこと】
+上記の入力データから、**Instagram発信に活かせる素材**を抽出・再構成してください：
+
+- 本人の記述から読み取れる「発信の核」を言語化する
+- 「好き」と「経験」の掛け合わせで生まれる独自ポジションを発見する
+- マイナス経験を「共感の武器」として物語化する
+- 本人が気づいていない才能・視点を指摘する
+- STEP2（ジャンル選定）で使えるキーワードに落とし込む
+
+# 【出力ルール】
+- 温かい言葉で、でも鋭く。本人が「そう！それが私の核だ！」と涙するレベルで
+- 抽象論ではなく、入力データの具体的な記述を必ず引用して根拠を示すこと
+- 必ず下記の区切り記号（---セクション：〜---）を使って出力すること。他の形式は絶対に使わない
+
+---セクション：自己分析サマリー---
+この人の特徴を温かい言葉で5〜6行にまとめる。
+「好き」と「経験」が交差する核の部分、そして本人でも気づいていない魅力を含めて、人物像が鮮やかに浮かぶように。
+
+---セクション：本質的な強みTOP3---
+掛け合わせで生まれる強みを3つ、以下の形式で：
+
+■ 強み①：○○ ×（かける）○○
+┗ 根拠：入力データの「〜〜」という記述から読み取れる
+┗ なぜこれが強みか：同じ組み合わせを持つ人は少ないから／一次情報として説得力があるから／など
+┗ 発信に活かすなら：Instagramで「〇〇な人向けの△△」として発信できる
+
+■ 強み②：○○ × ○○
+（同様の構造）
+
+■ 強み③：○○ × ○○
+（同様の構造）
+
+---セクション：助けられる人---
+あなたが助けられる人の具体像を3〜4つ。
+「〇〇で悩む◯代◯◯」の形式で、年代・立場・悩みを含めて親友1人がイメージできるレベルで具体的に。
+なぜその人を助けられるのか（本人の一次情報との接続）も1行で添える。
+
+---セクション：ユニークな視点---
+あなたならではの切り口・視点を3つ。
+「普通の人なら〇〇と考えるところを、あなたは△△と見られる」という対比で言語化すると良い。
+一次情報性が高い（本人にしか語れない）ものを優先。
+
+---セクション：ストーリーの種---
+ヒーローズ・ジャーニー視点での物語の核を2本提案。
+「◯◯で苦しんでいた私が、△△に出会い／気づき、□□になれた」型の100〜150字のストーリー骨子。
+マイナス経験・コンプレックスが強みに変わる物語を優先。フォロワーが「私も同じだ」と感じる具体性を大事に。
+
+---セクション：注目キーワード---
+STEP2（ジャンル選定）で使えるキーワードの掛け合わせを6〜8個。
+・○○ × ○○（例：料理 × 時短 × ワーママ）
+・◯◯で悩む人向け◯◯
+実例レベルの粒度で：「23時帰宅の社畜夫の体力超回復レシピ」など、「誰の・どんな状況の・何」が分かる具体性で。
+
+---セクション：隠れた才能---
+本人がまだ気づいていない可能性が高い、潜在的な強みや才能を2〜3つ。
+入力データの「周りからの評価」「苦じゃないこと」「つい時間を忘れてやれること」から読み取る。
+「あなたは自分で思っている以上に〇〇が得意です」の形式で、根拠つきで伝える。
+
+---セクション：次のステップへの橋渡し---
+STEP2（発信ジャンル調査）に向けて、この自己分析結果をどう活かすべきか、3行以内でアドバイス。
+特にニーズ調査で「どのキーワードを検索すべきか」の指針を添える。
+
+それでは、上記の情報をもとに、温かく・でも鋭く、本人の人生が動き出すような深い分析をお願いします。`;
+
+  document.getElementById('promptDisplay').textContent = prompt;
+  goToStep(2);
+}
+
+function generateReport() {
+  const raw = document.getElementById('resultText').value.trim();
+  if (!raw) { alert('強みレポートを貼り付けてください！'); return; }
+
+  const s = parseResult(raw);
+  const container = document.getElementById('reportContent');
+
+  if (Object.keys(s).length < 2) {
+    container.innerHTML = `<div class="report-card"><div class="report-card-label">AI REPORT</div><h3>結果</h3><p>${nl2br(escHtml(raw))}</p></div>
+    <div class="card" style="background:#FFF8E1;border-left:4px solid #FFD93D"><p style="font-size:13px">⚠️ セクションマーカーが検出できませんでした。AIの回答に「---SECTION:〜---」が含まれているか確認してください。</p></div>`;
+    saveReport('step1_report', raw);
+    goToStep(4); return;
+  }
+
+  let html = '';
+  html += makeReportCard('SUMMARY', '📊 あなたの自己分析サマリー', s['自己分析サマリー'], '');
+  html += makeReportCard('TOP 3 STRENGTHS', '💪 本質的な強み TOP3', s['本質的な強みTOP3'], 'purple');
+  html += makeReportCard('WHO YOU CAN HELP', '🎯 あなたが助けられる人', s['助けられる人'], 'green');
+  html += makeReportCard('UNIQUE ANGLE', '✨ あなたならではの視点', s['ユニークな視点'], '');
+  html += makeReportCard('STORY SEED', '📖 ストーリーの種', s['ストーリーの種'], 'orange');
+  html += makeReportCard('KEYWORDS', '🏷 注目キーワード', s['注目キーワード'], 'purple');
+  html += makeReportCard('HIDDEN TALENT', '🌟 隠れた才能', s['隠れた才能'], 'pink');
+
+  container.innerHTML = html;
+  saveReport('step1_report', raw);
+  goToStep(4);
+  setTimeout(launchConfetti, 300);
+}
+
+// Initialize auto-save on page load
+document.addEventListener('DOMContentLoaded', () => initAutoSave('step1'));
+</script>
+</body>
+</html>

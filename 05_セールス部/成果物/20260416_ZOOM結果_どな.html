@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZOOM結果まとめ｜どな（@pipi_to_haha）</title>
+<style>
+  :root {
+    --primary: #2D3436;
+    --accent: #00B894;
+    --accent-light: #E8FFF7;
+    --bg: #FAFAFA;
+    --card: #FFFFFF;
+    --border: #E0E0E0;
+    --text: #2D3436;
+    --text-light: #636E72;
+    --success: #00B894;
+    --warning: #FDCB6E;
+    --danger: #D63031;
+    --info: #0984E3;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; background:var(--bg); color:var(--text); line-height:1.8; }
+
+  .header {
+    background: linear-gradient(135deg, #00B894 0%, #00CEC9 100%);
+    color:#fff; padding:40px 24px; text-align:center;
+  }
+  .header h1 { font-size:26px; margin-bottom:8px; font-weight:700; }
+  .header .subtitle { font-size:15px; opacity:.85; }
+  .header .account { display:inline-block; background:rgba(255,255,255,.2); padding:6px 16px; border-radius:20px; margin-top:12px; font-size:14px; }
+  .header .meta { font-size:13px; opacity:.75; margin-top:8px; }
+
+  .summary-bar {
+    background: var(--primary); color:#fff; padding:16px 24px;
+    display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
+  }
+  .summary-bar .badge {
+    background:rgba(255,255,255,.12); padding:8px 16px; border-radius:8px;
+    font-size:13px; display:flex; align-items:center; gap:8px;
+  }
+  .summary-bar .badge-num {
+    background:var(--accent); width:22px; height:22px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700;
+  }
+
+  .container { max-width:900px; margin:0 auto; padding:24px 16px; }
+
+  .section { margin-bottom:36px; }
+  .section-title {
+    font-size:20px; font-weight:700; padding:12px 0;
+    border-bottom:3px solid var(--accent); margin-bottom:16px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .section-title .icon { font-size:24px; }
+
+  .card {
+    background:var(--card); border-radius:12px; padding:24px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:16px;
+    border-left:4px solid var(--accent);
+  }
+  .card h3 { font-size:16px; color:var(--accent); margin-bottom:10px; font-weight:700; }
+  .card p, .card li { font-size:14px; }
+  .card ul { padding-left:20px; }
+  .card ul li { margin-bottom:6px; }
+
+  .card-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+
+  .highlight-box {
+    background:var(--accent-light); border:2px solid var(--accent);
+    border-radius:12px; padding:20px 24px; margin-bottom:16px;
+  }
+  .highlight-box h3 { color:var(--accent); font-size:16px; margin-bottom:8px; font-weight:700; }
+  .highlight-box p { font-size:15px; font-weight:600; }
+
+  .warning-box {
+    background:#FFFBEA; border:2px solid var(--warning);
+    border-radius:12px; padding:20px 24px; margin-bottom:16px;
+  }
+  .warning-box h3 { color:#856404; font-size:16px; margin-bottom:8px; font-weight:700; }
+  .warning-box p, .warning-box li { font-size:14px; color:#856404; }
+  .warning-box ul { padding-left:20px; }
+  .warning-box ul li { margin-bottom:6px; }
+
+  .axis-list { display:flex; flex-direction:column; gap:12px; margin:16px 0; }
+  .axis-item {
+    background:var(--card); border-radius:10px; padding:16px 20px;
+    border-left:4px solid var(--accent);
+    box-shadow:0 2px 6px rgba(0,0,0,.05);
+    display:flex; align-items:flex-start; gap:14px;
+  }
+  .axis-num {
+    background:var(--accent); color:#fff; width:30px; height:30px; min-width:30px;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:14px; font-weight:700;
+  }
+  .axis-body { flex:1; }
+  .axis-body strong { font-size:15px; display:block; margin-bottom:4px; }
+  .axis-body span { font-size:13px; color:var(--text-light); }
+
+  .persona-card {
+    background:linear-gradient(135deg, var(--accent-light) 0%, #fff 100%);
+    border:2px solid var(--accent); border-radius:16px; padding:24px; margin-bottom:16px;
+  }
+  .persona-card h3 { font-size:18px; color:var(--accent); margin-bottom:12px; font-weight:700; }
+  .persona-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .persona-attr { background:#fff; padding:10px 14px; border-radius:8px; font-size:13px; }
+  .persona-attr strong { color:#00816A; }
+
+  .before-card {
+    background:var(--card); border-radius:12px; padding:24px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:16px;
+    border-top:4px solid var(--danger);
+  }
+  .before-card .card-label {
+    font-size:11px; font-weight:700; color:var(--danger);
+    text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;
+  }
+  .before-card h3 { font-size:16px; color:var(--primary); margin-bottom:12px; font-weight:700; }
+  .before-card ul { padding-left:20px; }
+  .before-card ul li { font-size:14px; margin-bottom:6px; }
+  .before-card blockquote {
+    background:#FFF5F5; border-left:3px solid var(--danger);
+    padding:12px 16px; border-radius:0 8px 8px 0;
+    margin-top:10px; font-size:13px; line-height:1.7; color:#636E72;
+    font-style:italic;
+  }
+
+  .step-flow { display:flex; flex-direction:column; gap:0; margin:16px 0; }
+  .step-item {
+    background:var(--card); border-radius:12px; padding:20px;
+    border-left:4px solid var(--accent);
+    box-shadow:0 2px 6px rgba(0,0,0,.04);
+  }
+  .step-arrow { text-align:center; font-size:22px; color:var(--accent); padding:6px 0; }
+  .step-num {
+    background:var(--accent); color:#fff; width:28px; height:28px; border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; margin-right:8px;
+  }
+  .step-item h4 { font-size:15px; margin-bottom:8px; display:flex; align-items:center; font-weight:700; }
+  .step-item p { font-size:14px; color:var(--text-light); }
+  .step-item blockquote {
+    background:var(--accent-light); border-left:3px solid var(--accent);
+    padding:12px 16px; border-radius:0 8px 8px 0;
+    margin-top:10px; font-size:13px; line-height:1.7;
+  }
+
+  .post-card {
+    background:var(--card); border-radius:12px; padding:20px 24px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:12px;
+    border-left:4px solid var(--info);
+  }
+  .post-card .post-type {
+    display:inline-block; background:var(--info); color:#fff;
+    font-size:11px; font-weight:700; padding:3px 10px; border-radius:20px;
+    margin-bottom:8px; letter-spacing:.5px;
+  }
+  .post-card h3 { font-size:15px; font-weight:700; margin-bottom:8px; }
+  .post-card ul { padding-left:18px; }
+  .post-card ul li { font-size:13px; margin-bottom:4px; }
+
+  table { width:100%; border-collapse:collapse; font-size:14px; margin-bottom:16px; }
+  th { background:var(--primary); color:#fff; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); }
+  tr:nth-child(even) td { background:#F8F8F8; }
+  td:first-child { font-weight:600; color:var(--accent); white-space:nowrap; }
+
+  .phrase-list { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0; }
+  .phrase {
+    background:var(--accent-light); color:#00816A;
+    padding:8px 16px; border-radius:20px; font-size:13px; font-weight:600;
+    border:1px solid var(--accent);
+  }
+
+  .action-list { display:flex; flex-direction:column; gap:12px; margin:16px 0; }
+  .action-item {
+    background:var(--card); border-radius:10px; padding:16px 20px;
+    box-shadow:0 2px 6px rgba(0,0,0,.05);
+    display:flex; align-items:flex-start; gap:14px;
+  }
+  .action-item.priority-1 { border-left:4px solid var(--danger); }
+  .action-item.priority-2 { border-left:4px solid var(--warning); }
+  .action-item.priority-3 { border-left:4px solid var(--info); }
+  .action-item.priority-4 { border-left:4px solid var(--border); }
+  .action-num {
+    width:30px; height:30px; min-width:30px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px; font-weight:700; color:#fff;
+  }
+  .action-item.priority-1 .action-num { background:var(--danger); }
+  .action-item.priority-2 .action-num { background:var(--warning); color:var(--primary); }
+  .action-item.priority-3 .action-num { background:var(--info); }
+  .action-item.priority-4 .action-num { background:#B2BEC3; }
+  .action-body strong { font-size:15px; display:block; }
+  .action-body span { font-size:13px; color:var(--text-light); }
+
+  .tag {
+    display:inline-block; background:var(--accent-light);
+    color:#00816A; font-size:11px; font-weight:700;
+    padding:2px 10px; border-radius:20px;
+    border:1px solid var(--accent); margin-left:8px;
+  }
+  .tag.urgent { background:#FFF5F5; color:var(--danger); border-color:var(--danger); }
+
+  .story-flow {
+    display:flex; flex-wrap:wrap; gap:8px;
+    align-items:center; margin:12px 0;
+  }
+  .story-step {
+    background:var(--accent); color:#fff;
+    padding:8px 14px; border-radius:20px; font-size:13px; font-weight:600;
+  }
+  .story-arrow { color:var(--accent); font-size:18px; font-weight:700; }
+
+  @media(max-width:600px) {
+    .persona-grid { grid-template-columns:1fr; }
+    .card-grid { grid-template-columns:1fr; }
+    .summary-bar { flex-direction:column; align-items:center; }
+    .header h1 { font-size:20px; }
+    .story-flow { flex-direction:column; align-items:flex-start; }
+  }
+
+  /* ===== SECTION A: Deep-dive cards ===== */
+  .critical-section-title {
+    font-size:20px; font-weight:700; padding:12px 0;
+    border-bottom:3px solid #E17055; margin-bottom:16px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .critical-section-title .icon { font-size:24px; }
+
+  .critical-intro-box {
+    background:#FFF3EE; border:2px solid #E17055;
+    border-radius:12px; padding:20px 24px; margin-bottom:20px;
+  }
+  .critical-intro-box p { font-size:14px; color:#7D3C00; line-height:1.9; }
+
+  .deepdive-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:8px; }
+
+  .deepdive-card {
+    background:#fff; border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.07);
+    border-top:4px solid #E17055;
+    overflow:hidden;
+  }
+  .deepdive-card summary {
+    padding:16px 20px; cursor:pointer; font-size:15px; font-weight:700;
+    color:#7D3C00; list-style:none; display:flex; align-items:center; gap:10px;
+    background:#FFF3EE; border-bottom:1px solid #FDDCCC;
+    user-select:none;
+  }
+  .deepdive-card summary::-webkit-details-marker { display:none; }
+  .deepdive-card summary::after {
+    content:'▼'; font-size:11px; margin-left:auto; color:#E17055;
+    transition:transform .25s;
+  }
+  .deepdive-card[open] summary::after { transform:rotate(180deg); }
+  .deepdive-card-num {
+    background:#E17055; color:#fff; width:26px; height:26px; min-width:26px;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:700;
+  }
+  .deepdive-card-body { padding:16px 20px; }
+  .deepdive-card-body ul { padding-left:20px; margin-bottom:12px; }
+  .deepdive-card-body ul li { font-size:13px; margin-bottom:6px; color:var(--text); }
+  .deepdive-effect {
+    background:#E8FFF7; border-left:3px solid var(--accent);
+    padding:10px 14px; border-radius:0 8px 8px 0;
+    font-size:13px; color:#00816A; font-weight:600;
+  }
+
+  @media(max-width:600px) {
+    .deepdive-grid { grid-template-columns:1fr; }
+  }
+
+  /* ===== SECTION B: Script sections ===== */
+  .script-section-title {
+    font-size:20px; font-weight:700; padding:12px 0;
+    border-bottom:3px solid var(--accent); margin-bottom:16px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .script-intro {
+    background:var(--accent-light); border:2px solid var(--accent);
+    border-radius:12px; padding:16px 20px; margin-bottom:24px; font-size:14px; color:#00816A;
+  }
+  .sub-section-title {
+    font-size:17px; font-weight:700; color:var(--primary);
+    margin:28px 0 14px; padding-left:12px;
+    border-left:4px solid var(--accent);
+  }
+  .reel-frame {
+    background:#fff; border-radius:12px; margin-bottom:10px;
+    box-shadow:0 2px 6px rgba(0,0,0,.05);
+    display:flex; align-items:stretch; overflow:hidden;
+    border:1px solid var(--border);
+  }
+  .reel-frame-num {
+    background:var(--primary); color:#fff; min-width:64px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:12px 8px; font-size:11px; font-weight:700; gap:4px; text-align:center;
+  }
+  .reel-frame-num .sec {
+    background:var(--accent); color:#fff; border-radius:20px;
+    font-size:10px; padding:2px 8px; white-space:nowrap;
+  }
+  .reel-frame-body { padding:14px 18px; flex:1; }
+  .reel-frame-body .scene { font-size:12px; color:var(--text-light); margin-bottom:4px; }
+  .reel-frame-body .line { font-size:14px; font-weight:600; margin-bottom:6px; color:var(--text); }
+  .reel-frame-body .aim {
+    font-size:12px; color:#00816A; background:var(--accent-light);
+    display:inline-block; padding:3px 10px; border-radius:20px;
+  }
+
+  .feed-grid { display:flex; flex-direction:column; gap:10px; }
+  .feed-page {
+    background:#fff; border-radius:12px; padding:16px 20px;
+    box-shadow:0 2px 6px rgba(0,0,0,.05);
+    border:1px solid var(--border);
+    display:flex; align-items:flex-start; gap:14px;
+  }
+  .feed-page-num {
+    background:var(--accent); color:#fff; min-width:36px; height:36px;
+    border-radius:8px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; flex-shrink:0;
+  }
+  .feed-page-body { flex:1; }
+  .feed-page-title { font-size:14px; font-weight:700; margin-bottom:4px; }
+  .feed-page-text { font-size:13px; color:var(--text); margin-bottom:6px; line-height:1.8; }
+  .feed-page-aim { font-size:12px; color:#00816A; font-style:italic; }
+
+  @media(max-width:600px) {
+    .reel-frame { flex-direction:column; }
+    .reel-frame-num { flex-direction:row; min-width:unset; padding:10px 14px; justify-content:flex-start; }
+  }
+  @media print {
+    .deepdive-card[open] .deepdive-card-body,
+    .deepdive-card .deepdive-card-body { display:block !important; }
+    .deepdive-card summary::after { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>iメイト深堀り会 ZOOM結果まとめ｜どな（@pipi_to_haha）</h1>
+  <div class="subtitle">親のサポート系｜アカウント概念 確定版</div>
+  <div class="account">@pipi_to_haha｜親のサポート、どこまでやるべき？</div>
+  <div class="meta">作成日：2026年4月16日　作成者：セールス部</div>
+</div>
+
+<div class="summary-bar">
+  <div class="badge"><span class="badge-num">1</span>理想の未来 確定</div>
+  <div class="badge"><span class="badge-num">2</span>ペルソナ修正 完了</div>
+  <div class="badge"><span class="badge-num">3</span>Beforeエピソード 確定</div>
+  <div class="badge"><span class="badge-num">4</span>Afterストーリー 確定</div>
+  <div class="badge"><span class="badge-num">5</span>投稿構成 確定</div>
+  <div class="badge"><span class="badge-num">6</span>切り返し 確定</div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: 決定した理想の未来 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F31F;</span> 決定した理想の未来</div>
+
+    <div class="highlight-box">
+      <h3>コアメッセージ（全投稿の軸）</h3>
+      <p>「旅行しながら収入が作れることが、人生の余裕を実感させてくれる」</p>
+      <p style="font-size:13px; font-weight:400; margin-top:8px; color:#00816A;">※ 誇張なし・嘘なし。どなさん自身が体現している等身大の表現</p>
+    </div>
+
+    <div class="axis-list">
+      <div class="axis-item">
+        <div class="axis-num">1</div>
+        <div class="axis-body">
+          <strong>旅行しながら収入が作れる（場所に縛られない）</strong>
+          <span>旅先のホテル・空港・カフェでスマホ作業できる。証拠写真を積極的に撮影・発信する</span>
+        </div>
+      </div>
+      <div class="axis-item">
+        <div class="axis-num">2</div>
+        <div class="axis-body">
+          <strong>収入源の道筋が見えてきた（会社に頼らなくても）</strong>
+          <span>「ガッポガッポ稼ぐ」ではなく「道筋が見えてきた」という誠実な表現で訴求</span>
+        </div>
+      </div>
+      <div class="axis-item">
+        <div class="axis-num">3</div>
+        <div class="axis-body">
+          <strong>親との関わりが良い感じに（介護疲れにならない）</strong>
+          <span>「介護」という言葉は使わず「親の老後の世話」「親のサポート」に統一する</span>
+        </div>
+      </div>
+      <div class="axis-item">
+        <div class="axis-num">4</div>
+        <div class="axis-body">
+          <strong>自分の経験が誰かの助けに → 自己肯定感UP</strong>
+          <span>発信によって「誰かの役に立てた」実感が、自分の存在価値の確認につながる</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="warning-box">
+      <h3>キーワード注意事項（表現の統一）</h3>
+      <ul>
+        <li><strong>使わない言葉：</strong>「介護」（重く、距離感が出る）</li>
+        <li><strong>使う言葉：</strong>「親の老後の世話」「親のサポート」「親との関わり」</li>
+        <li><strong>訴求の禁止表現：</strong>「ガッポガッポ稼げる」「月収○万円」「自由になれる」</li>
+        <li><strong>推奨表現：</strong>「道筋が見えてきた」「人生の余裕を実感」「場所に縛られない」</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 2: ペルソナ修正 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F464;</span> ペルソナ修正（重要な発見）</div>
+
+    <div class="highlight-box">
+      <h3>最重要修正：アラカン → アラフィフ（50代前半）</h3>
+      <p>ZOOMで判明。メインターゲットは60代前後ではなく50代前半が正しい。</p>
+    </div>
+
+    <div class="persona-card">
+      <h3>修正後のペルソナ：50代前半女性（就職氷河期世代）</h3>
+      <div class="persona-grid">
+        <div class="persona-attr"><strong>年齢：</strong>50代前半（アラフィフ）</div>
+        <div class="persona-attr"><strong>世代：</strong>就職氷河期世代。お金にシビア</div>
+        <div class="persona-attr"><strong>ライフステージ：</strong>子供が手離れして時間ができた</div>
+        <div class="persona-attr"><strong>職業傾向：</strong>個人でお店・ハンドメイドをやっている人が多い</div>
+        <div class="persona-attr"><strong>職業例：</strong>カフェオーナー、お菓子作家 等</div>
+        <div class="persona-attr"><strong>関心：</strong>親のサポートをしながら自分の生活も大切にしたい</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>フォロワーが求めているもの（在り方の軸）</h3>
+      <p style="margin-bottom:10px;">「仲良くない親をうまくサポートしながら自分の生活も楽しめている」状態への憧れ</p>
+      <ul>
+        <li>情報よりも<strong>「在り方・考え方」への共感</strong>が刺さる</li>
+        <li>ノウハウより「あなたはどうやってそのマインドになれたの？」が知りたい</li>
+        <li>翔子さんのようなふわっとした親しみやすい見せ方が響く</li>
+        <li>キラキラ系・成功者アピールは逆効果（就職氷河期世代は警戒する）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Beforeエピソード -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F4D6;</span> Beforeエピソード（確定）</div>
+
+    <div class="before-card">
+      <div class="card-label">Card 1｜メインエピソード</div>
+      <h3>看護師時代の「思い込み」による働き過ぎ</h3>
+      <ul>
+        <li>体調を崩しても休まず働き続けた</li>
+        <li>「仕事に穴を開けてはいけない」という呪縛に縛られていた</li>
+        <li>子供の頃から植え付けられた「周りの役に立たなければいけない」という価値観</li>
+        <li>37〜38歳頃まで自分を削り続けた</li>
+        <li>メンタルダウンしても辞めなかった</li>
+      </ul>
+      <blockquote>「身体は悲鳴をあげていた。でも『自分が休んだら誰かに迷惑をかける』という思い込みが、ずっと私を縛っていた」</blockquote>
+    </div>
+
+    <div class="before-card">
+      <div class="card-label">Card 2｜親との関係エピソード</div>
+      <h3>不仲だった母との20年ぶり同居</h3>
+      <ul>
+        <li>母とは長年の確執があり、関係性が難しかった</li>
+        <li>40歳で苦しい気持ちを打ち明けると、母から「あんたは悪くない」というLINEが届いた</li>
+        <li>「この人は幼い人なんだ」と受け入れ、自分が大人として接する側に切り替えた</li>
+      </ul>
+      <blockquote>「長年ずっと、母のことで心が重かった。でも40歳のあの日、気持ちを伝えたら、ふっと楽になれた」</blockquote>
+    </div>
+
+    <div class="before-card">
+      <div class="card-label">Card 3｜副業失敗エピソード</div>
+      <h3>2022年ブログ挑戦→挫折</h3>
+      <ul>
+        <li>2022年、ブログで副業を試みるも挫折してしまった</li>
+        <li>「私って仕事でもダメだし、新しいことをしてもダメなんだ」と落ち込んだ</li>
+      </ul>
+      <blockquote>「仕事でも自信をなくして、副業でも失敗して。自分には何もできないって、本当に思っていた」</blockquote>
+    </div>
+  </div>
+
+  <!-- SECTION 4: After/転換点 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F680;</span> After / 転換点（確定）</div>
+
+    <p style="font-size:14px; color:var(--text-light); margin-bottom:16px;">ヒーローズジャーニーの流れで語る</p>
+
+    <div class="step-flow">
+      <div class="step-item">
+        <h4><span class="step-num">1</span>看護師で体を壊す</h4>
+        <p>身体の限界まで自分を削り続けた看護師時代</p>
+      </div>
+      <div class="step-arrow">&#x25BC;</div>
+      <div class="step-item">
+        <h4><span class="step-num">2</span>「人生を楽しもう」と決意</h4>
+        <p>もう自分を犠牲にするのはやめようと、初めて自分のために動き始めた</p>
+      </div>
+      <div class="step-arrow">&#x25BC;</div>
+      <div class="step-item">
+        <h4><span class="step-num">3</span>ブログ副業失敗</h4>
+        <p>新しいことに挑戦するも挫折。「やっぱり私にはできない」と思った</p>
+      </div>
+      <div class="step-arrow">&#x25BC;</div>
+      <div class="step-item">
+        <h4><span class="step-num">4</span>iサークル・りこぴんに出会う</h4>
+        <p>「キラッと光る部分の見つけ方」を教わった。自分の経験に価値があると初めて気づいた</p>
+        <blockquote>「ブログで挫折してから、自分にはもう無理だと思っていた。でもりこぴんさんに"あなたにはこういう価値がある"と言ってもらったとき、初めて自分を信じられた気がした」</blockquote>
+      </div>
+      <div class="step-arrow">&#x25BC;</div>
+      <div class="step-item">
+        <h4><span class="step-num">5</span>発信でたくさんの人に求められる</h4>
+        <p>親のサポート経験を発信すると、同じ悩みを抱える人から「救われました」という声が届いた</p>
+      </div>
+      <div class="step-arrow">&#x25BC;</div>
+      <div class="step-item">
+        <h4><span class="step-num">6</span>「自分は存在していい」と認められた感覚</h4>
+        <p>誰かの役に立てている実感が、長年なかった自己肯定感をつくってくれた</p>
+      </div>
+      <div class="step-arrow">&#x25BC;</div>
+      <div class="step-item">
+        <h4><span class="step-num">7</span>親にも余裕が生まれ、未来への安心へ</h4>
+        <p>インスタ発信→自分を客観視→親との関係がさらに改善。旅先での作業が「場所に縛られない」証拠に</p>
+        <blockquote>「旅先のホテルでスマホを開いて、今日もここから発信できる。この感覚が、私にとっての余裕そのものです」</blockquote>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h3>副次効果として語れること</h3>
+      <ul>
+        <li><strong>証拠写真の撮影：</strong>旅先（ホテル・空港・カフェ）での作業写真を積極的に撮り、発信に使う</li>
+        <li><strong>好循環：</strong>インスタ発信→自分を客観視→親との関係がさらに改善というポジティブな連鎖</li>
+        <li><strong>顔出しなしで体現：</strong>首から下の出演スタイルで「顔出しなしでもできる」を証明し続ける</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 5: 投稿構成 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F4F1;</span> 投稿構成（確定）</div>
+
+    <div class="post-card">
+      <div class="post-type">投稿1｜リール</div>
+      <h3>コラボライブ告知</h3>
+      <ul>
+        <li>りこぴんがスライドを画面共有しながら解説</li>
+        <li>どなさんは首から下の出演（顔出しなしスタイルの体現）</li>
+        <li>「顔出しせずに自宅でできる」を視聴者に自然に見せる</li>
+      </ul>
+    </div>
+
+    <div class="post-card">
+      <div class="post-type">投稿2｜フィード</div>
+      <h3>勉強会案内 / 経験を価値に</h3>
+      <ul>
+        <li>「あなたの経験が誰かを救う」がテーマ</li>
+        <li>自分のBeforeエピソードと変化を静止画で丁寧に語る</li>
+        <li>勉強会への誘導をCTAとして入れる</li>
+      </ul>
+    </div>
+
+    <div class="post-card">
+      <div class="post-type">投稿3｜リール</div>
+      <h3>勉強会案内</h3>
+      <ul>
+        <li>動画でどなさん自身の変化と余裕を見せる</li>
+        <li>旅先作業の様子など「場所に縛られない」を視覚化</li>
+        <li>勉強会への参加を呼びかける</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>ストーリー構成の流れ</h3>
+      <div class="story-flow">
+        <div class="story-step">マイナス</div>
+        <div class="story-arrow">→</div>
+        <div class="story-step">きっかけ</div>
+        <div class="story-arrow">→</div>
+        <div class="story-step">挑戦</div>
+        <div class="story-arrow">→</div>
+        <div class="story-step">うまくいく</div>
+        <div class="story-arrow">→</div>
+        <div class="story-step">良い未来</div>
+        <div class="story-arrow">→</div>
+        <div class="story-step">あなたにもできる</div>
+        <div class="story-arrow">→</div>
+        <div class="story-step">勉強会へ</div>
+      </div>
+      <p style="font-size:13px; color:var(--text-light); margin-top:8px;">このストーリーラインを全ての投稿・ストーリーズの骨格として使う</p>
+    </div>
+  </div>
+
+  <!-- SECTION 6: 切り返し -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F6E1;</span> フォロワーからの切り返し（確定）</div>
+
+    <table>
+      <tr>
+        <th style="width:35%;">フォロワーの不安・疑問</th>
+        <th>どなさんの切り返し</th>
+      </tr>
+      <tr>
+        <td>「顔出しできない」</td>
+        <td>どなさん自身が顔出しなしで活動している。「企業のSNSお手伝いを顔出しせずに自宅でできる」と体で示す</td>
+      </tr>
+      <tr>
+        <td>「稼げる実績がない」</td>
+        <td>「道筋が見えてきた」「人生の余裕を実感」という等身大の表現で。誇張なし・嘘なしの誠実訴求</td>
+      </tr>
+      <tr>
+        <td>「キラキラ系が苦手」</td>
+        <td>翔子さんのようなふわっとした親しみやすい見せ方で安心感を出す。成功者アピールはしない</td>
+      </tr>
+      <tr>
+        <td>「嘘をつかないか心配」</td>
+        <td>「ガッポガッポ稼げる」とは言わない。「道筋が見えた」「余裕が生まれた」という誠実な表現を一貫して使う</td>
+      </tr>
+    </table>
+
+    <div class="highlight-box">
+      <h3>「嘘をつかない」訴求の原則</h3>
+      <p>どなさんの強みは「正直さ・誠実さ」。誇張した言葉は使わず、自分が実際に感じた変化をそのまま言語化する。それが就職氷河期世代のフォロワーに最も刺さる。</p>
+    </div>
+  </div>
+
+  <!-- SECTION 7: 次のアクション -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x2705;</span> 次のアクション</div>
+
+    <div class="action-list">
+      <div class="action-item priority-1">
+        <div class="action-num">1</div>
+        <div class="action-body">
+          <strong>投稿台本を今週中に作成 → 講師に提出<span class="tag urgent">最優先</span></strong>
+          <span>上記の確定内容（理想の未来・Beforeエピソード・Afterストーリー・切り返し）をもとに3投稿分の台本を書く</span>
+        </div>
+      </div>
+      <div class="action-item priority-2">
+        <div class="action-num">2</div>
+        <div class="action-body">
+          <strong>旅先での作業写真を意識して撮影<span class="tag">継続</span></strong>
+          <span>ホテル・空港・カフェでスマホ作業している場面を撮影。投稿素材として積み上げる</span>
+        </div>
+      </div>
+      <div class="action-item priority-3">
+        <div class="action-num">3</div>
+        <div class="action-body">
+          <strong>投稿作成構造の講座（セッター約2時間）を視聴</strong>
+          <span>台本作成の前に講座を確認し、投稿の型を頭に入れておく</span>
+        </div>
+      </div>
+      <div class="action-item priority-4">
+        <div class="action-num">4</div>
+        <div class="action-body">
+          <strong>ZOOMアーカイブを見直す</strong>
+          <span>今日のZOOMの内容を録画で振り返り、決定内容を再確認する</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION A: 「過去の辛い経験」を深掘る切り口（追加）         -->
+<!-- ============================================================ -->
+<div class="container">
+  <div class="section">
+    <div class="critical-section-title">
+      <span class="icon">🔥</span>
+      【伸びる投稿のための深掘り切り口】「本人も思い出せなかった、でも確かにあった」を引き出す
+    </div>
+
+    <div class="critical-intro-box">
+      <p>伸びる投稿の正体は『え？！この人がそんな経験を？』と読者を思考停止させる衝撃。まえさんの『死産・流産』『子供にけがをさせた』『ぼくママと遊んだこと一度もない』のような、本人が封印していた記憶を掘り起こすことが鍵。下記の質問をZOOMで本人にぶつけてください。</p>
+    </div>
+
+    <div class="deepdive-grid">
+
+      <details class="deepdive-card" open>
+        <summary>
+          <span class="deepdive-card-num">1</span>
+          看護師時代の身体の悲鳴
+        </summary>
+        <div class="deepdive-card-body">
+          <ul>
+            <li>夜勤明けの体の状態は？</li>
+            <li>体調を崩しても出勤した日の朝の様子は？</li>
+            <li>病院で診断された/されなかった具体的な症状は？</li>
+            <li>「あの時辞めればよかった」と思う瞬間は？</li>
+          </ul>
+          <div class="deepdive-effect">医療従事者として体は分かっていたのに「役に立たなければ」で無視した話</div>
+        </div>
+      </details>
+
+      <details class="deepdive-card" open>
+        <summary>
+          <span class="deepdive-card-num">2</span>
+          母との関係の核心エピソード
+        </summary>
+        <div class="deepdive-card-body">
+          <ul>
+            <li>母に一番傷つけられた言葉は？</li>
+            <li>「あんたは悪くない」のLINEを受け取った時の場所/状況は？</li>
+            <li>母に対して「もう無理」と思った瞬間は？</li>
+            <li>母の介護で一番辛かった日は？</li>
+          </ul>
+          <div class="deepdive-effect">一般読者が経験する「親との確執」を代弁。共感層が広い</div>
+        </div>
+      </details>
+
+      <details class="deepdive-card">
+        <summary>
+          <span class="deepdive-card-num">3</span>
+          「役に立たなければ」の刷り込みの正体
+        </summary>
+        <div class="deepdive-card-body">
+          <ul>
+            <li>子供時代に「ありがとう」と言われた最初の記憶は？</li>
+            <li>「役に立たない自分」を見せた時の親の反応は？</li>
+            <li>大人になって「この呪縛から抜けたい」と思った瞬間は？</li>
+            <li>心理学/カウンセリングを受けた経験は？</li>
+          </ul>
+          <div class="deepdive-effect">深層心理の根っこ。同じ刷り込みを持つ女性層を直撃</div>
+        </div>
+      </details>
+
+      <details class="deepdive-card">
+        <summary>
+          <span class="deepdive-card-num">4</span>
+          副業失敗時の絶望
+        </summary>
+        <div class="deepdive-card-body">
+          <ul>
+            <li>ブログを諦めた最後の日のことを覚えている？</li>
+            <li>「私には何もできない」と泣いた瞬間は？</li>
+            <li>SNSで成功している人を見て妬んだ瞬間は？</li>
+            <li>夫/家族に副業を秘密にしていた？</li>
+          </ul>
+          <div class="deepdive-effect">「成功者を見て自己嫌悪」型。多くの人が共感する闇</div>
+        </div>
+      </details>
+
+      <details class="deepdive-card">
+        <summary>
+          <span class="deepdive-card-num">5</span>
+          看護師業界での具体的な辛さ
+        </summary>
+        <div class="deepdive-card-body">
+          <ul>
+            <li>夜勤の合間に泣いた瞬間は？</li>
+            <li>患者さん/家族から理不尽なクレームを受けた時は？</li>
+            <li>同僚/上司との人間関係で病んだ瞬間は？</li>
+            <li>辞めたいと言えなかった理由は？</li>
+          </ul>
+          <div class="deepdive-effect">看護師ジャンルでの強烈な共感を生む</div>
+        </div>
+      </details>
+
+      <details class="deepdive-card">
+        <summary>
+          <span class="deepdive-card-num">6</span>
+          「自分は存在していい」と思えた瞬間の具体描写
+        </summary>
+        <div class="deepdive-card-body">
+          <ul>
+            <li>初めてフォロワーから「救われました」とDMが来た時は？</li>
+            <li>どんな投稿に「ありがとう」が集まった？</li>
+            <li>その瞬間に泣いた？スクショを撮った？</li>
+            <li>誰かに「見てこれ」と言わずにはいられなかった？</li>
+          </ul>
+          <div class="deepdive-effect">After側の最強エピソード。読者に「私もこうなりたい」を喚起</div>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION B: 投稿台本サンプル（リール＋フィード）             -->
+<!-- ============================================================ -->
+<div class="container">
+  <div class="section">
+    <div class="script-section-title">
+      <span class="icon">📝</span>
+      【投稿台本サンプル】PDF「まえさん」のローンチ投稿構成を参考に作成
+    </div>
+
+    <div class="script-intro">
+      iサークルPRO+講座『PRO_13-1ローンチ用フィード投稿』『PRO_13-2ローンチ用リール』に沿った構成。ヒーローズジャーニー型でどなさん独自のエピソードを当てはめた。ZOOMで台本を磨き込んでいきましょう。
+    </div>
+
+    <!-- B1: リール台本 -->
+    <div class="sub-section-title">B-1｜リール台本（人生ビフォアフ型）</div>
+
+    <div class="reel-frame">
+      <div class="reel-frame-num">
+        <span>冒頭フック</span>
+        <span class="sec">0〜3秒</span>
+      </div>
+      <div class="reel-frame-body">
+        <div class="scene">画面：白衣を脱ぐシーン or 看護師の手元</div>
+        <div class="line">「夜勤明けで倒れても、私は仕事を休めませんでした」</div>
+        <span class="aim">狙い：医療従事者が倒れる衝撃→医療系ジャンルへの広い共感</span>
+      </div>
+    </div>
+
+    <div class="reel-frame">
+      <div class="reel-frame-num">
+        <span>過去の自己紹介</span>
+        <span class="sec">3〜7秒</span>
+      </div>
+      <div class="reel-frame-body">
+        <div class="scene">画面：病院の廊下</div>
+        <div class="line">看護師18年。夜勤しても、体壊しても、絶対に休まなかった人間でした</div>
+        <span class="aim">狙い：異常な働き方の宣言</span>
+      </div>
+    </div>
+
+    <div class="reel-frame">
+      <div class="reel-frame-num">
+        <span>どん底</span>
+        <span class="sec">7〜20秒</span>
+      </div>
+      <div class="reel-frame-body">
+        <div class="scene">画面：暗い病院/夜の街</div>
+        <div class="line">子供の頃からの口癖は「役に立たなければ、私には価値がない」。体調を崩しても出勤、メンタルダウンしても辞めなかった。気づけば、自分の人生を生きている感覚がゼロでした。40歳の時、母にやっと本音をぶつけました「私、ずっと辛かった」。返ってきたLINEは「あんたは悪くない」。スマホを握りしめて、号泣しました</div>
+        <span class="aim">狙い：40歳の核心エピソード→読者の感情を最深部まで動かす</span>
+      </div>
+    </div>
+
+    <div class="reel-frame">
+      <div class="reel-frame-num">
+        <span>副業挫折</span>
+        <span class="sec">20〜28秒</span>
+      </div>
+      <div class="reel-frame-body">
+        <div class="scene">画面：パソコン画面</div>
+        <div class="line">「人生楽しもう」と思って始めたブログは大失敗。「私って、仕事もダメ、新しいことしてもダメな人間なんだ」そう自分を責めていました</div>
+        <span class="aim">狙い：まえさん型の「全くフォロワーさんは増えない」</span>
+      </div>
+    </div>
+
+    <div class="reel-frame">
+      <div class="reel-frame-num">
+        <span>きっかけ</span>
+        <span class="sec">28〜38秒</span>
+      </div>
+      <div class="reel-frame-body">
+        <div class="scene">画面：YouTube画面</div>
+        <div class="line">そんな時、たまたま見たYouTubeでりこぴんさんに出会いました。「自分の経験のキラッと光る部分」を見つける方法を教えてもらい、半信半疑でインスタを始めました</div>
+        <span class="aim">狙い：具体的な接触ストーリー</span>
+      </div>
+    </div>
+
+    <div class="reel-frame">
+      <div class="reel-frame-num">
+        <span>転換</span>
+        <span class="sec">38〜50秒</span>
+      </div>
+      <div class="reel-frame-body">
+        <div class="scene">画面：DM画面</div>
+        <div class="line">親のサポートの話を発信したら「救われました」「私も同じです」のDMが止まらなくなりました。誰かの役に立てている、私が存在していい理由が、初めて見つかった気がしました</div>
+        <span class="aim">狙い：どなさん独自の「自分は存在していい」エピソード</span>
+      </div>
+    </div>
+
+    <div class="reel-frame">
+      <div class="reel-frame-num">
+        <span>今の姿</span>
+        <span class="sec">50〜60秒</span>
+      </div>
+      <div class="reel-frame-body">
+        <div class="scene">画面：旅先のホテル/カフェ</div>
+        <div class="line">今は旅先のホテルで仕事ができる、母のサポートの合間にも収入が作れる、顔出しなしで企業さんのSNSのお手伝いまでできるようになりました。何より、母とも余裕を持って向き合えています</div>
+        <span class="aim">狙い：物理的自由＋精神的自由</span>
+      </div>
+    </div>
+
+    <div class="reel-frame">
+      <div class="reel-frame-num">
+        <span>メッセージ</span>
+        <span class="sec">60〜65秒</span>
+      </div>
+      <div class="reel-frame-body">
+        <div class="line">「自分には何もない」と思っていた私が変われた。あなたの「何年も悩んできた経験」は誰かの救いになって、収入源になります</div>
+        <span class="aim">狙い：本人にしか言えない確信メッセージ</span>
+      </div>
+    </div>
+
+    <div class="reel-frame">
+      <div class="reel-frame-num">
+        <span>CTA</span>
+        <span class="sec">65〜70秒</span>
+      </div>
+      <div class="reel-frame-body">
+        <div class="line">「気になる」とコメントしてください。無料勉強会の詳細をDMでお送りします</div>
+        <span class="aim">狙い：シンプル＋直接的</span>
+      </div>
+    </div>
+
+    <!-- B2: フィード台本 -->
+    <div class="sub-section-title" style="margin-top:32px;">B-2｜フィード台本（10ページ構成）</div>
+
+    <div class="feed-grid">
+
+      <div class="feed-page">
+        <div class="feed-page-num">P1</div>
+        <div class="feed-page-body">
+          <div class="feed-page-title">表紙</div>
+          <div class="feed-page-text">見出し：「役に立たなければ、私には価値がない」<br>サブ：看護師18年、自分の人生を生きてこなかった私が母の隣で収入を作れるようになるまで</div>
+          <div class="feed-page-aim">狙い：深層心理を掘り起こす導入</div>
+        </div>
+      </div>
+
+      <div class="feed-page">
+        <div class="feed-page-num">P2</div>
+        <div class="feed-page-body">
+          <div class="feed-page-title">私の真実</div>
+          <div class="feed-page-text">親のサポートを発信している、温かいアカウント。そう思ってもらえているかもしれません。でも、本当の私は「自分の人生を生きていない人間」でした</div>
+          <div class="feed-page-aim">狙い：まえさん型の真実告白</div>
+        </div>
+      </div>
+
+      <div class="feed-page">
+        <div class="feed-page-num">P3</div>
+        <div class="feed-page-body">
+          <div class="feed-page-title">どん底①</div>
+          <div class="feed-page-text">子供の頃から、母とは仲良くなかったんです。「役に立たなければ、私には価値がない」いつからかそう思い込んで生きていました。だから看護師18年、夜勤明けで体が動かなくなっても、メンタルダウンしても、絶対に仕事を休みませんでした。「休んだら、私の存在価値がなくなる」本気でそう思っていたんです</div>
+          <div class="feed-page-aim">狙い：子供時代のトラウマ→今の生き方の根っこ</div>
+        </div>
+      </div>
+
+      <div class="feed-page">
+        <div class="feed-page-num">P4</div>
+        <div class="feed-page-body">
+          <div class="feed-page-title">どん底②</div>
+          <div class="feed-page-text">40歳の時、やっと母に本音をぶつけました。「ずっと辛かった」「私のことを見てくれなかった」。返ってきたLINEは「あんたは悪くない」。スマホを握りしめて、布団の中で号泣しました。40年間、誰にも言えなかった本音でした</div>
+          <div class="feed-page-aim">狙い：具体的なシーン→読者が泣く</div>
+        </div>
+      </div>
+
+      <div class="feed-page">
+        <div class="feed-page-num">P5</div>
+        <div class="feed-page-body">
+          <div class="feed-page-title">副業の挫折</div>
+          <div class="feed-page-text">「私の人生、もっと楽しもう」そう思って始めたブログは大失敗。「私って、仕事もダメ、新しいことしてもダメな人間なんだ」また、自分を責める日々が始まりました</div>
+          <div class="feed-page-aim">狙い：まえさん型「全くフォロワーさんは増えない」</div>
+        </div>
+      </div>
+
+      <div class="feed-page">
+        <div class="feed-page-num">P6</div>
+        <div class="feed-page-body">
+          <div class="feed-page-title">きっかけ</div>
+          <div class="feed-page-text">そんな時、たまたま見たYouTubeで2児のママでありながら旦那さんの何倍も稼ぐりこぴんさんに出会いました。「自分の経験のキラッと光る部分の見つけ方」を教えてもらいました</div>
+          <div class="feed-page-aim">狙い：具体的な出会い</div>
+        </div>
+      </div>
+
+      <div class="feed-page">
+        <div class="feed-page-num">P7</div>
+        <div class="feed-page-body">
+          <div class="feed-page-title">インスタを始めた</div>
+          <div class="feed-page-text">半信半疑で親のサポートの話を発信し始めました。顔出しなし、本名なし。看護師として身につけた知識や経験を少しずつ言葉にしていきました</div>
+          <div class="feed-page-aim">狙い：ハードルの低さを示す</div>
+        </div>
+      </div>
+
+      <div class="feed-page">
+        <div class="feed-page-num">P8</div>
+        <div class="feed-page-body">
+          <div class="feed-page-title">転換点</div>
+          <div class="feed-page-text">「救われました」「私も同じ状況です」「ずっと一人で抱え込んでいました」DMが止まらなくなりました。40年間「役に立たなければ価値がない」と思い込んでいた私が、初めて、自分が存在していい理由を見つけました</div>
+          <div class="feed-page-aim">狙い：どなさん独自の「自己肯定感」転換点</div>
+        </div>
+      </div>
+
+      <div class="feed-page">
+        <div class="feed-page-num">P9</div>
+        <div class="feed-page-body">
+          <div class="feed-page-title">今の生活</div>
+          <div class="feed-page-text">今は旅先のホテルで仕事ができる、母のサポートの合間にも収入が作れる、顔出しなしで企業のSNSのお手伝いまで。何より、母とも余裕を持って向き合えるようになりました。「役に立たなければ価値がない」と思っていた私が「私は私のままで価値がある」と思えるようになったこと、それが一番の宝物です</div>
+          <div class="feed-page-aim">狙い：感情の最大ピーク</div>
+        </div>
+      </div>
+
+      <div class="feed-page">
+        <div class="feed-page-num">P10</div>
+        <div class="feed-page-body">
+          <div class="feed-page-title">コラボライブ告知</div>
+          <div class="feed-page-text">りこぴんさんとのコラボライブを開催します。✅ 看護師18年の私が、なぜインスタで人生が変わったのか ✅ 顔出しなしでも収入が作れる本当の理由 ✅ 「自分の経験」がどう価値になるのか。もちろん無料。「気になる」とコメントしてくれた人だけ、詳細をDMでお送りします</div>
+          <div class="feed-page-aim">狙い：CTA</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

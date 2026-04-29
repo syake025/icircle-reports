@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>深堀り会｜どな（@pipi_to_haha）</title>
+<style>
+  :root {
+    --primary: #2D3436;
+    --accent: #00B894;
+    --accent-light: #E8FFF7;
+    --bg: #FAFAFA;
+    --card: #FFFFFF;
+    --border: #E0E0E0;
+    --text: #2D3436;
+    --text-light: #636E72;
+    --success: #00B894;
+    --warning: #FDCB6E;
+    --danger: #D63031;
+    --info: #0984E3;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; background:var(--bg); color:var(--text); line-height:1.8; }
+  .header { background: linear-gradient(135deg, #00B894 0%, #00CEC9 100%); color:#fff; padding:40px 24px; text-align:center; }
+  .header h1 { font-size:28px; margin-bottom:8px; }
+  .header .subtitle { font-size:15px; opacity:.85; }
+  .header .account { display:inline-block; background:rgba(255,255,255,.2); padding:6px 16px; border-radius:20px; margin-top:12px; font-size:14px; }
+  .purpose-bar { background: var(--primary); color:#fff; padding:20px 24px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+  .purpose-bar .goal { background:rgba(255,255,255,.12); padding:10px 18px; border-radius:8px; font-size:14px; display:flex; align-items:center; gap:8px; }
+  .purpose-bar .goal-num { background:var(--accent); width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; }
+  .container { max-width:900px; margin:0 auto; padding:24px 16px; }
+  .section { margin-bottom:32px; }
+  .section-title { font-size:20px; font-weight:700; padding:12px 0; border-bottom:3px solid var(--accent); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+  .section-title .icon { font-size:24px; }
+  .card { background:var(--card); border-radius:12px; padding:24px; box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:16px; border-left:4px solid var(--accent); }
+  .card h3 { font-size:16px; color:var(--accent); margin-bottom:10px; }
+  .card p, .card li { font-size:14px; }
+  .card ul { padding-left:20px; }
+  .card ul li { margin-bottom:6px; }
+  .highlight-box { background:var(--accent-light); border:2px solid var(--accent); border-radius:12px; padding:20px 24px; margin-bottom:16px; }
+  .highlight-box h3 { color:var(--accent); font-size:16px; margin-bottom:8px; }
+  .highlight-box p { font-size:15px; font-weight:600; }
+  table { width:100%; border-collapse:collapse; font-size:14px; margin-bottom:16px; }
+  th { background:var(--primary); color:#fff; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); }
+  tr:nth-child(even) td { background:#F8F8F8; }
+  .phrase-list { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0; }
+  .phrase { background:var(--accent-light); color:#00816A; padding:8px 16px; border-radius:20px; font-size:13px; font-weight:600; border:1px solid var(--accent); }
+  .ng-box { background:#FFF5F5; border:2px solid var(--danger); border-radius:12px; padding:20px 24px; margin-bottom:16px; }
+  .ng-box h3 { color:var(--danger); font-size:16px; margin-bottom:8px; }
+  .step-flow { display:flex; flex-direction:column; gap:0; margin:16px 0; }
+  .step-item { background:var(--card); border-radius:12px; padding:20px; border-left:4px solid var(--accent); }
+  .step-arrow { text-align:center; font-size:24px; color:var(--accent); padding:4px 0; }
+  .step-num { background:var(--accent); color:#fff; width:28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; margin-right:8px; }
+  .step-item h4 { font-size:15px; margin-bottom:8px; display:flex; align-items:center; }
+  .step-item blockquote { background:var(--accent-light); border-left:3px solid var(--accent); padding:12px 16px; border-radius:0 8px 8px 0; margin-top:8px; font-size:13px; line-height:1.7; }
+  .persona-card { background:linear-gradient(135deg, var(--accent-light) 0%, #FFF 100%); border:2px solid var(--accent); border-radius:16px; padding:24px; margin-bottom:24px; }
+  .persona-card h3 { font-size:18px; color:var(--accent); margin-bottom:12px; }
+  .persona-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .persona-attr { background:#fff; padding:10px 14px; border-radius:8px; font-size:13px; }
+  .persona-attr strong { color:#00816A; }
+  .deep-insight { background:#F0F0F0; border-radius:8px; padding:14px 18px; margin:8px 0; font-size:14px; }
+  .deep-insight em { color:var(--accent); font-style:normal; font-weight:700; }
+  .agenda-section { background:linear-gradient(135deg, #DFE6E9 0%, #B2BEC3 100%); border-radius:12px; padding:24px; margin-bottom:16px; }
+  .agenda-section h3 { font-size:18px; margin-bottom:16px; color:var(--primary); }
+  .agenda-item { background:#fff; border-radius:8px; padding:16px; margin-bottom:12px; border-left:4px solid var(--info); }
+  .agenda-item h4 { color:var(--info); font-size:15px; margin-bottom:6px; }
+  .agenda-item .question { background:#E8F4FD; padding:8px 12px; border-radius:6px; font-size:13px; margin-top:6px; color:var(--primary); }
+  .note-area { background:var(--card); border:2px dashed var(--border); border-radius:12px; padding:20px; margin-bottom:16px; }
+  .note-area h4 { color:var(--text-light); font-size:14px; margin-bottom:8px; }
+  .note-area textarea { width:100%; min-height:100px; border:1px solid var(--border); border-radius:8px; padding:12px; font-size:14px; font-family:inherit; resize:vertical; line-height:1.7; }
+  .funnel { display:flex; flex-direction:column; align-items:center; gap:2px; margin:16px 0; }
+  .funnel-step { padding:10px 20px; text-align:center; font-size:13px; color:#fff; font-weight:600; border-radius:6px; }
+  .funnel-arrow { font-size:18px; color:var(--text-light); }
+  @media(max-width:600px) { .persona-grid { grid-template-columns:1fr; } .purpose-bar { flex-direction:column; align-items:center; } .header h1 { font-size:22px; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>iメイト深堀り会</h1>
+  <div class="subtitle">ZOOM 1on1 セッション資料</div>
+  <div class="account">どな｜@pipi_to_haha｜ぴぴ 親のサポート、どこまでやるべき？</div>
+</div>
+
+<div class="purpose-bar">
+  <div class="goal"><span class="goal-num">1</span>フォロワーに刺さる「理想の未来」を決める</div>
+  <div class="goal"><span class="goal-num">2</span>それを証明する「自分のエピソード」を決める</div>
+  <div class="goal"><span class="goal-num">3</span>投稿作成のイメージを掴む</div>
+  <div class="goal"><span class="goal-num">4</span>フォロワーの不安への切り返しを準備する</div>
+  <div class="goal"><span class="goal-num">5</span>投稿スケジュールの大枠を決める</div>
+</div>
+
+<div class="container">
+
+  <!-- 訴求戦略レポート -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F3AF;</span> 訴求戦略レポート</div>
+
+    <div class="highlight-box">
+      <h3>核心メッセージ（これが全ての軸）</h3>
+      <p>「在宅で・スマホで・介護の合間にもできる収入源がある。あなたの経験が誰かの救いになる」</p>
+    </div>
+
+    <div class="card">
+      <h3>なぜこのメッセージが刺さるのか</h3>
+      <ul>
+        <li>フォロワーの最大の恐怖は「介護が始まったら働けなくなる→収入ゼロ→老後が詰む」</li>
+        <li>「在宅で収入を得る方法がある」は、この恐怖への直接的な解決策</li>
+        <li>「あなたの経験が価値になる」は「自分には何もない」コンプレックスへの処方箋</li>
+        <li>「副業で稼ぐ」ではなく「誰かの役に立つ→結果として収入になる」の順番が重要</li>
+      </ul>
+    </div>
+
+    <table>
+      <tr><th>フォロワーの表面の欲求</th><th>深層の欲求</th></tr>
+      <tr><td>介護費用の情報が知りたい</td><td>「一人で抱えている」孤独を分かち合いたい</td></tr>
+      <tr><td>施設選びの参考にしたい</td><td>「自分と同じ状況の人がいる」安心が欲しい</td></tr>
+      <tr><td>終活の進め方を知りたい</td><td>「介護が始まったらどうしよう」の不安を消したい</td></tr>
+    </table>
+
+    <div class="card"><h3>訴求の3ステップ</h3></div>
+    <div class="step-flow">
+      <div class="step-item">
+        <h4><span class="step-num">1</span>共感を得る</h4>
+        <p>フォロワーが「今まさに」感じている不安を代弁する。</p>
+        <blockquote>「80歳の母を一人で支えている。姉は遠方で頼れない。パートに行きながら、母の通院に付き添って、家事もして。でも一番怖いのは、介護が本格的に始まったらパートにも行けなくなること」</blockquote>
+      </div>
+      <div class="step-arrow">&#x25BC;</div>
+      <div class="step-item">
+        <h4><span class="step-num">2</span>自分の変化を見せる</h4>
+        <p>「同じ苦しみの中にいた自分」がどう変わったかを語る。</p>
+        <blockquote>「私も看護師として身を削って働いてきた。人の役に立たなきゃ、と自分をすり減らしてきた。でもインスタで"自分の経験を発信する"ことを始めてから変わった。家にいても、旅先でも、スマホ1つで仕事ができる。そして何より、同じ悩みの人が"救われました"と言ってくれる」</blockquote>
+      </div>
+      <div class="step-arrow">&#x25BC;</div>
+      <div class="step-item">
+        <h4><span class="step-num">3</span>勉強会へ誘導する</h4>
+        <p>「あなたの経験＝価値」を伝え、行動のハードルを下げる。</p>
+        <blockquote>「あなたの"親のサポート経験"は、今まさに同じことで悩んでいる何万人もの人を救えるコンテンツなんです。それをインスタで発信するだけで、在宅でも収入になる方法がある。まずは無料の勉強会で聞いてみませんか？」</blockquote>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>刺さるフレーズ集</h3>
+      <div class="phrase-list">
+        <span class="phrase">介護が始まっても、収入が途絶えない働き方がある</span>
+        <span class="phrase">あなたの経験は"誰かの救い"になる</span>
+        <span class="phrase">在宅で、スマホで、母の隣でもできる仕事</span>
+        <span class="phrase">55歳からでも遅くなかった。私が証拠です</span>
+        <span class="phrase">"自分のための人生"を始めるのに、遅すぎることはない</span>
+        <span class="phrase">新しいスキルじゃなくて、今までの経験がそのまま価値になる</span>
+      </div>
+    </div>
+
+    <div class="ng-box">
+      <h3>NG訴求（絶対に避けること）</h3>
+      <ul>
+        <li>「キラキラ」「夢」「自由」等のポジティブすぎる言葉（現実感がなく刺さらない）</li>
+        <li>「月収○万円」等の金額訴求（現実離れして警戒される）</li>
+        <li>「起業」「独立」等のスケールの大きい言葉（遠すぎる）</li>
+        <li>「挑戦」「チャレンジ」（この世代は「挑戦」にアレルギーがある）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ターゲット深堀り -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F464;</span> ターゲット深堀り（ブラッシュアップ版）</div>
+
+    <div class="persona-card">
+      <h3>ペルソナ：ゆかり（55歳・既婚女性）</h3>
+      <div class="persona-grid">
+        <div class="persona-attr"><strong>年齢：</strong>55歳既婚</div>
+        <div class="persona-attr"><strong>家族：</strong>夫57歳、娘2人（27歳独立・24歳同居）</div>
+        <div class="persona-attr"><strong>夫年収：</strong>624万円</div>
+        <div class="persona-attr"><strong>自身：</strong>扶養内パート事務職（年収120万円）</div>
+        <div class="persona-attr"><strong>負担：</strong>住宅ローン残債＋母(80歳)のサポート</div>
+        <div class="persona-attr"><strong>健康：</strong>夫婦とも高血圧・脂質異常症</div>
+        <div class="persona-attr"><strong>趣味：</strong>BTSファン、韓国好き、近場ランチ</div>
+        <div class="persona-attr"><strong>SNS：</strong>ランチ・芸能情報を見る＝息抜き</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>深層心理（言語化できていない本当の気持ち）</h3>
+      <div class="deep-insight"><em>「自分の人生を楽しむ」発想がない</em>：「娘のため」「母のため」「夫のため」が行動の全動機。自分のために月5,000円使うことにすら罪悪感。</div>
+      <div class="deep-insight"><em>「介護」が目の前に迫る恐怖</em>：母が元気な「今」が最後の猶予期間。介護が始まったらパートにも行けない→収入ゼロの恐怖。</div>
+      <div class="deep-insight"><em>「スキルがない」コンプレックス</em>：事務職パート以外の経験なし。「新しいことを頑張る」という発想自体がない。</div>
+      <div class="deep-insight"><em>「自分の人生はいつ始まるのか」</em>：若い頃は子育て、今は親のサポート。いつも誰かのために生きている。</div>
+    </div>
+
+    <div class="card">
+      <h3>悩みの構造</h3>
+      <table>
+        <tr><th>切実な悩み</th><th>その奥にある感情</th></tr>
+        <tr><td>住宅ローンを年金開始前に返したい</td><td>老後に借金を持ち越す恐怖</td></tr>
+        <tr><td>母の介護費用が不透明</td><td>「いくらかかるか分からない」最悪の不安</td></tr>
+        <tr><td>姉は非協力的</td><td>「結局、全部自分が背負う」不公平感</td></tr>
+        <tr><td>娘に経済的負担をかけたくない</td><td>「子供に迷惑をかける親にはなりたくない」</td></tr>
+        <tr><td>介護が始まったら働けない</td><td>収入源を失う→自分の老後も詰む</td></tr>
+      </table>
+    </div>
+
+    <div class="highlight-box">
+      <h3>ゆかりがiサークルに入る「決定的な理由」</h3>
+      <p>「在宅で」「スマホで」「介護の合間にも」できる収入源があると知った時。</p>
+      <p style="font-size:14px; font-weight:400; margin-top:8px;">しかも「自分の経験（親のサポート・同居）がそのままコンテンツになる」＝新しいスキル不要。同じ悩みの人を救える＝存在意義を感じられる。</p>
+    </div>
+
+    <div class="card">
+      <h3>伸びるキーワードから見えるフォロワー心理</h3>
+      <div class="phrase-list">
+        <span class="phrase">高齢の母</span><span class="phrase">終活</span><span class="phrase">介護</span>
+        <span class="phrase">同居</span><span class="phrase">施設</span><span class="phrase">老人ホーム</span>
+        <span class="phrase">墓じまい</span><span class="phrase">費用</span><span class="phrase">長生き</span>
+      </div>
+      <ul style="margin-top:12px;">
+        <li>全員が「親の問題×お金の不安」を抱えている</li>
+        <li>タブーな話題を正面から語ってくれる安心感を求めている</li>
+        <li>「この人はどうやって乗り越えているんだろう」というロールモデルを探している</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>フォロワーがiサークルに入るまでの心理ステップ</h3>
+      <div class="funnel">
+        <div class="funnel-step" style="background:#00B894; width:100%;">1.「この人も同じ苦しみを経験してるんだ」（共感）</div>
+        <div class="funnel-arrow">&#x25BC;</div>
+        <div class="funnel-step" style="background:#00CEC9; width:90%;">2.「え、在宅でスマホで収入を得てるの？」（驚き）</div>
+        <div class="funnel-arrow">&#x25BC;</div>
+        <div class="funnel-step" style="background:#0984E3; width:80%;">3.「私の介護経験もコンテンツになるの？」（希望）</div>
+        <div class="funnel-arrow">&#x25BC;</div>
+        <div class="funnel-step" style="background:#636E72; width:70%;">4.「でも55歳の私に本当にできる？」（不安）</div>
+        <div class="funnel-arrow">&#x25BC;</div>
+        <div class="funnel-step" style="background:#6C5CE7; width:60%;">5.「どなさん自身が55歳で始めて成果を出してる」（信頼）</div>
+        <div class="funnel-arrow">&#x25BC;</div>
+        <div class="funnel-step" style="background:#E17055; width:50%;">6.「無料だし、聞くだけ聞いてみよう」（行動）</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZOOM 深堀りアジェンダ -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F4DD;</span> ZOOM深堀りアジェンダ</div>
+
+    <div class="agenda-section">
+      <h3>AGENDA 1：フォロワーに刺さる「理想の未来」を決める</h3>
+      <div class="agenda-item">
+        <h4>Q1. フォロワーさんが一番「この人みたいになりたい」と思うのはどんな部分？</h4>
+        <p style="font-size:13px; color:var(--text-light);">母との関係性？在宅で働けてること？精神的な余裕？経済的な安心？</p>
+        <div class="question">深堀り：DMやコメントで「私もそうなりたい」と言われるのはどんな投稿の時？</div>
+      </div>
+      <div class="agenda-item">
+        <h4>Q2. 以下の「理想の未来」候補の中で、フォロワーさんに最も響くのはどれ？</h4>
+        <ul style="font-size:14px; padding-left:20px; margin:8px 0;">
+          <li>A.「介護が始まっても収入が途絶えない安心」（経済的安心）</li>
+          <li>B.「自分の経験が誰かの救いになる実感」（存在意義）</li>
+          <li>C.「在宅で、自分のペースでできる仕事がある」（時間の自由）</li>
+          <li>D.「"自分のための人生"をやっと始められた」（自己解放）</li>
+        </ul>
+        <div class="question">深堀り：どなさん自身が一番伝えたい「変化」はどれ？</div>
+      </div>
+    </div>
+
+    <div class="note-area">
+      <h4>メモ欄：理想の未来（決定内容）</h4>
+      <textarea placeholder="ここにZOOM中のメモを記入..."></textarea>
+    </div>
+
+    <div class="agenda-section">
+      <h3>AGENDA 2：証明する「自分のエピソード」を決める</h3>
+      <div class="agenda-item">
+        <h4>Q3. 母との関係で一番しんどかった瞬間は？</h4>
+        <p style="font-size:13px; color:var(--text-light);">20年ぶりの同居を決めた時？過去の辛い関係性を思い出す時？</p>
+        <div class="question">深堀り：フォロワーさんも「同じ」と感じるのはどんな場面？</div>
+      </div>
+      <div class="agenda-item">
+        <h4>Q4. 看護師時代の「すり減った経験」で一番リアルなエピソードは？</h4>
+        <p style="font-size:13px; color:var(--text-light);">身体を壊しても辞められなかった話？「人の役に立たなきゃ」の呪縛？</p>
+        <div class="question">深堀り：「もうこんな働き方はイヤ」と思った具体的なシーンは？</div>
+      </div>
+      <div class="agenda-item">
+        <h4>Q5. インスタ発信を始めて「変わった」と実感した最初の瞬間は？</h4>
+        <p style="font-size:13px; color:var(--text-light);">フォロワーから「救われました」と言われた時？在宅で収入を得た時？母との関わり方が変わった時？</p>
+        <div class="question">深堀り：iサークルに入る前と後で、何が一番違う？</div>
+      </div>
+    </div>
+
+    <div class="note-area">
+      <h4>メモ欄：使うエピソード（決定内容）</h4>
+      <textarea placeholder="ここにZOOM中のメモを記入..."></textarea>
+    </div>
+
+    <div class="agenda-section">
+      <h3>AGENDA 3：投稿作成イメージ</h3>
+      <div class="agenda-item">
+        <h4>Q6. 投稿構成の確認</h4>
+        <table style="font-size:13px;">
+          <tr><th>投稿</th><th>内容</th><th>目的</th></tr>
+          <tr><td>1本目</td><td>過去の苦しみ（看護師時代 or 母との関係）</td><td>共感を得る</td></tr>
+          <tr><td>2本目</td><td>インスタ発信で変わったこと</td><td>可能性を見せる</td></tr>
+          <tr><td>ストーリーズ</td><td>コミュニティ紹介＋勉強会誘導</td><td>行動させる</td></tr>
+        </table>
+        <div class="question">確認：Before（過去）は「看護師の苦しみ」と「母との関係」どちらをメインにする？</div>
+      </div>
+      <div class="agenda-item">
+        <h4>Q7. 普段のストーリーズのトーン・雰囲気は？</h4>
+        <p style="font-size:13px; color:var(--text-light);">情報提供型？共感型？淡々と事実を伝える？感情を出す？</p>
+        <div class="question">深堀り：フォロワーさんはどなさんの「どんな言葉」に一番反応する？</div>
+      </div>
+    </div>
+
+    <div class="note-area">
+      <h4>メモ欄：投稿イメージ（決定内容）</h4>
+      <textarea placeholder="ここにZOOM中のメモを記入..."></textarea>
+    </div>
+
+    <div class="agenda-section">
+      <h3>AGENDA 4：フォロワーの不安への切り返し</h3>
+      <div class="agenda-item">
+        <h4>Q8. フォロワーさんが感じる不安と、それへの回答を決める</h4>
+        <table style="font-size:13px;">
+          <tr><th>想定される不安</th><th>切り返しの方向性（案）</th></tr>
+          <tr><td>「55歳の私にできるわけない」</td><td>「私も55歳から始めた。年齢じゃなくて"型"があるかどうか」</td></tr>
+          <tr><td>「スキルが何もない」</td><td>「親のサポート経験、それが何万人が知りたい情報」</td></tr>
+          <tr><td>「時間がない」</td><td>「旅先のホテルでも、母の隣でも、スマホ10分で作業できる」</td></tr>
+          <tr><td>「怪しい副業じゃないの？」</td><td>「看護師の私が選んだ場所。真面目な人ほど合う」</td></tr>
+          <tr><td>「お金がかかるんでしょ？」</td><td>「まず無料の勉強会で内容を見て判断して」</td></tr>
+        </table>
+        <div class="question">深堀り：他にフォロワーさんから聞かれそうな質問は？</div>
+      </div>
+    </div>
+
+    <div class="note-area">
+      <h4>メモ欄：切り返し（決定内容）</h4>
+      <textarea placeholder="ここにZOOM中のメモを記入..."></textarea>
+    </div>
+
+    <div class="agenda-section">
+      <h3>AGENDA 5：投稿スケジュール</h3>
+      <div class="agenda-item">
+        <h4>Q9. 投稿の順番とタイミング</h4>
+        <table style="font-size:13px;">
+          <tr><th>順序</th><th>種類</th><th>内容</th><th>推奨タイミング</th></tr>
+          <tr><td>1</td><td>フィード/リール</td><td>コラボライブ告知</td><td>ライブ数日前</td></tr>
+          <tr><td>2</td><td>フィード</td><td>過去の暴露→共感→気づき</td><td>ローンチ開始後</td></tr>
+          <tr><td>3</td><td>リール</td><td>変化のストーリー→勉強会誘導</td><td>ローンチ中盤</td></tr>
+          <tr><td>4</td><td>ストーリーズ</td><td>コミュニティの雰囲気＋勉強会リンク</td><td>継続的に</td></tr>
+        </table>
+        <div class="question">確認：ローンチ期間と各投稿の具体的な日付を決めましょう</div>
+      </div>
+    </div>
+
+    <div class="note-area">
+      <h4>メモ欄：スケジュール（決定内容）</h4>
+      <textarea placeholder="ここにZOOM中のメモを記入..."></textarea>
+    </div>
+  </div>
+
+  <!-- 最終まとめ -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x2705;</span> セッション最終まとめ</div>
+    <div class="note-area">
+      <h4>今日決まったこと</h4>
+      <textarea placeholder="1. 理想の未来：&#10;2. 使うエピソード：&#10;3. 投稿構成：&#10;4. 切り返し：&#10;5. スケジュール：&#10;6. 次のアクション：" style="min-height:180px;"></textarea>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

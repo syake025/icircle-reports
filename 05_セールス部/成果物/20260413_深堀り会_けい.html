@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>深堀り会｜けい（@oitaonsen_lets_go）</title>
+<style>
+  :root {
+    --primary: #2D3436;
+    --accent: #0984E3;
+    --accent-light: #E8F4FD;
+    --bg: #FAFAFA;
+    --card: #FFFFFF;
+    --border: #E0E0E0;
+    --text: #2D3436;
+    --text-light: #636E72;
+    --success: #00B894;
+    --warning: #FDCB6E;
+    --danger: #D63031;
+    --info: #0984E3;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; background:var(--bg); color:var(--text); line-height:1.8; }
+  .header { background: linear-gradient(135deg, #0984E3 0%, #74B9FF 100%); color:#fff; padding:40px 24px; text-align:center; }
+  .header h1 { font-size:28px; margin-bottom:8px; }
+  .header .subtitle { font-size:15px; opacity:.85; }
+  .header .account { display:inline-block; background:rgba(255,255,255,.2); padding:6px 16px; border-radius:20px; margin-top:12px; font-size:14px; }
+  .purpose-bar { background: var(--primary); color:#fff; padding:20px 24px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+  .purpose-bar .goal { background:rgba(255,255,255,.12); padding:10px 18px; border-radius:8px; font-size:14px; display:flex; align-items:center; gap:8px; }
+  .purpose-bar .goal-num { background:var(--accent); width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; }
+  .container { max-width:900px; margin:0 auto; padding:24px 16px; }
+  .section { margin-bottom:32px; }
+  .section-title { font-size:20px; font-weight:700; padding:12px 0; border-bottom:3px solid var(--accent); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+  .section-title .icon { font-size:24px; }
+  .card { background:var(--card); border-radius:12px; padding:24px; box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:16px; border-left:4px solid var(--accent); }
+  .card h3 { font-size:16px; color:var(--accent); margin-bottom:10px; }
+  .card p, .card li { font-size:14px; }
+  .card ul { padding-left:20px; }
+  .card ul li { margin-bottom:6px; }
+  .highlight-box { background:var(--accent-light); border:2px solid var(--accent); border-radius:12px; padding:20px 24px; margin-bottom:16px; }
+  .highlight-box h3 { color:var(--accent); font-size:16px; margin-bottom:8px; }
+  .highlight-box p { font-size:15px; font-weight:600; }
+  table { width:100%; border-collapse:collapse; font-size:14px; margin-bottom:16px; }
+  th { background:var(--primary); color:#fff; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); }
+  tr:nth-child(even) td { background:#F8F8F8; }
+  .phrase-list { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0; }
+  .phrase { background:var(--accent-light); color:#0767B3; padding:8px 16px; border-radius:20px; font-size:13px; font-weight:600; border:1px solid var(--accent); }
+  .ng-box { background:#FFF5F5; border:2px solid var(--danger); border-radius:12px; padding:20px 24px; margin-bottom:16px; }
+  .ng-box h3 { color:var(--danger); font-size:16px; margin-bottom:8px; }
+  .step-flow { display:flex; flex-direction:column; gap:0; margin:16px 0; }
+  .step-item { background:var(--card); border-radius:12px; padding:20px; border-left:4px solid var(--accent); }
+  .step-arrow { text-align:center; font-size:24px; color:var(--accent); padding:4px 0; }
+  .step-num { background:var(--accent); color:#fff; width:28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; margin-right:8px; }
+  .step-item h4 { font-size:15px; margin-bottom:8px; display:flex; align-items:center; }
+  .step-item blockquote { background:var(--accent-light); border-left:3px solid var(--accent); padding:12px 16px; border-radius:0 8px 8px 0; margin-top:8px; font-size:13px; line-height:1.7; }
+  .persona-card { background:linear-gradient(135deg, var(--accent-light) 0%, #FFF 100%); border:2px solid var(--accent); border-radius:16px; padding:24px; margin-bottom:24px; }
+  .persona-card h3 { font-size:18px; color:var(--accent); margin-bottom:12px; }
+  .persona-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .persona-attr { background:#fff; padding:10px 14px; border-radius:8px; font-size:13px; }
+  .persona-attr strong { color:#0767B3; }
+  .deep-insight { background:#F0F0F0; border-radius:8px; padding:14px 18px; margin:8px 0; font-size:14px; }
+  .deep-insight em { color:var(--accent); font-style:normal; font-weight:700; }
+  .agenda-section { background:linear-gradient(135deg, #DFE6E9 0%, #B2BEC3 100%); border-radius:12px; padding:24px; margin-bottom:16px; }
+  .agenda-section h3 { font-size:18px; margin-bottom:16px; color:var(--primary); }
+  .agenda-item { background:#fff; border-radius:8px; padding:16px; margin-bottom:12px; border-left:4px solid var(--info); }
+  .agenda-item h4 { color:var(--info); font-size:15px; margin-bottom:6px; }
+  .agenda-item .question { background:#E8F4FD; padding:8px 12px; border-radius:6px; font-size:13px; margin-top:6px; color:var(--primary); }
+  .note-area { background:var(--card); border:2px dashed var(--border); border-radius:12px; padding:20px; margin-bottom:16px; }
+  .note-area h4 { color:var(--text-light); font-size:14px; margin-bottom:8px; }
+  .note-area textarea { width:100%; min-height:100px; border:1px solid var(--border); border-radius:8px; padding:12px; font-size:14px; font-family:inherit; resize:vertical; line-height:1.7; }
+  .funnel { display:flex; flex-direction:column; align-items:center; gap:2px; margin:16px 0; }
+  .funnel-step { padding:10px 20px; text-align:center; font-size:13px; color:#fff; font-weight:600; border-radius:6px; }
+  .funnel-arrow { font-size:18px; color:var(--text-light); }
+  .dual-persona { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px; }
+  @media(max-width:600px) { .persona-grid { grid-template-columns:1fr; } .dual-persona { grid-template-columns:1fr; } .purpose-bar { flex-direction:column; align-items:center; } .header h1 { font-size:22px; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>iメイト深堀り会</h1>
+  <div class="subtitle">ZOOM 1on1 セッション資料</div>
+  <div class="account">けい｜@oitaonsen_lets_go｜大分県の温泉スポットを教えちゃんな！</div>
+</div>
+
+<div class="purpose-bar">
+  <div class="goal"><span class="goal-num">1</span>フォロワーに刺さる「理想の未来」を決める</div>
+  <div class="goal"><span class="goal-num">2</span>それを証明する「自分のエピソード」を決める</div>
+  <div class="goal"><span class="goal-num">3</span>投稿作成のイメージを掴む</div>
+  <div class="goal"><span class="goal-num">4</span>フォロワーの不安への切り返しを準備する</div>
+  <div class="goal"><span class="goal-num">5</span>投稿スケジュールの大枠を決める</div>
+</div>
+
+<div class="container">
+
+  <!-- 訴求戦略レポート -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F3AF;</span> 訴求戦略レポート</div>
+
+    <div class="highlight-box">
+      <h3>核心メッセージ（これが全ての軸）</h3>
+      <p>「好きな旅行を発信するだけで、旅行代が稼げるようになった。温泉好きなだけで始めた。スマホ1つで人生が変わった」</p>
+    </div>
+
+    <div class="card">
+      <h3>なぜこのメッセージが刺さるのか</h3>
+      <ul>
+        <li>フォロワーは「旅行に行きたいけどお金が...」「もっと自由に時間を使いたい」と思っている</li>
+        <li>「好きなこと＝旅行」を発信することが仕事になるという概念自体が衝撃的</li>
+        <li>けいさん自身が「ただの温泉好き→フォロワー3.6万人→企業案件」のリアルな実例</li>
+        <li>「副業」ではなく「好きを仕事に」というストーリーが信頼を生む</li>
+      </ul>
+    </div>
+
+    <table>
+      <tr><th>フォロワーの表面の欲求</th><th>深層の欲求</th></tr>
+      <tr><td>穴場の温泉を知りたい</td><td>忙しい日常から「ちょうどいい非日常」で癒されたい</td></tr>
+      <tr><td>週末に行ける場所を探したい</td><td>「頑張った自分へのご褒美」が欲しい</td></tr>
+      <tr><td>コスパの良い旅行先を知りたい</td><td>「こんな場所知ってるの私だけ」の優越感</td></tr>
+    </table>
+
+    <div class="card"><h3>訴求の3ステップ</h3></div>
+    <div class="step-flow">
+      <div class="step-item">
+        <h4><span class="step-num">1</span>共感を得る</h4>
+        <p>「会社員としての閉塞感」「自分なんて」という過去の自分を語る。</p>
+        <blockquote>「会社員時代、有給使って温泉行くのにいつも上司の顔色を伺ってた。"自分なんかが前に出ていいのか"ってずっと思ってた。今は好きな時に好きな温泉に行けて、しかもそれが仕事になってる」</blockquote>
+      </div>
+      <div class="step-arrow">&#x25BC;</div>
+      <div class="step-item">
+        <h4><span class="step-num">2</span>ロールモデルとして語る</h4>
+        <p>「特別じゃなかった自分」が変わった理由を伝える。</p>
+        <blockquote>「私も最初は"ただの温泉好き"だった。特別なスキルなんてなかった。でもインスタで温泉の発信を始めて、正しいやり方を学んだら、フォロワー3.6万人。企業からお仕事もいただけるようになった。変わったのは"発信の設計"を知ったから」</blockquote>
+      </div>
+      <div class="step-arrow">&#x25BC;</div>
+      <div class="step-item">
+        <h4><span class="step-num">3</span>勉強会へ誘導する</h4>
+        <p>「スマホだけ」「無料」「10投稿」のハードルの低さを前面に。</p>
+        <blockquote>「"好きなこと"を発信するだけでフォロワー1万人達成できた方法を、無料で教えてもらえる勉強会があるよ。特別なスキルも機材も要らない。スマホだけでOK。温泉好き、旅行好き、食べるの好き...何でもいい。気になる人はストーリーズ見て」</blockquote>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>刺さるフレーズ集</h3>
+      <div class="phrase-list">
+        <span class="phrase">好きな温泉に行くことが、仕事になるって知ってた？</span>
+        <span class="phrase">スマホ1つで始められる。特別なスキルは要らない</span>
+        <span class="phrase">私も最初はただの温泉好きだった</span>
+        <span class="phrase">週末の"ご褒美旅行"を、もっと気兼ねなく行けるようになったら？</span>
+        <span class="phrase">旅行が好き、それだけで十分。あとは"やり方"を知るだけ</span>
+        <span class="phrase">10投稿で人生が変わる方法、無料で聞けるらしい</span>
+        <span class="phrase">一人じゃなくて仲間と一緒だから、楽しく続く</span>
+      </div>
+    </div>
+
+    <div class="ng-box">
+      <h3>NG訴求（絶対に避けること）</h3>
+      <ul>
+        <li>「副業」「稼ぐ」等のダイレクトなお金の話（怪しく感じる層が多い）</li>
+        <li>「頑張る」「努力」等のハードワーク感</li>
+        <li>「人生を変える」等の大げさな表現（「大人のご褒美」くらいの温度感がベスト）</li>
+        <li>長文での説明（フォロワー層は「パッと見て分かる」情報を好む）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ターゲット深堀り -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F464;</span> ターゲット深堀り（ブラッシュアップ版）</div>
+
+    <div class="dual-persona">
+      <div class="persona-card">
+        <h3>ペルソナA：あやか（28歳ワーママ）</h3>
+        <div style="font-size:13px;">
+          <p><strong>28歳既婚</strong>、子ども2人（保育園）</p>
+          <p><strong>共働き</strong>：自分 事務職300万 / 夫 営業職400万</p>
+          <p><strong>自分時間</strong>：22時以降のわずかな時間</p>
+          <p><strong>SNS</strong>：副業・発信に「うっすら興味」</p>
+          <p><strong>本音</strong>：「私にも何か発信できるかも」</p>
+        </div>
+      </div>
+      <div class="persona-card">
+        <h3>ペルソナB：りえ（35〜49歳女性）</h3>
+        <div style="font-size:13px;">
+          <p><strong>35〜49歳</strong>、地方在住、既婚</p>
+          <p><strong>仕事</strong>：会社員 or パート or 扶養内</p>
+          <p><strong>自由なお金</strong>：月1〜3万円</p>
+          <p><strong>好き</strong>：旅行、温泉、カフェ、おでかけ</p>
+          <p><strong>SNS</strong>：見る専。発信者になる自信はない</p>
+          <p><strong>本音</strong>：副業に興味あるが怪しいのは怖い</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>深層心理（2ペルソナ共通）</h3>
+      <div class="deep-insight"><em>「このままの生活を続ける漠然とした不安」</em>：大きな不満はないけど、5年後10年後が見えない。お金も時間も「ギリギリ」が続く予感。</div>
+      <div class="deep-insight"><em>「私にも何かできるかも」という微かな期待</em>：SNSで発信している人を見て「いいな」と思う。でも「私にはセンスがない」「時間がない」で止まる。</div>
+      <div class="deep-insight"><em>「怪しいものへの強い警戒心」</em>：副業＝怪しい。稼げる＝嘘くさい。だから「好きなことの延長」「仲間がいる安心」「無料でまず聞ける」が効く。</div>
+      <div class="deep-insight"><em>「認められたい」</em>：毎日頑張ってるのに、誰にも認められない。「ありがとう」「すごいね」と言われたい。</div>
+    </div>
+
+    <div class="card">
+      <h3>悩みの構造</h3>
+      <table>
+        <tr><th>表面の悩み</th><th>深い悩み（言語化できていない）</th></tr>
+        <tr><td>お金に余裕がない</td><td>旅行や外食を「我慢する」のが当たり前になっている</td></tr>
+        <tr><td>自分の時間がない</td><td>ママ・妻・社員の役割だけで「自分としての存在意義」が薄い</td></tr>
+        <tr><td>副業に興味があるが分からない</td><td>「怪しくない」「私にもできる」確信が持てない</td></tr>
+        <tr><td>このままでいいのかモヤモヤ</td><td>人生が前に進んでいる実感がない</td></tr>
+      </table>
+    </div>
+
+    <div class="highlight-box">
+      <h3>あやか/りえがiサークルに入る「決定的な理由」</h3>
+      <p>「特別なスキルがなくても、"好きなこと"を発信するだけで始められる」と知った時。</p>
+      <p style="font-size:14px; font-weight:400; margin-top:8px;">けいさん自身が「温泉好き→3.6万人→仕事に」の実例。「怪しくない」「仲間がいる」「正しい順番を教えてもらえる」の安心感。</p>
+    </div>
+
+    <div class="card">
+      <h3>伸びるキーワードから見えるフォロワー心理</h3>
+      <div class="phrase-list">
+        <span class="phrase">99%は知らない</span><span class="phrase">ここだけ</span><span class="phrase">教えちゃんな！</span>
+        <span class="phrase">週末に行きたい</span><span class="phrase">非日常</span><span class="phrase">コスパがいい</span>
+        <span class="phrase">癒し</span><span class="phrase">絶景</span><span class="phrase">保存必須</span>
+        <span class="phrase">大人のご褒美</span><span class="phrase">日帰りで行ける</span><span class="phrase">温泉×ごはん</span>
+      </div>
+      <ul style="margin-top:12px;">
+        <li>「知る人ぞ知る」情報への欲求＝特別感・優越感</li>
+        <li>「週末」「日帰り」＝忙しい日常からの"ちょうどいい"非日常</li>
+        <li>「コスパ」＝お金をかけずに癒されたい</li>
+        <li>「大人のご褒美」＝頑張った自分への小さなプレゼント</li>
+        <li>「保存必須」＝いつか行きたい→でも「いつか」が来ない人が大半</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>フォロワーがiサークルに入るまでの心理ステップ</h3>
+      <div class="funnel">
+        <div class="funnel-step" style="background:#0984E3; width:100%;">1.「けいさんの温泉情報、最高！毎回保存してる」（ファン）</div>
+        <div class="funnel-arrow">&#x25BC;</div>
+        <div class="funnel-step" style="background:#6C5CE7; width:90%;">2.「え、温泉好きを発信するだけで仕事になったの？」（驚き）</div>
+        <div class="funnel-arrow">&#x25BC;</div>
+        <div class="funnel-step" style="background:#00B894; width:80%;">3.「私もカフェ好き/旅行好きだし...できるかも？」（希望）</div>
+        <div class="funnel-arrow">&#x25BC;</div>
+        <div class="funnel-step" style="background:#636E72; width:70%;">4.「でも怪しくない？難しくない？時間ある？」（不安）</div>
+        <div class="funnel-arrow">&#x25BC;</div>
+        <div class="funnel-step" style="background:#E17055; width:60%;">5.「スマホだけ・10投稿・仲間もいるなら...」（安心）</div>
+        <div class="funnel-arrow">&#x25BC;</div>
+        <div class="funnel-step" style="background:#D63031; width:50%;">6.「無料の勉強会、行ってみよう」（行動）</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZOOM 深堀りアジェンダ -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x1F4DD;</span> ZOOM深堀りアジェンダ</div>
+
+    <div class="agenda-section">
+      <h3>AGENDA 1：フォロワーに刺さる「理想の未来」を決める</h3>
+      <div class="agenda-item">
+        <h4>Q1. フォロワーさんが一番「この人の生活いいな」と思っているのはどんな部分？</h4>
+        <p style="font-size:13px; color:var(--text-light);">好きな温泉に自由に行けること？発信が仕事になっていること？楽しそうに生きてること？</p>
+        <div class="question">深堀り：DMやコメントで「羨ましい」「憧れる」と言われるのはどんな投稿？</div>
+      </div>
+      <div class="agenda-item">
+        <h4>Q2. 以下の「理想の未来」候補の中で、フォロワーさんに最も響くのはどれ？</h4>
+        <ul style="font-size:14px; padding-left:20px; margin:8px 0;">
+          <li>A.「好きな旅行を発信するだけで旅行代が稼げる未来」（好き→収入）</li>
+          <li>B.「会社に依存しない、もう一つの収入源がある安心」（経済的自立）</li>
+          <li>C.「"自分なんて"と思っていた自分が、人から必要とされる存在になる」（自己肯定）</li>
+          <li>D.「家族との時間も自分の好きなことも、両方大切にできる働き方」（バランス）</li>
+        </ul>
+        <div class="question">深堀り：けいさん自身が一番「これが変わった」と思うことは？</div>
+      </div>
+    </div>
+
+    <div class="note-area">
+      <h4>メモ欄：理想の未来（決定内容）</h4>
+      <textarea placeholder="ここにZOOM中のメモを記入..."></textarea>
+    </div>
+
+    <div class="agenda-section">
+      <h3>AGENDA 2：証明する「自分のエピソード」を決める</h3>
+      <div class="agenda-item">
+        <h4>Q3. 「自分なんて」と一番思っていた時の具体的なエピソードは？</h4>
+        <p style="font-size:13px; color:var(--text-light);">「頭が悪い」と言われた経験？会社員としての閉塞感？発信を始める前の自信のなさ？</p>
+        <div class="question">深堀り：フォロワーさんも「分かる」と共感するのはどの場面？</div>
+      </div>
+      <div class="agenda-item">
+        <h4>Q4. インスタ発信を「感覚→設計」に変えた瞬間のストーリーは？</h4>
+        <p style="font-size:13px; color:var(--text-light);">iサークルで学ぶ前と後で、具体的に何が変わった？最初に「これだ」と思ったきっかけは？</p>
+        <div class="question">深堀り：フォロワー1万人達成の時、どんな気持ちだった？誰に伝えたかった？</div>
+      </div>
+      <div class="agenda-item">
+        <h4>Q5. フォロワーさんから感謝された「一番嬉しかったエピソード」は？</h4>
+        <p style="font-size:13px; color:var(--text-light);">「行ってきました！」のDM？企業からの初案件？「必要とされる実感」を得た瞬間？</p>
+        <div class="question">深堀り：「自分の言葉や経験に価値がある」と思えるようになった転換点は？</div>
+      </div>
+    </div>
+
+    <div class="note-area">
+      <h4>メモ欄：使うエピソード（決定内容）</h4>
+      <textarea placeholder="ここにZOOM中のメモを記入..."></textarea>
+    </div>
+
+    <div class="agenda-section">
+      <h3>AGENDA 3：投稿作成イメージ</h3>
+      <div class="agenda-item">
+        <h4>Q6. 投稿構成の確認</h4>
+        <table style="font-size:13px;">
+          <tr><th>投稿</th><th>内容</th><th>目的</th></tr>
+          <tr><td>1本目</td><td>過去の自分（「自分なんて」と思っていた頃）</td><td>共感を得る</td></tr>
+          <tr><td>2本目</td><td>温泉好き→発信→人生が変わった話</td><td>可能性を見せる</td></tr>
+          <tr><td>ストーリーズ</td><td>コミュニティの雰囲気＋勉強会誘導</td><td>行動させる</td></tr>
+        </table>
+        <div class="question">確認：この構成で良い？フォロワーの温度感に合ってる？</div>
+      </div>
+      <div class="agenda-item">
+        <h4>Q7. 普段の投稿やストーリーズのトーンは？</h4>
+        <p style="font-size:13px; color:var(--text-light);">方言を使う？テンション高め？「教えちゃんな！」の親しみやすい雰囲気？</p>
+        <div class="question">深堀り：訴求投稿でも同じトーンで行く？フォロワーが違和感を感じないラインは？</div>
+      </div>
+    </div>
+
+    <div class="note-area">
+      <h4>メモ欄：投稿イメージ（決定内容）</h4>
+      <textarea placeholder="ここにZOOM中のメモを記入..."></textarea>
+    </div>
+
+    <div class="agenda-section">
+      <h3>AGENDA 4：フォロワーの不安への切り返し</h3>
+      <div class="agenda-item">
+        <h4>Q8. フォロワーさんが感じる不安と、それへの回答を決める</h4>
+        <table style="font-size:13px;">
+          <tr><th>想定される不安</th><th>切り返しの方向性（案）</th></tr>
+          <tr><td>「副業って怪しくない？」</td><td>「私も最初そう思った。でもやってることは温泉の投稿。怪しいことは何もない」</td></tr>
+          <tr><td>「発信するセンスがない」</td><td>「私も"ただの温泉好き"だった。センスじゃなくて"型"がある」</td></tr>
+          <tr><td>「時間がない（子育て中）」</td><td>「スマホで10分から始められる。子どもが寝た後の時間で十分」</td></tr>
+          <tr><td>「私の好きなことなんて需要ある？」</td><td>「温泉の投稿で3.6万人。"好き"に需要がないなんてことはない」</td></tr>
+        </table>
+        <div class="question">深堀り：フォロワーさんの属性的に、他にどんな不安がありそう？</div>
+      </div>
+    </div>
+
+    <div class="note-area">
+      <h4>メモ欄：切り返し（決定内容）</h4>
+      <textarea placeholder="ここにZOOM中のメモを記入..."></textarea>
+    </div>
+
+    <div class="agenda-section">
+      <h3>AGENDA 5：投稿スケジュール</h3>
+      <div class="agenda-item">
+        <h4>Q9. 投稿の順番とタイミング</h4>
+        <table style="font-size:13px;">
+          <tr><th>順序</th><th>種類</th><th>内容</th><th>推奨タイミング</th></tr>
+          <tr><td>1</td><td>フィード/リール</td><td>コラボライブ告知</td><td>ライブ数日前</td></tr>
+          <tr><td>2</td><td>フィード</td><td>過去の自分→気づき→変化</td><td>ローンチ開始後</td></tr>
+          <tr><td>3</td><td>リール</td><td>「温泉好きが仕事に」→勉強会誘導</td><td>ローンチ中盤</td></tr>
+          <tr><td>4</td><td>ストーリーズ</td><td>コミュニティ紹介＋勉強会リンク</td><td>継続的に</td></tr>
+        </table>
+        <div class="question">確認：ローンチ期間と各投稿の具体的な日付を決めましょう</div>
+      </div>
+    </div>
+
+    <div class="note-area">
+      <h4>メモ欄：スケジュール（決定内容）</h4>
+      <textarea placeholder="ここにZOOM中のメモを記入..."></textarea>
+    </div>
+  </div>
+
+  <!-- 最終まとめ -->
+  <div class="section">
+    <div class="section-title"><span class="icon">&#x2705;</span> セッション最終まとめ</div>
+    <div class="note-area">
+      <h4>今日決まったこと</h4>
+      <textarea placeholder="1. 理想の未来：&#10;2. 使うエピソード：&#10;3. 投稿構成：&#10;4. 切り返し：&#10;5. スケジュール：&#10;6. 次のアクション：" style="min-height:180px;"></textarea>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

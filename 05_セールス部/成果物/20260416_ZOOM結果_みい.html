@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iメイト深堀り会 ZOOM結果まとめ｜みい（@mii_excel）</title>
+<style>
+  :root {
+    --accent: #6C5CE7;
+    --accent-light: #F0EDFF;
+    --accent-mid: #A29BFE;
+    --bg: #FAFAFA;
+    --card: #FFFFFF;
+    --border: #E0E0E0;
+    --text: #2D3436;
+    --text-light: #636E72;
+    --success: #00B894;
+    --warning: #FDCB6E;
+    --danger: #D63031;
+    --info: #0984E3;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #6C5CE7 0%, #A29BFE 100%);
+    color: #fff;
+    padding: 40px 24px 32px;
+    text-align: center;
+  }
+  .header .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .header .account {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    padding: 8px 20px;
+    border-radius: 24px;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  .header .meta {
+    margin-top: 10px;
+    font-size: 13px;
+    opacity: 0.85;
+  }
+
+  /* CONTAINER */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 28px 16px 60px;
+  }
+
+  /* SECTION */
+  .section { margin-bottom: 36px; }
+  .section-title {
+    font-size: 20px;
+    font-weight: 800;
+    padding: 12px 0;
+    border-bottom: 3px solid var(--accent);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+  }
+  .section-title .icon { font-size: 24px; }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-shadow: 0 2px 10px rgba(108,92,231,0.08);
+    margin-bottom: 16px;
+    border-left: 4px solid var(--accent);
+  }
+  .card h3 {
+    font-size: 16px;
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .card p, .card li { font-size: 14px; line-height: 1.85; }
+  .card ul { padding-left: 20px; }
+  .card ul li { margin-bottom: 6px; }
+
+  .card.warning { border-left-color: var(--warning); }
+  .card.warning h3 { color: #A0720B; }
+  .card.success { border-left-color: var(--success); }
+  .card.success h3 { color: #007A62; }
+  .card.danger { border-left-color: var(--danger); }
+  .card.danger h3 { color: var(--danger); }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    background: var(--accent-light);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+  }
+  .highlight-box h3 { color: var(--accent); font-size: 15px; margin-bottom: 10px; font-weight: 700; }
+  .highlight-box .quote {
+    font-size: 17px;
+    font-weight: 800;
+    color: #3D2EAF;
+    line-height: 1.7;
+    border-left: 4px solid var(--accent);
+    padding-left: 16px;
+    margin-bottom: 10px;
+  }
+  .highlight-box p { font-size: 14px; color: var(--text); }
+
+  /* KEY INSIGHT */
+  .key-insight {
+    background: linear-gradient(135deg, #6C5CE7 0%, #A29BFE 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 16px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.7;
+  }
+  .key-insight .label {
+    font-size: 11px;
+    opacity: 0.8;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  /* PERSONA CARD */
+  .persona-card {
+    background: linear-gradient(135deg, var(--accent-light) 0%, #fff 100%);
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .persona-card h3 { font-size: 18px; color: var(--accent); margin-bottom: 14px; font-weight: 800; }
+  .persona-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .persona-attr {
+    background: #fff;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    border-left: 3px solid var(--accent-mid);
+  }
+  .persona-attr strong { color: #5441C0; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px; }
+  th { background: #2D3436; color: #fff; padding: 10px 14px; text-align: left; font-weight: 700; }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: #F8F8F8; }
+
+  /* STEP FLOW */
+  .step-flow { margin: 16px 0; }
+  .step-item {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 20px;
+    border-left: 4px solid var(--accent);
+    box-shadow: 0 2px 8px rgba(108,92,231,0.08);
+    margin-bottom: 4px;
+  }
+  .step-item h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .step-item p { font-size: 14px; color: var(--text-light); }
+  .step-num {
+    background: var(--accent);
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .step-arrow {
+    text-align: center;
+    font-size: 22px;
+    color: var(--accent);
+    padding: 4px 0;
+  }
+
+  /* PHRASE LIST */
+  .phrase-list { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+  .phrase {
+    background: var(--accent-light);
+    color: #5441C0;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--accent);
+  }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; padding: 0; margin: 0; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 6px rgba(108,92,231,0.07);
+    font-size: 14px;
+    border-left: 3px solid var(--accent);
+  }
+  .checklist li .check-num {
+    background: var(--accent);
+    color: #fff;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .checklist li .priority-tag {
+    background: #D63031;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 10px;
+    margin-left: auto;
+    flex-shrink: 0;
+    align-self: center;
+  }
+
+  /* STAT GRID */
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+  .stat-box {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(108,92,231,0.08);
+    border-top: 3px solid var(--accent);
+  }
+  .stat-box .num { font-size: 26px; font-weight: 900; color: var(--accent); line-height: 1.2; }
+  .stat-box .label { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+
+  /* DEEP INSIGHT */
+  .deep-insight {
+    background: #F4F0FF;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    font-size: 14px;
+    border-left: 3px solid var(--accent-mid);
+  }
+  .deep-insight strong { color: var(--accent); }
+
+  /* BEFORE CARDS GRID */
+  .before-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  /* TAG */
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+  }
+  .tag-main { background: #6C5CE7; color: #fff; }
+  .tag-sub { background: var(--accent-light); color: #5441C0; border: 1px solid var(--accent); }
+  .tag-key { background: #2D3436; color: #fff; }
+
+  /* SECTION NUM BADGE */
+  .sec-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .persona-grid { grid-template-columns: 1fr; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+    .before-grid { grid-template-columns: 1fr; }
+    .header h1 { font-size: 20px; }
+  }
+
+  @media print {
+    .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .card, .highlight-box, .persona-card { break-inside: avoid; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="badge">ZOOM RESULT REPORT</div>
+  <h1>iメイト深堀り会 ZOOM結果まとめ<br>みい（@mii_excel）</h1>
+  <div class="account">30代ワーママPC時短術｜作成日：2026年4月16日</div>
+  <div class="meta">担当：セールス部｜iメイト9期ローンチ施策</div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: 決定した理想の未来 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="sec-num">1</span>
+      <span class="icon">&#x1F31F;</span>
+      決定した理想の未来
+    </div>
+
+    <div class="highlight-box">
+      <h3>確定した「理想の未来」キャッチコピー</h3>
+      <div class="quote">「週3〜4日、午前10時〜午後3時の短時間勤務で、今の収入をそのまま維持できる働き方」</div>
+      <p>SNSで「週3で10時〜15時で今の収入と同じならそっちがいい」に共感殺到。この一言がフォロワーの本音を全て言い表している。</p>
+    </div>
+
+    <div class="key-insight">
+      <div class="label">KEY INSIGHT</div>
+      フォロワーが欲しいのは「もっと稼ぐ」ではなく「労働時間を減らして収入は維持」
+    </div>
+
+    <div class="card">
+      <h3>「時間の自由」が叶えてくれる生活の余白</h3>
+      <ul>
+        <li>子どもの送迎に余裕を持って間に合う</li>
+        <li>子どもの急病時に「夜にやればいい」と思える安心感</li>
+        <li>夫と急遽ランチに行ける／夫婦の時間が増える</li>
+        <li>収入を変えずに労働時間だけ短縮できる</li>
+      </ul>
+    </div>
+
+    <div class="card success">
+      <h3>SNSエビデンス（共感の根拠）</h3>
+      <p>「週3で10時〜15時で今の収入と同じならそっちがいい」——この投稿へのコメント・保存数から、フォロワーの深層欲求が「稼ぐ額を増やす」ではなく「同じ収入で自由な時間を手に入れる」であることが裏付けられた。</p>
+    </div>
+  </div>
+
+  <!-- SECTION 2: ペルソナ修正 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="sec-num">2</span>
+      <span class="icon">&#x1F464;</span>
+      ペルソナ修正（重要な発見）
+    </div>
+
+    <div class="card warning">
+      <h3>当初設定からの修正ポイント</h3>
+      <p>当初は「37歳ワーママ」をメインターゲットとして設定していたが、ZOOMでの深堀りにより実際のフォロワー層は<strong>44〜45歳が中心</strong>であることが判明した。</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="num">37%</div>
+        <div class="label">45〜54歳（最多）</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">35%</div>
+        <div class="label">35〜44歳（2位）</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">800万+</div>
+        <div class="label">年収最多層</div>
+      </div>
+    </div>
+
+    <div class="key-insight">
+      <div class="label">INSIGHT</div>
+      年収800万以上が最多層。悩みはお金ではなく「時間の自由」——収入ではなく働き方を変えたい層がメイン。
+    </div>
+
+    <div class="persona-card">
+      <h3>リアルペルソナ：元同僚「中島さん」</h3>
+      <div class="persona-grid">
+        <div class="persona-attr"><strong>年代：</strong>40代</div>
+        <div class="persona-attr"><strong>子ども：</strong>中高生（手がかからなくなった頃）</div>
+        <div class="persona-attr"><strong>特徴：</strong>仕事はできるが自己肯定感が低い</div>
+        <div class="persona-attr"><strong>転職：</strong>経験なし（同じ会社に長く勤める）</div>
+        <div class="persona-attr"><strong>収入：</strong>世帯年収は高いが不満が残る</div>
+        <div class="persona-attr"><strong>SNS：</strong>時短術・在宅ワーク系を密かに保存</div>
+      </div>
+      <div class="deep-insight" style="margin-top:14px;">
+        <strong>重要指針：</strong>全ての投稿を「中島さんへの手紙」として設計する。「中島さんが読んだらどう感じるか」を常に問いかけながら発信する。
+      </div>
+    </div>
+
+    <div class="card danger">
+      <h3>副業への警戒感が強い層への対応（要注意）</h3>
+      <ul>
+        <li>地方在住・40代・マルチ商法被害経験あり層が多く含まれる</li>
+        <li>「怪しい」「うさんくさい」と感じさせる表現は即離脱につながる</li>
+        <li>「やることはインスタで時短ワザを教えるだけ」という具体性で安心感を作る</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Before エピソード -->
+  <div class="section">
+    <div class="section-title">
+      <span class="sec-num">3</span>
+      <span class="icon">&#x1F4C9;</span>
+      Beforeエピソード（確定）
+    </div>
+
+    <div class="card" style="border-left-color: #D63031;">
+      <div class="tag tag-main">メイン（最重要）</div>
+      <h3 style="color: #D63031;">Card 1 : ブラック企業で倒れた</h3>
+      <ul>
+        <li>毎日怒鳴り声が飛び交う職場。人がどんどん辞めていきタスクが集中していく</li>
+        <li>会社で突然倒れた（意識はあるが手足が動かない状態）—— この体験が2回ある</li>
+        <li>適応障害の症状が出始めていたが「病院に行ったら転職に不利になる」という恐怖から受診できず3年間耐え続けた</li>
+        <li>社長の愛人に濡れ衣を着せられ、大勢の前で怒鳴られる屈辱を経験した</li>
+        <li>後先を考えず衝動的に退職を決断</li>
+      </ul>
+    </div>
+
+    <div class="before-grid">
+      <div class="card">
+        <div class="tag tag-sub">スキル面</div>
+        <h3>Card 2 : スキルゼロからのスタート</h3>
+        <ul>
+          <li>タイピングは指1本</li>
+          <li>ExcelはMOS資格なしで完全独学</li>
+          <li>ショートカットはコピペ（Ctrl+C / Ctrl+V）のみ</li>
+          <li>中卒・正社員歴なし・派遣切り3回</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="tag tag-sub">派遣切り</div>
+        <h3>Card 3 : 何度も「切られた」経験</h3>
+        <ul>
+          <li>経理として入社するも「仕事ができない」と判断され契約終了</li>
+          <li>派遣先で報告漏れの濡れ衣を着せられ派遣切り</li>
+          <li>レストランバイトで突然「来なくていい」と告げられる</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: After/転換点 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="sec-num">4</span>
+      <span class="icon">&#x1F4C8;</span>
+      After／転換点（確定）
+    </div>
+
+    <div class="card success">
+      <h3>退職直後の転換点</h3>
+      <ul>
+        <li>退職時にパワハラの記録を提出 → 失業手当が即日支給される</li>
+        <li>「在宅なら人間関係トラブルが起きない」という気づきを得る</li>
+        <li>YouTubeでりこぴんを発見 → インスタ発信をスタート</li>
+      </ul>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="num">8.5万</div>
+        <div class="label">アフィリエイト月収</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">22万</div>
+        <div class="label">PR案件1本の単価</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">減少</div>
+        <div class="label">収入同水準で労働時間短縮</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>生活の具体的な変化（Afterエピソード）</h3>
+      <ul>
+        <li>子どもの発熱 → 「夜にやればいい」と思える余裕が生まれた</li>
+        <li>夫から急遽「ランチ行こう」と連絡 → すぐに合流できる</li>
+        <li>収入はほぼ変わらずに、労働時間は大幅に短縮された</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 5: 投稿構成 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="sec-num">5</span>
+      <span class="icon">&#x1F4F1;</span>
+      投稿構成（確定）
+    </div>
+
+    <div class="card">
+      <h3>ヒーローズジャーニー構成で投稿を作成</h3>
+      <p style="margin-bottom:14px; color:var(--text-light);">みいさんの物語を「英雄の旅」の構造で語ることで、フォロワーが自分ごととして受け取れる流れを作る。</p>
+      <div class="step-flow">
+        <div class="step-item">
+          <h4><span class="step-num">1</span>どん底</h4>
+          <p>ブラック企業で倒れた／派遣切り3回／中卒でスキルゼロという絶望的な過去</p>
+        </div>
+        <div class="step-arrow">&#x25BC;</div>
+        <div class="step-item">
+          <h4><span class="step-num">2</span>きっかけ</h4>
+          <p>YouTubeでりこぴんを発見。「在宅で人間関係なし」という解決策に出会う</p>
+        </div>
+        <div class="step-arrow">&#x25BC;</div>
+        <div class="step-item">
+          <h4><span class="step-num">3</span>チャレンジ</h4>
+          <p>タイピング指1本・MOS資格ゼロ・完全独学でExcel発信をスタート</p>
+        </div>
+        <div class="step-arrow">&#x25BC;</div>
+        <div class="step-item">
+          <h4><span class="step-num">4</span>成功</h4>
+          <p>アフィリエイト月8.5万円＋PR案件22万円。週3〜4日短時間勤務で収入維持</p>
+        </div>
+        <div class="step-arrow">&#x25BC;</div>
+        <div class="step-item">
+          <h4><span class="step-num">5</span>メッセージ</h4>
+          <p>「フォロワーさんより私の方ができなかった。だからあなたにもできる」</p>
+        </div>
+        <div class="step-arrow">&#x25BC;</div>
+        <div class="step-item">
+          <h4><span class="step-num">6</span>勉強会へ誘導</h4>
+          <p>「まずは無料勉強会で話を聞いてみて」と具体的な行動を促す</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>投稿3本の内訳</h3>
+      <table>
+        <tr>
+          <th>投稿</th>
+          <th>種類</th>
+          <th>内容・目的</th>
+        </tr>
+        <tr>
+          <td>1本目</td>
+          <td>リール</td>
+          <td>コラボライブ告知 ＋ 月収公開</td>
+        </tr>
+        <tr>
+          <td>2本目</td>
+          <td>フィード</td>
+          <td>勉強会案内（ストーリー型）</td>
+        </tr>
+        <tr>
+          <td>3本目</td>
+          <td>リール</td>
+          <td>物語型（ヒーローズジャーニー）→ 勉強会誘導</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>コラボライブの設計</h3>
+      <ul>
+        <li>りこぴんがスライドを画面共有して進行</li>
+        <li>みいさんは「首から下のみ」の画面表示（顔出しなし）</li>
+        <li>「来る理由」を具体化すること → 月収全公開・Before&After公開など</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>参考アカウント</h3>
+      <div class="phrase-list">
+        <span class="phrase">フィード参考：まえさん</span>
+        <span class="phrase">フィード参考：レイさん</span>
+        <span class="phrase">リール参考：浜野さん</span>
+        <span class="phrase">リール参考：マリリンさん</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: 切り返し -->
+  <div class="section">
+    <div class="section-title">
+      <span class="sec-num">6</span>
+      <span class="icon">&#x1F4AC;</span>
+      切り返し（確定）
+    </div>
+
+    <table>
+      <tr>
+        <th>フォロワーの不安・反論</th>
+        <th>みいさんならではの切り返し</th>
+      </tr>
+      <tr>
+        <td>「年齢的に無理」</td>
+        <td>「おさつさん（50代）が7.7万フォロワーを達成しています」</td>
+      </tr>
+      <tr>
+        <td>「スキルがない」</td>
+        <td>「MOS資格ゼロ。タイピング指1本から始めました」</td>
+      </tr>
+      <tr>
+        <td>「副業は怪しい」</td>
+        <td>「やることはインスタで時短ワザを教えるだけです」</td>
+      </tr>
+      <tr>
+        <td>「時間がない」</td>
+        <td>「子ども2人のワーママ。寝かしつけ後の30分から始めました」</td>
+      </tr>
+    </table>
+
+    <div class="key-insight">
+      <div class="label">核心戦略</div>
+      「フォロワーさんより自分の方ができなかった」を見せる。自己肯定感が低い層（40代・中島さん像）が「この人より私の方がまだマシかも」と思えることで行動が生まれる。
+    </div>
+  </div>
+
+  <!-- SECTION 7: 次のアクション -->
+  <div class="section">
+    <div class="section-title">
+      <span class="sec-num">7</span>
+      <span class="icon">&#x2705;</span>
+      次のアクション
+    </div>
+
+    <ul class="checklist">
+      <li>
+        <span class="check-num">1</span>
+        <span>リール台本を作成する（ヒーローズジャーニー構成で「どん底→勉強会誘導」の流れを1本にまとめる）</span>
+        <span class="priority-tag">最優先</span>
+      </li>
+      <li>
+        <span class="check-num">2</span>
+        <span>コラボライブに来る理由を具体化する（月収全公開・Before&After公開・限定公開情報など、来なければ見られない価値を設計）</span>
+      </li>
+      <li>
+        <span class="check-num">3</span>
+        <span>投稿作成講座を視聴する（フィード・リールの参考アカウントの構成を研究する）</span>
+      </li>
+      <li>
+        <span class="check-num">4</span>
+        <span>ストーリーズを毎日「中島さん宛て」で発信し続ける（40代・仕事はできるが自己肯定感が低い元同僚のイメージで書く）</span>
+      </li>
+    </ul>
+
+    <div class="card" style="margin-top:8px; background:linear-gradient(135deg, var(--accent-light), #fff); border-left-color:#A29BFE;">
+      <h3>セッション全体を振り返って</h3>
+      <p>みいさんのストーリーは「壮絶さ」と「等身大感」が共存する希少なBeforeを持っている。「倒れた」「濡れ衣」「派遣切り3回」というドラマチックな過去を、「指1本タイピング」「MOS資格なし」という身近な弱点と組み合わせることで、フォロワーは「自分でもできるかもしれない」と感じる。この掛け算が最大の強みである。</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- =============================================
+     SECTION A: 深掘り切り口
+     ============================================= -->
+<style>
+  /* SECTION A: Warning accent styles */
+  .section-title-danger {
+    font-size: 20px;
+    font-weight: 800;
+    padding: 12px 0;
+    border-bottom: 3px solid #D63031;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+  }
+  .section-title-danger .sec-num-danger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #D63031;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .alert-box {
+    background: #FFF5F5;
+    border: 2px solid #D63031;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+  .alert-box .alert-label {
+    font-size: 11px;
+    font-weight: 800;
+    color: #D63031;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .alert-box p {
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--text);
+  }
+
+  /* ACCORDION */
+  .accordion { margin-bottom: 12px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(214,48,49,0.10); }
+  .accordion-header {
+    background: linear-gradient(135deg, #D63031 0%, #FF7675 100%);
+    color: #fff;
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    user-select: none;
+    list-style: none;
+  }
+  .accordion-header::-webkit-details-marker { display: none; }
+  .accordion-header .acc-num {
+    background: rgba(255,255,255,0.25);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .accordion-header .acc-arrow {
+    margin-left: auto;
+    font-size: 18px;
+    transition: transform 0.2s;
+  }
+  details[open] .acc-arrow { transform: rotate(180deg); }
+  .accordion-body {
+    background: #fff;
+    padding: 18px 22px;
+    border: 2px solid #D63031;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+  }
+  .accordion-body ul { padding-left: 18px; margin-bottom: 14px; }
+  .accordion-body ul li { font-size: 14px; line-height: 1.85; margin-bottom: 6px; color: var(--text); }
+  .accordion-effect {
+    background: linear-gradient(135deg, #FFF5F5 0%, #FEEEEE 100%);
+    border-left: 4px solid #D63031;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #9B1C1C;
+    font-weight: 600;
+  }
+  .accordion-effect strong { color: #D63031; }
+
+  /* SECTION B: Script styles */
+  .script-intro {
+    background: var(--accent-light);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--text);
+  }
+  .script-label {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .subsection-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--accent);
+    border-left: 5px solid var(--accent);
+    padding-left: 14px;
+    margin: 24px 0 14px;
+  }
+
+  /* REEL STEP */
+  .reel-step {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 6px;
+    box-shadow: 0 2px 10px rgba(108,92,231,0.09);
+    border-left: 4px solid var(--accent);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .reel-step-num {
+    background: var(--accent);
+    color: #fff;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    flex-shrink: 0;
+    line-height: 1.2;
+  }
+  .reel-step-num .time { font-size: 9px; opacity: 0.85; font-weight: 600; }
+  .reel-step-content h4 { font-size: 14px; font-weight: 800; color: var(--accent); margin-bottom: 6px; }
+  .reel-step-content .scene { font-size: 12px; color: var(--text-light); margin-bottom: 4px; }
+  .reel-step-content .script {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.75;
+    background: var(--accent-light);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 8px 0;
+    border-left: 3px solid var(--accent-mid);
+  }
+  .reel-step-content .aim { font-size: 12px; color: #5441C0; font-weight: 600; }
+  .reel-arrow {
+    text-align: center;
+    font-size: 20px;
+    color: var(--accent-mid);
+    padding: 2px 0;
+  }
+
+  /* FEED PAGE */
+  .feed-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .feed-page {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 10px rgba(108,92,231,0.08);
+    border-top: 4px solid var(--accent);
+  }
+  .feed-page-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .feed-page h4 { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+  .feed-page .feed-body { font-size: 13px; line-height: 1.75; color: var(--text); margin-bottom: 8px; }
+  .feed-page .feed-aim { font-size: 12px; color: #5441C0; font-weight: 600; border-top: 1px solid var(--border); padding-top: 8px; }
+
+  @media (max-width: 600px) {
+    .reel-step { grid-template-columns: 1fr; }
+    .feed-grid { grid-template-columns: 1fr; }
+  }
+  @media print {
+    .accordion-body { display: block !important; }
+    details { display: block; }
+    details summary { display: none; }
+    .reel-step, .feed-page { break-inside: avoid; }
+  }
+</style>
+
+<div class="container">
+
+  <!-- SECTION A -->
+  <div class="section">
+    <div class="section-title-danger">
+      <span class="sec-num-danger">A</span>
+      <span style="font-size:22px;">&#x26A0;&#xFE0F;</span>
+      【伸びる投稿のための深掘り切り口】「本人も思い出せなかった、でも確かにあった」を引き出す
+    </div>
+
+    <div class="alert-box">
+      <div class="alert-label">CRITICAL — バイラル投稿の核心</div>
+      <p>伸びる投稿の正体は『え？！この人がそんな経験を？』と読者を思考停止させる衝撃。まえさんの『死産・流産』『子供にけがをさせた』『ぼくママと遊んだこと一度もない』のような、本人が封印していた記憶を掘り起こすことが鍵。下記の質問をZOOMで本人にぶつけてください。</p>
+    </div>
+
+    <!-- CARD 1 -->
+    <details class="accordion">
+      <summary class="accordion-header">
+        <span class="acc-num">1</span>
+        身体の警報を更に深掘り
+        <span class="acc-arrow">&#x25BC;</span>
+      </summary>
+      <div class="accordion-body">
+        <p style="font-size:13px; color:var(--text-light); margin-bottom:10px; font-weight:600;">深掘り質問リスト</p>
+        <ul>
+          <li>倒れた×2回の「直前の出来事」は具体的に何だった？</li>
+          <li>倒れた時の周りの反応は？誰が一番動揺してた？</li>
+          <li>倒れる前の睡眠時間は？体重の変化は？</li>
+          <li>適応障害症状（眠れない／食欲不振／涙／動悸）の具体的なシーン</li>
+        </ul>
+        <div class="accordion-effect"><strong>期待効果：</strong>会社で倒れた話をもっと生々しく描く。読者の「私も似た症状ある」を引き出す</div>
+      </div>
+    </details>
+
+    <!-- CARD 2 -->
+    <details class="accordion">
+      <summary class="accordion-header">
+        <span class="acc-num">2</span>
+        子供への罪悪感
+        <span class="acc-arrow">&#x25BC;</span>
+      </summary>
+      <div class="accordion-body">
+        <p style="font-size:13px; color:var(--text-light); margin-bottom:10px; font-weight:600;">深掘り質問リスト</p>
+        <ul>
+          <li>派遣切り／退職前の時期、子供への態度は？</li>
+          <li>「ごめんね」と言った場面は？</li>
+          <li>子供の前でイライラした瞬間は？</li>
+          <li>子供が「ママ大丈夫？」と聞いた瞬間は？</li>
+        </ul>
+        <div class="accordion-effect"><strong>期待効果：</strong>まえさん型の「最低な母」エピソード。同じワーママに刺さる</div>
+      </div>
+    </details>
+
+    <!-- CARD 3 -->
+    <details class="accordion">
+      <summary class="accordion-header">
+        <span class="acc-num">3</span>
+        夫との衝突
+        <span class="acc-arrow">&#x25BC;</span>
+      </summary>
+      <div class="accordion-body">
+        <p style="font-size:13px; color:var(--text-light); margin-bottom:10px; font-weight:600;">深掘り質問リスト</p>
+        <ul>
+          <li>夫と喧嘩した時のセリフは？</li>
+          <li>夫に「お前のせいで」と言われた瞬間は？</li>
+          <li>夫に隠していたことは？（仕事の状況／お金／体調）</li>
+          <li>「離婚」を考えた瞬間は？</li>
+        </ul>
+        <div class="accordion-effect"><strong>期待効果：</strong>夫婦関係の生々しさ。多くの妻が経験している</div>
+      </div>
+    </details>
+
+    <!-- CARD 4 -->
+    <details class="accordion">
+      <summary class="accordion-header">
+        <span class="acc-num">4</span>
+        恥ずかしい過去（中卒／派遣切り3回）
+        <span class="acc-arrow">&#x25BC;</span>
+      </summary>
+      <div class="accordion-body">
+        <p style="font-size:13px; color:var(--text-light); margin-bottom:10px; font-weight:600;">深掘り質問リスト</p>
+        <ul>
+          <li>履歴書を書く時の気持ちは？</li>
+          <li>面接で何を言われた時が一番辛かった？</li>
+          <li>「中卒」を言わずに済むよう避けた話題は？</li>
+          <li>派遣切りされた直後の家での時間は？</li>
+        </ul>
+        <div class="accordion-effect"><strong>期待効果：</strong>学歴コンプレックスを正面から語る。同じ層に強烈に刺さる</div>
+      </div>
+    </details>
+
+    <!-- CARD 5 -->
+    <details class="accordion">
+      <summary class="accordion-header">
+        <span class="acc-num">5</span>
+        社長愛人の濡れ衣事件
+        <span class="acc-arrow">&#x25BC;</span>
+      </summary>
+      <div class="accordion-body">
+        <p style="font-size:13px; color:var(--text-light); margin-bottom:10px; font-weight:600;">深掘り質問リスト</p>
+        <ul>
+          <li>大勢の前で怒鳴られた瞬間の周りの視線は？</li>
+          <li>自分が悪くないと知っていた人は誰？</li>
+          <li>その日の帰り道で何を考えた？</li>
+          <li>夜に布団の中で何を思った？</li>
+        </ul>
+        <div class="accordion-effect"><strong>期待効果：</strong>読者の怒りと同情を同時に呼ぶ。映像化できる強烈エピソード</div>
+      </div>
+    </details>
+
+    <!-- CARD 6 -->
+    <details class="accordion">
+      <summary class="accordion-header">
+        <span class="acc-num">6</span>
+        リアルペルソナ「中島さん」自身の生活シーン
+        <span class="acc-arrow">&#x25BC;</span>
+      </summary>
+      <div class="accordion-body">
+        <p style="font-size:13px; color:var(--text-light); margin-bottom:10px; font-weight:600;">深掘り質問リスト</p>
+        <ul>
+          <li>中島さんが元同僚の頃、何で困っていた？</li>
+          <li>中島さんが愚痴っていた言葉は？</li>
+          <li>中島さんが「いいな」と言ってきた瞬間は？</li>
+          <li>中島さんに「これ知ってる？」と教えたことは？</li>
+        </ul>
+        <div class="accordion-effect"><strong>期待効果：</strong>リアルペルソナの言葉を直接投稿に使える</div>
+      </div>
+    </details>
+  </div>
+
+  <!-- SECTION B -->
+  <div class="section">
+    <div class="section-title">
+      <span class="sec-num">B</span>
+      <span class="icon">&#x1F3AC;</span>
+      【投稿台本サンプル】PDF「まえさん」のローンチ投稿構成を参考に作成
+    </div>
+
+    <div class="script-intro">
+      <div class="script-label">REFERENCE</div>
+      iサークルPRO+講座「PRO_13-1ローンチ用フィード投稿」「PRO_13-2ローンチ用リール」に沿った構成。ヒーローズジャーニー型でみいさん独自のエピソードを当てはめた。ZOOMで台本を磨き込んでいきましょう。
+    </div>
+
+    <!-- B1 リール台本 -->
+    <div class="subsection-title">B-1｜リール台本（人生ビフォアフ型）</div>
+
+    <div class="step-flow">
+
+      <div class="reel-step">
+        <div class="reel-step-num">
+          <span>1</span>
+          <span class="time">0-3秒</span>
+        </div>
+        <div class="reel-step-content">
+          <h4>冒頭フック</h4>
+          <div class="scene">&#x1F4F9; 画面：暗いトーン＋衝撃の文字</div>
+          <div class="script">「会社で2回倒れました。手も足も動かないのに、上司は私を責めました」</div>
+          <div class="aim">&#x1F3AF; 狙い：思考停止させる衝撃で離脱を防ぐ</div>
+        </div>
+      </div>
+      <div class="reel-arrow">&#x25BC;</div>
+
+      <div class="reel-step">
+        <div class="reel-step-num">
+          <span>2</span>
+          <span class="time">3-7秒</span>
+        </div>
+        <div class="reel-step-content">
+          <h4>過去の自己紹介</h4>
+          <div class="scene">&#x1F4F9; 画面：履歴書／中卒の文字</div>
+          <div class="script">中卒・派遣切り3回・正社員経験ゼロ。どこに行っても「使えない」と言われる人生でした</div>
+          <div class="aim">&#x1F3AF; 狙い：自己肯定感の最低レベルから始める</div>
+        </div>
+      </div>
+      <div class="reel-arrow">&#x25BC;</div>
+
+      <div class="reel-step">
+        <div class="reel-step-num">
+          <span>3</span>
+          <span class="time">7-15秒</span>
+        </div>
+        <div class="reel-step-content">
+          <h4>どん底①</h4>
+          <div class="scene">&#x1F4F9; 画面：会社の暗いオフィス</div>
+          <div class="script">ブラック企業で毎日怒鳴り声→人がどんどん辞めて、タスクが私一人に集中。ある日突然、会社で倒れました。意識はあるのに、手も足も動かない。それでも病院には行けませんでした。「適応障害と診断されたら、もう次の仕事が見つからない」</div>
+          <div class="aim">&#x1F3AF; 狙い：怖くて病院に行けなかった真相→共感層の核心</div>
+        </div>
+      </div>
+      <div class="reel-arrow">&#x25BC;</div>
+
+      <div class="reel-step">
+        <div class="reel-step-num">
+          <span>4</span>
+          <span class="time">15-22秒</span>
+        </div>
+        <div class="reel-step-content">
+          <h4>どん底②</h4>
+          <div class="scene">&#x1F4F9; 画面：謝罪している自分の絵</div>
+          <div class="script">社長の愛人のミスを濡れ衣で50人の前で謝罪。夜、布団の中で泣きながら考えました。「私の人生、いつまでこうなんだろう」</div>
+          <div class="aim">&#x1F3AF; 狙い：理不尽の生々しさで怒り＋同情を集める</div>
+        </div>
+      </div>
+      <div class="reel-arrow">&#x25BC;</div>
+
+      <div class="reel-step">
+        <div class="reel-step-num">
+          <span>5</span>
+          <span class="time">22-30秒</span>
+        </div>
+        <div class="reel-step-content">
+          <h4>きっかけ</h4>
+          <div class="scene">&#x1F4F9; 画面：YouTubeを開く手元</div>
+          <div class="script">後先考えず辞めた次の日、震える手でYouTubeを開きました。「在宅 仕事 人間関係 ない」で検索。そこで出会ったのが、りこぴんさんでした</div>
+          <div class="aim">&#x1F3AF; 狙い：具体的な検索キーワード→読者が真似できる</div>
+        </div>
+      </div>
+      <div class="reel-arrow">&#x25BC;</div>
+
+      <div class="reel-step">
+        <div class="reel-step-num">
+          <span>6</span>
+          <span class="time">30-45秒</span>
+        </div>
+        <div class="reel-step-content">
+          <h4>転換</h4>
+          <div class="scene">&#x1F4F9; 画面：投稿画面</div>
+          <div class="script">「私のExcelの知識、誰かの役に立つかも？」半信半疑で投稿を始めたら...「上司に褒められた！」「助かりました！」コメントが止まらなくなりました</div>
+          <div class="aim">&#x1F3AF; 狙い：After側の喜び。読者に「私もできるかも」を喚起</div>
+        </div>
+      </div>
+      <div class="reel-arrow">&#x25BC;</div>
+
+      <div class="reel-step">
+        <div class="reel-step-num">
+          <span>7</span>
+          <span class="time">45-55秒</span>
+        </div>
+        <div class="reel-step-content">
+          <h4>今の姿</h4>
+          <div class="scene">&#x1F4F9; 画面：収入グラフ</div>
+          <div class="script">今ではアフィリエイト月8.5万円、PR案件は1本22万円。子供が熱を出しても「夜にやればいい」、夫と急遽ランチに行ける余裕ができました</div>
+          <div class="aim">&#x1F3AF; 狙い：具体的な数字＋生活の変化</div>
+        </div>
+      </div>
+      <div class="reel-arrow">&#x25BC;</div>
+
+      <div class="reel-step">
+        <div class="reel-step-num">
+          <span>8</span>
+          <span class="time">55-60秒</span>
+        </div>
+        <div class="reel-step-content">
+          <h4>メッセージ</h4>
+          <div class="scene">&#x1F4F9; 画面：まっすぐ前を見る画像</div>
+          <div class="script">「タイピング指1本」「MOSなし」だった私が変われた。だからあなたも、絶対に変われる</div>
+          <div class="aim">&#x1F3AF; 狙い：読者への直接の確信メッセージ</div>
+        </div>
+      </div>
+      <div class="reel-arrow">&#x25BC;</div>
+
+      <div class="reel-step" style="border-left-color: #00B894;">
+        <div class="reel-step-num" style="background: #00B894;">
+          <span>9</span>
+          <span class="time">60-65秒</span>
+        </div>
+        <div class="reel-step-content">
+          <h4 style="color: #00B894;">CTA</h4>
+          <div class="scene">&#x1F4F9; 画面：コメント欄</div>
+          <div class="script">「変わりたい」とコメントしてください。DMで無料勉強会の詳細を送ります（次回はいつになるか分かりません）</div>
+          <div class="aim" style="color: #007A62;">&#x1F3AF; 狙い：緊急性＋具体的な行動指示</div>
+        </div>
+      </div>
+
+    </div><!-- /step-flow -->
+
+    <!-- B2 フィード台本 -->
+    <div class="subsection-title" style="margin-top:32px;">B-2｜フィード台本（10ページ構成）</div>
+
+    <div class="feed-grid">
+
+      <div class="feed-page">
+        <div class="feed-page-num">P1 表紙</div>
+        <h4>「2年前、私は会社で倒れました」</h4>
+        <div class="feed-body">中卒・派遣切り3回の私が月収30万円のExcel発信者になるまで</div>
+        <div class="feed-aim">&#x1F3AF; 一目で「読みたい」を生む強烈タイトル</div>
+      </div>
+
+      <div class="feed-page">
+        <div class="feed-page-num">P2 私の真実</div>
+        <h4>まえさん型「私はそういう人ではありません」</h4>
+        <div class="feed-body">みなさんは私のことを「Excelの先生」「仕事ができる人」だと思ってくれているかもしれません。でも、本当の私は全然違いました。2年前まで、私は「社会から不要とされた人間」でした</div>
+        <div class="feed-aim">&#x1F3AF; 読者の期待を覆すことで続きを読ませる</div>
+      </div>
+
+      <div class="feed-page">
+        <div class="feed-page-num">P3 どん底①</div>
+        <h4>具体的な台詞→生々しさ</h4>
+        <div class="feed-body">中卒・正社員経験ゼロ・派遣切り3回。バイトすら続かない。履歴書を書くたびに「私には何もない」と泣いていました。婚約者には「お前と結婚するの怖い」と言われ、別れを告げられた夜、初めて死にたいと思いました</div>
+        <div class="feed-aim">&#x1F3AF; 具体的な台詞で生々しさを出す</div>
+      </div>
+
+      <div class="feed-page">
+        <div class="feed-page-num">P4 どん底②</div>
+        <h4>段落構成で一行ずつインパクト</h4>
+        <div class="feed-body">最後に拾われたブラック企業で毎日怒鳴り声が響き、人がどんどん辞めていきました。ある朝、会社で突然倒れました。意識はあるのに、手も足も動かない。2回繰り返しました。でも、病院には行けませんでした。「適応障害と診断されたら、転職に不利になる」それが怖かったんです</div>
+        <div class="feed-aim">&#x1F3AF; まえさん型の段落構成。一行ずつインパクト</div>
+      </div>
+
+      <div class="feed-page">
+        <div class="feed-page-num">P5 どん底③</div>
+        <h4>崩壊の決定的瞬間</h4>
+        <div class="feed-body">社長の愛人のミスを50人の前で私のせいにされ、謝罪を強要された日。その夜、布団の中で声を殺して泣きました。「もう、もう無理だ」。後先考えず、退職届を出しました</div>
+        <div class="feed-aim">&#x1F3AF; 崩壊の決定的瞬間を描く</div>
+      </div>
+
+      <div class="feed-page">
+        <div class="feed-page-num">P6 きっかけ</div>
+        <h4>読者が今すぐマネできる導線</h4>
+        <div class="feed-body">退職した次の日、震える手でYouTubeを検索しました。「在宅 仕事 人間関係 ない」。そこで出会ったのが2児のママでありながら、旦那さんの何倍も稼ぐりこぴんさんでした</div>
+        <div class="feed-aim">&#x1F3AF; 読者が今すぐマネできる導線</div>
+      </div>
+
+      <div class="feed-page">
+        <div class="feed-page-num">P7 インスタを始めた</div>
+        <h4>低い起点で逆転インパクト最大化</h4>
+        <div class="feed-body">「私のExcelの知識、誰かの役に立つかも？」半信半疑で投稿を始めました。IT音痴で、タイピングは指1本、MOS資格すら持っていない。「業務に必要な部分だけ独学で覚えた」程度の私が...</div>
+        <div class="feed-aim">&#x1F3AF; 低い起点を再強調＝逆転のインパクト最大化</div>
+      </div>
+
+      <div class="feed-page">
+        <div class="feed-page-num">P8 人生激変</div>
+        <h4>数字で変化を証明</h4>
+        <div class="feed-body">「上司に褒められた！」「助かりました！」コメントが止まらなくなりました。気づけばフォロワーは増え続け、今ではアフィリエイト月8.5万円、PR案件は1本22万円。会社員時代より収入が増えました</div>
+        <div class="feed-aim">&#x1F3AF; 数字で変化を証明</div>
+      </div>
+
+      <div class="feed-page">
+        <div class="feed-page-num">P9 一番嬉しかったこと</div>
+        <h4>感情の最大ピーク</h4>
+        <div class="feed-body">何より嬉しいのは、子供が熱を出しても「夜にやればいい」、夫と急遽ランチに行ける余裕ができたこと。会社で倒れていた私が今は自分のペースで仕事ができています。すべてのきっかけは、りこぴんさんとの出会いでした</div>
+        <div class="feed-aim">&#x1F3AF; 感情の最大ピーク</div>
+      </div>
+
+      <div class="feed-page" style="border-top-color: #00B894;">
+        <div class="feed-page-num" style="background: #00B894;">P10 コラボライブ告知</div>
+        <h4 style="color: #007A62;">まえさん型のCTA構成</h4>
+        <div class="feed-body">りこぴんさんに無理を言って、2人のコラボライブを開催してもらえることになりました。&#x2705; IT音痴の私が0から月収30万に到達できた本当の理由　&#x2705; 会社で倒れた私を救った"環境"の話　&#x2705; 収入の全公開（毎月の内訳）。もちろん無料。「みらい」とコメントしてくれた人だけ、詳細をDMでお送りします</div>
+        <div class="feed-aim" style="color: #007A62;">&#x1F3AF; まえさん型のCTA構成</div>
+      </div>
+
+    </div><!-- /feed-grid -->
+
+  </div><!-- /section B -->
+
+</div><!-- /container -->
+</body>
+</html>

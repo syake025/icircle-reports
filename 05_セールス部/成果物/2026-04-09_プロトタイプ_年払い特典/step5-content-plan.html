@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEP 5：投稿計画レポートを作る | iサークル年払い特典</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="header">
+  <span class="deco-sparkle">✨</span>
+  <span class="deco-sparkle">💫</span>
+  <span class="deco-sparkle">⭐</span>
+  <span class="deco-sparkle">✨</span>
+  <div class="badge">STEP 5 / 5 ✨ FINAL ✨</div>
+  <h1><span class="accent">投稿計画</span>レポートを作る</h1>
+  <p>全ステップの集大成！AIがあなた専用の10投稿プランを作成🎬</p>
+  <div class="hero-chars">
+    <div class="hero-char rikopin"><img src="images/nami.png" alt=""></div>
+  </div>
+</div>
+
+<div class="progress-bar">
+  <div class="prog-step"><div class="prog-dot active" data-step="1">1</div><div class="prog-label">入力</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="2">2</div><div class="prog-label">プロンプト</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="3">3</div><div class="prog-label">結果貼付</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="4">4</div><div class="prog-label">レポート</div></div>
+</div>
+<div id="stepLabel">STEP 1：これまでの結果と追加情報を入力</div>
+
+<div class="container">
+
+
+<div class="char-intro nami">
+  <div class="avatar"><img src="images/nami.png" alt="nami"></div>
+  <div class="bubble">
+    <div class="name">nami </div>
+    <p>いよいよ投稿作成のフェーズですね🏠✨<br>今までのアカウント設計をもとに、投稿プランを10本作成していくよ！</p>
+  </div>
+</div>
+
+<!-- ===== Section 1: Input ===== -->
+<div class="section active" id="section1">
+  <!-- Summary Box -->
+  <div class="card" id="summaryCard">
+    <div class="card-title"><span class="emoji">📋</span> これまでの進捗サマリー</div>
+    <div class="card-subtitle">各ステップの結果が自動で読み込まれます</div>
+    <div id="summaryContent" style="font-size:13px;line-height:1.8"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="emoji">📥</span> STEP 4 のプロフィールレポートを入力</div>
+    <div class="card-subtitle">前ステップのレポートが自動で入ります。入っていない場合はコピペしてください。</div>
+    <div class="field">
+      <label>STEP 4：プロフィール作成レポート</label>
+      <textarea id="input_step4" placeholder="STEP 4のプロフィール作成レポートをここに貼り付け..." style="min-height:160px"></textarea>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="emoji">📱</span> 投稿の参考情報（任意）</div>
+    <div class="field">
+      <label>ベンチマーク投稿の共通点（あれば）</label>
+      <textarea id="input_benchmark" placeholder="例）カルーセル投稿が多い、文字入れ画像で目を引いている、最後にCTAがある" style="min-height:80px"></textarea>
+      <div class="field-hint">参考にしたいアカウントの投稿を見て気づいたことがあれば</div>
+    </div>
+    <div class="field">
+      <label>どんな投稿が気になる？（あれば）</label>
+      <textarea id="input_preference" placeholder="例）○選系のまとめ投稿が気になる、ビフォーアフター系が好き、ストーリー調の投稿に惹かれる" style="min-height:80px"></textarea>
+      <div class="field-hint">普段Instagramを見ていて気になる投稿の特徴</div>
+    </div>
+  </div>
+  <button class="btn btn-primary" onclick="generatePrompt()">投稿計画プロンプトを生成 🔍</button>
+</div>
+
+<!-- ===== Section 2: Prompt ===== -->
+<div class="section" id="section2">
+  <div class="card">
+    <div class="card-title"><span class="emoji">🔍</span> 投稿計画プロンプト</div>
+    <div class="card-subtitle">AIが全ステップの結果を統合して10投稿のプランを作成します</div>
+    <div class="prompt-box" id="promptDisplay"></div>
+    <div class="copy-success" id="copySuccess">コピーしました！ ✅</div>
+    <button class="btn btn-copy" onclick="copyText('promptDisplay','copySuccess')">📋 コピーする</button>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="emoji">💡</span> Claude（おすすめ）、ChatGPT、Geminiに貼り付けて送信してください</div>
+    <div class="howto"><div class="howto-num">1</div><div class="howto-text">Claude（おすすめ）、ChatGPT、Geminiを開いてプロンプトを貼り付け</div></div>
+    <div class="howto"><div class="howto-num">2</div><div class="howto-text">AIが<strong>10投稿の計画</strong>を一気に作ってくれます</div></div>
+    <div class="howto"><div class="howto-num">3</div><div class="howto-text">結果を全文コピーして次へ！</div></div>
+  </div>
+  <button class="btn btn-primary" onclick="goToStep(3)">結果が出た → 次へ進む</button>
+  <button class="btn btn-outline no-print" onclick="goToStep(1)">← 入力を修正する</button>
+</div>
+
+<!-- ===== Section 3: Paste Result ===== -->
+<div class="section" id="section3">
+  <div class="card">
+    <div class="card-title"><span class="emoji">📥</span> 投稿計画の結果を貼り付け</div>
+    <div class="card-subtitle">AIから出てきた投稿計画を全文コピーして貼り付けてください</div>
+    <textarea id="resultText" placeholder="AIからの投稿計画結果をここに貼り付け..." style="min-height:200px"></textarea>
+  </div>
+  <button class="btn btn-primary" onclick="generateReport()">投稿計画レポートを表示する 🎉</button>
+  <button class="btn btn-outline no-print" onclick="goToStep(2)">← 戻る</button>
+</div>
+
+<!-- ===== Section 4: Report ===== -->
+<div class="section" id="section4">
+  <canvas id="confetti"></canvas>
+  <div class="report-header">
+    <div class="badge">ALL STEPS COMPLETE</div>
+    <h2>📱 投稿計画レポート</h2>
+    <p>あなた専用の10投稿プランが完成しました</p>
+  </div>
+  <div id="reportContent"></div>
+
+  <!-- Celebration CTA: final page with all characters -->
+  <div class="celebration-cta">
+    <div class="celebration-burst">🎉</div>
+    <div class="celebration-sparkles">
+      <span>✨</span><span>💫</span><span>⭐</span><span>🌟</span><span>💖</span><span>🎊</span>
+    </div>
+    <div class="ribbon">✨ 5 STEPS COMPLETE ✨</div>
+    <h3>全5ステップ、<br>よく頑張ったね🔥</h3>
+    <p>自己分析 → ジャンル選定 → コンセプト設計 → プロフィール → 投稿計画<br>
+    ここまでやり切ったあなたは<strong>本当にすごい</strong>！<br>
+    あとは、この計画に沿って投稿を始めるだけ🚀</p>
+
+    <div class="team-cheer">
+      <div class="cheer-char">
+        <div class="cheer-avatar"><img src="images/syake_star.png" alt="しゃけ"></div>
+        <div class="cheer-name">しゃけ</div>
+        <div class="cheer-line">応援してる⭐</div>
+      </div>
+      <div class="cheer-char">
+        <div class="cheer-avatar"><img src="images/erena.png" alt="えれな"></div>
+        <div class="cheer-name">えれな</div>
+        <div class="cheer-line">楽しもう✨</div>
+      </div>
+      <div class="cheer-char center">
+        <div class="cheer-avatar"><img src="images/rikopin_wink.png" alt="りこぴん"></div>
+        <div class="cheer-name">りこぴん</div>
+        <div class="cheer-line">よく頑張った！🍅</div>
+      </div>
+      <div class="cheer-char">
+        <div class="cheer-avatar"><img src="images/akkun_smile.png" alt="あっくん"></div>
+        <div class="cheer-name">あっくん</div>
+        <div class="cheer-line">お疲れ様👓</div>
+      </div>
+      <div class="cheer-char">
+        <div class="cheer-avatar"><img src="images/nami.png" alt="nami"></div>
+        <div class="cheer-name">nami</div>
+        <div class="cheer-line">ここから本番🏠</div>
+      </div>
+    </div>
+
+    <p class="team-closing">iサークル運営メンバー一同<br>あなたの挑戦を応援しています🔥</p>
+  </div>
+  <div class="save-options">
+    <div class="save-options-title">💾 レポートを保存・コピー</div>
+    <div class="save-options-grid">
+      <button class="save-btn image no-print" onclick="saveReportAsImage('STEP5_投稿計画レポート')">
+        <span class="icon">🖼️</span>
+        <span class="label">画像で保存</span>
+      </button>
+      <button class="save-btn pdf no-print" onclick="saveReportAsPDF()">
+        <span class="icon">📄</span>
+        <span class="label">PDFで保存</span>
+      </button>
+      <button class="save-btn text no-print" onclick="copyReportAsText('step5')">
+        <span class="icon">📋</span>
+        <span class="label">テキスト<br>コピー</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="top-link no-print" style="margin-top:20px;text-align:center">
+    <a href="index.html" class="top-link-btn">🏠 TOPページに戻る</a>
+  </div>
+
+</div>
+<script src="shared.js"></script>
+<script>
+window.stepLabels = {
+  1: 'STEP 1：これまでの結果と追加情報を入力',
+  2: '投稿計画プロンプト',
+  3: '計画結果を貼り付け',
+  4: '投稿計画レポート完成！'
+};
+
+// Auto-load previous reports and build summary
+window.addEventListener('DOMContentLoaded', function() {
+  const prev = loadReport('step4_report');
+  if (prev) document.getElementById('input_step4').value = prev;
+
+  // Build summary
+  const steps = [
+    { key: 'step1_report', label: 'STEP 1：自己分析' },
+    { key: 'step2_report', label: 'STEP 2：ジャンル分析' },
+    { key: 'step3_report', label: 'STEP 3：コンセプト設計' },
+    { key: 'step4_report', label: 'STEP 4：プロフィール作成' }
+  ];
+  let summaryHtml = '';
+  steps.forEach(function(s) {
+    const data = loadReport(s.key);
+    if (data) {
+      const preview = data.substring(0, 100).replace(/\n/g, ' ') + (data.length > 100 ? '...' : '');
+      summaryHtml += '<div style="margin-bottom:8px;padding:8px 12px;background:rgba(126,176,155,0.1);border-radius:8px;border-left:3px solid #7EB09B">';
+      summaryHtml += '<strong style="color:#7EB09B">✅ ' + escHtml(s.label) + ' 完了</strong><br>';
+      summaryHtml += '<span style="color:var(--text-light);font-size:12px">' + escHtml(preview) + '</span>';
+      summaryHtml += '</div>';
+    } else {
+      summaryHtml += '<div style="margin-bottom:8px;padding:8px 12px;background:rgba(232,130,155,0.1);border-radius:8px;border-left:3px solid #E8829B">';
+      summaryHtml += '<strong style="color:#E8829B">❌ ' + escHtml(s.label) + ' 未完了</strong>';
+      summaryHtml += '</div>';
+    }
+  });
+  document.getElementById('summaryContent').innerHTML = summaryHtml;
+});
+
+function generatePrompt() {
+  const step4 = document.getElementById('input_step4').value.trim();
+  const benchmark = document.getElementById('input_benchmark').value.trim();
+  const preference = document.getElementById('input_preference').value.trim();
+  if (!step4) { alert('STEP 4のプロフィールレポートを入力してください！'); return; }
+
+  // Load all previous reports for context
+  const step1 = loadReport('step1_report');
+  const step2 = loadReport('step2_report');
+  const step3 = loadReport('step3_report');
+
+  const prompt = `あなたはInstagramで収益化を目指す人のための「投稿戦略プランナー」です。
+iサークル（Instagram副業コミュニティ）のコンテンツ戦略に沿って、最初の10投稿の具体的な計画を作成してください。
+
+# これまでのアカウント設計結果
+
+## STEP 1：自己分析（強み）レポート
+${step1 || '（データなし。STEP 4の情報から推測してください）'}
+
+## STEP 2：ジャンル分析レポート
+${step2 || '（データなし。STEP 4の情報から推測してください）'}
+
+## STEP 3：コンセプト設計レポート
+${step3 || '（データなし。STEP 4の情報から推測してください）'}
+
+## STEP 4：プロフィール作成レポート
+${step4}
+${benchmark ? '\n# ベンチマーク投稿の共通点\n' + benchmark : ''}${preference ? '\n# 気になる投稿の特徴\n' + preference : ''}
+
+# 投稿計画で大事にしてほしいこと（iサークルのメソッド）
+
+## リール vs フィードの使い分け
+- **リール**：新規リーチ用。再生数で伸びる。20〜40秒推奨
+- **フィード**：既存フォロワーとの関係深化用。保存・シェアで伸びる
+- 初期は **リールメイン** で新規獲得を優先
+
+## リール制作の鉄則
+- **最初の2秒が勝負**（冒頭フック：問いかけ・ビフォー提示・意外性）
+- **20〜40秒** が最適尺（長すぎると離脱・短すぎると情報不足）
+- 文字テロップは **1画面1メッセージ**、読める速度で
+- 1投稿 = 1メッセージ（詰め込みすぎない）
+
+## 投稿頻度（あくまで目安）
+- **理想は週4回以上** のリール投稿（ただしストレスなく続けられる頻度を優先）
+- 無理のないペースで継続することが最優先
+- フィードも間に1〜2本挟むとアカウント全体の印象が豊かに
+
+## 投稿時間（参考）
+- Instagram利用が多いのは **20〜21時** 前後
+- 平日夜・週末午前が一般的に反応取りやすい
+- 自分のターゲットのライフスタイルから逆算するのが本質
+
+# 投稿の構成ルール
+
+## 10投稿のカテゴリーバランス
+- **ノウハウ系**（4〜5本）：実用的な情報を提供
+- **共感系**（3〜4本）：ターゲットの悩みに寄り添う
+- **ビフォーアフター系（一次情報）**（1〜2本）：本人の実体験・変化を見せる
+
+## 投稿タイプ
+- **○選系**：「○○な人の特徴5選」等
+- **物語系**：「○○だった私が△△になるまで」（一次情報の宝庫）
+- **比較系**：「○○ vs △△」「NG → OK」
+- **あるある系**：共感を生む
+- **How to系**：手順を見せる
+
+# 出力フォーマット（必ず以下のセクション区切りで出力）
+
+---SECTION:投稿戦略---
+10投稿全体の戦略を4〜5行で説明。
+・カテゴリーバランスの配分理由
+・なぜこの順番にしたか（最初の3本で印象決まる意識）
+・リール：フィード比率
+
+---SECTION:投稿1---
+■ タイトル：○○○○○（14字以内推奨）
+■ カテゴリー：ノウハウ / 共感 / ビフォーアフター
+■ タイプ：○選系 / 物語系 / 比較系 / あるある系 / How to系
+■ 形式：リール or フィード
+■ なぜ伸びるか（ターゲット目線で1〜2行）
+
+■ フック（最初の2秒）
+問いかけ／ビフォー提示／意外性など具体的な冒頭台詞を1文で
+
+■ 台本構成（リールなら 20〜40秒 / 文字テロップ含め）
+  - 0〜2秒：フック（上記の1文そのまま）
+  - 3〜8秒：悩み共感 or 問題提起
+  - 9〜20秒：本題（ノウハウ or エピソード）
+  - 21〜30秒：具体例 or ビフォーアフター
+  - 31〜40秒：CTA（フォロー誘導・保存促進・次回予告）
+  ※フィードの場合は「表紙→問題→解決→具体例→CTA」の5〜7枚構成で
+
+■ 文字テロップ骨子（5〜7個の一行テロップ）
+  1) ○○○
+  2) ○○○
+  3) ...
+
+■ キャプション雛形（200字前後）：ハッシュタグ前の本文
+■ 撮影・制作のコツ：〜〜
+
+---SECTION:投稿2---
+（投稿1と同じ形式で）
+
+---SECTION:投稿3---
+（投稿1と同じ形式で）
+
+---SECTION:投稿4---
+（投稿1と同じ形式で）
+
+---SECTION:投稿5---
+（投稿1と同じ形式で）
+
+---SECTION:残り5本の概要---
+投稿6〜10について、以下の簡易形式で：
+⑥ タイトル / カテゴリー / タイプ / 形式 / フック一言 / 伸びる理由（1行）
+⑦ ...
+⑧ ...
+⑨ ...
+⑩ ...
+
+---SECTION:スケジュール---
+10投稿を「無理のないペースで」続けるための投稿ペース提案。
+・冒頭に「※これはあくまで目安です。自分のペースで続けることが何より大切！」と1行明記
+・週2〜3投稿をひとつの目安として提示（これが「正解」ではないことを強調）
+・慣れてきたら週4回以上に増やしても良い旨を添える
+・投稿曜日・時間帯の一般的な参考（平日夜・週末午前など）を軽く触れる
+・「完璧より継続」「60〜70点で出して改善していく」のiサークル流マインドも添える
+
+---SECTION:伸びるコツ---
+投稿を伸ばすための具体的なコツを5〜6つ。
+初心者がやりがちなミスとその対策も含めてください。
+
+---SECTION:完了メッセージ---
+全5ステップを完了したユーザーへの温かいメッセージ。
+「ここまでやり切ったあなたは素晴らしい」という称賛と、
+次にやるべきことを3つだけ簡潔に伝えてください。`;
+
+  document.getElementById('promptDisplay').textContent = prompt;
+  goToStep(2);
+}
+
+function generateReport() {
+  const raw = document.getElementById('resultText').value.trim();
+  if (!raw) { alert('投稿計画を貼り付けてください！'); return; }
+
+  const s = parseResult(raw);
+  const container = document.getElementById('reportContent');
+
+  if (Object.keys(s).length < 2) {
+    container.innerHTML = `<div class="report-card"><div class="report-card-label">AI REPORT</div><h3>結果</h3><p>${nl2br(escHtml(raw))}</p></div>
+    <div class="card" style="background:#FFF8E1;border-left:4px solid #FFD93D"><p style="font-size:13px">⚠️ セクションマーカーが検出できませんでした。AIの回答に「---SECTION:〜---」が含まれているか確認してください。</p></div>`;
+    saveReport('step5_report', raw);
+    goToStep(4); return;
+  }
+
+  let html = '';
+  html += makeReportCard('STRATEGY', '📊 投稿戦略', s['投稿戦略'], '');
+  html += makeReportCard('POST 1', '📱 投稿1', s['投稿1'], 'purple');
+  html += makeReportCard('POST 2', '📱 投稿2', s['投稿2'], 'green');
+  html += makeReportCard('POST 3', '📱 投稿3', s['投稿3'], 'pink');
+  html += makeReportCard('POST 4', '📱 投稿4', s['投稿4'], 'purple');
+  html += makeReportCard('POST 5', '📱 投稿5', s['投稿5'], 'green');
+  html += makeReportCard('POSTS 6-10', '📋 残り5本の概要', s['残り5本の概要'], '');
+  html += makeReportCard('SCHEDULE', '📅 スケジュール', s['スケジュール'], '');
+  html += makeReportCard('TIPS', '🚀 伸びるコツ', s['伸びるコツ'], 'pink');
+  html += makeReportCard('MESSAGE', '💌 完了メッセージ', s['完了メッセージ'], 'purple');
+
+  container.innerHTML = html;
+  saveReport('step5_report', raw);
+  goToStep(4);
+  setTimeout(launchConfetti, 300);
+}
+function exportStep5Excel() {
+  const data = collectExportData('step5', [
+    { id: 'input_step4', label: 'STEP4 プロフィールレポート（引継ぎ）' },
+    { id: 'input_benchmark', label: 'ベンチマーク投稿の共通点' },
+    { id: 'input_preference', label: '気になる投稿' },
+    { id: 'resultText', label: 'AI回答（貼付）' },
+  ]);
+  downloadExcel('STEP5_投稿計画レポート', data);
+}
+document.addEventListener('DOMContentLoaded', () => initAutoSave('step5'));
+</script>
+</body>
+</html>

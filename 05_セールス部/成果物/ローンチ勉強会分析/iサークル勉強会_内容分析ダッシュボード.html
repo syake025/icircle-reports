@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iCircle 勉強会 内容分析ダッシュボード</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --primary: #6c5ce7;
+    --secondary: #fd79a8;
+    --accent: #00b894;
+    --warning: #fdcb6e;
+    --danger: #d63031;
+    --bg: #f8f9fa;
+    --card: #ffffff;
+    --text: #2d3436;
+    --text-light: #636e72;
+    --border: #e0e0e0;
+    --tab-active: #6c5ce7;
+    --tab-inactive: #b2bec3;
+    --s-rank: #d63031;
+    --a-rank: #e17055;
+    --b-rank: #fdcb6e;
+    --c-rank: #74b9ff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.6; }
+  header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 24px 32px; }
+  header h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  header p { font-size: 13px; opacity: 0.85; }
+  .tab-nav { background: white; border-bottom: 2px solid var(--border); display: flex; padding: 0 24px; overflow-x: auto; sticky; top:0; z-index:10; }
+  .tab-btn { padding: 14px 20px; border: none; background: none; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--tab-inactive); border-bottom: 3px solid transparent; transition: all 0.2s; white-space: nowrap; }
+  .tab-btn.active { color: var(--tab-active); border-bottom-color: var(--tab-active); }
+  .tab-btn:hover { color: var(--primary); }
+  .tab-content { display: none; padding: 24px; max-width: 1280px; margin: 0 auto; }
+  .tab-content.active { display: block; }
+  .section-title { font-size: 16px; font-weight: 700; color: var(--primary); margin: 24px 0 12px; padding-left: 10px; border-left: 4px solid var(--primary); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  @media(max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+  .card { background: var(--card); border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .card h3 { font-size: 14px; font-weight: 700; color: var(--text-light); margin-bottom: 12px; }
+  .chart-wrap { position: relative; height: 260px; }
+  .chart-wrap-sm { position: relative; height: 200px; }
+  .chart-wrap-lg { position: relative; height: 320px; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+  @media(max-width: 900px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+  .kpi { background: var(--card); border-radius: 12px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); text-align: center; }
+  .kpi .num { font-size: 28px; font-weight: 800; color: var(--primary); }
+  .kpi .label { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+  .kpi .sub { font-size: 11px; color: var(--danger); margin-top: 2px; font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--primary); color: white; padding: 8px 10px; text-align: center; font-weight: 600; }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--border); text-align: center; }
+  tr:hover td { background: #f0eeff; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+  .badge-red { background: #ffeaea; color: var(--danger); }
+  .badge-green { background: #eafff5; color: var(--accent); }
+  .badge-yellow { background: #fffae5; color: #e17055; }
+  .badge-blue { background: #e8f4ff; color: #0984e3; }
+  .badge-purple { background: #f0eeff; color: var(--primary); }
+  .badge-gray { background: #f5f5f5; color: #aaa; }
+  .heatmap-row { display: grid; grid-template-columns: 180px repeat(6, 1fr); gap: 3px; margin-bottom: 3px; font-size: 12px; }
+  .heatmap-label { background: #f0eeff; padding: 6px 8px; border-radius: 6px; font-weight: 600; display: flex; align-items: center; }
+  .heatmap-cell { padding: 6px 4px; border-radius: 6px; text-align: center; font-weight: 700; font-size: 11px; display: flex; align-items: center; justify-content: center; }
+  .h-full { background: #00b894; color: white; }
+  .h-half { background: #fdcb6e; color: #6c5c00; }
+  .h-none { background: #ffcdd2; color: #c62828; }
+  .h-new { background: #e3f2fd; color: #1565c0; }
+  .insight-box { background: linear-gradient(135deg, #f0eeff, #fce8ff); border-left: 4px solid var(--primary); padding: 16px 18px; border-radius: 0 8px 8px 0; margin-bottom: 12px; }
+  .insight-box h4 { font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+  .insight-box p { font-size: 13px; color: var(--text); line-height: 1.7; }
+  .priority-matrix { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .priority-card { padding: 14px; border-radius: 8px; }
+  .priority-s { background: #fff0f0; border: 2px solid var(--s-rank); }
+  .priority-a { background: #fff5ee; border: 2px solid var(--a-rank); }
+  .priority-b { background: #fffde7; border: 2px solid var(--b-rank); }
+  .priority-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 13px; font-weight: 800; margin-bottom: 8px; }
+  .tag-s { background: var(--s-rank); color: white; }
+  .tag-a { background: var(--a-rank); color: white; }
+  .tag-b { background: var(--b-rank); color: #333; }
+  .priority-item { font-size: 12px; margin: 4px 0; display: flex; align-items: flex-start; gap: 6px; }
+  .priority-item::before { content: "→"; color: #999; flex-shrink: 0; }
+  .timeline { position: relative; padding-left: 20px; }
+  .timeline::before { content: ""; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: var(--primary); opacity: 0.3; }
+  .timeline-item { position: relative; padding: 10px 0 10px 16px; }
+  .timeline-item::before { content: ""; position: absolute; left: -14px; top: 14px; width: 10px; height: 10px; border-radius: 50%; background: var(--primary); }
+  .timeline-item .date { font-size: 12px; font-weight: 700; color: var(--primary); }
+  .timeline-item .desc { font-size: 12px; color: var(--text); }
+  .summary-card { background: linear-gradient(135deg, var(--primary), #a29bfe); color: white; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+  .summary-card h2 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+  .summary-card ul { list-style: none; }
+  .summary-card li { font-size: 13px; line-height: 1.7; padding: 3px 0 3px 16px; position: relative; }
+  .summary-card li::before { content: "✦"; position: absolute; left: 0; opacity: 0.8; }
+  .step-table th:first-child, .step-table td:first-child { text-align: left; }
+  .change-badge { font-size: 10px; padding: 2px 6px; border-radius: 10px; }
+  .cb-up { background: #e8f5e9; color: #2e7d32; }
+  .cb-down { background: #ffebee; color: #c62828; }
+  .cb-same { background: #f5f5f5; color: #777; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📊 iCircle 勉強会 内容分析ダッシュボード</h1>
+  <p>分析対象：3期〜8期（2024年9月〜2026年3月） | 作成日：2026年4月8日 | 9期ローンチ向け意思決定資料</p>
+</header>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('summary')">📋 サマリー</button>
+  <button class="tab-btn" onclick="switchTab('conversion')">📈 成約率推移</button>
+  <button class="tab-btn" onclick="switchTab('steps')">📚 3ステップ変遷</button>
+  <button class="tab-btn" onclick="switchTab('sales')">💬 セールスパート</button>
+  <button class="tab-btn" onclick="switchTab('cases')">👥 事例履歴</button>
+  <button class="tab-btn" onclick="switchTab('n1')">🔍 N1不安×対応</button>
+  <button class="tab-btn" onclick="switchTab('hypothesis')">🧪 仮説評価</button>
+  <button class="tab-btn" onclick="switchTab('priority')">🚀 改善優先度</button>
+</nav>
+
+<!-- ===== TAB 1: サマリー ===== -->
+<div id="tab-summary" class="tab-content active">
+  <div class="summary-card">
+    <h2>エグゼクティブサマリー</h2>
+    <ul>
+      <li>成約率は3期68.9%→8期25.2%まで一貫して低下。最大要因は「コラボ流入70%超の参加者に対して勉強会が無策だったこと」</li>
+      <li>N1で判明した「怪しさへの警戒（6名）」「家族に内緒（4名）」が全6期を通じて未対応のまま放置された</li>
+      <li>oVice（バーチャルオフィス）はN1で「なかったら辞めていた」という最強の体験ながら7期まで完全未言及</li>
+      <li>継続率データ（年払い1Y継続率62% vs 月払い36%）が全6期で一度も勉強会内で使われていない</li>
+      <li>9期の最優先3施策：①コラボ参加者への接続演出 ②怪しさ・家族内緒への正面対応 ③oVice訴求の核心化</li>
+    </ul>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="num">68.9%</div>
+      <div class="label">3期 成約率（最高）</div>
+    </div>
+    <div class="kpi">
+      <div class="num" style="color:var(--danger)">25.2%</div>
+      <div class="label">8期 成約率（最低）</div>
+      <div class="sub">▼43.7pp 低下</div>
+    </div>
+    <div class="kpi">
+      <div class="num">70.5%</div>
+      <div class="label">8期 コラボ経由申込率</div>
+    </div>
+    <div class="kpi">
+      <div class="num" style="color:var(--accent)">62%</div>
+      <div class="label">年払い1Y継続率（全期平均）</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>成約率 vs 着席率の推移</h3>
+      <div class="chart-wrap">
+        <canvas id="kpiChart"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <h3>成約率低下の主要因（寄与度推定）</h3>
+      <div class="chart-wrap">
+        <canvas id="factorChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">最重要の改善ポイント（TOP3）</div>
+  <div class="grid-3">
+    <div class="insight-box">
+      <h4>① コラボ参加者への接続設計</h4>
+      <p>コラボ経由 vs 自社経由で成約率に15pp差。「○○さんから来た方、ありがとう」の一言で差を縮小できる。最も費用対効果が高い施策。</p>
+    </div>
+    <div class="insight-box">
+      <h4>② 怪しさ・家族内緒への正面対応</h4>
+      <p>全6期で未対応の最大ブロッカー2つ。各1〜2分のスクリプト追加で解消できる。「怪しいから返金保証がある」「内緒OKの先輩がいる」を台本に明記。</p>
+    </div>
+    <div class="insight-box">
+      <h4>③ oViceを「仲間」の核心として訴求</h4>
+      <p>N1で「なかったら辞めていた」（5名）という最強の入会後体験。7期まで完全未言及。「バーチャルオフィスでいつでも誰かに会える」ビジョンを機能紹介の核心にする。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TAB 2: 成約率推移 ===== -->
+<div id="tab-conversion" class="tab-content">
+  <div class="section-title">成約率・ファネルデータ推移</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>成約率（対着席）の推移</h3>
+      <div class="chart-wrap-lg">
+        <canvas id="conversionChart"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <h3>着席者数 vs 成約者数</h3>
+      <div class="chart-wrap-lg">
+        <canvas id="volumeChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px">
+    <h3>ファネルデータ詳細</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>期</th><th>実施時期</th><th>申込者数</th><th>着席者数</th><th>着席率</th>
+          <th>成約者数</th><th>成約率(対着席)</th><th>成約率(対申込)</th><th>重複率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>3期</strong></td><td>2024年9月</td><td>540</td><td>332</td><td>61.6%</td>
+          <td>229</td><td><span class="badge badge-green">68.9%</span></td><td>42.4%</td><td>3.6%</td>
+        </tr>
+        <tr>
+          <td><strong>4期</strong></td><td>2024年12月</td><td>389</td><td>271</td><td>69.9%</td>
+          <td>169</td><td><span class="badge badge-blue">62.3%</span></td><td>43.5%</td><td>4.2%</td>
+        </tr>
+        <tr>
+          <td><strong>5期</strong></td><td>2025年3月</td><td>367</td><td>274</td><td>74.7%</td>
+          <td>113</td><td><span class="badge badge-yellow">41.2%</span></td><td>30.8%</td><td>6.5%</td>
+        </tr>
+        <tr>
+          <td><strong>6期</strong></td><td>2025年6月</td><td>279</td><td>194</td><td>69.6%</td>
+          <td>85</td><td><span class="badge badge-yellow">43.9%</span></td><td>30.5%</td><td>7.2%</td>
+        </tr>
+        <tr>
+          <td><strong>7期</strong></td><td>2025年12月</td><td>551</td><td>420</td><td>76.3%</td>
+          <td>161</td><td><span class="badge badge-red">38.4%</span></td><td>29.3%</td><td>11.2%</td>
+        </tr>
+        <tr>
+          <td><strong>8期</strong></td><td>2026年3月</td><td>781</td><td>559</td><td>71.6%</td>
+          <td>141</td><td><span class="badge badge-red">25.2%</span></td><td>18.1%</td><td>8.9%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">継続率データ（年払い vs 月払い）</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>年払い vs 月払い 1年後継続率</h3>
+      <div class="chart-wrap-lg">
+        <canvas id="retentionChart"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <h3>継続率データのポイント</h3>
+      <br>
+      <div class="insight-box">
+        <h4>年払い1Y継続率62% vs 月払い36%（全期平均差：+25.4pp）</h4>
+        <p>年払いを選んだ人は月払いの約1.7倍の継続率。これは「コミットメントの差」であり、成果の差にもつながる。</p>
+      </div>
+      <div class="insight-box">
+        <h4>0期年払い継続率：82%（最高）</h4>
+        <p>初期コホートの強いコミットメントを示す。9期では0期水準への回帰を目標にできる。</p>
+      </div>
+      <div class="insight-box">
+        <h4>1Y継続者の2Y継続率：76%（0〜1期平均）</h4>
+        <p>1年続いた人の4人に3人が2年目も継続。初年度の定着が最重要。</p>
+      </div>
+      <p style="font-size:12px;color:var(--danger);margin-top:8px;font-weight:700;">⚠ この継続率データは全6期で勉強会内で一度も使われていない。9期では年払い訴求の核心材料として使うべき。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TAB 3: 3ステップ変遷 ===== -->
+<div id="tab-steps" class="tab-content">
+  <div class="section-title">3ステップのタイトル変遷マトリクス</div>
+  <div class="card" style="margin-bottom:20px;overflow-x:auto">
+    <table class="step-table">
+      <thead>
+        <tr><th style="text-align:left">要素</th><th>3期</th><th>4期</th><th>5期</th><th>6期</th><th>7期</th><th>8期</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align:left;font-weight:700">ステップ1<br>タイトル</td>
+          <td>徹底的な自己分析<br>マイナス感情の共感が最重要</td>
+          <td>徹底的な自己分析<br>（同上）</td>
+          <td>徹底的な自己分析<br>（同上）</td>
+          <td><span class="badge badge-purple">大幅変更</span><br>誰でも専門家になれる自己分析の裏技</td>
+          <td>強い共感を作る自己分析<br>マイナス感情が超重要</td>
+          <td>「私には何もない」が消える自己分析</td>
+        </tr>
+        <tr>
+          <td style="text-align:left;font-weight:700">ステップ1<br>核心メッセージ</td>
+          <td>マイナス感情への共感</td>
+          <td>マイナス感情への共感</td>
+          <td>マイナス感情への共感</td>
+          <td>弱み→狭い領域の専門家</td>
+          <td>マイナス感情＋弱みから探す</td>
+          <td>経験談が入っていること</td>
+        </tr>
+        <tr>
+          <td style="text-align:left;font-weight:700">ステップ2<br>タイトル</td>
+          <td>アカウント設計<br>隠されたインサイトを満たす</td>
+          <td>（同上）</td>
+          <td>（同上）</td>
+          <td><span class="badge badge-blue">用語変更</span><br>隠された都合のいい願望を満たす</td>
+          <td>ユーザーの心に隠された<br>都合のいい願望を満たす</td>
+          <td>（7期を継続）</td>
+        </tr>
+        <tr>
+          <td style="text-align:left;font-weight:700">ステップ2<br>核心メッセージ</td>
+          <td>インサイト（専門用語）</td>
+          <td>インサイト</td>
+          <td>インサイト</td>
+          <td>都合のいい願望（平易な言葉）</td>
+          <td>都合のいい願望</td>
+          <td>都合のいい願望</td>
+        </tr>
+        <tr>
+          <td style="text-align:left;font-weight:700">ステップ3<br>タイトル</td>
+          <td>圧倒的なバズを作る<br>超共感リール</td>
+          <td>（同上）</td>
+          <td>（同上）</td>
+          <td><span class="badge badge-purple">大幅変更</span><br>常識破壊リールの極意</td>
+          <td>常識破壊リール<br>（想像の一歩先）</td>
+          <td><span class="badge badge-blue">回帰</span><br>バズを作るリール作成の手順</td>
+        </tr>
+        <tr>
+          <td style="text-align:left;font-weight:700">ステップ3<br>主要テクニック</td>
+          <td>3パート構成＋ビュッフェ方式</td>
+          <td>3パート構成</td>
+          <td>3パート構成</td>
+          <td><span class="badge badge-yellow">対義語テクニック</span>（一点突破）</td>
+          <td><span class="badge badge-yellow">想像の一歩先</span>（新フレーム）</td>
+          <td>3パート構成に回帰</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">フレームワーク使用履歴（全6期）</div>
+  <div class="card" style="margin-bottom:20px">
+    <div style="margin-bottom:10px;font-size:12px;display:flex;gap:10px;flex-wrap:wrap">
+      <span class="badge h-full" style="padding:4px 10px">○ 使用あり</span>
+      <span class="badge h-half" style="padding:4px 10px">△ 簡略化</span>
+      <span class="badge h-none" style="padding:4px 10px">× 未使用</span>
+    </div>
+    <table>
+      <thead>
+        <tr><th style="text-align:left">フレームワーク</th><th>3期</th><th>4期</th><th>5期</th><th>6期</th><th>7期</th><th>8期</th><th>備考</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align:left">自分年表（感情年表）</td>
+          <td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td>
+          <td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td>
+          <td style="text-align:left">全期安定。不変のコア</td>
+        </tr>
+        <tr>
+          <td style="text-align:left">5%/95%理論</td>
+          <td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td>
+          <td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td>
+          <td style="text-align:left">全期安定</td>
+        </tr>
+        <tr>
+          <td style="text-align:left">AだけどB構文</td>
+          <td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td>
+          <td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td>
+          <td style="text-align:left">最重要フレームワーク</td>
+        </tr>
+        <tr>
+          <td style="text-align:left">メラビアンの法則</td>
+          <td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td>
+          <td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td>
+          <td style="text-align:left">全期安定</td>
+        </tr>
+        <tr style="background:#fff8f0">
+          <td style="text-align:left">共感の深度モデル</td>
+          <td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td>
+          <td><span class="badge h-none">×</span></td><td><span class="badge h-full">○</span></td><td><span class="badge h-none">×</span></td>
+          <td style="text-align:left;color:var(--danger)">⚠ 6期・8期で省略。復活推奨</td>
+        </tr>
+        <tr style="background:#fff8f0">
+          <td style="text-align:left">4分類（共感/有益/笑い/癒し）</td>
+          <td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td>
+          <td><span class="badge h-none">×</span></td><td><span class="badge h-full">○</span></td><td><span class="badge h-none">×</span></td>
+          <td style="text-align:left;color:var(--danger)">⚠ 6期・8期で省略。復活推奨</td>
+        </tr>
+        <tr>
+          <td style="text-align:left">弱み→専門家転換</td>
+          <td><span class="badge h-none">×</span></td><td><span class="badge h-none">×</span></td><td><span class="badge h-none">×</span></td>
+          <td><span class="badge h-full">◎</span></td><td><span class="badge h-half">△</span></td><td><span class="badge h-half">△</span></td>
+          <td style="text-align:left">6期導入、継承中</td>
+        </tr>
+        <tr>
+          <td style="text-align:left">3パート構成＋ビュッフェ方式</td>
+          <td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td><td><span class="badge h-full">○</span></td>
+          <td><span class="badge h-none">×</span></td><td><span class="badge h-none">×</span></td><td><span class="badge h-full">○</span></td>
+          <td style="text-align:left">8期で原点回帰</td>
+        </tr>
+        <tr>
+          <td style="text-align:left">対義語テクニック</td>
+          <td><span class="badge h-none">×</span></td><td><span class="badge h-none">×</span></td><td><span class="badge h-none">×</span></td>
+          <td><span class="badge h-full">○</span></td><td><span class="badge h-half">△</span></td><td><span class="badge h-none">×</span></td>
+          <td style="text-align:left">6期のみメイン</td>
+        </tr>
+        <tr>
+          <td style="text-align:left">想像の一歩先</td>
+          <td><span class="badge h-none">×</span></td><td><span class="badge h-none">×</span></td><td><span class="badge h-none">×</span></td>
+          <td><span class="badge h-none">×</span></td><td><span class="badge h-full">○</span></td><td><span class="badge h-none">×</span></td>
+          <td style="text-align:left">7期のみ。8期で削除</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== TAB 4: セールスパート ===== -->
+<div id="tab-sales" class="tab-content">
+  <div class="section-title">セールスパート構成の変化</div>
+  <div class="card" style="margin-bottom:20px;overflow-x:auto">
+    <table>
+      <thead>
+        <tr><th style="text-align:left">構成要素</th><th>3期</th><th>4期</th><th>5期</th><th>6期</th><th>7期</th><th>8期</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align:left">悩みの可視化（番号質問）</td>
+          <td><span class="badge badge-green">○</span></td><td><span class="badge badge-green">○</span></td><td><span class="badge badge-green">○</span></td>
+          <td><span class="badge badge-green">○</span></td><td><span class="badge badge-green">○</span></td><td><span class="badge badge-green">○</span></td>
+        </tr>
+        <tr>
+          <td style="text-align:left">独学完了率データ（6.5%）</td>
+          <td><span class="badge badge-gray">×</span></td><td><span class="badge badge-gray">×</span></td><td><span class="badge badge-gray">×</span></td>
+          <td><span class="badge badge-gray">×</span></td><td><span class="badge badge-green">◎追加</span></td><td><span class="badge badge-green">○</span></td>
+        </tr>
+        <tr>
+          <td style="text-align:left">機能紹介の型</td>
+          <td>7つのコンテンツ（詳細）</td><td>7つのコンテンツ</td><td>7つのコンテンツ</td>
+          <td>7つのコンテンツ</td><td>3仕組み（構造化）</td><td>3仕組み</td>
+        </tr>
+        <tr style="background:#fff8f0">
+          <td style="text-align:left">oViceの訴求</td>
+          <td><span class="badge badge-red">× 未言及</span></td><td><span class="badge badge-red">× 未言及</span></td><td><span class="badge badge-red">× 未言及</span></td>
+          <td><span class="badge badge-red">× 未言及</span></td><td><span class="badge badge-red">× 未言及</span></td><td><span class="badge badge-yellow">△ 概要のみ</span></td>
+        </tr>
+        <tr>
+          <td style="text-align:left">運営スピーチの深度</td>
+          <td>3名・詳細（3〜5分）</td><td>3名・詳細</td><td>3名・詳細</td>
+          <td>4名・詳細（なみ追加）</td><td>3名・短縮（2〜3分）</td><td>3名・短縮</td>
+        </tr>
+        <tr style="background:#fff8f0">
+          <td style="text-align:left">育休ママ登壇（なみさん）</td>
+          <td><span class="badge badge-gray">×</span></td><td><span class="badge badge-gray">×</span></td><td><span class="badge badge-gray">×</span></td>
+          <td><span class="badge badge-green">○ 初登壇</span></td><td><span class="badge badge-red">× 不在</span></td><td><span class="badge badge-red">× 不在</span></td>
+        </tr>
+        <tr>
+          <td style="text-align:left">アンカリング上限</td>
+          <td>〜50万円</td><td>〜50万円</td><td>〜50万円</td>
+          <td>〜50万円</td><td>〜100万円（引上げ）</td><td>〜100万円</td>
+        </tr>
+        <tr>
+          <td style="text-align:left">ツール無料期間</td>
+          <td><span class="badge badge-blue">3ヶ月</span></td><td><span class="badge badge-blue">3ヶ月</span></td><td><span class="badge badge-green">6ヶ月（最長）</span></td>
+          <td><span class="badge badge-yellow">60日（短縮）</span></td><td><span class="badge badge-yellow">60日</span></td><td><span class="badge badge-yellow">60日</span></td>
+        </tr>
+        <tr style="background:#fff8f0">
+          <td style="text-align:left">継続率データの活用</td>
+          <td><span class="badge badge-red">× 未使用</span></td><td><span class="badge badge-red">× 未使用</span></td><td><span class="badge badge-red">× 未使用</span></td>
+          <td><span class="badge badge-red">× 未使用</span></td><td><span class="badge badge-red">× 未使用</span></td><td><span class="badge badge-red">× 未使用</span></td>
+        </tr>
+        <tr>
+          <td style="text-align:left">緊急性演出の強度</td>
+          <td><span class="badge badge-yellow">△4日間のみ</span></td><td><span class="badge badge-yellow">△4日間のみ</span></td><td><span class="badge badge-yellow">△3日間のみ</span></td>
+          <td><span class="badge badge-blue">○</span></td><td><span class="badge badge-blue">○</span></td><td><span class="badge badge-green">◎同時申込実況追加</span></td>
+        </tr>
+        <tr>
+          <td style="text-align:left">推定所要時間（合計）</td>
+          <td>約85分</td><td>約70分</td><td>約90〜120分</td><td>約90分</td><td>約90分</td><td>約95分</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">年払い特典の変遷</div>
+  <div class="card" style="margin-bottom:20px">
+    <div class="chart-wrap">
+      <canvas id="toolFreeChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TAB 5: 事例履歴 ===== -->
+<div id="tab-cases" class="tab-content">
+  <div class="section-title">主要事例の使用期マトリクス</div>
+  <div class="card" style="margin-bottom:20px;overflow-x:auto">
+    <div style="margin-bottom:10px;font-size:12px;display:flex;gap:10px;flex-wrap:wrap">
+      <span style="background:#00b894;color:white;padding:3px 10px;border-radius:10px;font-size:11px">教育パートで使用</span>
+      <span style="background:#74b9ff;color:white;padding:3px 10px;border-radius:10px;font-size:11px">セールスパートで使用</span>
+      <span style="background:#dfe6e9;color:#636e72;padding:3px 10px;border-radius:10px;font-size:11px">未使用</span>
+    </div>
+    <table>
+      <thead>
+        <tr><th style="text-align:left">事例名</th><th>ジャンル</th><th>3期</th><th>4期</th><th>5期</th><th>6期</th><th>7期</th><th>8期</th><th>N1属性一致</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align:left"><strong>つくしさん</strong></td><td>離婚体験・自己開示</td>
+          <td style="background:#e8f5e9">教育</td><td style="background:#e8f5e9">教育</td><td style="background:#e8f5e9">教育</td>
+          <td style="background:#dfe6e9">—</td><td style="background:#e8f5e9">教育</td><td style="background:#e8f5e9">教育</td>
+          <td><span class="badge badge-yellow">○ 50代事例</span></td>
+        </tr>
+        <tr>
+          <td style="text-align:left"><strong>マリモさん</strong></td><td>30代ワーママ・料理</td>
+          <td style="background:#dfe6e9">—</td><td style="background:#dfe6e9">—</td><td style="background:#dfe6e9">—</td>
+          <td style="background:#dfe6e9">—</td><td style="background:#e8f5e9">教育</td><td style="background:#e8f5e9">教育</td>
+          <td><span class="badge badge-green">◎ 最高一致</span></td>
+        </tr>
+        <tr>
+          <td style="text-align:left"><strong>有子さん</strong></td><td>ワーママ・時短レシピ</td>
+          <td style="background:#dfe6e9">—</td><td style="background:#e3f2fd">セールス</td><td style="background:#e3f2fd">セールス</td>
+          <td style="background:#e3f2fd">セールス</td><td style="background:#e3f2fd">セールス</td><td style="background:#e3f2fd">セールス</td>
+          <td><span class="badge badge-green">◎ 高一致</span></td>
+        </tr>
+        <tr>
+          <td style="text-align:left"><strong>ルリさん</strong></td><td>シングルマザー・元教員</td>
+          <td style="background:#dfe6e9">—</td><td style="background:#dfe6e9">—</td><td style="background:#dfe6e9">—</td>
+          <td style="background:#e3f2fd">セールス</td><td style="background:#e3f2fd">セールス</td><td style="background:#e3f2fd">セールス</td>
+          <td><span class="badge badge-green">◎ 高一致</span></td>
+        </tr>
+        <tr>
+          <td style="text-align:left"><strong>モコさん</strong></td><td>50代・ダイエット</td>
+          <td style="background:#dfe6e9">—</td><td style="background:#dfe6e9">—</td><td style="background:#dfe6e9">—</td>
+          <td style="background:#dfe6e9">—</td><td style="background:#e3f2fd">セールス</td><td style="background:#e3f2fd">セールス</td>
+          <td><span class="badge badge-blue">○ 50代事例</span></td>
+        </tr>
+        <tr>
+          <td style="text-align:left"><strong>タピキチさん</strong></td><td>男性・時短料理</td>
+          <td style="background:#dfe6e9">—</td><td style="background:#dfe6e9">—</td><td style="background:#dfe6e9">—</td>
+          <td style="background:#e3f2fd">セールス</td><td style="background:#e3f2fd">セールス</td><td style="background:#e3f2fd">セールス</td>
+          <td><span class="badge badge-yellow">△ 男性・差異あり</span></td>
+        </tr>
+        <tr>
+          <td style="text-align:left"><strong>めぐさん</strong></td><td>40代・野菜料理</td>
+          <td style="background:#dfe6e9">—</td><td style="background:#dfe6e9">—</td><td style="background:#dfe6e9">—</td>
+          <td style="background:#e8f5e9">教育</td><td style="background:#e3f2fd">セールス</td><td style="background:#e3f2fd">セールス</td>
+          <td><span class="badge badge-blue">○ 40代独立事例</span></td>
+        </tr>
+        <tr>
+          <td style="text-align:left"><strong>おとぱぱさん</strong></td><td>主婦の不満代弁（男性）</td>
+          <td style="background:#e8f5e9">教育</td><td style="background:#e8f5e9">教育</td><td style="background:#e8f5e9">教育</td>
+          <td style="background:#dfe6e9">退場</td><td style="background:#dfe6e9">退場</td><td style="background:#dfe6e9">退場</td>
+          <td><span class="badge badge-gray">△ 古い事例</span></td>
+        </tr>
+        <tr>
+          <td style="text-align:left"><strong>いとさん</strong></td><td>破局→ライフスタイル</td>
+          <td style="background:#e8f5e9">教育</td><td style="background:#e8f5e9">教育</td><td style="background:#e8f5e9">教育</td>
+          <td style="background:#dfe6e9">—</td><td style="background:#e3f2fd">セールス</td><td style="background:#e3f2fd">セールス</td>
+          <td><span class="badge badge-blue">○ 転換事例</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">事例のN1属性マッチング分析</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>現行事例のペルソナ一致度分布（8期）</h3>
+      <div class="chart-wrap">
+        <canvas id="caseFitChart"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <h3>9期推奨：事例の再バランス</h3>
+      <br>
+      <div class="insight-box">
+        <h4>現状の問題：「すごい実績」比率が高すぎる</h4>
+        <p>8期の事例は月収100万・フォロワー30万超の「大成功」事例が7〜8割。N1ペルソナ（育休ママ・公務員）が「自分には無理」と感じるリスクが高い。</p>
+      </div>
+      <div class="insight-box">
+        <h4>9期推奨：「同じ境遇の人が3ヶ月で変わった」事例を6〜7割に</h4>
+        <p>フォロワー1,000〜5,000人・月収5〜10万円の「自分にも手が届く」中間成果事例を増やす。育休ママ・公務員・薬剤師の属性マッチング事例を優先選定。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TAB 6: N1不安×対応 ===== -->
+<div id="tab-n1" class="tab-content">
+  <div class="section-title">N1で判明した不安 × 勉強会での対応度ヒートマップ</div>
+  <div class="card" style="margin-bottom:20px">
+    <div style="margin-bottom:12px;font-size:12px;display:flex;gap:12px;flex-wrap:wrap">
+      <span class="heatmap-cell h-full" style="border-radius:6px;padding:4px 10px;width:auto">◎ 十分対応</span>
+      <span class="heatmap-cell h-half" style="border-radius:6px;padding:4px 10px;width:auto">○ ある程度</span>
+      <span style="background:#ffcdd2;color:#c62828;border-radius:6px;padding:4px 10px;font-weight:700;font-size:11px">× 未対応</span>
+    </div>
+
+    <div class="heatmap-row" style="font-weight:700;font-size:12px;background:#f0eeff;border-radius:6px;padding:6px 0">
+      <div style="padding:0 8px">不安項目（N1人数）</div>
+      <div style="text-align:center">3期</div><div style="text-align:center">4期</div><div style="text-align:center">5期</div>
+      <div style="text-align:center">6期</div><div style="text-align:center">7期</div><div style="text-align:center">8期</div>
+    </div>
+
+    <div class="heatmap-row" style="margin-top:6px">
+      <div class="heatmap-label">価格への不安（4名）</div>
+      <div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div>
+      <div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div>
+    </div>
+    <div class="heatmap-row">
+      <div class="heatmap-label">自分にできるか（3名）</div>
+      <div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div>
+      <div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div>
+    </div>
+    <div class="heatmap-row">
+      <div class="heatmap-label">怪しさへの警戒（5名）</div>
+      <div class="heatmap-cell h-half">○</div><div class="heatmap-cell h-half">○</div><div class="heatmap-cell h-half">○</div>
+      <div class="heatmap-cell h-half">○</div><div class="heatmap-cell h-half">○</div><div class="heatmap-cell h-half">○</div>
+    </div>
+    <div class="heatmap-row">
+      <div class="heatmap-label">同期チームへの不安（2名）</div>
+      <div class="heatmap-cell h-half">○</div><div class="heatmap-cell h-half">○</div><div class="heatmap-cell h-half">○</div>
+      <div class="heatmap-cell h-half">○</div><div class="heatmap-cell h-half">○</div><div class="heatmap-cell h-half">○</div>
+    </div>
+    <div class="heatmap-row">
+      <div class="heatmap-label" style="color:var(--danger)">家族に内緒（4名）⚠</div>
+      <div class="heatmap-cell h-none">×</div><div class="heatmap-cell h-none">×</div><div class="heatmap-cell h-none">×</div>
+      <div class="heatmap-cell h-none">×</div><div class="heatmap-cell h-none">×</div><div class="heatmap-cell h-none">×</div>
+    </div>
+  </div>
+
+  <div class="section-title">N1で判明した入会後価値 × 事前伝達度ヒートマップ</div>
+  <div class="card" style="margin-bottom:20px">
+    <div class="heatmap-row" style="font-weight:700;font-size:12px;background:#f0eeff;border-radius:6px;padding:6px 0">
+      <div style="padding:0 8px">入会後価値（N1人数）</div>
+      <div style="text-align:center">3期</div><div style="text-align:center">4期</div><div style="text-align:center">5期</div>
+      <div style="text-align:center">6期</div><div style="text-align:center">7期</div><div style="text-align:center">8期</div>
+    </div>
+
+    <div class="heatmap-row" style="margin-top:6px">
+      <div class="heatmap-label">同期制度・チーム交流（6名）</div>
+      <div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div>
+      <div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div>
+    </div>
+    <div class="heatmap-row">
+      <div class="heatmap-label">先輩との交流（5名）</div>
+      <div class="heatmap-cell h-half">○</div><div class="heatmap-cell h-half">○</div><div class="heatmap-cell h-half">○</div>
+      <div class="heatmap-cell h-half">○</div><div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div>
+    </div>
+    <div class="heatmap-row">
+      <div class="heatmap-label">講座のわかりやすさ（4名）</div>
+      <div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div>
+      <div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div>
+    </div>
+    <div class="heatmap-row">
+      <div class="heatmap-label">ライブ配信（4名）</div>
+      <div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div>
+      <div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div><div class="heatmap-cell h-full">◎</div>
+    </div>
+    <div class="heatmap-row">
+      <div class="heatmap-label" style="color:var(--danger)">oVice・バーチャルオフィス（5名）⚠</div>
+      <div class="heatmap-cell h-none">×</div><div class="heatmap-cell h-none">×</div><div class="heatmap-cell h-none">×</div>
+      <div class="heatmap-cell h-none">×</div><div class="heatmap-cell h-none">×</div><div class="heatmap-cell h-half">△</div>
+    </div>
+  </div>
+
+  <div class="section-title">N1インタビュー対象者プロフィール</div>
+  <div class="card" style="margin-bottom:20px;overflow-x:auto">
+    <table>
+      <thead>
+        <tr><th>名前</th><th>期</th><th>年齢</th><th>職業</th><th>居住地</th><th>認知経路</th><th>決め手</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>ひに</td><td>8期</td><td>33歳</td><td>公務員（事務・育休中）</td><td>福島県</td><td>ゆきだるまさん紹介</td><td>信頼できる人の推薦</td></tr>
+        <tr><td>みずな</td><td>8期</td><td>36歳</td><td>薬剤師→退職</td><td>長崎市</td><td>紹介</td><td>月額制の安さ</td></tr>
+        <tr><td>Aoi</td><td>7期</td><td>31歳</td><td>元コールセンター派遣</td><td>埼玉県</td><td>紹介</td><td>勉強会の温かい雰囲気</td></tr>
+        <tr><td>ルマ</td><td>7期</td><td>32歳</td><td>公務員保育士（育休中）</td><td>愛知県</td><td>紹介</td><td>他スクール比較・月額制</td></tr>
+        <tr><td>なお</td><td>7期</td><td>40歳</td><td>元教員→フリーランス</td><td>大阪府</td><td>6期生に相談</td><td>知人の推薦</td></tr>
+        <tr><td>あいな</td><td>7期</td><td>31歳</td><td>看護師（時短パート）</td><td>北海道</td><td>他スクール比較</td><td>月額が一番安い</td></tr>
+        <tr><td>さく</td><td>8期</td><td>38歳</td><td>市役所事務（育休中）</td><td>和歌山市</td><td>GPT・検索</td><td>りこぴんの普通の主婦感</td></tr>
+        <tr><td>もえか</td><td>7期</td><td>31歳</td><td>元警察官→退職</td><td>兵庫県</td><td>対談コンテンツ</td><td>自分の未来を変えたい</td></tr>
+        <tr><td>たけのこ</td><td>8期</td><td>31歳</td><td>保育士→派遣事務</td><td>横浜市</td><td>ゆきだるまさん紹介</td><td>信頼できる人の推薦</td></tr>
+        <tr><td>つるぴ</td><td>8期</td><td>31歳</td><td>地方公務員（育休中）</td><td>福岡県</td><td>紹介</td><td>サバスイーツさんの推薦</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== TAB 7: 仮説評価 ===== -->
+<div id="tab-hypothesis" class="tab-content">
+  <div class="section-title">成約率低下の仮説検証サマリー</div>
+  <div class="card" style="margin-bottom:20px">
+    <div class="chart-wrap-lg">
+      <canvas id="hypothesisChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px;overflow-x:auto">
+    <table>
+      <thead>
+        <tr><th>仮説</th><th>内容</th><th>データの裏付け</th><th>成約率への影響度</th><th>改善可能か</th><th>容易さ</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>仮説①</td><td style="text-align:left">教育パートのマンネリ化（つくし等5期連続使用）</td>
+          <td><span class="badge badge-yellow">中</span></td>
+          <td><span class="badge badge-yellow">小〜中</span></td>
+          <td><span class="badge badge-green">◎</span></td>
+          <td><span class="badge badge-green">高</span></td>
+        </tr>
+        <tr>
+          <td>仮説②</td><td style="text-align:left">セールスパートの情報過多（事例連発）</td>
+          <td><span class="badge badge-yellow">中</span></td>
+          <td><span class="badge badge-yellow">中</span></td>
+          <td><span class="badge badge-blue">○</span></td>
+          <td><span class="badge badge-yellow">中</span></td>
+        </tr>
+        <tr style="background:#fff8f0">
+          <td>仮説③</td><td style="text-align:left">社会的証明が多すぎて「自分には無理」に転化</td>
+          <td><span class="badge badge-red">強</span></td>
+          <td><span class="badge badge-red">中〜大</span></td>
+          <td><span class="badge badge-green">◎</span></td>
+          <td><span class="badge badge-green">高</span></td>
+        </tr>
+        <tr style="background:#fff8f0">
+          <td>仮説④</td><td style="text-align:left">大規模化で「温かさ」が希薄化（340名→個別反応不可）</td>
+          <td><span class="badge badge-red">強</span></td>
+          <td><span class="badge badge-red">大</span></td>
+          <td><span class="badge badge-blue">○</span></td>
+          <td><span class="badge badge-yellow">中</span></td>
+        </tr>
+        <tr>
+          <td>仮説⑤</td><td style="text-align:left">「出し過ぎ」で満足して帰る（飢餓感設計の不足）</td>
+          <td><span class="badge badge-yellow">中</span></td>
+          <td><span class="badge badge-yellow">中</span></td>
+          <td><span class="badge badge-blue">○</span></td>
+          <td><span class="badge badge-yellow">中</span></td>
+        </tr>
+        <tr>
+          <td>仮説⑥</td><td style="text-align:left">年払い特典情報が多く意思決定を複雑化</td>
+          <td><span class="badge badge-yellow">中</span></td>
+          <td><span class="badge badge-yellow">小〜中</span></td>
+          <td><span class="badge badge-green">◎</span></td>
+          <td><span class="badge badge-green">高</span></td>
+        </tr>
+        <tr style="background:#fff0f0">
+          <td>仮説⑦</td><td style="text-align:left"><strong>コラボ流入参加者への接続設計がゼロ（最大の要因）</strong></td>
+          <td><span class="badge badge-red">強</span></td>
+          <td><span class="badge badge-red">大</span></td>
+          <td><span class="badge badge-green">◎</span></td>
+          <td><span class="badge badge-green">高</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">エモーショナルジャーニーの期間比較</div>
+  <div class="card" style="margin-bottom:20px">
+    <div class="chart-wrap-lg">
+      <canvas id="emotionChart"></canvas>
+    </div>
+    <p style="font-size:12px;color:var(--text-light);margin-top:8px">※ 各フェーズの感情強度（0〜10）は構造化分析から推定。実測値ではない。</p>
+  </div>
+</div>
+
+<!-- ===== TAB 8: 改善優先度 ===== -->
+<div id="tab-priority" class="tab-content">
+  <div class="section-title">9期勉強会 改善施策の優先度マトリクス</div>
+  <div class="card" style="margin-bottom:20px">
+    <div class="chart-wrap-lg">
+      <canvas id="matrixChart"></canvas>
+    </div>
+    <p style="font-size:12px;color:var(--text-light);margin-top:8px">横軸：実施の容易さ（高→右） ／ 縦軸：成約率への影響度（高→上） ／ バブルサイズ：改善の緊急性</p>
+  </div>
+
+  <div class="section-title">優先度別 改善施策リスト</div>
+  <div class="priority-matrix">
+    <div class="priority-card priority-s">
+      <div class="priority-tag tag-s">S ランク（最優先・今すぐ着手）</div>
+      <div class="priority-item">怪しさへの正面対応スクリプト追加（「怪しいから返金保証がある」）</div>
+      <div class="priority-item">「家族に内緒OK」スクリプト追加（月額はお小遣いの範囲・内緒で始めた先輩多数）</div>
+      <div class="priority-item">コラボ参加者への接続演出（冒頭に「○○さんから来た方ありがとう」）</div>
+      <div class="priority-item">oViceを機能紹介の核心に（「バーチャルオフィスでいつでも誰かに会える」専用スクリプト）</div>
+    </div>
+    <div class="priority-card priority-a">
+      <div class="priority-tag tag-a">A ランク（4月中に設計完了）</div>
+      <div class="priority-item">継続率データを年払い訴求に追加（「年払いは月払いの1.7倍継続率」）</div>
+      <div class="priority-item">事例を「同じ境遇の人が変わった」6〜7割の比率に変更</div>
+      <div class="priority-item">育休ママ登壇（なみさん復帰 or ゲストiCircle生）</div>
+      <div class="priority-item">共感の深度モデル・4分類を教育パートに復活</div>
+      <div class="priority-item">セールスパートを60分に短縮（事例連発廃止・構造化）</div>
+    </div>
+    <div class="priority-card priority-b">
+      <div class="priority-tag tag-b">B ランク（5月以降で対応）</div>
+      <div class="priority-item">つくしさん事例を最新の50代成功者に入替</div>
+      <div class="priority-item">アイスブレイクの問いかけを4回に増加</div>
+      <div class="priority-item">ドンバズくん無料期間を90日に戻すことを検討</div>
+      <div class="priority-item">名指しコメント拾いの強化・スタッフのコメント監視役明確化</div>
+      <div class="priority-item">教育パートの飢餓感設計（出す/出さない線引き）</div>
+      <div class="priority-item">「今申し込むとどうなるか」の具体的フロー追加</div>
+    </div>
+    <div style="padding:14px;border-radius:8px;background:#f5f5f5;border:1px dashed #ccc">
+      <div class="priority-tag" style="background:#bbb;color:white">勉強会外の施策（参考）</div>
+      <div class="priority-item" style="color:#888">オプトインLP復活（事前教育の復活）</div>
+      <div class="priority-item" style="color:#888">紹介者経由のコラボ専用LP設計</div>
+      <div class="priority-item" style="color:#888">LINE配信の事前温度感醸成の強化</div>
+      <p style="font-size:11px;color:#aaa;margin-top:8px">※ これらは勉強会外の施策。本ダッシュボードの分析範囲外。</p>
+    </div>
+  </div>
+
+  <div class="section-title">9期勉強会までのスケジュール</div>
+  <div class="card">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">4月第3週（〜4/20）</div>
+        <div class="desc">本提案書をチームで共有・方針合意。Sランク施策の着手決定。担当：りこぴん・しゃけ</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">4月第4週（〜4/27）</div>
+        <div class="desc">新規スクリプト（怪しさ・家族内緒・oVice・コラボ接続）のドラフト作成。担当：しゃけ＋りこぴん</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">5月第1週（〜5/4）</div>
+        <div class="desc">ドラフトレビュー・修正。なみさんまたはゲストiCircle生への登壇依頼。担当：りこぴん</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">5月第2週（〜5/11）</div>
+        <div class="desc">事例入替の検討（最新50代事例の選定・つくしさんデータ更新）・共感深度モデル復活設計。担当：しゃけ＋えれな</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">5月第3週（〜5/18）</div>
+        <div class="desc">セールスパートの構成改訂（60分版への短縮設計）・継続率データ追加。担当：しゃけ</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">5月第4週（〜5/25）</div>
+        <div class="desc">台本全体のドラフト統合・運営メンバー全員にフィードバック収集。担当：しゃけ＋全員</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">6月第1〜2週</div>
+        <div class="desc"><strong>台本ドラフト完成・内部レビュー</strong>。各メンバーのスピーチ原稿確認。担当：全員・りこぴん最終確認</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">6月第3週</div>
+        <div class="desc"><strong>リハーサル・修正</strong>。コメント監視役のオペレーション確認。担当：全員</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">6月最終週</div>
+        <div class="desc"><strong>9期勉強会 本番</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Tab switching
+function switchTab(name) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+const periods = ['3期', '4期', '5期', '6期', '7期', '8期'];
+const conversionRates = [68.9, 62.3, 41.2, 43.9, 38.4, 25.2];
+const seatRates = [61.6, 69.9, 74.7, 69.6, 76.3, 71.6];
+
+// KPI Chart (summary)
+new Chart(document.getElementById('kpiChart'), {
+  type: 'line',
+  data: {
+    labels: periods,
+    datasets: [
+      { label: '成約率（対着席）%', data: conversionRates, borderColor: '#6c5ce7', backgroundColor: 'rgba(108,92,231,0.1)', fill: true, tension: 0.3, pointRadius: 5 },
+      { label: '着席率%', data: seatRates, borderColor: '#fd79a8', backgroundColor: 'rgba(253,121,168,0.05)', fill: true, tension: 0.3, pointRadius: 5, borderDash: [5,5] }
+    ]
+  },
+  options: { responsive: true, maintainAspectRatio: false, scales: { y: { min: 0, max: 100, ticks: { callback: v => v + '%' } } }, plugins: { legend: { position: 'top' } } }
+});
+
+// Factor Chart (成約率低下要因)
+new Chart(document.getElementById('factorChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['コラボ流入・温度感の低下', '事前教育(LP)の省略', '勉強会内容の未最適化', 'その他（マーケット環境等）'],
+    datasets: [{ data: [35, 30, 25, 10], backgroundColor: ['#d63031', '#e17055', '#fdcb6e', '#b2bec3'], borderWidth: 2 }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } } }
+});
+
+// Conversion Chart
+new Chart(document.getElementById('conversionChart'), {
+  type: 'bar',
+  data: {
+    labels: periods,
+    datasets: [
+      { label: '成約率（対着席）%', data: conversionRates, backgroundColor: conversionRates.map(v => v >= 60 ? '#00b894' : v >= 40 ? '#fdcb6e' : '#d63031'), borderRadius: 6 }
+    ]
+  },
+  options: { responsive: true, maintainAspectRatio: false, scales: { y: { min: 0, max: 80, ticks: { callback: v => v + '%' } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.raw + '%' } } } }
+});
+
+// Volume Chart
+new Chart(document.getElementById('volumeChart'), {
+  type: 'bar',
+  data: {
+    labels: periods,
+    datasets: [
+      { label: '着席者数', data: [332, 271, 274, 194, 420, 559], backgroundColor: 'rgba(108,92,231,0.3)', borderRadius: 4 },
+      { label: '成約者数', data: [229, 169, 113, 85, 161, 141], backgroundColor: 'rgba(108,92,231,0.9)', borderRadius: 4 }
+    ]
+  },
+  options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } }, plugins: { legend: { position: 'top' } } }
+});
+
+// Retention Chart
+new Chart(document.getElementById('retentionChart'), {
+  type: 'bar',
+  data: {
+    labels: ['0期', '1期', '2期', '2.5期', '3期', '4期', '5期'],
+    datasets: [
+      { label: '年払い1Y継続率%', data: [82, 62, 57, 49, 59, 62, 61], backgroundColor: '#00b894', borderRadius: 4 },
+      { label: '月払い1Y継続率%', data: [35, 35, 40, 58, 44, 23, 19], backgroundColor: '#fd79a8', borderRadius: 4 }
+    ]
+  },
+  options: { responsive: true, maintainAspectRatio: false, scales: { y: { min: 0, max: 100, ticks: { callback: v => v + '%' } } }, plugins: { legend: { position: 'top' } } }
+});
+
+// Tool Free Chart
+new Chart(document.getElementById('toolFreeChart'), {
+  type: 'bar',
+  data: {
+    labels: periods,
+    datasets: [{ label: 'ツール無料期間（日）', data: [90, 90, 180, 60, 60, 60], backgroundColor: ['#74b9ff','#74b9ff','#00b894','#fdcb6e','#fdcb6e','#fdcb6e'], borderRadius: 6 }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, title: { display: true, text: '日数' } } }, plugins: { legend: { display: false }, annotation: {} } }
+});
+
+// Case Fit Chart
+new Chart(document.getElementById('caseFitChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['N1ペルソナに◎一致', '○ある程度一致', '△差異あり'],
+    datasets: [{ data: [3, 4, 3], backgroundColor: ['#00b894', '#74b9ff', '#fdcb6e'], borderWidth: 2 }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+});
+
+// Hypothesis Chart
+new Chart(document.getElementById('hypothesisChart'), {
+  type: 'radar',
+  data: {
+    labels: ['①マンネリ化', '②情報過多', '③社会的証明過多', '④温かさ希薄化', '⑤出し過ぎ', '⑥年払い迷い', '⑦コラボ未対応'],
+    datasets: [
+      { label: 'データの裏付け', data: [2, 2, 3, 3, 2, 2, 3], borderColor: '#6c5ce7', backgroundColor: 'rgba(108,92,231,0.15)', pointRadius: 4 },
+      { label: '成約率への影響度', data: [2, 2, 3, 3, 2, 2, 3], borderColor: '#d63031', backgroundColor: 'rgba(214,48,49,0.1)', pointRadius: 4 },
+      { label: '改善の容易さ', data: [3, 2, 3, 2, 2, 3, 3], borderColor: '#00b894', backgroundColor: 'rgba(0,184,148,0.1)', pointRadius: 4 }
+    ]
+  },
+  options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 3, ticks: { stepSize: 1, callback: v => ['','小','中','大'][v] } } }, plugins: { legend: { position: 'top' } } }
+});
+
+// Emotion Journey Chart
+new Chart(document.getElementById('emotionChart'), {
+  type: 'line',
+  data: {
+    labels: ['開始', 'アイスブレイク', 'ステップ1', 'ステップ2', 'ステップ3', '課題認識', 'iCircle説明', '運営スピーチ', '価格提示', '緊急性', 'Q&A申込'],
+    datasets: [
+      { label: '3期（成約率68.9%）', data: [4,7,8,8,7,6,8,9,8,7,8], borderColor: '#00b894', tension: 0.4, pointRadius: 4 },
+      { label: '8期（成約率25.2%）', data: [4,5,7,7,6,6,7,7,8,7,6], borderColor: '#d63031', tension: 0.4, pointRadius: 4, borderDash: [5,5] }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: { y: { min: 0, max: 10, title: { display: true, text: '感情強度（推定）' } } },
+    plugins: { legend: { position: 'top' }, tooltip: { mode: 'index' } }
+  }
+});
+
+// Priority Matrix Chart (bubble)
+new Chart(document.getElementById('matrixChart'), {
+  type: 'bubble',
+  data: {
+    datasets: [
+      { label: 'Sランク', data: [
+        { x: 9, y: 9, r: 16, label: '怪しさ正面対応' },
+        { x: 9, y: 9, r: 16, label: '家族内緒OK' },
+        { x: 9, y: 8, r: 18, label: 'コラボ接続設計' },
+        { x: 8, y: 9, r: 16, label: 'oVice訴求' }
+      ], backgroundColor: 'rgba(214,48,49,0.7)', borderColor: '#d63031' },
+      { label: 'Aランク', data: [
+        { x: 9, y: 7, r: 12, label: '継続率データ追加' },
+        { x: 8, y: 7, r: 12, label: '事例の再バランス' },
+        { x: 6, y: 8, r: 13, label: '育休ママ登壇' },
+        { x: 9, y: 6, r: 11, label: '深度モデル復活' },
+        { x: 6, y: 7, r: 11, label: 'セールス60分化' }
+      ], backgroundColor: 'rgba(225,112,85,0.7)', borderColor: '#e17055' },
+      { label: 'Bランク', data: [
+        { x: 6, y: 5, r: 9, label: 'つくし入替' },
+        { x: 9, y: 5, r: 9, label: '問いかけ4回化' },
+        { x: 5, y: 5, r: 9, label: 'ツール90日検討' },
+        { x: 9, y: 5, r: 8, label: 'コメント強化' }
+      ], backgroundColor: 'rgba(253,203,110,0.7)', borderColor: '#fdcb6e' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: {
+      x: { min: 0, max: 10, title: { display: true, text: '実施の容易さ（低←→高）' } },
+      y: { min: 0, max: 10, title: { display: true, text: '成約率への影響度（低←→高）' } }
+    },
+    plugins: {
+      legend: { position: 'top' },
+      tooltip: { callbacks: { label: ctx => ctx.raw.label + ` (影響${ctx.parsed.y}, 容易さ${ctx.parsed.x})` } }
+    }
+  }
+});
+</script>
+</body>
+</html>

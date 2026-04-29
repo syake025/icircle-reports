@@ -1,0 +1,2102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICircle Pro ストーリーズマネタイズ完全ラーニングガイド｜2026.04.16</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+    line-height: 1.95;
+    color: #1f2937;
+    background: #f1f5f9;
+    padding: 20px;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; background: #fff; border-radius: 20px; box-shadow: 0 20px 60px rgba(30, 41, 59, 0.15); overflow: hidden; }
+  header {
+    background: linear-gradient(130deg, #4338ca 0%, #7c3aed 50%, #ec4899 100%);
+    color: #fff; padding: 55px 40px 50px; text-align: center; position: relative;
+  }
+  header::after {
+    content: ""; position: absolute; bottom: -1px; left: 0; right: 0; height: 40px;
+    background: linear-gradient(to top, #fff, transparent);
+  }
+  header .eyebrow { font-size: 13px; letter-spacing: 4px; opacity: 0.9; margin-bottom: 12px; }
+  header h1 { font-size: 30px; margin-bottom: 14px; line-height: 1.4; font-weight: 800; }
+  header h1 small { display: block; font-size: 16px; font-weight: 500; margin-top: 8px; opacity: 0.95; }
+  header .meta { font-size: 14px; opacity: 0.9; margin-top: 18px; }
+  header .pills { margin-top: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+  header .pill { background: rgba(255,255,255,0.18); backdrop-filter: blur(8px); padding: 6px 14px; border-radius: 30px; font-size: 12px; }
+
+  /* タブ */
+  .tabs {
+    display: flex; background: #fff; border-bottom: 2px solid #e5e7eb;
+    flex-wrap: wrap; position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  }
+  .tab-btn {
+    flex: 1; min-width: 180px; padding: 18px 14px; background: transparent;
+    border: none; font-size: 14px; font-weight: 700; color: #94a3b8; cursor: pointer;
+    transition: all 0.25s; border-bottom: 4px solid transparent; font-family: inherit;
+    line-height: 1.4;
+  }
+  .tab-btn small { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; margin-top: 3px; }
+  .tab-btn:hover { background: #f8fafc; color: #4338ca; }
+  .tab-btn.active { color: #4338ca; border-bottom-color: #4338ca; background: #f5f3ff; }
+
+  /* タブ中身 */
+  .tab-content { display: none; padding: 50px 45px 70px; }
+  .tab-content.active { display: block; animation: fadeIn 0.5s; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  h2 {
+    color: #1e293b; font-size: 26px; margin: 45px 0 20px;
+    padding: 0 0 12px; border-bottom: 4px solid #4338ca; font-weight: 800;
+    position: relative;
+  }
+  h2:first-child { margin-top: 0; }
+  h2 .chapter-num {
+    display: inline-block; background: #4338ca; color: #fff; font-size: 13px;
+    padding: 3px 10px; border-radius: 12px; margin-right: 12px; vertical-align: middle;
+    font-weight: 700;
+  }
+
+  h3 {
+    color: #312e81; font-size: 20px; margin: 32px 0 15px; padding-left: 14px;
+    border-left: 6px solid #7c3aed; font-weight: 700; line-height: 1.5;
+  }
+
+  h4 {
+    color: #6d28d9; font-size: 17px; margin: 22px 0 10px; font-weight: 700;
+  }
+
+  p { margin-bottom: 14px; font-size: 15.5px; }
+
+  ul, ol { margin: 12px 0 18px 28px; }
+  li { margin-bottom: 8px; font-size: 15.5px; }
+
+  /* callout box variants */
+  .box { border-radius: 12px; padding: 22px 26px; margin: 22px 0; position: relative; }
+  .box h4 { margin-top: 0; }
+  .box-idea { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left: 6px solid #f59e0b; }
+  .box-idea h4 { color: #92400e; }
+  .box-tip { background: #e0f2fe; border-left: 6px solid #0284c7; }
+  .box-tip h4 { color: #075985; }
+  .box-warn { background: #fee2e2; border-left: 6px solid #dc2626; }
+  .box-warn h4 { color: #991b1b; }
+  .box-note { background: #f3e8ff; border-left: 6px solid #9333ea; }
+  .box-note h4 { color: #6b21a8; }
+  .box-note .ref { font-size: 12px; color: #7e22ce; margin-top: 10px; font-style: italic; display: block; }
+  .box-flow { background: #ecfdf5; border: 2px solid #10b981; }
+  .box-flow h4 { color: #065f46; }
+  .box-quote {
+    background: #f8fafc; border-left: 6px solid #64748b; font-style: italic;
+    color: #334155; padding: 18px 24px; position: relative;
+  }
+  .box-quote::before {
+    content: "\201C"; position: absolute; top: -10px; left: 10px; font-size: 56px;
+    color: #94a3b8; font-family: Georgia, serif; line-height: 1;
+  }
+  .box-quote .who {
+    display: block; text-align: right; font-style: normal; font-size: 13px;
+    color: #64748b; margin-top: 8px; font-weight: 600;
+  }
+
+  /* flow steps */
+  .flow-step {
+    background: #fff; padding: 14px 18px; margin: 12px 0;
+    border-left: 5px solid #10b981; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .flow-step .day { font-weight: bold; color: #10b981; font-size: 13px; letter-spacing: 1px; display: block; margin-bottom: 4px; }
+
+  /* examples compare */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 18px 0; }
+  .compare .ng, .compare .ok { padding: 16px 18px; border-radius: 10px; font-size: 14px; }
+  .compare .ng { background: #fef2f2; border: 2px solid #fca5a5; }
+  .compare .ok { background: #ecfdf5; border: 2px solid #6ee7b7; }
+  .compare .label { font-size: 11px; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px; }
+  .compare .ng .label { color: #dc2626; }
+  .compare .ok .label { color: #059669; }
+  @media (max-width: 640px) { .compare { grid-template-columns: 1fr; } }
+
+  /* dialogue */
+  .dialog {
+    background: #fafafa; border-radius: 10px; padding: 18px 22px; margin: 15px 0;
+    border: 1px dashed #cbd5e1;
+  }
+  .dialog .line { margin: 6px 0; font-size: 14.5px; }
+  .dialog .who {
+    display: inline-block; background: #4338ca; color: #fff; padding: 2px 8px;
+    border-radius: 4px; font-size: 12px; margin-right: 8px; font-weight: 700;
+  }
+  .dialog .who.shake { background: #ec4899; }
+  .dialog .who.name { background: #10b981; }
+  .dialog .who.aya { background: #f59e0b; }
+  .dialog .who.sakura { background: #0ea5e9; }
+
+  /* story card */
+  .story-card {
+    background: linear-gradient(135deg, #fef3c7 0%, #fce7f3 100%);
+    border-radius: 14px; padding: 24px 28px; margin: 22px 0;
+  }
+  .story-card .title { font-size: 18px; font-weight: 800; color: #7c2d12; margin-bottom: 10px; }
+  .story-card .lead { color: #7c2d12; font-size: 14.5px; }
+
+  /* highlighted phrase */
+  .marker { background: linear-gradient(transparent 60%, #fef08a 60%); padding: 0 2px; font-weight: 700; }
+  .marker-pink { background: linear-gradient(transparent 60%, #fbcfe8 60%); padding: 0 2px; font-weight: 700; }
+  .ng-word { color: #dc2626; font-weight: 700; }
+  .ok-word { color: #059669; font-weight: 700; }
+
+  /* account header */
+  .account-hero {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    padding: 26px 30px; border-radius: 16px; margin-bottom: 30px;
+    border: 3px solid #f59e0b;
+  }
+  .account-hero h2 { border: none; padding: 0; margin: 0 0 10px; color: #78350f; font-size: 24px; }
+  .account-hero .sub { color: #92400e; font-size: 14px; line-height: 1.8; }
+  .account-hero .meta-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px; margin-top: 18px;
+  }
+  .account-hero .meta-item {
+    background: rgba(255,255,255,0.7); padding: 10px 14px; border-radius: 8px; font-size: 13px;
+  }
+  .account-hero .meta-item .label {
+    display: block; font-size: 10px; color: #a16207; font-weight: 700; letter-spacing: 1px; margin-bottom: 3px;
+  }
+
+  /* chapter divider */
+  .chapter-divider {
+    margin: 50px 0 30px; text-align: center; position: relative;
+  }
+  .chapter-divider::before {
+    content: ""; position: absolute; top: 50%; left: 0; right: 0;
+    height: 2px; background: linear-gradient(to right, transparent, #c4b5fd, transparent);
+  }
+  .chapter-divider span {
+    background: #fff; color: #7c3aed; font-weight: 800; padding: 0 20px;
+    position: relative; font-size: 15px; letter-spacing: 3px;
+  }
+
+  /* table of contents */
+  .toc {
+    background: #f5f3ff; border: 2px solid #c4b5fd; border-radius: 14px;
+    padding: 22px 28px; margin: 25px 0;
+  }
+  .toc h3 { border: none; padding: 0; margin: 0 0 12px; color: #5b21b6; font-size: 17px; }
+  .toc ol { margin: 0 0 0 22px; }
+  .toc li { margin-bottom: 4px; font-size: 14px; color: #4c1d95; }
+
+  /* takeaway */
+  .takeaway {
+    background: linear-gradient(135deg, #ecfccb 0%, #d9f99d 100%);
+    border: 3px solid #65a30d; border-radius: 14px; padding: 20px 26px; margin: 22px 0;
+  }
+  .takeaway h4 {
+    color: #365314; margin-top: 0; font-size: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .takeaway h4::before { content: "✨"; }
+
+  /* badge */
+  .badge {
+    display: inline-block; background: #4338ca; color: #fff;
+    font-size: 11px; padding: 3px 10px; border-radius: 30px; font-weight: 700;
+    letter-spacing: 1px; margin-right: 6px;
+  }
+  .badge-pink { background: #ec4899; }
+  .badge-green { background: #10b981; }
+  .badge-amber { background: #f59e0b; }
+  .badge-blue { background: #0ea5e9; }
+
+  /* scenario */
+  .scenario {
+    background: #fff7ed; border-left: 5px solid #ea580c; padding: 15px 20px;
+    border-radius: 8px; margin: 14px 0;
+  }
+  .scenario .q-label { font-weight: 700; color: #c2410c; font-size: 12px; letter-spacing: 1px; margin-bottom: 6px; }
+
+  footer {
+    background: #1e293b; color: #cbd5e1; padding: 30px 40px; text-align: center; font-size: 13px;
+  }
+  footer a { color: #a78bfa; }
+
+  @media (max-width: 700px) {
+    .tab-btn { font-size: 12px; padding: 14px 10px; min-width: 140px; }
+    header h1 { font-size: 22px; }
+    .tab-content { padding: 30px 22px 50px; }
+    h2 { font-size: 21px; }
+    h3 { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">ICIRCLE PRO LEARNING GUIDE</div>
+    <h1>ストーリーズで売上が生まれる"仕組み"を丸ごと理解する<small>2026年4月16日 開催｜ストーリーズ添削会 第1回 完全保存版</small></h1>
+    <div class="meta">講師：しゃけ ／ 全3時間（前半セミナー30分＋ライブ添削3名）</div>
+    <div class="pills">
+      <span class="pill">🎤 前半：売れるストーリーズの原理</span>
+      <span class="pill">🍱 添削① なめちゃん</span>
+      <span class="pill">🧱 添削② あやさん</span>
+      <span class="pill">🍳 添削③ さくらさん</span>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="all">📚 完全版<small>3時間まるごと</small></button>
+    <button class="tab-btn" data-tab="seminar">🎤 前半セミナー<small>売れる原理30分</small></button>
+    <button class="tab-btn" data-tab="name">🍱 添削① なめちゃん<small>冷凍弁当アフィリ</small></button>
+    <button class="tab-btn" data-tab="aya">🧱 添削② あやさん<small>自社レゴ教育</small></button>
+    <button class="tab-btn" data-tab="sakura">🍳 添削③ さくらさん<small>神戸オフ会</small></button>
+  </div>
+
+  <!-- =========================================== -->
+  <!-- Tab 1: 完全版 -->
+  <!-- =========================================== -->
+  <div class="tab-content active" id="tab-all">
+    <h2><span class="chapter-num">INTRO</span>このガイドの読み方</h2>
+
+    <p>2026年4月16日、ICircle Proで始まった新シリーズ「<strong>ストーリーズ添削会</strong>」の第1回。前半30分のセミナー＋後半の添削ライブ3名、計3時間の中には、<span class="marker">売れるストーリーズの"原理"と"実戦"</span>が詰まっていました。</p>
+
+    <p>このページは、その3時間を<strong>誰でも学習ガイドとして使える形</strong>に再構成したものです。添削を受けていなかった人も、自分のアカウントに応用できるように、しゃけさんが放った重要な比喩・フレーズ・セリフをできる限り残しました。</p>
+
+    <div class="toc">
+      <h3>📖 目次（全3パート／14章）</h3>
+      <ol>
+        <li>新シリーズ「ストーリーズ添削会」の背景</li>
+        <li>【前半セミナー】売れるストーリーズの"論理"</li>
+        <li>客観視 ─ 自分とフォロワーのズレこそ売れない原因</li>
+        <li>ストーリーズで"買った経験"を解剖するワーク</li>
+        <li>4つの不を超える ─ 減点式の売れるゲーム</li>
+        <li>信用の壁を超える技術 ─ 普段のストーリーズの真価</li>
+        <li>楽天アフィリの特殊性 ─ 場所の信用という武器</li>
+        <li>【添削①】なめちゃん：冷凍弁当が売れなかった理由と14日間の物語設計</li>
+        <li>【添削②】あやさん：東大レゴ部コラボを活かしきるローンチ再設計</li>
+        <li>【添削③】さくらさん：オフ会を「料理教室」に変える発想</li>
+        <li>3添削を貫く共通原則</li>
+        <li>ストーリーズは"育成ゲーム" ─ しゃけさんの思考プロセス</li>
+        <li>講座ナレッジ（PRO_11-1/11-2/12-1）との接続</li>
+        <li>明日から実行する10のアクション</li>
+      </ol>
+    </div>
+
+    <div class="chapter-divider"><span>PART 1 ─ 前提と論理</span></div>
+
+    <h2><span class="chapter-num">01</span>新シリーズ「ストーリーズ添削会」の背景</h2>
+
+    <p>まずこのシリーズ自体の位置づけを整理しておきます。ここを理解しておくと、アフィリエイトメンバーを含めた<strong>全員</strong>が、このシリーズを"使い倒す"設計だと分かります。</p>
+
+    <h3>なぜ今、ストーリーズに全振りした添削会なのか</h3>
+
+    <ul>
+      <li>これまでのグルコンは<strong>自社商品</strong>の話が中心だった</li>
+      <li>4月16日（今回）から、<strong>ストーリーズに特化</strong>した添削会が新しくスタート</li>
+      <li>次回以降のスケジュール：
+        <ul>
+          <li>4/30：りこぴんさん</li>
+          <li>5/14：<strong>アフィリエイトが超得意な特別ゲスト</strong>の添削ライブ</li>
+          <li>5/28：しゃけ</li>
+        </ul>
+      </li>
+    </ul>
+
+    <div class="box box-quote">
+      アフィリエイトの方はですね、この添削が非常に活用してほしいポイントではあるので、本当にストーリーズ上げたものを直近のやつとかでもいいんですけれども、<strong>ぜひフル活用してもらえたら</strong>なというふうに思ってます。<br>
+      添削依頼を出していただいたら、ほぼ100%で採択されるような現状です。後半になってくるとみんな混雑して、添削出していただいたのに見れなくなっていっちゃうのを心ぐらいで、<strong>早め早めに出して</strong>もらえたらと思います。
+      <span class="who">— しゃけ（シリーズのスタート宣言）</span>
+    </div>
+
+    <h3>この日の添削対象</h3>
+
+    <p>急遽MEGさんが不参加となり、代わりにチョアさんが追加 → 時間の都合でチョアさんは次回持ち越し。結果、以下の3名のアカウントが添削されました。</p>
+
+    <ul>
+      <li><strong>なめちゃん</strong>（アフィリエイト／冷凍弁当）</li>
+      <li><strong>あやさん</strong>（自社商品／レゴ教育）</li>
+      <li><strong>さくらさん</strong>（自社／オフ会告知）</li>
+    </ul>
+
+    <h2><span class="chapter-num">02</span>【前半セミナー】売れるストーリーズの"論理"</h2>
+
+    <div class="box box-quote">
+      ただただ「ここダメですね」「ここはこうしましょう」って言っても、多分全員が論理がないから、多分自分ごと化して自分の投稿とかに活かしていけない。なので流れとしてはまず前半で15分〜20分ぐらい、どういったストーリーズが売れるのかというか、そもそもの売上を作るためのストーリーズ何なのかっていうところの、講座でも話してるんですけれども、<strong>さらにそこの具体とか復習とか、皆さんに実感してもらえるような時間</strong>にさせていただいて、そこから添削に入っていこうかなというふうに思っています。
+      <span class="who">— しゃけ（前半セミナーの狙い）</span>
+    </div>
+
+    <p>添削だけでは応用が利かない。だから<strong>原理を先に共有</strong>してから添削に入る設計。その原理は2本柱：</p>
+
+    <div class="box box-flow">
+      <h4>🎯 今日伝える2本柱</h4>
+      <ol>
+        <li><strong>客観視</strong> ─ フォロワーから自分がどう見られているか、解像度を持つ</li>
+        <li><strong>4つの不を超える</strong> ─ ①信用 ②必要 ③最適 ④今すぐ の4つの壁を全部超える</li>
+      </ol>
+      <p style="margin-top:10px;">添削はこの2本柱を、3人の実例でなぞっていく構成になっています。</p>
+    </div>
+
+    <h2><span class="chapter-num">03</span>客観視 ─ 自分とフォロワーのズレが売れない原因</h2>
+
+    <p>売れていない人の共通点は、シンプルに<span class="marker">"ズレ"</span>です。</p>
+
+    <div class="box box-idea">
+      <h4>💡 ズレの構造</h4>
+      <ul>
+        <li>自分：「私、完璧にこれだったら売れるでしょって思って出している」</li>
+        <li>なのに売れない</li>
+        <li>＝ 自分の思っている像と、フォロワーから見えている像がズレている</li>
+        <li>だから"届かない"</li>
+      </ul>
+      <p><strong>自分の頭の中のズレを修正するだけで、届くようになる。</strong></p>
+    </div>
+
+    <h3>客観視をトレーニングする具体的な方法</h3>
+
+    <p>今日の添削で使われていた方法：<strong>参加者全員に「この人どう見える？」を書いてもらう</strong>。これは添削ライブ特有のメリットですが、普段でもできる形に落とせます。</p>
+
+    <div class="box box-tip">
+      <h4>💬 普段の運用に落とすなら</h4>
+      <ul>
+        <li>同期・発信仲間に「私ってどう見える？」を直接聞く</li>
+        <li>DMをもらった時、そのDMから逆算して「こう見られているんだ」と気づく</li>
+        <li>ストーリーズの質問箱で「私ってどんなイメージ？」を月1で聞く</li>
+      </ul>
+      <p>重要なのは、<strong>自分の頭の中だけで完結させない</strong>こと。</p>
+    </div>
+
+    <h2><span class="chapter-num">04</span>ストーリーズで"買った経験"を解剖するワーク</h2>
+
+    <p>しゃけさんはいきなり原理を語らず、<strong>「皆さん、ストーリーズで物を買ったことありますか？」</strong>という体験の掘り起こしから入りました。これ自体が、ストーリーズで物を売るときの最初の一手（自分ごと化）の実演。</p>
+
+    <h3>ケース1：あやさんがパンセさんから買ったシアトップス</h3>
+
+    <div class="story-card">
+      <div class="title">1回目はスルー、2回目で購入</div>
+      <p class="lead">
+        同期パンセさんがシアトップスを紹介。1回目は既に持っていたのでスルー。数シーズン後の2回目、ちょうど持っていたシアトップスが<strong>ボロボロ</strong>になっていて「今だな」と購入決定。
+      </p>
+    </div>
+
+    <h3>ケース2：なめちゃんが楽天で買う子育てグッズ</h3>
+
+    <div class="story-card">
+      <div class="title">特定の人からしか買わない／世界観と人柄で選ぶ</div>
+      <p class="lead">
+        プライベートアカウントで暮らし・子育て系をフォロー。買うのは数人の<strong>特定の人</strong>から。決め手は<span class="marker">世界観が好き／人柄が伝わる／ちょっとドジなところにくすっと笑う</span>／リアルに使っている場面が見える、など。
+      </p>
+    </div>
+
+    <div class="box box-idea">
+      <h4>💡 両ケースから導かれる心理の核心</h4>
+      <p>ストーリーズで物を買うという行為は、<span class="marker-pink">「憧れているインフルエンサーの場所に、心理的に距離を縮めたい」</span>という欲求。買うのは仲良くなりたいからではなく、<strong>憧れの場所に近づく手っ取り早い手段</strong>として物を選ぶ。</p>
+    </div>
+
+    <h2><span class="chapter-num">05</span>4つの不を超える ─ 減点式の売れるゲーム</h2>
+
+    <p>買われるためには、フォロワーの中にある4つの壁を全部超える必要がある。</p>
+
+    <div class="box box-flow">
+      <h4>🎯 4つの不（買わない理由）</h4>
+      <ol>
+        <li><strong>信用しない</strong></li>
+        <li><strong>必要じゃない</strong></li>
+        <li><strong>最適じゃない</strong></li>
+        <li><strong>今すぐじゃない</strong></li>
+      </ol>
+    </div>
+
+    <h3>最適が効く場面：マナラの洗顔</h3>
+
+    <p>洗顔は全員使っている → 「必要」は最初からクリア → 売れるカギは<span class="marker">「どれが最適か」</span>を腑落ちさせること。商品のカテゴリーによって、どの壁が主戦場になるかが変わる。</p>
+
+    <div class="box box-warn">
+      <h4>⚠️ 減点式だから怖い</h4>
+      <p>4つのうち1つでも抜け漏れがあれば売れない。「信用OK・必要OK・最適OK・今すぐは？ → 語れていない → 減点 → 売れない」。<br>
+      全部クリアして初めて売れる、という<strong>抜け漏れチェック型</strong>のゲーム。</p>
+    </div>
+
+    <h3>リンクを貼らない日 vs 貼る日の役割分担</h3>
+
+    <div class="box box-flow">
+      <h4>🟢 2種類の日の役割</h4>
+      <p><strong>リンクを貼らない日（普段のストーリーズ）：</strong><br>
+      ①信用の壁を超える。人間性・効果の証明・生活感を積む。</p>
+      <p style="margin-top:10px;"><strong>リンクを貼る日（訴求当日）：</strong><br>
+      ②必要・③最適・④今すぐの壁を超える。</p>
+      <p style="margin-top:10px; padding-top:10px; border-top:1px solid #a7f3d0;">
+        この関係は<strong>直列</strong>。普段で①を超えた人だけが、訴求日のストーリーズを見てくれる。片方だけでは絶対に機能しない。
+      </p>
+    </div>
+
+    <h2><span class="chapter-num">06</span>信用の壁を超える技術 ─ 普段のストーリーズの真価</h2>
+
+    <h3>たとえ話①：しゃけが急に英語塾を紹介し始めたら？</h3>
+
+    <div class="box box-quote">
+      僕が急に英語塾をみんなに紹介しだしたら、意味わからんじゃないですか。「<strong>言ってないやん英語塾、どういうこと？</strong>」ってなるじゃないですか。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <p>逆に、<strong>しゃけさんが普段AIを使いまくっている</strong>のをフォロワーが知っているから、「AQUA VOICEがいい」と言えば「ちょっと試そうかな」になる。</p>
+
+    <h3>たとえ話②：なめちゃんがヨガマットをおすすめしたら？</h3>
+
+    <p>なめちゃんは毎日ダイエット記録やストレッチを上げている → 「毎日やっている人が売るんだから大丈夫、いいかも」となる。さらに「4つぐらい買っていたけど、3つは使っておらず今はこれ1本」と言われたら、<span class="marker">必要な人にだけ刺さる信用</span>が立ち上がる。</p>
+
+    <div class="takeaway">
+      <h4>信用は言葉では作れない</h4>
+      <p>信用は「信用してください」とは作れない。<strong>普段の使ってる姿・生活・試した結果</strong>を数ヶ月積み上げることでしか作れない。リンクを貼る日だけ頑張っても遅い。</p>
+    </div>
+
+    <h2><span class="chapter-num">07</span>楽天アフィリの特殊性 ─ 場所の信用という武器</h2>
+
+    <p><strong>アフィリエイトは全部同じではない</strong>という話。これは楽天アフィリ組には特に重要。</p>
+
+    <div class="box box-warn">
+      <h4>⚠️ 全員が持っている前提</h4>
+      <p>「Instagramで売られているものには、いいと言っているけど実は良くないものもあるよね」という認識は、<strong>世の中の全員が持っている</strong>。動かしようのない前提。</p>
+    </div>
+
+    <h3>楽天 vs その他アフィリ ─ "場所の信用"</h3>
+
+    <div class="compare">
+      <div class="ng">
+        <div class="label">その他アフィリ</div>
+        よくわからん店で売っているもの。信用の壁が高い。
+      </div>
+      <div class="ok">
+        <div class="label">楽天アフィリ</div>
+        近所のイオンモールで売っているもの。場所の信用で壁が低い。
+      </div>
+    </div>
+
+    <h3>イオンの自分枕と50万円の羽毛布団</h3>
+
+    <div class="story-card">
+      <div class="title">同じ商品でも、売られる"場所"で印象が180度変わる</div>
+      <p class="lead">
+        自分枕というブランドがイオンに入っている。枕2〜3万円で売って、<strong>バックエンドで50万円の羽毛布団</strong>をセールスするビジネスモデル。<br><br>
+        カフェで同じセールスをされたら「マルチだ、怖い」。<br>
+        でもイオンなら「ちょっと大丈夫ちゃう？」。<br><br>
+        <strong>売っている"場所"で心理が180度変わる</strong>。楽天＝イオン枠。その他＝よくわからん店枠。
+      </p>
+    </div>
+
+    <div class="box box-idea">
+      <h4>💡 売り方の違い</h4>
+      <ul>
+        <li><strong>楽天アフィリ</strong>：場所の信用で①は超えやすい → ②③④にフォーカス、リンクもガツンと出していい</li>
+        <li><strong>その他アフィリ</strong>：①の壁が高い → 普段のストーリーズで信用を作る、リンクはやんわり添える</li>
+      </ul>
+    </div>
+
+    <div class="chapter-divider"><span>PART 2 ─ 実戦：3つの添削</span></div>
+
+    <h2><span class="chapter-num">08</span>【添削①】なめちゃん：14日間の物語設計</h2>
+
+    <p class="meta" style="color:#64748b; font-size:13px; margin-bottom:15px;">※ 詳細は <strong>Tab 3「🍱 添削① なめちゃん」</strong> を参照。ここでは全体の流れだけダイジェストします。</p>
+
+    <h3>アカウントの現状</h3>
+
+    <ul>
+      <li>毎週1,000〜2,000人フォロワー増の優良アカウント</li>
+      <li>ココア蒸しパンが200万再生、1本でフォロワー6,000〜7,000人増</li>
+      <li>フォロワーからの印象：<strong>スタイルきれい／意識高い／美容と健康に詳しそう</strong></li>
+      <li>冷凍弁当アフィリのゼロローンチ1週間訴求 → <strong>販売ゼロ</strong></li>
+    </ul>
+
+    <h3>なぜ売れなかったのか</h3>
+
+    <ul>
+      <li>1週間匂わせたが、物語になっていなかった</li>
+      <li>商品が<strong>唐突に</strong>出てきた（ハリーポッターが急にボルデモートと戦う状態）</li>
+      <li>「作家になる」視点の欠如</li>
+    </ul>
+
+    <h3>しゃけさんがその場で組み立てた14日間の物語設計</h3>
+
+    <div class="box box-flow">
+      <h4>📅 なめちゃんの14日ストーリー設計</h4>
+      <div class="flow-step">
+        <span class="day">DAY 1-3：自分ごと化の種まき</span>
+        食事の重要性 → コンビニ弁当でニキビ／下腹ポッコリ → 戻すのに1週間かかるよね？共感
+      </div>
+      <div class="flow-step">
+        <span class="day">DAY 4-5：競合をずらす（家政婦）</span>
+        忙しくて無理 → 家政婦検討 → 残業代の2倍 → 別の選択肢を探す
+      </div>
+      <div class="flow-step">
+        <span class="day">DAY 6-9：双方向で興味喚起</span>
+        「冷凍弁当食べたことある？」質問 → DM回収 → 種類比較 → 2メーカーに絞る
+      </div>
+      <div class="flow-step">
+        <span class="day">DAY 10-12：実証</span>
+        2メーカー食べ比べ → 美味しい／値段／カロリーで評価 → DM「どこで買ったの？」嵐
+      </div>
+      <div class="flow-step">
+        <span class="day">DAY 13-14：訴求本番</span>
+        「紹介ならめっちゃ安いらしい」→ リンク貼る（後ろに添える）→ キャンペーン明日まで（理由つき）
+      </div>
+    </div>
+
+    <div class="box box-idea">
+      <h4>💡 この章の中核テクニック</h4>
+      <ul>
+        <li><strong>競合をずらす</strong>（冷凍弁当 vs 家政婦 で価格感覚を上書き）</li>
+        <li><strong>自分からボールを投げない</strong>（先にフォロワーに質問させて、リアクションで返す）</li>
+        <li><strong>お願いしない</strong>（矢印・連打・「買って」は商品力の自白）</li>
+        <li><strong>口コミは3パターンだけ</strong>（画面一面／アンダーバー＋要約／ピックアップ）</li>
+      </ul>
+    </div>
+
+    <h2><span class="chapter-num">09</span>【添削②】あやさん：東大レゴ部コラボのローンチ再設計</h2>
+
+    <p class="meta" style="color:#64748b; font-size:13px; margin-bottom:15px;">※ 詳細は <strong>Tab 4「🧱 添削② あやさん」</strong> を参照。</p>
+
+    <h3>強いネタを持っているのに届いていない</h3>
+
+    <ul>
+      <li>東大レゴ部コラボ／モニター生6名／お子さんの成長が投稿で見える</li>
+      <li>フォロワー認識：<strong>教育熱心なママ、あやさんの子供はちゃんと育っている</strong></li>
+      <li>なのにリアクションが少ない → <strong>主語・前提・順番の省略</strong>が原因</li>
+    </ul>
+
+    <h3>主語を入れるだけで別物になる</h3>
+
+    <div class="compare">
+      <div class="ng"><div class="label">Before</div>「アーカイブを残してほしい」</div>
+      <div class="ok"><div class="label">After</div>「<strong>東大レゴ部×あやレゴのコラボでやったインスタライブ</strong>のアーカイブを残してほしい人？」</div>
+    </div>
+
+    <h3>情報の順番を逆転</h3>
+
+    <div class="box box-flow">
+      <h4>正しい順序：対象＆内容 → 名前 → 特典</h4>
+      <ol>
+        <li>何歳から何歳の子供が、レゴを通して脳を育てるプログラム</li>
+        <li>名前を「イクノビルドラボ」にしました</li>
+        <li>込めた思い</li>
+        <li>本気だから東大レゴ部の協力を得た</li>
+      </ol>
+    </div>
+
+    <h3>セミナータイトル改善（Before / After）</h3>
+
+    <div class="compare">
+      <div class="ng">
+        <div class="label">Before</div>
+        東大生の94%が夢中だった<br>あのレゴの遊び方<br>AI時代の考える力を育てる特別勉強会
+      </div>
+      <div class="ok">
+        <div class="label">After</div>
+        東大生の94%が<strong>共通して</strong>夢中になった<br>レゴ遊びの<strong>秘密を公開</strong><br>AI時代に活躍できる<strong>わが子の思考力</strong>を育てる特別勉強会
+      </div>
+    </div>
+
+    <div class="box box-idea">
+      <h4>💡 この章の中核テクニック</h4>
+      <ul>
+        <li><strong>主語・前提・順番</strong>を毎ページ揃える</li>
+        <li>いい話は<strong>1日で終わらせず3日擦る</strong></li>
+        <li>競合を<strong>塾代150万/年</strong>にずらす</li>
+        <li><strong>3日先の台本を同期にレビューしてもらう</strong>（これで売上2〜5倍変わる）</li>
+      </ul>
+    </div>
+
+    <h2><span class="chapter-num">10</span>【添削③】さくらさん：オフ会を「料理教室」に変える発想</h2>
+
+    <p class="meta" style="color:#64748b; font-size:13px; margin-bottom:15px;">※ 詳細は <strong>Tab 5「🍳 添削③ さくらさん」</strong> を参照。</p>
+
+    <h3>60%は伝わっている優等生</h3>
+
+    <ul>
+      <li>顔出し・写真・口コミ・雰囲気づくり ─ 全部できている</li>
+      <li>でも申込4人 → 業界用語「オフ会」のハードルを認識できていなかった</li>
+      <li>世間の認識：「オフ会＝知らない人にネットで会う→刺されないかな？レベルで怖い」</li>
+    </ul>
+
+    <h3>コンセプト再設計：オフ会→無料料理レッスン</h3>
+
+    <div class="box box-flow">
+      <h4>💡 新コンセプト</h4>
+      <p style="font-size: 16px; font-weight: 700;">
+        「無料で参加できる<strong>お料理レッスン</strong>／お弁当特化の<strong>お料理教室</strong>」<br>
+        ─ 歴20年のプロ（さくらさん）が教える／会場代・食材代のみ集金／営業は一切なし
+      </p>
+    </div>
+
+    <div class="box box-idea">
+      <h4>💡 ABCクッキング対比で価格感覚を壊す</h4>
+      <p>ABCクッキング：1回5万円、10回で50万円。<br>
+      さくらさんのレッスン：会場代＋食材代のみ。<strong>お弁当特化・JKママのプロ</strong>から学べる希少性。</p>
+    </div>
+
+    <h3>切り口は"10個"出す</h3>
+
+    <p>「楽しい訴求」だけだと30通りある刺さりポイントのうち1個しか当たらない。10個出せば参加者は単純計算で10倍。</p>
+
+    <div class="box box-idea">
+      <h4>💡 この章の中核テクニック</h4>
+      <ul>
+        <li>業界用語（オフ会／プロンプト／アフィリ）を<strong>フォロワーの言葉に翻訳</strong>する</li>
+        <li>切り口は<strong>10個</strong>用意する（楽しい1軸だと届かない）</li>
+        <li>自分側のメリットを<strong>正直に開示</strong>（論語の視・観・察）</li>
+        <li>集合写真に<strong>「全員初めまして」</strong>と書き、既存グループの恐怖を消す</li>
+      </ul>
+    </div>
+
+    <div class="chapter-divider"><span>PART 3 ─ 横断的な学び</span></div>
+
+    <h2><span class="chapter-num">11</span>3添削を貫く共通原則</h2>
+
+    <p>3人別々の商品・ジャンルだったにも関わらず、しゃけさんのアドバイスには<strong>一本の筋</strong>が通っていました。</p>
+
+    <div class="box box-flow">
+      <h4>🧭 全員に共通した6つの原則</h4>
+      <ol>
+        <li><strong>フォロワー視点で妄想する</strong><br>
+        自分の発信が、前提ゼロの人にどう見えるかを毎回シミュレーションする。しゃけさんの思考の中核。</li>
+        <li><strong>順番が全て</strong><br>
+        自分が言いたいことは最後。先にフォロワーに言わせる／見せる。リアクションの形で返す。</li>
+        <li><strong>物語で売る</strong><br>
+        商品単体ではなく、自分の失敗 → 模索 → 解決 → 実証の旅路として1〜2週間で描く。ハリーポッター理論。</li>
+        <li><strong>お願いしない</strong><br>
+        矢印・リンク連打・「買ってください」は、商品力の無さを自白している。</li>
+        <li><strong>競合を"別業界"に置く</strong><br>
+        冷凍弁当 vs 家政婦／お弁当教室 vs ABCクッキング／レゴ教育 vs 塾代150万。価格感を壊すと売れる。</li>
+        <li><strong>主語と見出しを1ページ1つ</strong><br>
+        ストーリーズはザッピングされる前提。毎ページ単体で意味が通るように書く。</li>
+      </ol>
+    </div>
+
+    <h2><span class="chapter-num">12</span>ストーリーズは"育成ゲーム" ─ しゃけさんの思考プロセス</h2>
+
+    <div class="box box-quote">
+      やってることは本当に、フォロワーさんを育ててるんですよ、育成ゲームみたいなのを。<br>
+      この意識からこの意識に変えます → 次はこの意識からこの意識に → 双方向性から興味を持ってもらう → 選択肢を知ってもらう → 私が実証してあげます → 信用を作っていく → 必要性を話す → 今すぐ買う理由 → 買える。<br>
+      <strong>本当の意味で"超えていけるか"を抜け漏れチェックするゲーム</strong>。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <h3>フォロワーの脳内シミュレーションの実演（さくらさん編より）</h3>
+
+    <div class="box box-quote">
+      今僕がバーってポンポンポンって出してるのってどういう思考で出してるかっていうと、<strong>僕がさくらさんのフォロワーさんだったらどう感じるかな</strong>って妄想で膨らましていってるんですよね。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <p>これが<strong>"客観視"の実行可能な形</strong>。自分のアカウントに向き合う時に再現できるプロセス：</p>
+
+    <div class="box box-tip">
+      <h4>🧠 しゃけ式・フォロワー脳内シミュレーション</h4>
+      <ol>
+        <li>自分のストーリーズ1枚目を、前提ゼロで見る</li>
+        <li>「何の話？怖いな／気になるな／わからないな」を自分で1人ボケツッコミする</li>
+        <li>各反応に対して、次のページで何を見せれば脳内の疑問が解けるかを設計する</li>
+        <li>全部の疑問が解ける流れができたら、本物の順番になっている</li>
+      </ol>
+    </div>
+
+    <h2><span class="chapter-num">13</span>講座ナレッジとの接続</h2>
+
+    <p>ICircle Pro講座で既に学んでいる内容と、今日のセミナーがどう繋がっているかの対応表。</p>
+
+    <div class="box box-note">
+      <h4>📖 PRO_11-1（ストーリーズの本質）との接続</h4>
+      <ul>
+        <li>講座：「ものが買われる3パターン ─ もの／人／効果の証明」</li>
+        <li>今日：「4つの不の①信用」は、講座の"人"と"効果の証明"を合わせた領域</li>
+        <li>講座：「信頼残高はコップに水を溜めるイメージ」</li>
+        <li>今日：「リンクを貼らない日の積み上げ」はこれそのもの</li>
+      </ul>
+    </div>
+
+    <div class="box box-note">
+      <h4>📖 PRO_11-2（ストーリーズの作り方）との接続</h4>
+      <ul>
+        <li>講座：「リアクション構造」─ 何かに対するリアクションとして伝えたいことを展開</li>
+        <li>今日：「フォロワーに先に言わせる→リアクションで返す」はリアクション構造そのもの</li>
+        <li>講座：「言いたいことは自分で言わない」「"良い"を誰が最初に言うか」</li>
+        <li>今日：DM・口コミの3パターン（画面一面／アンダーバー＋要約／ピックアップ）</li>
+        <li>講座：映え写真4原則（①文字スペース ②映るものは3個以内 ③自分の姿 ④引きと寄り）</li>
+        <li>今日：さくらさんの写真がほぼ全て実践できている理由</li>
+      </ul>
+    </div>
+
+    <div class="box box-note">
+      <h4>📖 PRO_12-1（ローンチストーリーズの計画方法）との接続</h4>
+      <ul>
+        <li>講座：「潜在層を顕在層に変える3つの方法」─ ①悩みの自覚 ②理想の未来 ③自分ごと化</li>
+        <li>今日：なめちゃんの14日設計 Day 1-3／あやさんの Day 1-3 ── 完全にこの3つの組み立て</li>
+        <li>講座：ローンチストーリーズは告知を階段的に何重にも行う</li>
+        <li>今日：14日間の"物語"設計はこの階段的告知の具体例</li>
+      </ul>
+      <span class="ref">全参照：01_ナレッジ/iサークルPRO+講座ナレッジ/</span>
+    </div>
+
+    <h2><span class="chapter-num">14</span>明日から実行する10のアクション</h2>
+
+    <p>このガイドを読み終えた後、具体的に何をすれば明日から変わるか。</p>
+
+    <div class="takeaway">
+      <h4>10のアクション（重要度順）</h4>
+      <ol>
+        <li>自分のフォロワーから見える自分像を<strong>同期に書き出してもらう</strong>（客観視）</li>
+        <li>リンクを貼らない日のストーリーズを<strong>1日最低10枚</strong>上げる</li>
+        <li>商品を売る時は<strong>1〜2週間の物語</strong>で設計する（作家になる）</li>
+        <li>競合を<strong>"別業界"にずらす</strong>フレーム（家政婦／塾／料理教室など）</li>
+        <li>自分からボールを投げる前に、<strong>フォロワーに言わせる質問</strong>を投げる</li>
+        <li>リンクに<strong>矢印を置かない</strong>／リンクは後ろに添える（楽天は別）</li>
+        <li>口コミ・DMは<strong>3パターン以外使わない</strong>（特にアンダーバーだけはNG、要約必須）</li>
+        <li>ストーリーズ台本は<strong>3日先まで事前に書いて同期にレビュー</strong>させる（12時間以内に返す）</li>
+        <li>業界用語（オフ会／プロンプト）を<strong>フォロワーの日常語に翻訳</strong>する</li>
+        <li>4つの不（信用／必要／最適／今すぐ）を<strong>チェックリスト</strong>にして、訴求前に全部クリアしているか検算する</li>
+      </ol>
+    </div>
+
+    <h2><span class="chapter-num">CLOSE</span>しゃけさんの締めの言葉</h2>
+
+    <div class="box box-quote">
+      今日で売上2倍になりましたね、よかったですけど頑張ります。<br>
+      皆さんのこの切り口というか、改善点というか、分岐点になるようないろんなところが見つかって。<br>
+      今日ね、できてないところを僕すごい言っていってたんで、「私全然できてないじゃん」って思われるようなことを結構言ったかもしれないですけど、大前提なんですけれども、<strong>70点80点とかそれぐらい取れてるぐらい、やっぱりいいところもっともっと今日いいよって言ったところ以外にも、もっともっといいところある</strong>んですよね。<br>
+      時間の関係でやっぱり悪いところ、改善点をフォーカスしていった方が点数上がっていくんで、そこに言ってただけなんで、<strong>全然できてないじゃん私って思わないでください</strong>。<br>
+      一つの気づきで圧倒的に数字って変わるんですよね。このちっちゃい気づきで変わるっていうのをね、分かっておいてもらえたらという風なところです。
+      <span class="who">— しゃけ（セミナー終了時）</span>
+    </div>
+
+    <div class="takeaway">
+      <h4>最後に ─ このガイドの使い方</h4>
+      <p>このレポートは、1回読んで終わりではなく<strong>アカウント運用の傍に置いて何度も戻る学習ガイド</strong>として作りました。<br>
+      特に：</p>
+      <ul>
+        <li>訴求前に<strong>第5章（4つの不）</strong>でチェックリストを回す</li>
+        <li>ストーリーズのネタに困ったら<strong>第11章の6原則</strong>に戻る</li>
+        <li>同期にレビューを頼む時は<strong>Tab 4（あやさん編）のテンプレ</strong>を使う</li>
+        <li>DM・口コミを載せる時は<strong>3パターンだけ</strong>を意識（第8章・Tab 3参照）</li>
+      </ul>
+      <p>1つの気づきで数字が変わる、というしゃけさんの言葉を信じて、<span class="marker-pink">今日寝る前に1つだけ</span>自分のストーリーズに反映してみてください。</p>
+    </div>
+  </div>
+
+  <!-- =========================================== -->
+  <!-- Tab 2: 前半セミナー -->
+  <!-- =========================================== -->
+  <div class="tab-content" id="tab-seminar">
+    <h2><span class="chapter-num">SEMINAR</span>売れるストーリーズには"論理"がある</h2>
+
+    <p>今日から始まった新シリーズ「ストーリーズ添削会」。毎回の流れは、前半30分で<span class="marker">しゃけさんが原理を講義</span>、その後に3人のアカウントをライブ添削するという構成です。</p>
+
+    <div class="box box-quote">
+      ただただ「ここダメですね」「こうしましょう」って言っても、多分全員が論理がないから自分ごと化して自分の投稿に活かせない。だから前半で原理を話して、みんなに実感してもらえる時間にしたい。
+      <span class="who">— しゃけ（冒頭のセッティング）</span>
+    </div>
+
+    <div class="toc">
+      <h3>🧭 このセミナーで語られた2つの柱</h3>
+      <ol>
+        <li><strong>客観視</strong> ─ フォロワーから自分はどう見られているか、解像度を持てているか？</li>
+        <li><strong>4つの不を超える</strong> ─ ①信用 ②必要 ③最適 ④今すぐ の4つの壁を全部超えて、初めて商品が売れる</li>
+      </ol>
+    </div>
+
+    <h2><span class="chapter-num">01</span>客観視 ─ 自分とフォロワーの"認識のズレ"が売れない原因</h2>
+
+    <p>しゃけさんはまず「客観視」を定義し直します。</p>
+
+    <div class="box box-idea">
+      <h4>💡 客観視の定義</h4>
+      <p>一歩引いて自分を見る。もっと言うと、<span class="marker">フォロワーさんから自分はどんな風に見られているか、理解できていますか？</span>ということ。</p>
+      <p>意外とみんな、そんなことを考える余裕がない／考えてないんじゃないか。ここが、売れるかどうかの大きな分岐点。</p>
+    </div>
+
+    <h3>なぜ"ずれ"が売れない原因になるのか</h3>
+
+    <p>しゃけさんの言葉を起点にロジックを追います。</p>
+
+    <ul>
+      <li>売れてない人は、<span class="marker">自分の思っている"像"</span>と、<span class="marker-pink">フォロワーが思っている"像"</span>にギャップがある。</li>
+      <li>自分は「これだったら売れるでしょ」という像で発信しているのに売れない。</li>
+      <li>それは、フォロワーが見ている像とズレているから届かない。</li>
+      <li><span class="marker">自分の頭の中のズレを修正する</span>と、届くようになる。</li>
+    </ul>
+
+    <div class="box box-tip">
+      <h4>🧪 今日の添削で使われたワーク</h4>
+      <p>本人に「どう見られていると思う？」を聞くのではなく、<span class="marker">参加者全員</span>に「この人どう見える？」をチャットで書いてもらう。こうすると、本人の認識 vs フォロワーの認識のズレが一瞬で可視化される。</p>
+      <p>これは添削ライブ特有の強みですが、通常運用でも<strong>同期や発信仲間に「私ってどう見える？」を聞く</strong>ことで同じ効果が得られる。</p>
+    </div>
+
+    <div class="takeaway">
+      <h4>この章のテイクアウェイ</h4>
+      <p>売れない＝フォロワーに「関係ない」と受け取られている状態。<strong>自分は完璧だと思って出している発信ほど、ズレを疑え。</strong>ズレを修正する最速の方法は、他人の目を入れること。</p>
+    </div>
+
+    <h2><span class="chapter-num">02</span>ワーク：「ストーリーズで物を買った経験」を全員で解剖する</h2>
+
+    <p>しゃけさんはいきなり原理の話には入りません。「皆さん、ストーリーズで物を買ったことありますか？」という<strong>体験の掘り起こし</strong>から入ります。</p>
+
+    <div class="box box-quote">
+      ストーリーズで買ったことがない人は、ストーリーズで買う人の心理状態が掴みきれていないかもしれない。そこが意外とめちゃくちゃ大事な部分なので、まず心理を調整していきたい。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <h3>ケース1：あやさんとパンセさんのシアトップス</h3>
+
+    <div class="story-card">
+      <div class="title">1回目のローンチではスルーした。でも2回目で買った。</div>
+      <p class="lead">
+        同期のパンセさんがシアトップスをおすすめしていた。1回目の訴求時は、自分で持っていたから買わなかった。でもシーズンが変わって2回目のローンチのとき、持っていたシアトップスがボロボロになっていて<strong>「今だな」</strong>と感じて購入。
+      </p>
+    </div>
+
+    <p>ここから引き出せる心理：</p>
+    <ul>
+      <li><strong>人：</strong> パンセさんは<span class="marker">同期で信用できる人</span>だった。</li>
+      <li><strong>必要：</strong> 1回目は必要じゃなかった。2回目はボロボロで必要だった。</li>
+      <li><strong>今すぐ：</strong> ボロボロ＋セール再来で「今だな」がトリガーになった。</li>
+    </ul>
+
+    <h3>ケース2：なめちゃんが楽天で買う子育てグッズ</h3>
+
+    <div class="story-card">
+      <div class="title">プライベートアカウントで、特定の数人からだけ買う。</div>
+      <p class="lead">
+        暮らし・子育てのプライベートアカウントで、数人の発信者をフォロー。<strong>世界観が好き・人柄が伝わる・ちょっとドジな一面にくすっと笑える</strong>。そういう人が<strong>リアルに使っている場面</strong>を見ると「いいな」と思って買う。
+      </p>
+    </div>
+
+    <div class="box box-idea">
+      <h4>💡 この2つのケースが教えてくれること</h4>
+      <p>ストーリーズでの購入は、<span class="marker">「憧れているインフルエンサーの場所に、心理的に距離を縮めたい」</span>という心理が根底にある。仲良くなるという意味ではなく、<strong>憧れている人のところに手っ取り早く近づく手段として「買う」という行為が発生する</strong>。</p>
+    </div>
+
+    <div class="box box-quote">
+      フォロワーさんからしたら、憧れている人のところに行くのに手っ取り早い方法が「買う」という手段。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <h2><span class="chapter-num">03</span>4つの不 ─ 全部クリアして初めて売れる減点式ゲーム</h2>
+
+    <p>買われるためには、フォロワーの中にある<strong>4つの壁</strong>を全部超える必要がある。</p>
+
+    <div class="box box-flow">
+      <h4>🎯 4つの不（=買わない理由）</h4>
+      <ol>
+        <li><strong>信用しない</strong> ─ この人/この商品/この話、信用できない</li>
+        <li><strong>必要じゃない</strong> ─ 自分には必要ない</li>
+        <li><strong>最適じゃない</strong> ─ 他にも選択肢がある中で、これが最適とは思えない</li>
+        <li><strong>今すぐじゃない</strong> ─ 買うとしても今すぐじゃなくていい</li>
+      </ol>
+    </div>
+
+    <h3>"最適"が効く場面：マナラの洗顔</h3>
+
+    <p>マナラの洗顔を例に、<strong>商品カテゴリーによって壁の重みが変わる</strong>ことが説明されました。</p>
+
+    <ul>
+      <li>洗顔そのものは<span class="marker">全員使っている</span> → 「必要じゃない」の壁は最初から超えている</li>
+      <li>となると、売れるカギは<span class="marker-pink">「どれが最適か」</span>を腑落ちさせること</li>
+      <li>こういう「必要は自明／最適を教えるべき」商品のときは③が主戦場になる</li>
+    </ul>
+
+    <div class="box box-warn">
+      <h4>⚠️ 減点式という怖さ</h4>
+      <p>4つのうち<strong>1つでも抜け漏れがあれば売れない</strong>。<br>
+      「信用 OK・必要 OK・最適 OK・今すぐは？ → 語れていない → 減点 → 売れない」。<br>
+      全部クリアして初めて売れる、という抜け漏れチェック型のゲームだと思うこと。</p>
+    </div>
+
+    <h2><span class="chapter-num">04</span>信用の壁を超える技術 ─ 普段のストーリーズの役割</h2>
+
+    <p>4つの不のうち、①信用は<span class="marker">"リンクを貼らない日"</span>の普段のストーリーズで超えていくもの。</p>
+
+    <div class="box box-flow">
+      <h4>🟢 リンクを貼らない日 vs 貼る日の役割分担</h4>
+      <p><strong>リンクを貼らない日＝普段のストーリーズ：</strong><br>
+      ①信用の壁を超える。人間性・効果の証明・生活感を積む。</p>
+      <p style="margin-top:10px;"><strong>リンクを貼る日＝訴求当日：</strong><br>
+      ②必要・③最適・④今すぐの壁を超える。</p>
+      <p style="margin-top:10px; padding-top:10px; border-top:1px solid #a7f3d0;">
+        この関係は<strong>直列</strong>。リンクを貼らない日で信用を超えた人だけが、訴求当日のストーリーズを見てくれる。片方だけでは絶対に機能しない。
+      </p>
+    </div>
+
+    <h3>たとえ話①：しゃけが急に英語塾を紹介し始めたら？</h3>
+
+    <div class="box box-quote">
+      僕が急に英語塾をみんなに紹介しだしたら、意味わからんじゃないですか。「言ってないやん英語塾、どういうこと？」ってなるじゃないですか。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <p>普段から使っている内容なら話は別。<strong>しゃけさんが普段AIを使いまくっている</strong>のをフォロワーが知っているから、「AQUA VOICE（音声入力アプリ）がこれで生産性2倍になる」と言われたら、ちょっと試してみようかなと思える。</p>
+
+    <div class="box box-idea">
+      <h4>💡 信用とは「使ってる証拠」の蓄積</h4>
+      <p>リンクを貼らずに普段から使う姿を見せ続ける行為が、実は信用の構築そのもの。だから<strong>普段のストーリーズ＝サボれない</strong>。サボると訴求当日に誰も買ってくれない。</p>
+    </div>
+
+    <h3>たとえ話②：なめちゃんがヨガマットを紹介したら？</h3>
+
+    <p>なめちゃんは毎日ダイエット記録やストレッチをストーリーズに上げている。これを知っているフォロワーは、<strong>「毎日やっている人が売るんだから大丈夫、これいいかも」</strong>と思える。</p>
+
+    <p>さらに、「4つぐらい買っていたけど、その3つは使っていなくて今はこれ1本だけ使ってる」と言われたら、<span class="marker">必要な人にだけ刺さる</span>形で信用が立ち上がる。</p>
+
+    <div class="takeaway">
+      <h4>この章のテイクアウェイ</h4>
+      <p>信用は言葉で「信用してください」とは作れない。<strong>普段の使ってる姿・生活の姿・試した結果を数ヶ月単位で積み上げる</strong>ことでしか作れない。リンクを貼る日だけ頑張っても遅い。</p>
+    </div>
+
+    <h2><span class="chapter-num">05</span>楽天アフィリエイトの特殊性 ─ 場所の信用が一段跳ばしできる</h2>
+
+    <p>しゃけさんが強調したのは、<strong>「アフィリエイト＝同じ」ではない</strong>ということ。楽天アフィリとその他アフィリは、売り方・性質・フォロワーからの見え方がまるで違います。</p>
+
+    <div class="box box-warn">
+      <h4>⚠️ 前提：世の中の全員が持っている認識</h4>
+      <p>「Instagramで売られているものには、いいって言ってるけど<span class="marker-pink">実は良くないものもあるよね</span>」という認識は、世の中の全員が持っている。これは動かしようのない前提。</p>
+    </div>
+
+    <h3>楽天 vs その他 ─ "場所の信用"という概念</h3>
+
+    <div class="compare">
+      <div class="ng">
+        <div class="label">その他アフィリ</div>
+        <p><strong>よくわからん店で売っているもの</strong>。このお店大丈夫？という警戒心から入るので、信用の壁がとても高い。ここを普段のストーリーズで埋めていく必要がある。</p>
+      </div>
+      <div class="ok">
+        <div class="label">楽天アフィリ</div>
+        <p><strong>近所のイオンモールで売っているもの</strong>。楽天・Amazonで普段から買い物をして大きな失敗をしていない人が大半 → 場所の信用で①の壁が最初から低い。</p>
+      </div>
+    </div>
+
+    <h3>たとえ話：イオンの「自分枕」と50万円の羽毛布団</h3>
+
+    <div class="story-card">
+      <div class="title">同じ商品でも、売られる"場所"で印象がまるで変わる</div>
+      <p class="lead">
+        自分枕という枕屋さん、実はイオンにたくさん入っている。店舗で枕を2〜3万で売って、購入者に<strong>バックエンドで50万円の羽毛布団をセールス</strong>するビジネスモデル。<br><br>
+        これが<span class="ng-word">カフェでセールス</span>されたら「マルチだ、怖い」となる。<br>
+        でも<span class="ok-word">イオンで売ってたら</span>「ちょっと大丈夫ちゃう？」と思える。<br><br>
+        <strong>売っている"場所"がどこかで、心理が180度変わる</strong>。楽天アフィリ＝イオンのポジション。その他アフィリ＝よくわからん店のポジション。
+      </p>
+    </div>
+
+    <div class="box box-idea">
+      <h4>💡 この違いから導かれる売り方の違い</h4>
+      <ul>
+        <li><strong>楽天アフィリ</strong>：①信用は超えやすい。だから<span class="marker">「今必要かどうか／これが最適かどうか」にフィット</span>させることに集中する。</li>
+        <li><strong>その他アフィリ</strong>：①信用の壁がまず高い。普段のストーリーズでの人間性／使ってる証拠をしっかり作ってから訴求する。</li>
+        <li>単価も違う。売り方・見え方も違う。<strong>同じアフィリと思わないこと</strong>。</li>
+      </ul>
+    </div>
+
+    <div class="takeaway">
+      <h4>前半セミナー全体のテイクアウェイ</h4>
+      <ol>
+        <li><strong>自分がどう見られているかの解像度</strong>を持つこと。認識ズレが売れない最大要因。</li>
+        <li>売れる条件は<strong>4つの不の全クリア</strong>。減点式。</li>
+        <li><strong>リンクを貼らない日＝信用構築</strong>／貼る日＝必要・最適・今すぐ。両方揃って初めて機能。</li>
+        <li>楽天は場所の信用、その他は自分で信用を作る。<strong>同じアフィリと思うな</strong>。</li>
+      </ol>
+    </div>
+
+    <div class="box box-note">
+      <h4>📖 講座ナレッジとのつながり</h4>
+      <ul>
+        <li><strong>PRO_11-1（ストーリーズの本質）</strong>：ものが買われる3パターン（もの／人／効果の証明）の「人・効果の証明」が、まさに今日の①信用の壁を超える素材。</li>
+        <li><strong>PRO_11-1</strong>：信頼残高は「コップに水を溜めるイメージ」。今日話された"リンクを貼らない日の積み立て"はこれそのもの。</li>
+        <li><strong>PRO_12-1（ローンチストーリーズの計画方法）</strong>：潜在層を顕在層に変える3つの方法（悩みの自覚／理想の未来／自分ごと化）は、後半の添削で3人全員に共通して使われている武器。</li>
+      </ul>
+      <span class="ref">参照：01_ナレッジ/iサークルPRO+講座ナレッジ/</span>
+    </div>
+  </div>
+
+  <!-- =========================================== -->
+  <!-- Tab 3: なめちゃん -->
+  <!-- =========================================== -->
+  <div class="tab-content" id="tab-name">
+    <div class="account-hero">
+      <h2>🍱 添削① なめちゃん</h2>
+      <p class="sub">30〜40代ママ向けに、米粉・レンチン系の<strong>ヘルシースイーツレシピ</strong>を発信。毎週のように1,000〜2,000人ずつ着実に伸びている優良アカウント。引っ越しで撮影時間帯が夜→昼になり、コンセプトも再調整中。</p>
+      <div class="meta-grid">
+        <div class="meta-item"><span class="label">商品</span>冷凍弁当アフィリ（他社）</div>
+        <div class="meta-item"><span class="label">ローンチ期間</span>1週間の訴求</div>
+        <div class="meta-item"><span class="label">結果</span>販売ゼロ（クリック100件）</div>
+        <div class="meta-item"><span class="label">離脱率</span>普段10% → 訴求中30%</div>
+      </div>
+    </div>
+
+    <h2><span class="chapter-num">01</span>バズっているのに売れない ─ 数字が教えてくれた違和感</h2>
+
+    <p>なめちゃんは数字上は絶好調のアカウントです。</p>
+
+    <ul>
+      <li>ココア蒸しパンが<strong>200万再生</strong>、1本でフォロワー6,000〜7,000人増</li>
+      <li>卵蒸しパンは50万再生</li>
+      <li>最近もキウイアイス・さつまいもシフォンなど伸びている投稿が続出</li>
+      <li>コンセプト変更の背景：引っ越しで日中撮影が可能になり、実家時代の「寝かしつけ後の夜撮り」から卒業</li>
+    </ul>
+
+    <p>それなのに、冷凍弁当アフィリのゼロローンチで<strong>販売ゼロ</strong>。なめちゃん自身の振り返りはこう：</p>
+
+    <div class="box box-quote">
+      訴求前の匂わせや質問箱では、共感のDMやリアクションがめちゃくちゃもらえていました。でも、いざ訴求を始めた瞬間、反応が減り、閲覧数も10%から30%にガクッと落ちたんです。そもそも普段の閲覧数も改善が必要だと感じています。
+      <span class="who">— なめちゃん</span>
+    </div>
+
+    <p>しゃけさんのコメント：<strong>「離脱率10%は全然悪くない」</strong>。問題は数字ではなく、<span class="marker-pink">ユーザーの4つの不を認識できずに組み立ててしまった設計</span>の方にある。</p>
+
+    <h2><span class="chapter-num">02</span>客観視：フォロワーから見える"なめちゃん"の輪郭</h2>
+
+    <p>ライブ参加者から寄せられた「なめちゃんってどう見える？」の声：</p>
+
+    <div class="box box-tip">
+      <h4>🗣 フォロワー目線のなめちゃん像（チャットより）</h4>
+      <ul>
+        <li>スタイルきれい／意識高い人</li>
+        <li>綺麗な新ママ</li>
+        <li>ヘルシーなスイーツいっぱい作れるしおしゃれ</li>
+        <li>美容と健康に詳しそう</li>
+        <li>体型がきれいで素敵</li>
+      </ul>
+    </div>
+
+    <p>しゃけさんが拾ったキーポイント：</p>
+
+    <div class="box box-idea">
+      <h4>💡 "美容と健康に詳しそう"が最重要</h4>
+      <p>この印象は<span class="marker">まさに狙いたいブランディング</span>。なのに、投稿でしか出せていない。<strong>普段のストーリーズでもっと乗せていくべき</strong>：</p>
+      <ul>
+        <li>乳液にアゼライン酸が入っているやつ使ってる、などちょっと専門的な話</li>
+        <li>レチノール／お風呂上がりのドライヤー姿</li>
+        <li>寝かしつけ行ってきます、みたいなリアルな動線</li>
+        <li>わかる人にわかる単語（アゼライン酸・レチノール等）を自然に混ぜる</li>
+      </ul>
+    </div>
+
+    <h3>なめちゃんが実はやっていた「ちゃんとしてる工夫」</h3>
+
+    <p>なめちゃんは、しゃけさんに言われてから既に手を打ち始めていた：</p>
+
+    <ul>
+      <li>ストーリーズでお腹の写真を載せるようにした → <strong>「そんなにお腹綺麗なんですか」</strong>というコメントが増えた</li>
+      <li>冷凍弁当を反省したタイミングで、<strong>ハイライトに自己紹介を追加</strong>（私20代はこうで、こういう甘いものがやめられなくて…）</li>
+      <li>「みんなと仲良くなりたいから答えて」と<strong>アンケートで年齢・仕事・ダイエット悩みを取得</strong>してフォロワー解像度を上げ始めている</li>
+    </ul>
+
+    <div class="box box-quote">
+      (お腹の写真を出すようにした判断に対して)今のこのページめっちゃいいですね。これめっちゃいい。いいですね。
+      <span class="who">— しゃけ（なめちゃんの施策を絶賛）</span>
+    </div>
+
+    <h3>さらに1段深めるには ─ "間取りまで知られる状態"</h3>
+
+    <div class="box box-idea">
+      <h4>💡 売れる時の究極状態</h4>
+      <p>しゃけさんが目指している基準：<br>
+      <strong>フォロワーが、発信者の家の間取り・家具の種類・どの家具がどこにあるか・毎日どこでご飯を食べているかまで覚えてるぐらい</strong>。この"全部知ってる"状態の人が買う。</p>
+      <p>つまり、<span class="marker">美容と健康に詳しそう</span>＋<span class="marker">リアルな生活が丸見え</span>の両輪で進める。</p>
+    </div>
+
+    <div class="box box-quote">
+      パジャマで撮ってるのが最高ですね。めちゃくちゃいいですね。フォロワーさんも寝かしつけ後に作って、夜の時間で食べてそうですよね。
+      <span class="who">— しゃけ（なめちゃんのパジャマ撮影を評価）</span>
+    </div>
+
+    <h2><span class="chapter-num">03</span>冷凍弁当ローンチを解剖する</h2>
+
+    <h3>商品の強み（なめちゃん自身の言語化）</h3>
+
+    <ol>
+      <li><strong>時間節約</strong> ─ 忙しくてコンビニ弁当／スーパー惣菜に頼っているママにとって、作る時間が要らない</li>
+      <li><strong>ヘルシー</strong> ─ カロリー計算されている・添加物が極力使われていない</li>
+      <li><strong>美味しい</strong> ─ ASP担当者情報／楽天口コミ／自分の実食すべてで評価良</li>
+      <li><strong>子供OK</strong> ─ 納豆・味噌汁と合わせれば子供にも安心してあげられる</li>
+      <li>しゃけさん追加：<strong>圧倒的に楽</strong> ─ 洗い物要らず、捨てるだけ（しゃけさん自身も2週間に10食届くヘビーユーザー）</li>
+    </ol>
+
+    <h3>1週間の匂わせ期間を追ってみる</h3>
+
+    <p>なめちゃんは<strong>りこぴんさんのアドバイス通り、1週間匂わせ</strong>を仕込んでいました。「今日の夕食」「今日の予祝 肉じゃが」など、商品名を出さずに食事を見せていた。しゃけさんの指摘：</p>
+
+    <div class="box box-warn">
+      <h4>⚠️ 匂わせ写真の作りに改善余地</h4>
+      <ul>
+        <li>夕食の写真が<strong>近すぎる</strong>。引きでテーブル全体、子供が食べている姿がほしい。</li>
+        <li>「今から食べる、髪ビショビショ」みたいに<span class="marker">何でビショビショなの？</span>と膨らむネタをスルーしている。</li>
+        <li>「本業休憩中に食べながら◯◯」と複数情報を1ページに詰め込みすぎ。<strong>1ページ1見出し</strong>で分けるべき。</li>
+        <li>流行りの画像切り抜きは不要。デザインの型は本筋じゃない。</li>
+      </ul>
+    </div>
+
+    <h3>急に弁当が出てきた ─ 唐突に映る問題</h3>
+
+    <div class="box box-quote">
+      2週間前から食事を見せてきてたのに、いきなり冷凍弁当がガンって出てきた感じで、パッと見たとき「これ何？」ってなっちゃってた。
+      <span class="who">— しゃけ（視聴者視点の再現）</span>
+    </div>
+
+    <p>つまり、商品名のない食事が並び → いきなり冷凍弁当の商品が出てきた、という流れ。<strong>物語の文脈なしに商品が置かれた</strong>状態だった。</p>
+
+    <h2><span class="chapter-num">04</span>アフィリは"作家になる" ─ ハリーポッター理論</h2>
+
+    <p>しゃけさんが今回のセミナーで最もパワフルだった例え話がこれ。</p>
+
+    <div class="box box-quote">
+      物語を、アフィリエイトをするときに大事なのは、<strong>作家になってください</strong>。<br>
+      イメージで言ったらハリーポッター。映画が始まって、急にボルデモートと繋がってバーッてなってたら、「何してんの？意味わからん」って普通になるじゃないですか。<br>
+      あれはもう一人で虐げられてるところから、連れ出してもらって、魔法の世界に連れてもらって、同級生との出会いがあって…っていう<strong>着実な物語があるから、魔法の面白さとか学園生活が面白さを帯びてくる</strong>んですよね。<br>
+      アフィリエイトも結構一緒で、<strong>物語を描くところが重要</strong>。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <p>なめちゃんの場合、「商品をただ載せた」状態だった。これでは観客は物語の文脈を持たないままラスボス戦を見せられている。<strong>ハリーが入学する前のシーンから描き直す必要があった</strong>。</p>
+
+    <h2><span class="chapter-num">05</span>【実演】1〜2週間かけて描くべきだった物語の全設計</h2>
+
+    <p>しゃけさんがその場で組み立てた<strong>14日分の物語ストーリーズ設計</strong>を、できるだけ忠実に再現します。</p>
+
+    <div class="box box-flow">
+      <h4>🌱 段階1：自分ごと化の種まき（Day 1〜3）</h4>
+      <div class="flow-step">
+        <span class="day">DAY 1</span>
+        <strong>食事の重要性を語る。</strong><br>
+        「普段から実は健康をめちゃくちゃ意識していて、食事はすごい大事にしてる」という考え方を伝える。<br>
+        最初のスタート地点は「食事ってこんなに大事なんだ」を思い出させること。
+      </div>
+      <div class="flow-step">
+        <span class="day">DAY 2</span>
+        <strong>コンビニ弁当でニキビ／下腹ポッコリの写真。</strong><br>
+        「あんまりこう、意識はしてるんだけど、でも忙しいとコンビニ弁当にハマっちゃって、ほら見てニキビできた」と本音のトーンで。<br>
+        <strong>理想の未来</strong>を感じさせつつ、<strong>問題意識</strong>を持たせる。「私そうなんだ…」と自分事化させる。
+      </div>
+      <div class="flow-step">
+        <span class="day">DAY 3</span>
+        <strong>共感の投げかけ。</strong><br>
+        「でも、食事意識して戻すの、1週間くらいかかるよね？」<br>
+        フォロワーは「わかるわかる」で反応する。ここで普段から信頼を積めている人なら、Day 1-3の時点でフォロワーの頭の中の<strong>なめちゃん像が変化</strong>し始める。<br>
+        ↓<br>
+        「この人も食事で失敗してるんだ、私と同じだ。こんなにスタイルキープしてるのすごい、意志力強そう」という認識に切り替わる。
+      </div>
+    </div>
+
+    <div class="box box-flow">
+      <h4>🌿 段階2：改善の模索と、競合の対比（Day 4〜5）</h4>
+      <div class="flow-step">
+        <span class="day">DAY 4</span>
+        <strong>体型維持が忙しい毎日で無理な事実を吐露。</strong><br>
+        「忙しい毎日、正直体型維持、無理…」「だから<span class="marker">いかに実践を楽にするか</span>が私のこだわり」<br>
+        フォロワーからの信用は「失敗を経験している人」というレイヤーで積まれる。
+      </div>
+      <div class="flow-step">
+        <span class="day">DAY 5</span>
+        <strong>家政婦との対比を持ち出す。</strong><br>
+        「運動は忙しいから無理。食事をどうにかしないといけない。でも時間ない。金をかけるしかないと思った。家に帰ったら<strong>家政婦雇うことも考えた</strong>。調べたら、私の残業代の2倍だった」<br>
+        ↓<br>
+        <strong>この売る商品の競合は、他社の冷凍弁当ではなく「家政婦」なんです。</strong>
+      </div>
+    </div>
+
+    <div class="box box-idea">
+      <h4>💡 競合をずらすという技</h4>
+      <p>冷凍弁当 vs 他社冷凍弁当、で比較するとただの比較・下げ合戦になる。<br>
+      でも<strong>冷凍弁当 vs 家政婦</strong>に変えると、フォロワーは「そんな選択肢考えてなかった」「家政婦より全然安い」と<span class="marker">価格感覚が上書きされる</span>。<br>
+      しゃけさんがこの後のあやさん・さくらさんの添削でも一貫して使っている、最重要テクニックの一つ。</p>
+    </div>
+
+    <div class="box box-flow">
+      <h4>🌳 段階3：フォロワーとの双方向（Day 6〜9）</h4>
+      <div class="flow-step">
+        <span class="day">DAY 6</span>
+        「家政婦の話、5食作ってもらって1食2,000円か。そんな時、職場の若い子がランチで<strong>『冷凍弁当めっちゃいいよ』</strong>って言ってたんだよね」
+      </div>
+      <div class="flow-step">
+        <span class="day">DAY 7-8</span>
+        「みんな冷凍弁当とか食べたことある？冷凍って美味しくなかったりするんかな？」<br>
+        <strong>フォロワーに質問を投げる</strong>。回答のDMをシェアしながら「こんな回答きました」「こういうの多いな」と双方向を4日ほどかけて回す。
+      </div>
+      <div class="flow-step">
+        <span class="day">DAY 9</span>
+        「弁当も何個か種類あるんだな。みんな売れてるの？美味しいの？」<br>
+        ↓ 最も票数が多かった2種類のメーカーに絞る。
+      </div>
+    </div>
+
+    <div class="box box-flow">
+      <h4>🌻 段階4：実証（Day 10〜12）</h4>
+      <div class="flow-step">
+        <span class="day">DAY 10</span>
+        「2種類、2メーカー買ってみるね〜」の宣言。
+      </div>
+      <div class="flow-step">
+        <span class="day">DAY 11</span>
+        <strong>食べ比べ動画。</strong>「両方美味しい、やばい」<br>
+        「でもカロリーの割に満足度高いのはこっち」「こっちの方が安いし、私はこっち派かな」
+      </div>
+      <div class="flow-step">
+        <span class="day">DAY 12</span>
+        DM嵐。「どこで買ったの？」「えー私は検索して出てきたところで買ったんだけど、<strong>紹介ならめっちゃ安いらしい、紹介で買えること知らんかった</strong>」<br>
+        ↑ <span class="marker-pink">ここでまだリンクを貼らない</span>。
+      </div>
+    </div>
+
+    <div class="box box-flow">
+      <h4>🏁 段階5：訴求本番（Day 13〜14）</h4>
+      <div class="flow-step">
+        <span class="day">DAY 13</span>
+        「今から買うなら誰かの紹介で買うのがいいよ。まあ私、ここじゃなくてもいいけど、一番安く買える紹介のリンク貼っとくね」<br>
+        口コミを見せる：<strong>①画面一面にDM大量／②アンダーバー＋要約／③ピックアップで1〜2件</strong>の3パターン。
+      </div>
+      <div class="flow-step">
+        <span class="day">DAY 14</span>
+        「ちょ、やばいかも」「紹介キャンペーン、<strong>この値段明日まで</strong>らしい」<br>
+        ここで重要：<span class="marker">なぜ明日までなのか理由を文脈で説明</span>する。「1〜2ヶ月に1回くらい安いタイミングがあって、このタイミングが次見たい。お試しするなら今かも」
+      </div>
+    </div>
+
+    <div class="takeaway">
+      <h4>この物語設計が機能する理由</h4>
+      <p>最初の3日で<strong>自分ごと化</strong>、4-5日目で<strong>家政婦との対比（顕在化）</strong>、6-9日目で<strong>双方向で興味を沸かせる</strong>、10-12日目で<strong>実証して信用を作る</strong>、13-14日目で<strong>必要・最適・今すぐ</strong>を一気に押さえる。<br>
+      4つの不が<span class="marker">全部埋まる導線</span>になっている。</p>
+    </div>
+
+    <h2><span class="chapter-num">06</span>絶対ルール① ─ 自分からボールを投げない</h2>
+
+    <div class="box box-quote">
+      私が何かものをお勧めする時というのは、<strong>私の都合で紹介するのは絶対NG</strong>。<br>
+      どっちかっていうと、フォロワーさんが言うならする。<br>
+      話し始める順序がめちゃくちゃ大事。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <h3>順番を作る技術</h3>
+
+    <ul>
+      <li>自分が言いたい（おすすめ）ことがある → <strong>その前に、フォロワーがその回答をしたくなるDMを送らせる質問</strong>を投げる。</li>
+      <li>言わせてから、リアクションとして「それならこんなのがいいよ」と返す。</li>
+      <li>ボールを先に相手に投げさせて、キャッチした後に受けたボールを返すイメージ。</li>
+    </ul>
+
+    <div class="compare">
+      <div class="ng">
+        <div class="label">NG</div>
+        「この冷凍弁当がおすすめ！」（自分から投げる）
+      </div>
+      <div class="ok">
+        <div class="label">OK</div>
+        「みんな冷凍弁当食べたことある？」→ DM返信 → 「それなら◯◯いいかもよ」（相手から投げさせて返す）
+      </div>
+    </div>
+
+    <h2><span class="chapter-num">07</span>絶対ルール② ─ お願いしない（商品力の自白になる）</h2>
+
+    <div class="box box-quote">
+      商品に自信がないから、お願いしちゃうんですよね。<br>
+      「買ってください」というお願いは、私の商品に自信がないからとか、商品力が低いから、という<strong>証明になっちゃってる</strong>。<br>
+      いいものは、お願いしなくても買うじゃないですか。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <h3>なめちゃんの訴求で"お願いになっていた"サイン</h3>
+
+    <ul>
+      <li>リンクの上にある<strong>矢印</strong>。これがあるだけで「押して」のお願いに見える。</li>
+      <li>「3日で終わる」連呼。なぜ3日で終わるのか文脈がないから、<strong>「知らんがな」</strong>と処理される。</li>
+      <li>リンクの連続表示。「こっちがいい、ここで買う方がいい、このサイトで買う方がいい」→ <strong>全部逆効果</strong>。</li>
+    </ul>
+
+    <div class="box box-idea">
+      <h4>💡 しゃけさんの"お願いしない"例</h4>
+      <p>しゃけさんがAQUA VOICE（音声入力アプリ）をみんなに紹介する時、「<strong>使ったらいいんじゃないですか。AIをガンガン使う人ならめちゃくちゃ時間短縮できると思いますよ</strong>」と言うだけで、お願いはしない。</p>
+      <p>お願いしていない＝商品に自信がある、というシグナルが無意識に伝わる。</p>
+    </div>
+
+    <h2><span class="chapter-num">08</span>DM・口コミの見せ方 ─ たった3パターンしかない</h2>
+
+    <p>しゃけさんが断言した、口コミ・DMの見せ方は<strong>たった3パターンだけ</strong>。</p>
+
+    <div class="box box-flow">
+      <h4>📩 口コミ/DMの見せ方3択</h4>
+      <ol>
+        <li><strong>画面一面</strong>にDMをバーッと並べて、<span class="marker">数の多さ</span>を見せる</li>
+        <li><strong>DMにアンダーバー＋要約の一言</strong>を添える（アンダーバーだけは絶対NG）</li>
+        <li>1〜2件を<strong>ピックアップ</strong>してじっくり読ませる</li>
+      </ol>
+      <p style="margin-top:12px;">この3つ以外は基本ない。迷ったらどれかに当てはめる。</p>
+    </div>
+
+    <div class="box box-warn">
+      <h4>⚠️ アンダーバーだけではダメな理由</h4>
+      <p>DMに赤線を引くだけでは、フォロワーは<strong>要約を自分でできない</strong>。<br>
+      下（もしくは上）に発信者側が<span class="marker-pink">一言で要約を添える</span>ことで初めて伝わる。<br>
+      例：「新年度で子供の日程が分からなくて参加決めかねてます」→ 「<strong>日程がまだわからない</strong>」と要約を添える。</p>
+    </div>
+
+    <h2><span class="chapter-num">09</span>リンクは"ガツン"か"添える"か ─ 楽天ルールの応用</h2>
+
+    <p>リンクをどう置くかも、前半の楽天理論と連動します。</p>
+
+    <div class="compare">
+      <div class="ok">
+        <div class="label">楽天アフィリ</div>
+        リンクは<strong>ガツン</strong>と出していい。場所の信用があるから、即行動を促してもOK。
+      </div>
+      <div class="ng">
+        <div class="label">その他アフィリ（冷凍弁当はこっち）</div>
+        リンクは<strong>後ろに添える</strong>。連打しない。最初はやんわり入って、やんわり誘う。人間関係と同じで、最初からガンガンくる人は嫌われる。
+      </div>
+    </div>
+
+    <h2><span class="chapter-num">10</span>ストーリーズは"育成ゲーム" ─ 抜け漏れチェック型の設計</h2>
+
+    <div class="box box-quote">
+      やってることは本当に、フォロワーさんを育ててるんですよ。育成ゲームみたいなのを。<br>
+      この意識からこの意識に変えます → 次はこの意識からこの意識に → 双方向性から興味を持ってもらう → 弁当っていう選択肢を知ってもらう → その選択肢がどうか私が実証してあげる → 信用を作る → 必要性を話す → 今すぐ買う理由を用意する。<br>
+      <strong>抜け漏れがないかチェックするゲーム</strong>。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <div class="takeaway">
+      <h4>なめちゃん編のテイクアウェイ</h4>
+      <ol>
+        <li><strong>作家になる</strong>：商品を載せるな、物語を描け（ハリーポッター理論）</li>
+        <li><strong>1週間は短すぎる</strong>：自分ごと化 → 模索 → 双方向 → 実証 → 訴求、の5段階で14日必要</li>
+        <li><strong>競合をずらす</strong>：冷凍弁当 vs 家政婦の対比で価格感覚を上書き</li>
+        <li><strong>自分から投げない</strong>：先にフォロワーに言わせる質問を投げる</li>
+        <li><strong>お願いしない</strong>：矢印・連打・「買って」は商品力の無さの自白</li>
+        <li><strong>口コミは3パターンだけ</strong>／アンダーバーだけは絶対NG、要約を添える</li>
+        <li>普段のストーリーズで「美容と健康に詳しそう」の印象を<span class="marker">投稿以外でも強化</span>する</li>
+      </ol>
+    </div>
+
+    <div class="box box-note">
+      <h4>📖 講座ナレッジとのつながり</h4>
+      <p>今日の「フォロワーに先に言わせる→リアクションで返す」は、<strong>PRO_11-2（ストーリーズの作り方）</strong>で紹介されている<span class="marker">「リアクション構造」</span>そのもの。何かに対するリアクションの形で自分の伝えたいことをストーリーズにあげる考え方が、今日の物語設計の中核になっている。</p>
+      <p>「言いたいことは自分で言わない」「良いというキーワードを誰が最初に言うかで印象が大きく変わる」も、DM・口コミの3パターンと直結。</p>
+      <span class="ref">参照：PRO_11-2_ストーリーズの作り方.md（リアクション構造／良いストーリーズの共通点6選）</span>
+    </div>
+  </div>
+
+  <!-- =========================================== -->
+  <!-- Tab 4: あやさん -->
+  <!-- =========================================== -->
+  <div class="tab-content" id="tab-aya">
+    <div class="account-hero">
+      <h2>🧱 添削② あやさん</h2>
+      <p class="sub">「あやレゴ」でおなじみ、<strong>レゴ × 子供の脳育て</strong>発信者。自社プログラム「イクノビルドラボ」（元：ブロックラボ／バンダイ商標のため改名）の無料勉強会をローンチ中。<strong>東大レゴ部とのコラボ</strong>という極めて強いネタを抱えているのに、伝え方で損している典型例。</p>
+      <div class="meta-grid">
+        <div class="meta-item"><span class="label">商品</span>自社：無料勉強会→有料講座</div>
+        <div class="meta-item"><span class="label">フェーズ</span>セミナー申込が明日スタート</div>
+        <div class="meta-item"><span class="label">強いネタ</span>東大レゴ部との対談・モニター生6名</div>
+        <div class="meta-item"><span class="label">課題</span>主語・前提・順番が省略されている</div>
+      </div>
+    </div>
+
+    <h2><span class="chapter-num">01</span>あやさんのポテンシャル ─ ネタの強さは抜群</h2>
+
+    <p>あやさんのアカウントは、ネタだけ見ればトップクラスに強い：</p>
+
+    <ul>
+      <li><strong>東大レゴ部とコラボ</strong> ─ 対談インスタライブまで実施済み</li>
+      <li>モニター生6名が作ったレゴキューブを"見て"と見せられる</li>
+      <li>お子さんはレゴを<strong>使いこなしている成長ぶり</strong>が投稿から見える</li>
+      <li>「灯台レゴ部へ行ってきます」など、現地取材の"凄み"写真が撮れている</li>
+    </ul>
+
+    <p>フォロワーからの認識は「<strong>家の教育でレゴを取り入れていて、脳の発達に使っているママ</strong>」。さらに、子供の成長が投稿で見えているからこそ、<span class="marker-pink">「あやさんの子供はちゃんと育ってる」</span>という<strong>憧れ</strong>が立っている。これは普通の発信者には出せない財産。</p>
+
+    <div class="box box-quote">
+      これがめちゃくちゃ大事で、フォロワーさんから見たら、レゴをまだやってるけど、そんなにレゴを使いこなせてる感覚とか成長をバリバリ感じてる人ってあんまりいない。そこで<strong>「あやさんの子供はちゃんと育ってるんだ」</strong>がやっぱり"すごっ"ってなる。憧れがさらに強まる。
+      <span class="who">— しゃけ（あやさんの投稿の強みを分析）</span>
+    </div>
+
+    <h2><span class="chapter-num">02</span>最大の課題 ─ 主語・前提・順番が省略されている</h2>
+
+    <p>ネタは強い。なのに、リアクションが想定より少ない。なぜか？<strong>作っている側（あやさん）は分かっているけど、見ている側（フォロワー）は前提ゼロ</strong>だから。ストーリーズはザッピングされるので、毎ページ単体で意味が通らないといけない。</p>
+
+    <div class="box box-warn">
+      <h4>⚠️ 典型的な"届いていない"ストーリーズ</h4>
+      <ul>
+        <li>「アーカイブを残してほしい」→ <span class="ng-word">何の？</span></li>
+        <li>「今回インタビューさせていただいた」→ <span class="ng-word">誰を？</span></li>
+        <li>「決めました」→ <span class="ng-word">何を？なぜ？</span></li>
+        <li>「プログラム」→ <span class="ng-word">何のプログラム？</span></li>
+        <li>「リリース」→ <span class="ng-word">何をリリース？</span></li>
+      </ul>
+      <p style="margin-top:12px;">これ、1ページ単位で読んだら全部「<strong>何の話？</strong>」になる。気になる人がたくさんいるのに、届いていない。</p>
+    </div>
+
+    <h3>修正例：主語を入れるだけで別物になる</h3>
+
+    <div class="compare">
+      <div class="ng">
+        <div class="label">Before（NG）</div>
+        「ストーリーズって出らけ残せ」「アーカイブ残してほしい」
+      </div>
+      <div class="ok">
+        <div class="label">After（OK）</div>
+        「<strong>東大レゴ部×あやレゴのコラボでやったインスタライブ</strong>のアーカイブを、ストーリーズに残してほしい人？」
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="ng">
+        <div class="label">Before（NG）</div>
+        「今回インタビューさせていただいた お二人」（誰だかわからない）
+      </div>
+      <div class="ok">
+        <div class="label">After（OK）</div>
+        「<strong>東大×あやレゴのコラボの話なんだけど</strong>、今回インタビューさせていただいた東大レゴ部のお二人、紹介させてください」
+      </div>
+    </div>
+
+    <div class="box box-idea">
+      <h4>💡 守護（主語）の癖を矯正する</h4>
+      <p>しゃけさんが何度も繰り返していたキーワード：<span class="marker">「守護・主語・前提」</span>。<br>
+      作り手は文脈を持っているから主語を飛ばしてしまう。でも見る側は<strong>毎ページ新規参加</strong>。3日前のストーリーズを覚えていない前提で、毎ページ主語を置き直す。</p>
+    </div>
+
+    <h2><span class="chapter-num">03</span>情報の"順番"を逆転する ─ プログラム説明の作り直し</h2>
+
+    <p>あやさんは「イクノビルドラボ」というプログラム名を先に出してから内容を説明していました。しゃけさんは<strong>順番を逆転すべき</strong>と指摘。</p>
+
+    <div class="box box-warn">
+      <h4>Before：現状の順序（NG）</h4>
+      <ol>
+        <li>プログラム名（イクノビルドラボ）</li>
+        <li>コンセプト</li>
+        <li>特典1〜3（東大レゴ部など）</li>
+      </ol>
+      <p>→ プログラム名を聞いても、何をするものか<span class="ng-word">ピンと来ない</span>。</p>
+    </div>
+
+    <div class="box box-flow">
+      <h4>After：正しい順序</h4>
+      <ol>
+        <li><strong>何歳から何歳の子供</strong>が、<strong>レゴを通して脳を育てる</strong>プログラム（対象と内容）</li>
+        <li>そのプログラムの名前を<strong>「イクノビルドラボ」</strong>にしました</li>
+        <li>なぜこの名前か、込めた思い</li>
+        <li>本気だからこそ<strong>東大レゴ部の協力</strong>を得る形にした（特典）</li>
+      </ol>
+      <p style="margin-top:10px;">この順序なら、プログラム名を聞いた時点で「子供の脳育ての何か」とフォロワーの頭の中に地図ができている。</p>
+    </div>
+
+    <h2><span class="chapter-num">04</span>いい話を"1日で終わらせすぎ"問題</h2>
+
+    <p>あやさんは<span class="marker-pink">いい話を持っているのに1日で消費している</span>。これが最ももったいないポイント。</p>
+
+    <div class="box box-quote">
+      いい話を1日で終わらせすぎ、もったいない。「そんな気がする」って、これ次の日擦れるじゃないですか。なんで1日で終わらせてるんですか。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <h3>例：東大が進学部を開設したニュース</h3>
+
+    <p>これをきっかけに「<strong>時代が変わってきてるよ、教育のやり方変わってきてるよ</strong>」という話に広げられるのに、あやさんは1日で終わらせていた。</p>
+
+    <div class="box box-idea">
+      <h4>💡 「同じ話を3日擦っていい」ルール</h4>
+      <ul>
+        <li>次の日見てない人への親切：「<strong>昨日話した話なんだけど</strong>」「<strong>一昨日話した話なんだけど</strong>」で、もう一度フルで話す。</li>
+        <li>面白い話・重要な話は、<strong>何回聞いてもフォロワーにとっていい話</strong>。</li>
+        <li>しつこく同じことを喋る勇気を持つ。3日同じテーマで擦るのは普通。</li>
+      </ul>
+    </div>
+
+    <h2><span class="chapter-num">05</span>デザインの改善ポイント ─ やらなくていいことをやめる</h2>
+
+    <p>あやさんの画面演出には、不要な飾りが多い。</p>
+
+    <div class="box box-warn">
+      <h4>⚠️ やめるべき演出</h4>
+      <ul>
+        <li><strong>スタンプ使いすぎ</strong> ─ 全部のページにスタンプを乗せていた。<span class="marker">1ページ1スタンプが上限</span>。</li>
+        <li><strong>流行の写真切り抜き</strong> ─ あやさんの世界観には合っていない。やらなくていい。</li>
+        <li><strong>不要な文言を擦る</strong> ─ 「スクラップ&ビルド」などを連発。擦る対象が間違っている。</li>
+        <li><strong>不要な画像</strong>（ハンバーグ等） ─ 別ページに分けるか、そもそも削除。</li>
+        <li>1ページに情報を詰め込みすぎ → <strong>1ページ1見出し</strong>で分ける。</li>
+      </ul>
+    </div>
+
+    <h2><span class="chapter-num">06</span>リアクションが少ない"本当の原因"</h2>
+
+    <p>あやさんは「最近、反応が本当に悪くて…」と話していました。しゃけさんの診断は明快：</p>
+
+    <div class="box box-quote">
+      伝わってないんですね、いいこと言ってんのに。フォロワーさんは<strong>気になる人めっちゃおるのに、届いてない</strong>っていうところがめちゃくちゃある。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <p>つまり、フォロワーが悪いのでも興味がないのでもない。<strong>主語・前提・順番が欠けているせいで、気になる話が"気になる話"として届いていないだけ</strong>。</p>
+
+    <h2><span class="chapter-num">07</span>ローンチの組み立て直し ─ 潜在→顕在の3日間</h2>
+
+    <p>あやさんには、セミナー申込が明日スタートする<strong>今日から実行できる3日分の物語</strong>がしゃけさんからその場で提示されました。</p>
+
+    <div class="box box-flow">
+      <h4>📅 DAY 1：我が子 → モニター生 → 時代 の一気通貫ストーリー</h4>
+      <p>以下を<strong>1日の中で連続</strong>して上げる（投稿ぐらいのボリュームになる想定）：</p>
+      <ul>
+        <li>私の子供がレゴを通してこんな風に育ってきた（過程を見せる）</li>
+        <li>レゴがなかったら、こうは育たなかったかもしれない</li>
+        <li>モニター生6名も、こんなにレゴを使いこなせている</li>
+        <li>実は今、時代が変わってきていて、東大が進学部を開設した（ニュース引用）</li>
+        <li>これからは「自分で考える力」の時代だよね</li>
+      </ul>
+    </div>
+
+    <div class="box box-flow">
+      <h4>📅 DAY 2：自分ごと化（DMの積み上げ）</h4>
+      <ul>
+        <li>「家のわが子もレゴにハマってるんだけど、こんな風に困っているんです」というDMをずらっと並べる</li>
+        <li><strong>みんなめちゃくちゃ困ってるんだ</strong>という問題意識の可視化</li>
+        <li>「だから私、レゴを通して<span class="marker">答えのない、自分だけの脳みそを育てる</span>プログラムを作ることにしました」</li>
+        <li>「その名前はイクノビルドラボです」</li>
+      </ul>
+    </div>
+
+    <div class="box box-flow">
+      <h4>📅 DAY 3：なぜイクノビルドラボなのか（1ページ丸ごと）</h4>
+      <ul>
+        <li>名前に込めた思いを1ページ丸ごと使って説明</li>
+        <li>（リアクションボタンは使わなくていい）</li>
+        <li><strong>「今回のプログラムは、軽い思いつきではありません。ただの楽しいイベントでもありません」</strong></li>
+        <li><strong>「お子さんの一生ものの思考力を育てる本気のプログラムです」</strong></li>
+        <li>鍛えたいのは<span class="marker">思考力</span>。ドーンと大きい文字で。</li>
+        <li>本気で向き合ってるから、東大レゴ部の協力を得ることが決定した</li>
+      </ul>
+    </div>
+
+    <h2><span class="chapter-num">08</span>競合をずらす ─ レゴ教育 vs 塾代150万／年</h2>
+
+    <p>なめちゃん編で出た<strong>「競合ずらし」</strong>の技を、あやさんにはこう適用：</p>
+
+    <div class="box box-idea">
+      <h4>💡 「塾代」との対比フレーム</h4>
+      <p>ライバルを他のレゴ教育にするのではなく、<strong>子供が大きくなってからの塾代・予備校代・大学費用</strong>に置く。</p>
+      <ul>
+        <li>大きくなってから塾代・予備校代・大学費用150万/年〜数千万円</li>
+        <li>小さい頃から自分で考えて動く力を作ったら、<strong>塾代は全然小さく</strong>済む</li>
+        <li>国公立に行く方向性が取れる可能性が開ける</li>
+        <li>今1〜2万円の投資 vs 将来的な教育費150万円/年の節約</li>
+      </ul>
+      <p style="margin-top:12px;">締めは<strong>質問形式</strong>：「今けちって将来大学費用・塾費用・予備校150万、大学シリーズ毎年払う選択肢に行くのか。今投資して将来の可能性を広げるのか。<span class="marker-pink">みんなはどっちを選ぶ？</span>」</p>
+    </div>
+
+    <h2><span class="chapter-num">09</span>【実録】セミナータイトル改善プロセス</h2>
+
+    <p>あやさんのもともとのセミナータイトルは：</p>
+
+    <div class="box box-warn">
+      <h4>Before</h4>
+      <p style="font-size: 16px; line-height: 1.8;">「東大生の94%が夢中だった<strong>あのレゴの遊び方</strong><br>
+      AI時代の考える力を育てる特別勉強会」</p>
+    </div>
+
+    <p>しゃけさんとAI（チャッピー）で議論しながら、その場で改善していく過程が再現価値の高いシーン。</p>
+
+    <h3>改善の思考プロセス</h3>
+
+    <div class="dialog">
+      <div class="line"><span class="who shake">しゃけ</span>「共通して」を入れたいんですよね。再現性を連想させたいから。</div>
+      <div class="line"><span class="who shake">しゃけ</span>「あのレゴの遊び方」って長い。「レゴ遊びの秘密を公開」にしたい。公開するよ、と言いたい。</div>
+      <div class="line"><span class="who shake">しゃけ</span>親が欲しいのは<strong>教育方法</strong>。だから「<span class="marker">わが子の思考力</span>が育つ」と明示したい。</div>
+      <div class="line"><span class="who aya">あや</span>AI時代に…は残しつつ…</div>
+      <div class="line"><span class="who shake">しゃけ</span>「AI時代で活躍できるわが子の思考力を育てる」。<strong>我が子</strong>って言葉入れたい。</div>
+    </div>
+
+    <div class="box box-flow">
+      <h4>After（最終版）</h4>
+      <p style="font-size: 17px; line-height: 1.9; font-weight: 600;">
+        東大生の94%が共通して夢中になった<br>
+        <span class="marker-pink">レゴ遊びの秘密を公開</span><br>
+        AI時代に活躍できる<span class="marker">わが子の思考力</span>を育てる特別勉強会
+      </p>
+    </div>
+
+    <h3>タイトル改善の原則</h3>
+
+    <ul>
+      <li><strong>「共通して」</strong> → 再現性のニュアンスを付与</li>
+      <li><strong>「秘密を公開」</strong> → 行動（公開する）を動詞で見せる／短く</li>
+      <li><strong>「わが子」</strong> → 親が一番欲しい<span class="marker">対象を明示</span>する</li>
+      <li><strong>「思考力」</strong> → 「考える力」より具体的でキャッチー</li>
+    </ul>
+
+    <h2><span class="chapter-num">10</span>台本レビュー運用 ─ 同期2人以上に見てもらう</h2>
+
+    <p>あやさんへの最大の運用アドバイス：<strong>自分一人で完成させるな、同期を入れろ</strong>。</p>
+
+    <div class="box box-quote">
+      これ多分、あやさんの中ではできてるんですよ。できてると思ってるけど、実際誰かが見たらできてない。客観視の部分だから、<strong>誰かの目を通すこと</strong>をやった方がいい。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <h3>レビュー依頼の具体的な仕方</h3>
+
+    <div class="box box-tip">
+      <h4>📝 依頼テンプレート（同期ポコビーさん・りこさんへ）</h4>
+      <p style="background: #fff; padding: 15px; border-radius: 8px; border: 1px dashed #0284c7;">
+        「今週のストーリーズ台本、見てほしいんだけどお願いできる？<br>
+        見てほしい観点は2つあって、<br>
+        ①<strong>主語や前提が抜けて、何の話をしているか分からない箇所</strong>がないか<br>
+        ②<strong>話の順番が、魅力的に伝わる順になっているか</strong><br>
+        が私の癖として課題だから、そこが出てないか見てほしい。<br>
+        もし可能であれば、順番や言い回しでいい案があればポイントで教えてもらえると嬉しい」
+      </p>
+    </div>
+
+    <div class="box box-idea">
+      <h4>💡 運用ルール</h4>
+      <ul>
+        <li><strong>3日先</strong>の台本を事前に書いてレビューに出す</li>
+        <li><strong>12時間以内</strong>にフィードバックを回す</li>
+        <li>3人ぐらいで相互レビュー体制を作る（依頼される側も頼みやすい）</li>
+        <li>これだけで<strong>売上2〜5倍</strong>変わる、としゃけさん断言</li>
+      </ul>
+    </div>
+
+    <h2><span class="chapter-num">11</span>"明日のストーリーズ"をゼロから書き直す緊急アドバイス</h2>
+
+    <p>しゃけさんの熱量が最も高まった場面：</p>
+
+    <div class="box box-quote">
+      こっからのストーリーズで<strong>売上2倍以上変わります</strong>。マジですか? 全然2倍って言わないですよ、5倍ぐらい変わります本当に。<br>
+      今こんなこと言うのはあるんですけど、今日も抜けていただいてもいいぐらいで。<br>
+      明日のストーリーズ上げる前に、今日寝る前に<strong>今週のストーリーズ全部台本書いて、ポコビーさんとかりこさんとかに見てもらう</strong>というか、お願いして今週のやつ見てほしいんだけどと。<br>
+      まだ間に合います。今週1週間以上ありますもんね。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <h3>具体的なアクション項目</h3>
+
+    <ol>
+      <li>今日寝る前に<strong>今週のストーリーズ全台本</strong>を書く</li>
+      <li>りこさん／ポコビーさんにレビュー依頼</li>
+      <li>1日<strong>最低10枚</strong>のストーリーズ</li>
+      <li>3月頭に出していた<strong>良かったコンテンツを再構成</strong>して出す（時代の話・我が子の話など）</li>
+      <li>セミナータイトルを今日から差し替える</li>
+    </ol>
+
+    <h2><span class="chapter-num">12</span>あやさんの"良かった点" ─ ここは絶対残す</h2>
+
+    <p>改善点ばかり見えるけど、強みもしっかり言語化されました。</p>
+
+    <div class="takeaway">
+      <h4>あやさんの継続すべき強み</h4>
+      <ul>
+        <li>モニター生の話／事例：<strong>めちゃくちゃいい</strong>。他のアカウントにはない資産。</li>
+        <li>3月頭のストーリーズ（時代の話・教育の話）：<strong>顕在化がちゃんとできていた</strong>。これを4月にもう一度出すべき。</li>
+        <li>東大進学部開設のニュース引用：切り口として強い。</li>
+        <li>お子さんの成長を投稿で見せられている：憧れを作れる希少なアカウント。</li>
+      </ul>
+    </div>
+
+    <h2><span class="chapter-num">13</span>あやさん編の学び</h2>
+
+    <div class="takeaway">
+      <h4>あやさん編のテイクアウェイ</h4>
+      <ol>
+        <li><strong>主語・前提・順番</strong>が全て。作り手は分かっていても見る側は前提ゼロ。</li>
+        <li>情報の順番を<strong>逆転</strong>する ─ 対象＆内容が先、名前は後。</li>
+        <li>いい話は<strong>1日で終わらせない</strong>。3日擦っていい。</li>
+        <li>スタンプ・切り抜き・不要な画像 ─ <strong>やらないことを決める</strong>。</li>
+        <li>競合は<strong>塾代150万/年</strong>。レゴ教育ではない。</li>
+        <li>タイトルは<strong>短く・再現性・対象の明示</strong>（わが子・思考力）。</li>
+        <li><strong>3日先の台本を事前レビュー</strong>。同期を巻き込む。これで売上5倍変わる。</li>
+      </ol>
+    </div>
+
+    <div class="box box-note">
+      <h4>📖 講座ナレッジとのつながり</h4>
+      <p><strong>PRO_12-1（ローンチストーリーズの計画方法）</strong>にある<span class="marker">潜在層を顕在層に変える3つの方法</span>（①悩みを自覚してもらう ②理想の未来を望んでもらう ③自分ごと化してもらう）が、あやさんのDay 1-3の組み立てにそのまま対応している。特にDay 2の「家のわが子もレゴにハマってるけど困ってる」DM並べは、③自分ごと化の典型テクニック。</p>
+      <span class="ref">参照：PRO_12-1_ローンチストーリーズの計画方法.md</span>
+    </div>
+  </div>
+
+  <!-- =========================================== -->
+  <!-- Tab 5: さくらさん -->
+  <!-- =========================================== -->
+  <div class="tab-content" id="tab-sakura">
+    <div class="account-hero">
+      <h2>🍳 添削③ さくらさん</h2>
+      <p class="sub">JKの子供のお弁当・お料理系発信者。2年前にしゃけさんとオフ会で話してコンセプトを決めた縁の深いアカウント。<strong>渚さんとのコラボオフ会 in 神戸</strong>を開催予定。ストーリーズの写真・口コミ・顔出しは<strong>60%まで到達している優等生</strong>。課題はコンセプト設計にある。</p>
+      <div class="meta-grid">
+        <div class="meta-item"><span class="label">商品</span>自社オフ会（有料・GW）</div>
+        <div class="meta-item"><span class="label">募集期間</span>3/7〜4/10（34日間）</div>
+        <div class="meta-item"><span class="label">結果</span>申込4人（前回・前々回も5-6人）</div>
+        <div class="meta-item"><span class="label">特殊性</span>渚さん講座生＋さくらさんフォロワー合同</div>
+      </div>
+    </div>
+
+    <h2><span class="chapter-num">01</span>さくらさんの到達レベル ─ 優等生ゆえの壁</h2>
+
+    <p>しゃけさんの診断を引用すると、さくらさんは<strong>ストーリーズの基本技術はしっかり身につけている</strong>：</p>
+
+    <div class="box box-tip">
+      <h4>✅ さくらさんの既にできていること</h4>
+      <ul>
+        <li>顔はストーリーズ・インスタライブで出している（投稿は非公開）<br>
+        → <span class="marker">心理的安全性は担保されている</span></li>
+        <li>写真が上手：エプロン姿／料理中の自分の姿／雰囲気写真／事前教育写真</li>
+        <li>お気に入りの良い写真を<strong>何回も使い回している</strong>（可愛い笑顔の写真）</li>
+        <li>口コミ・DMをちゃんと見せられている</li>
+      </ul>
+      <p style="margin-top:10px;"><strong>60%の人には伝わっている</strong>。あと少しの工夫で100%届く状態。</p>
+    </div>
+
+    <div class="box box-quote">
+      さくらさんの方が比べるのはあれですけど、さくらさんのやつは伝わるんですよ多分60%ぐらいの人には。でももっとちょっと工夫したら全員に伝わりそうかなみたいな温度感。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <h2><span class="chapter-num">02</span>最大の盲点 ─ 「オフ会」という言葉のハードルの高さ</h2>
+
+    <p>しゃけさんが指摘した、さくらさんが無意識に見逃していた事実：</p>
+
+    <div class="box box-warn">
+      <h4>⚠️ オフ会は、思ってるより怖い</h4>
+      <p>iサークル内では「オフ会＝楽しい・行きたい」が当たり前。でも<strong>世の中の普通の人</strong>からすると：</p>
+      <p style="background: #fff; padding: 12px 16px; border-radius: 8px; margin: 10px 0; border-left: 3px solid #dc2626;">
+        「え？知らない人にネットで会う？ <span class="ng-word">え？刺されないかな？</span> そこまで思うレベル。」
+      </p>
+      <p>この前提認識を持たないとオフ会告知は届かない。</p>
+    </div>
+
+    <h3>なぜiサークルのオフ会は人が集まるのか（比較）</h3>
+
+    <div class="box box-idea">
+      <h4>💡 iサークル本家のオフ会は"アカウント添削"という明確メリットがある</h4>
+      <ul>
+        <li>iサークル本体のオフ会：<strong>リアルで自分のアカウントを5分以上向き合って添削してもらえる</strong> ─ これが明確な参加理由。</li>
+        <li>これを抜いて「楽しいだけのオフ会」にしたら、300人コミュニティでも参加者は5〜10人。</li>
+        <li>「楽しいから来て」だけだと、5万円の交通費・時間コストを払う天秤で負ける。</li>
+      </ul>
+    </div>
+
+    <h3>フォロワーの脳内シミュレーション（しゃけ式）</h3>
+
+    <p>しゃけさんが実演した、フォロワー視点の思考プロセス：</p>
+
+    <div class="box box-quote">
+      今僕がバーってポンポンポンって出してるのってどういう思考で出してるかっていうと、<strong>僕がさくらさんのフォロワーさんだったらどう感じるかな</strong>って妄想で膨らましていってるんですよね。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <div class="box box-flow">
+      <h4>🧠 フォロワー視点の自動思考</h4>
+      <ol>
+        <li>オフ会って何か分かんないな、怖いな</li>
+        <li>リアルで会って料理するんだ、楽しそうかも</li>
+        <li>でもそれって、家でみんなで集まって、どういうメリットがあるんだろう?</li>
+        <li>私オフ会って、みんなで知らないところに行ったことないから、どういう良さがあるか分かんないな</li>
+        <li>→ ここで具体メリットを提示できると「行きたい！」に転換</li>
+      </ol>
+      <p style="margin-top:12px;">この順序で脳内シミュレートして、<strong>各ステップに1投稿ずつ当てる</strong>のがしゃけ流の設計。</p>
+    </div>
+
+    <h2><span class="chapter-num">03</span>コンセプト再設計 ─ 「オフ会」を「無料料理レッスン」に変える</h2>
+
+    <p>ここが今回のさくらさん添削で<span class="marker-pink">最大の発見</span>。</p>
+
+    <div class="box box-flow">
+      <h4>💡 新コンセプト</h4>
+      <p style="font-size: 17px; font-weight: 700; color: #065f46; background: #fff; padding: 16px 20px; border-radius: 10px;">
+        「無料で参加できる<strong>お料理レッスン</strong>／お弁当に特化した<strong>お料理教室</strong>」
+      </p>
+      <ul>
+        <li><strong>歴20年のプロ</strong>が教える（さくらさんは本当にプロ）</li>
+        <li><strong>無料</strong>。ただし会場代・食材代だけは<strong>集金</strong>になる（参加費無料＋実費負担の構造を明示）</li>
+        <li>体験版にありがちな<strong>後ろでの営業は一切なし</strong>（そもそも売るものがないから正直に言う）</li>
+      </ul>
+    </div>
+
+    <h3>ABCクッキングとの対比で"価格感覚"を壊す</h3>
+
+    <div class="compare">
+      <div class="ng">
+        <div class="label">料理教室の相場</div>
+        <strong>ABCクッキング等：1回5万円、10回で50万円。</strong><br>
+        プロに包丁の使い方・切り方・味付けを教わる対価。
+      </div>
+      <div class="ok">
+        <div class="label">さくらさんのレッスン</div>
+        <strong>会場代＋食材代のみで、同等のレッスン体験。</strong><br>
+        しかも<span class="marker">お弁当特化・JKママのプロから学べる</span>希少性。
+      </div>
+    </div>
+
+    <h3>「売るものがない」ことを正直に伝える</h3>
+
+    <div class="box box-quote">
+      私はこれをやることによって、こういうメリット・嬉しさがあるんだよ、だから安心してね、という感じ。なぜ私が開催しているのか、<strong>私のメリット</strong>に本質がある（論語の視・観・察）。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <div class="box box-tip">
+      <h4>📝 フォロワーの安心を作る文面例</h4>
+      <p style="background: #fff; padding: 15px; border-radius: 8px;">
+        「今日別に売られるわけじゃないから、いい！って言える感じにしたいんですよね。<br>
+        シンプルに目的は、<strong>みんなで仲良くなって、楽しく料理を作りたい</strong>っていうところだけ。<br>
+        売るんだったらちょっと別ですけど。ほんまに売っちゃダメだよって僕が言ってるわけじゃなくて、<br>
+        今日はそもそも売るものがないから<strong>安心してね</strong>」
+      </p>
+    </div>
+
+    <h3>「なぜ私が開催するのか」を正直に見せる</h3>
+
+    <p>しゃけさんは<strong>渋沢栄一／論語</strong>を引き合いに出しました。</p>
+
+    <div class="box box-idea">
+      <h4>💡 論語の「視・観・察」</h4>
+      <p>その人の<strong>言動はその通り</strong>として、その人の<strong>思考</strong>を観て、さらにその人が<strong>やることで得られるメリット</strong>まで察すると本質が見える。</p>
+      <p>さくらさんの場合、自分側のメリットを<span class="marker">あえて正直に開示する</span>：</p>
+      <ul>
+        <li>事前活動ではない</li>
+        <li>フォロワーさんと<strong>リアルに会って楽しい時間を過ごしたい</strong></li>
+        <li>発信の中で、<strong>どんな人が見てくれているのかを知りたい</strong></li>
+      </ul>
+      <p>これを正直に出すと、相手の警戒心が一気に下がる。</p>
+    </div>
+
+    <h2><span class="chapter-num">04</span>切り口10個 ─ 楽しい訴求だけでは届かない</h2>
+
+    <div class="box box-quote">
+      楽しい訴求だけで生きたい人もいるんですけど、メリットがあって楽しいもあるっていう両軸が大事。<br>
+      切り口が1つだけだと、1つに刺さった人しか来てない。でも本当は<strong>30通りぐらいあって、それぞれ均等に分かれてる</strong>。<br>
+      10個ぐらいの切り口でいったら、単純計算で参加者が10倍になる。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <div class="box box-flow">
+      <h4>🎯 さくらさんが訴求できる"10の切り口"</h4>
+      <ol>
+        <li>レシピ通りじゃなく、<strong>味見しながら自分好みに調整する技術</strong>が学べる</li>
+        <li>メインの肉を魚に変えて同じソースを使う、などの<strong>応用力</strong>が身につく</li>
+        <li><strong>明日から家で再現</strong>できる</li>
+        <li>投稿を見るだけでは分からない<strong>詰め方・時短のコツ</strong>を体験できる</li>
+        <li>彩りの言語化できない悩みを<strong>その場で質問</strong>できる</li>
+        <li>お弁当作りの<strong>ハードルが下がる</strong></li>
+        <li>子供が辛いのが苦手なら調味料をこう変える、という<strong>細かい調整</strong>が学べる</li>
+        <li>参加者同士で<strong>仲良くなれる</strong></li>
+        <li>料理中に<strong>リアルタイムで質問</strong>できる</li>
+        <li><strong>営業一切なし</strong>でクリーン</li>
+      </ol>
+    </div>
+
+    <h3>さくらさんが伝えたかった核心（本人インタビュー）</h3>
+
+    <p>さくらさん自身の言葉で語られた、オフ会の真の価値：</p>
+
+    <div class="box box-quote">
+      レシピに頼って調味料を測ってガチガチに作るんじゃなくて、毎回オフ会の時に<strong>その場で味見して自分好みに変えていいよ</strong>っていうのを伝えていて。<br>
+      お菓子は分量通りに作らないとできないけど、お料理ってそんなことないよ、と。<br>
+      1つの材料変えたら違うお弁当ができる、メインを肉から魚に変えてソースを同じにすれば別アレンジできる。<br>
+      <strong>明日から家で作ってね</strong>っていう、実践すぐできることをお伝えしたくて。
+      <span class="who">— さくらさん</span>
+    </div>
+
+    <div class="takeaway">
+      <h4>この本人の言葉を、そのままストーリーズに置けば刺さる</h4>
+      <p>さくらさんはすでに<strong>自分の商品の価値を的確に言語化できている</strong>。問題は、この情熱を<span class="marker">ストーリーズ上で"楽しい"という1軸に集約してしまった</span>こと。10個の切り口に展開すれば、刺さる人の総量が10倍になる。</p>
+    </div>
+
+    <h2><span class="chapter-num">05</span>写真の使い方 ─ 継続点と改善点</h2>
+
+    <h3>✅ そのまま続けるべきこと</h3>
+
+    <div class="box box-tip">
+      <h4>🌟 さくらさんの写真の強み</h4>
+      <ul>
+        <li>エプロン姿・料理中の姿を見せている（憧れへの距離を縮める）</li>
+        <li>お気に入りの写真を何回も使い回している（可愛い笑顔の1枚）</li>
+        <li>事前教育の写真の雰囲気が良い</li>
+      </ul>
+      <p><strong>「これしかなくて使いまわしてます」</strong>というさくらさんに対して、しゃけさんは<span class="marker">「それめっちゃ素晴らしいこと」</span>と評価。良い写真の使い回しは手抜きではなく、強化行為。</p>
+    </div>
+
+    <h3>⚠️ 改善すべきこと</h3>
+
+    <div class="box box-warn">
+      <h4>1. 「講座生が作った」という言葉はやめる</h4>
+      <p>「モニター生」「講座生」はイメージが堅く、既存グループの内輪感を出してしまう。</p>
+      <div class="compare" style="margin: 10px 0;">
+        <div class="ng"><div class="label">NG</div>「モニター生が作ったレゴキューブで…」</div>
+        <div class="ok"><div class="label">OK</div>「<strong>モニターで入ってくれた子たち</strong>が作ったレゴキューブで…」</div>
+      </div>
+    </div>
+
+    <div class="box box-warn">
+      <h4>2. 集合写真に工夫を足す</h4>
+      <ul>
+        <li>参加者が作った料理を<strong>5人分横並び</strong>でずらっと見せる<br>→ 「こんな風にいろんなアレンジ作れるんだ」とイメージが湧く</li>
+        <li>集合写真には<strong>「実は全員初めまして」</strong>と書く<br>→ 既に仲良しグループになっていない安心感を言語化</li>
+        <li>真剣に描いている／集中して作業している姿を入れる<br>→ 「私もこんな姿で参加するのか」と投影できる</li>
+      </ul>
+    </div>
+
+    <div class="box box-idea">
+      <h4>💡 沖縄のシーサー作り比喩</h4>
+      <p>しゃけさんの例え：沖縄のシーサー作り体験。自分のシーサー1個だけドンと写ってるより、<strong>5人組が作った5個並び</strong>の方が「こんな風に色付けするんだ」とイメージが湧く。</p>
+    </div>
+
+    <h2><span class="chapter-num">06</span>伝えきれていなかった"必要性"の訴求</h2>
+
+    <p>さくらさんのストーリーズに欠けていた、必要性の訴求ポイント：</p>
+
+    <div class="box box-warn">
+      <h4>⚠️ 未解消だった3つの疑問</h4>
+      <ol>
+        <li><strong>家で作るのと何が違うの？</strong> → 未解消</li>
+        <li><strong>みんなで集まる必要性は？</strong> → 解消が弱い</li>
+        <li><strong>なぜ今回開催？</strong> → やりたいからやります感で押し売りに見える</li>
+      </ol>
+    </div>
+
+    <div class="box box-tip">
+      <h4>📝 解消のテンプレ文面例</h4>
+      <p style="background: #fff; padding: 15px; border-radius: 8px; border-left: 3px solid #0284c7;">
+        「<strong>こんなにもみんなでお弁当を作るなんて楽しいなんて知りませんでした</strong>」という<br>
+        参加者のDMをピックアップして、横に「みんなで作ると本当に楽しい」「この日全員実は初めましてだった」を添える。
+      </p>
+    </div>
+
+    <h2><span class="chapter-num">07</span>DM見せ方の超重要ルール（全員共通）</h2>
+
+    <p>ここはなめちゃん編でも出ましたが、さくらさん編でさらに具体例つきで詳しく話されました。</p>
+
+    <div class="box box-warn">
+      <h4>🚫 赤線・アンダーバーだけは絶対NG</h4>
+      <p>DMに赤線を引いて4枚並べるだけ、は<strong>発信者の怠慢</strong>。フォロワーはその赤線を自分で要約できない。<br>
+      → <span class="ok-word">発信者側で要約を一言添える</span>ことで、初めて伝わる。</p>
+    </div>
+
+    <h3>実例：さくらさんの既存DMと修正案</h3>
+
+    <div class="compare">
+      <div class="ng">
+        <div class="label">Before</div>
+        「新年度で子供の日程が分からなくて参加決めかねてます」<br>
+        （本文に赤線だけ）「同じような人いるかな スタンプで教えてね」
+      </div>
+      <div class="ok">
+        <div class="label">After</div>
+        「新年度で子供の日程が分からなくて参加決めかねてます」<br>
+        ↓ さくらさんが上か下に要約を添える<br>
+        <strong>「日程がまだわからない」</strong><br>
+        「同じような方いるかな？スタンプで教えて」
+      </div>
+    </div>
+
+    <p>別のDMの例：</p>
+    <ul>
+      <li>「一人で参加するのが不安」というDM → 赤線だけで済ませず、<strong>「一人参加が不安」</strong>という要約を添える。</li>
+    </ul>
+
+    <div class="box box-idea">
+      <h4>💡 なぜこれが重要か</h4>
+      <p>フォロワーはストーリーズをザッピングしている。<strong>2秒で意味が取れるかどうか</strong>で読まれるかが決まる。発信者がする要約の一言は、フォロワーに対する親切。</p>
+    </div>
+
+    <h2><span class="chapter-num">08</span>言葉の微調整 ─ Before / After 集</h2>
+
+    <p>しゃけさんが現場で修正した、言葉の微調整集：</p>
+
+    <div class="compare">
+      <div class="ng">
+        <div class="label">Before</div>
+        「コラボ開催ではオフ会」<br>
+        （何をする会か不明）
+      </div>
+      <div class="ok">
+        <div class="label">After</div>
+        「<strong>みんなでリアルに集まって、パン作り＆お弁当作りをするオフ会 in 神戸</strong>」
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="ng">
+        <div class="label">Before</div>
+        「今回は関西でコラボ開催」
+      </div>
+      <div class="ok">
+        <div class="label">After</div>
+        「関西でみんなで集まって、パン作り／お弁当作りをする会は、<strong>もうないかもしれません</strong>」
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="ng">
+        <div class="label">Before</div>
+        「普段なかなかお会いできない皆さんと」
+      </div>
+      <div class="ok">
+        <div class="label">After</div>
+        「<strong>画面の奥でしか見ていない私や皆さん、大事なフォロワーさんと一緒にお会いして過ごせたら</strong>嬉しい」
+      </div>
+    </div>
+
+    <h2><span class="chapter-num">09</span>「プロンプト」が世の中に伝わらない問題 ─ 顧客の言葉で語る</h2>
+
+    <p>しゃけさんが挙げた鋭い視点：<strong>「プロンプト」という言葉ですらフォロワーには遠い</strong>。</p>
+
+    <div class="box box-quote">
+      僕がさくらさんに「これを改善するためのプロンプトを特別プレゼントします」って言っても、プロンプトって知ってるっちゃ知ってるけど、ちょっとしっくりこなくないですか。<br>
+      プロンプトはプロンプトでしょ、命令文でしょみたいな。AIに指示出す文章のことをプロンプトって言うんだよねって感じになるけど、<strong>世の中「オフ会」ってキーワードもそんな当たり前じゃない</strong>。
+      <span class="who">— しゃけ</span>
+    </div>
+
+    <div class="takeaway">
+      <h4>自分が使っている単語の"当たり前度"を疑う</h4>
+      <p>発信者にとっての常識ワードが、フォロワーにとっては<strong>外国語みたいなもの</strong>。オフ会 / アフィリ / ローンチ / DM / PR…これらを「みんなでリアルに集まる会」「紹介リンク」「販売開始」「メッセージ」などに置き換えるだけで、リーチが広がる。</p>
+    </div>
+
+    <h2><span class="chapter-num">10</span>さくらさん編の学び</h2>
+
+    <div class="takeaway">
+      <h4>さくらさん編のテイクアウェイ</h4>
+      <ol>
+        <li><strong>写真・口コミ・顔出しは既に60%合格</strong>。土台は最強クラス。</li>
+        <li>「オフ会」という言葉は<strong>世間には怖い響き</strong>。業界用語を疑え。</li>
+        <li>コンセプトを<span class="marker">「オフ会」→「無料料理レッスン／お料理教室」</span>に再設計。ABCクッキング比較で価格感覚を壊す。</li>
+        <li>切り口は<strong>10個</strong>展開。楽しいだけだと1/10しか刺さらない。</li>
+        <li>自分側のメリットを<strong>正直に開示</strong>する（論語の視・観・察）。</li>
+        <li>DMは<strong>赤線＋要約の一言</strong>がセット。アンダーバーだけはNG。</li>
+        <li>集合写真に「<strong>全員初めまして</strong>」と書く。既存グループの恐怖を打ち消す。</li>
+        <li>「講座生」→「<strong>入ってくれた子たち</strong>」など言葉の微調整。</li>
+      </ol>
+    </div>
+
+    <div class="box box-note">
+      <h4>📖 講座ナレッジとのつながり</h4>
+      <p><strong>PRO_11-2（ストーリーズの作り方）</strong>の<span class="marker">映え写真4原則</span>（①文字を入れるスペースを意識 ②映るものは3個以内 ③自分の姿を映す ④引きと寄り）を、さくらさんはほぼ全て実践できている。ここに<strong>「1ページ1見出し」</strong>を徹底することで、優等生から100点に変わる。</p>
+      <span class="ref">参照：PRO_11-2_ストーリーズの作り方.md（映え写真4原則／良いストーリーズの共通点6選）</span>
+    </div>
+  </div>
+
+  <footer>
+    <p>iサークル チーム共有リポジトリ ／ ICircle Pro 学習ガイド</p>
+    <p>2026-04-16 開催 ストーリーズ添削会 第1回｜2026-04-17 作成</p>
+  </footer>
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('.tab-btn');
+  const contents = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      tabs.forEach(t => t.classList.remove('active'));
+      contents.forEach(c => c.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('tab-' + target).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEP 3：コンセプトを設計する | iサークル年払い特典</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="header">
+  <span class="deco-sparkle">✨</span>
+  <span class="deco-sparkle">💫</span>
+  <span class="deco-sparkle">⭐</span>
+  <span class="deco-sparkle">✨</span>
+  <div class="badge">STEP 3 / 5</div>
+  <h1><span class="accent">コンセプト</span>を設計する</h1>
+  <p>AIと対話しながら、あなただけの『コンセプトストーリー』を作り上げる🎨</p>
+  <div class="hero-chars">
+    <div class="hero-char rikopin"><img src="images/erena_happy.png" alt=""></div>
+  </div>
+</div>
+
+<div class="progress-bar">
+  <div class="prog-step"><div class="prog-dot active" data-step="1">1</div><div class="prog-label">入力</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="2">2</div><div class="prog-label">プロンプト</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="3">3</div><div class="prog-label">結果貼付</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="4">4</div><div class="prog-label">レポート</div></div>
+</div>
+<div id="stepLabel">STEP 1：前ステップの結果とジャンルを入力</div>
+
+<div class="container">
+
+
+<div class="char-intro erena">
+  <div class="avatar"><img src="images/erena_happy.png" alt="えれな"></div>
+  <div class="bubble">
+    <div class="name">えれな </div>
+    <p>いよいよアカウントの"核"となる部分をつくっていくよ✨<br>AIと対話しながらターゲット・未来・差別化を言葉にしていこう🎨</p>
+  </div>
+</div>
+
+<!-- ===== Section 1: Input ===== -->
+<div class="section active" id="section1">
+  <div class="card">
+    <div class="card-title"><span class="emoji">📥</span> STEP 2 のジャンルレポートを入力</div>
+    <div class="card-subtitle">前ステップのレポートが自動で入ります。入っていない場合はコピペしてください。</div>
+    <div class="field">
+      <label>STEP 2：ジャンル分析レポート</label>
+      <textarea id="input_step2" placeholder="STEP 2のジャンル分析レポートをここに貼り付け..." style="min-height:160px"></textarea>
+    </div>
+  </div>
+  <!-- ジャンル確定 -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">🎯</span> 選んだ発信ジャンル</div>
+    <div class="field">
+      <label>あなたが選んだ発信ジャンル</label>
+      <input type="text" id="input_genre" placeholder="例）時短料理 × ワーママ、家づくり × ホテルライク">
+      <div class="field-hint">💡 STEP 2のランキングから選んでも、自分で決めてもOK！</div>
+    </div>
+  </div>
+
+  <!-- 宿題シート日目別タブ -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">📝</span> 16〜17日目の宿題結果を貼り付け（任意）</div>
+    <div class="card-subtitle">まだ記入していなければ空欄でOK。AIが対話で引き出します。</div>
+
+    <div class="day-tabs">
+      <button class="day-tab active" onclick="switchDay(16, this)">💭 16日目：コンセプト3要素</button>
+      <button class="day-tab" onclick="switchDay(17, this)">🎨 17日目：世界観</button>
+    </div>
+
+    <!-- 16日目 -->
+    <div class="day-content active" id="day16">
+      <div style="background:#FFF8E1;border-left:4px solid #FFD93D;padding:10px 14px;border-radius:10px;margin-bottom:16px;font-size:12px;line-height:1.7">
+        宿題シート「16日目①」で書いた<strong>3要素</strong>があれば貼り付けてね！
+      </div>
+      <div class="field">
+        <label>① どんな悩みを持っている人に届けるのか？</label>
+        <textarea id="input_concept_pain" placeholder="例）30代で子どもが2人いるフルタイムワーママ&#10;見た目がオバサンになっていくのは自覚しているが、容姿を後回しにしがち..." style="min-height:90px"></textarea>
+      </div>
+      <div class="field">
+        <label>② どんな未来に連れていくのか？（ベネフィット）</label>
+        <textarea id="input_concept_future" placeholder="例）周りのママ友から浮かない程度に身なりを整えられる&#10;子どもの授業参観に胸を張って参加できる..." style="min-height:80px"></textarea>
+      </div>
+      <div class="field">
+        <label>③ どんな解決策を提示するのか？</label>
+        <textarea id="input_concept_solution" placeholder="例）初めて化粧水を買う人のためのスキンケアのイロハ&#10;30代に合うメイクのやり方、垢抜けて見えるコツ..." style="min-height:80px"></textarea>
+      </div>
+      <div class="field">
+        <label>16日目③：ベンチマークアカウント（3つまで）</label>
+        <textarea id="input_benchmark" placeholder="例）&#10;@nami_ouchi_ → 家づくり系、茶色＋白、ポップ体フォント&#10;@cooking_mama → 時短レシピ、パステル系&#10;@setsuyaku_life → 節約系、シンプルデザイン" style="min-height:90px"></textarea>
+        <div class="field-hint">💡 アカウント名／特徴／色・フォントなどメモでOK</div>
+      </div>
+    </div>
+
+    <!-- 17日目 -->
+    <div class="day-content" id="day17">
+      <div style="background:#FFF8E1;border-left:4px solid #FFD93D;padding:10px 14px;border-radius:10px;margin-bottom:16px;font-size:12px;line-height:1.7">
+        宿題シート「17日目」で決めた<strong>テーマカラー・フォント</strong>を貼り付けてね！
+      </div>
+      <div class="field">
+        <label>自分のアカウントで使いたいテーマカラー・フォント</label>
+        <textarea id="input_worldview" placeholder="例）&#10;テーマカラー：ベージュ＋くすみピンク&#10;フォント：ポップ体（やわらかい印象）&#10;雰囲気：ほっこり系、ゆるい親しみやすさ" style="min-height:110px"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" onclick="generatePrompt()">コンセプト設計プロンプトを生成 🔍</button>
+</div>
+
+<!-- ===== Section 2: Prompt ===== -->
+<div class="section" id="section2">
+  <div class="card">
+    <div class="card-title"><span class="emoji">🔍</span> コンセプト設計プロンプト（対話型）</div>
+    <div class="card-subtitle">AIが5〜6つの質問であなたのコンセプトを引き出します</div>
+    <div class="prompt-box" id="promptDisplay"></div>
+    <div class="copy-success" id="copySuccess">コピーしました！ ✅</div>
+    <button class="btn btn-copy" onclick="copyText('promptDisplay','copySuccess')">📋 コピーする</button>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="emoji">💡</span> Claude（おすすめ）、ChatGPT、Geminiに貼り付けて送信してください</div>
+    <div class="howto"><div class="howto-num">1</div><div class="howto-text">Claude（おすすめ）、ChatGPT、Geminiを開いてプロンプトを貼り付け</div></div>
+    <div class="howto"><div class="howto-num">2</div><div class="howto-text">AIが質問してくるので<strong>1問ずつ答えてください</strong></div></div>
+    <div class="howto"><div class="howto-num">3</div><div class="howto-text">全て終わると<strong>コンセプトストーリー</strong>が2パターン出ます</div></div>
+    <div class="howto"><div class="howto-num">4</div><div class="howto-text">結果を全文コピーして次へ！</div></div>
+  </div>
+  <button class="btn btn-primary" onclick="goToStep(3)">結果が出た → 次へ進む</button>
+  <button class="btn btn-outline no-print" onclick="goToStep(1)">← 入力を修正する</button>
+</div>
+
+<!-- ===== Section 3: Paste Result ===== -->
+<div class="section" id="section3">
+  <div class="card">
+    <div class="card-title"><span class="emoji">📥</span> コンセプト設計の結果を貼り付け</div>
+    <div class="card-subtitle">AIから出てきたコンセプト結果を全文コピーして貼り付けてください</div>
+    <textarea id="resultText" placeholder="AIからのコンセプト設計結果をここに貼り付け..." style="min-height:200px"></textarea>
+  </div>
+  <div class="card" style="background:#FFF8E1;border-left:4px solid #FFD93D;margin-top:8px">
+    <div class="card-title" style="font-size:14px"><span class="emoji">⚠️</span> レポートが表示されない時は</div>
+    <p style="font-size:13px;line-height:1.8">
+      AIの回答に <strong>「---セクション：〜---」</strong> という区切り線が含まれているか確認してください。<br>
+      もし英語の「SECTION」になっていたら、AIに <strong>「『---セクション：〜---』の形式で出し直して」</strong> とお願いするとうまくいきます✨
+    </p>
+  </div>
+  <button class="btn btn-primary" onclick="generateReport()">コンセプトレポートを表示する 🎉</button>
+  <button class="btn btn-outline no-print" onclick="goToStep(2)">← 戻る</button>
+</div>
+
+<!-- ===== Section 4: Report ===== -->
+<div class="section" id="section4">
+  <canvas id="confetti"></canvas>
+  <div class="report-header">
+    <div class="badge">STEP 3 COMPLETE</div>
+    <h2>🎨 コンセプト設計レポート</h2>
+    <p>あなただけのコンセプトストーリーストーリーが完成しました</p>
+  </div>
+  <div id="reportContent"></div>
+  <div class="next-step-banner">
+    <h3>🎯 次のステップ</h3>
+    <p>コンセプトが決まったら、プロフィールを作りましょう！</p>
+    <a href="step4-profile-creation.html" class="btn btn-next" style="display:inline-block;text-decoration:none;padding:14px 32px;">STEP 4 へ進む →</a>
+  </div>
+  <div class="save-options">
+    <div class="save-options-title">💾 レポートを保存・コピー</div>
+    <div class="save-options-grid">
+      <button class="save-btn image no-print" onclick="saveReportAsImage('STEP3_コンセプト設計レポート')">
+        <span class="icon">🖼️</span>
+        <span class="label">画像で保存</span>
+      </button>
+      <button class="save-btn pdf no-print" onclick="saveReportAsPDF()">
+        <span class="icon">📄</span>
+        <span class="label">PDFで保存</span>
+      </button>
+      <button class="save-btn text no-print" onclick="copyReportAsText('step3')">
+        <span class="icon">📋</span>
+        <span class="label">テキスト<br>コピー</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="top-link no-print" style="margin-top:20px;text-align:center">
+    <a href="index.html" class="top-link-btn">🏠 TOPページに戻る</a>
+  </div>
+
+</div>
+<script src="shared.js"></script>
+<script>
+window.stepLabels = {
+  1: 'STEP 1：前ステップの結果とジャンルを入力',
+  2: 'コンセプト設計プロンプト',
+  3: '設計結果を貼り付け',
+  4: 'コンセプトレポート完成！'
+};
+
+// Auto-load STEP 2 report
+window.addEventListener('DOMContentLoaded', function() {
+  const prev = loadReport('step2_report');
+  if (prev) document.getElementById('input_step2').value = prev;
+});
+
+function generatePrompt() {
+  const g = id => (document.getElementById(id)?.value || '').trim();
+  const step2 = g('input_step2');
+  const genre = g('input_genre');
+  const benchmark = g('input_benchmark');
+  const pain = g('input_concept_pain');
+  const future = g('input_concept_future');
+  const solution = g('input_concept_solution');
+  const worldview = g('input_worldview');
+  if (!step2) { alert('STEP 2のジャンルレポートを入力してください！'); return; }
+  if (!genre) { alert('選んだ発信ジャンルを入力してください！'); return; }
+
+  // 16日目の3要素が全部埋まっているか（AIに「すでに下書きあり」と伝えるため）
+  const hasDraft = pain || future || solution;
+  const draftBlock = hasDraft ? `\n## 16日目：コンセプト3要素の下書き（すでに考えているもの・AIはこれを起点に深掘る）\n${pain ? '【どんな悩みを持つ人に届けるか】\n' + pain + '\n\n' : ''}${future ? '【どんな未来に連れていくか】\n' + future + '\n\n' : ''}${solution ? '【どんな解決策を提示するか】\n' + solution + '\n' : ''}` : '';
+  const worldviewBlock = worldview ? `\n## 17日目：希望する世界観（テーマカラー・フォントなど）\n${worldview}\n` : '';
+
+  const prompt = `あなたは、Instagram副業で発信を始める人のための「コンセプト設計コーチ」です。
+受講生と対話しながら、本人だけの「コンセプトストーリー」を作り上げます。
+
+以下の前提①〜③を必ず守って設計してください。これはInstagramで実際に伸びているアカウントが大事にしている原則です。
+
+# 【前提①】コンセプト設計の絶対原則
+
+1. **「アカウント設計で8割決まる」**
+   アカウントが伸びない98%の理由はコンセプト設計の甘さ。逆に言えばここさえ決まれば伸びる。
+
+2. **コンセプト設計の3要素**
+   ①誰に（ターゲット）②どんな未来に連れていくか（ベネフィット）③どんな解決策で（手段）
+   この3つが一本の筋で繋がっていないコンセプトは誰にも刺さらない。
+
+3. **「20年来の親友1人へのプレゼント」レベルでターゲットを絞る**
+   ❌「キレイになりたい女性」→ ⭕「産後のボディに自信を持てないアラフォー母」
+   具体的であるほど共感は深くなる。広げると一気に浅くなる。
+
+4. **「なぜ？」を繰り返し本当の悩みを掘り当てる**
+   表面的な悩み（例：料理が面倒）の奥に、本当の悩み（例：家族との時間を奪われている）がある。
+   さらに奥には「自分のことが嫌いになりそう」という本音が眠っている。ここまで掘る。
+
+5. **ベネフィットとメリットを区別する**
+   ❌メリット（フォロワーが増える／痩せる）
+   ⭕ベネフィット（好きな人と好きな場所で暮らせる／大好きな服をかっこよく着られる）
+
+6. **4Cストーリーで破綻をチェック**
+   Customer（悩み）→ Competitor（競合がいないポジション）→ Company（自分の強み）→ Concept
+   この4つが一本の物語として成立するか検証する。
+
+7. **完璧主義は最大の敵**
+   コンセプト設計に2ヶ月以上かけない。60〜70点で運用を開始して、データを見ながら微修正する。
+
+# 【前提②】世界観の作り方
+
+- **トーン**：優しいお姉さん／ストイックな先生／ゆるい友達／ちょっと毒舌な先輩 など、キャラ設定を1つに
+- **色・ビジュアル**：ジャンルに合う2〜3色のメインカラーを決める
+- **語尾・口調**：「〜だよ」「〜ですよ」「〜してね」など統一する
+- **投稿で取り上げるテーマの範囲**：発信ジャンル外のネタを入れるかどうかを決める
+
+# 【前提③】ベンチマーク3つ組み合わせの考え方
+
+- 1つだけ真似すると「丸パクリ」になる
+- 3つ以上の要素を組み合わせてオリジナルを作る
+- コンセプトが完全一致でなくてもOK。一部の要素（プロフィール構造／投稿スタイル／世界観）が参考になればよい
+- **短期間で伸びたアカウント**を優先的にベンチマークにする
+
+# 【入力情報】
+## STEP 2：ジャンル分析レポート
+${step2}
+
+## 選んだ発信ジャンル
+${genre}
+${benchmark ? '\n## 16日目③：ベンチマークアカウント（すでに意識している参考アカウント）\n' + benchmark : ''}${draftBlock}${worldviewBlock}
+
+# 【対話の進め方】必ず下記の2ステップで進めてください
+
+## ステップ1：追加情報を一括でまとめて質問
+以下の6つを **1つのメッセージにまとめて** 質問してください。1問ずつではなく番号付きで一気に。
+質問の前に「コンセプト設計のために、以下6つをまとめて答えてくれると深く分析できます✨」と一言添えて。
+
+1. ターゲット像：${genre}で具体的に誰を助けたい？（年代・立場・状況・具体的なシーン）
+2. ターゲットの表面的な悩み、そしてその奥にある本音の悩み（「なぜ？」を3回繰り返して出てくるレベルで）
+3. 届けたい未来（ターゲットがどうなれたら「このアカウントに出会えてよかった」と涙するか）
+4. あなたが伝えられる具体的なノウハウ・解決策（一次情報ベースで）
+5. あなたにしかない実体験・マイナス経験・コンプレックスを乗り越えた経験（ヒーローズ・ジャーニー）
+6. アカウントの世界観・トーン・語尾（例：優しいお姉さん／ストイックな先生／ゆるい友達など）
+
+**回答を受け取るまでステップ2に進まない。**
+
+## ステップ2：回答をもとにコンセプト設計
+回答を受け取ったら、必ず下記の区切り記号（---セクション：〜---）を使って出力：
+
+---セクション：ターゲット像---
+ペルソナを鮮明に描写する。
+名前（仮名）、年代、家族構成、職業、1日の流れ、日常の小さな不安、理想の姿を5〜6行で。
+「このペルソナが目の前にいるかのように」具体的に。
+
+---セクション：本当の悩み---
+「なぜ？」の深掘りで本音に到達する3層構造で：
+
+🔹 表面的な悩み（言葉にしやすい）：○○○
+　↓なぜ？
+🔹 中層の悩み（少し考えると出てくる）：○○○
+　↓なぜ？
+🔹 本当の悩み（本音・コア）：○○○
+
+この深掘りを2〜3パターン提示する。
+
+---セクション：届ける未来---
+感情に訴えるベネフィット（メリットではなく）を4〜5行で。
+「フォロワーが『このアカウントに出会えてよかった』と涙するレベル」の未来像を言語化。
+「痩せる」ではなく「大好きな服をかっこよく着て自分を好きになれる」のような深さで。
+
+---セクション：解決策---
+未来を実現する具体的なアプローチを4〜5つ箇条書きで。
+本人の一次情報・実体験ベースで、他の人には書けないオリジナル性のあるもの。
+「誰でも書ける一般論」は絶対NG。
+
+---セクション：4Cストーリー---
+4Cストーリー検証：
+
+🔹 Customer（誰のどんな悩み）：
+🔹 Competitor（競合がいないポジション／他のアカウントが取れていない角度）：
+🔹 Company（自分の強み・一次情報・ヒーローズジャーニー）：
+🔹 Concept（一言で表すアカウントコンセプト）：
+
+【ストーリー化】上記をつなげて150字前後の物語に。
+「○○で悩むCustomerに対して、今はCompetitorが△△の角度で発信しているが、私は一次情報である□□を活かして◇◇というコンセプトで刺しに行く」のような構造で。
+
+---セクション：コンセプトA---
+【パターンA：共感重視型（「私もそうだった」で引き込む）】
+
+🔹 ターゲット像：（ペルソナを1行で）
+🔹 届ける未来：（ベネフィットを1文で）
+🔹 解決策：（3つまで）
+🔹 世界観・トーン：
+🔹 語尾・口調：
+
+【キャッチコピー】8〜15字でアカウント一言表現（プロフィール名前欄に使えるレベル）
+【ストーリー】（150字前後）
+「○○で悩んでいた私が、△△と出会い／気づき、□□になれた。同じ悩みを持つあなたに、この方法を届けたい」の構造で。
+
+---セクション：コンセプトB---
+【パターンB：ベネフィット重視型（理想の未来を打ち出す）】
+（パターンAと同じ項目を、異なる切り口で）
+
+【キャッチコピー】8〜15字
+【ストーリー】（150字前後・パターンAとは異なる切り口で）
+
+---セクション：世界観---
+以下を決める：
+
+🔹 キャラ設定：（例：「優しい先輩」「ストイックな先生」「ゆるい友達」など）
+🔹 メインカラー：（2〜3色。ジャンルに合う配色を理由つきで）
+🔹 語尾・口調：（統一ルール3つ）
+🔹 取り上げるテーマの範囲：（ジャンル内だけか、時々プライベートも出すか）
+🔹 投稿全体のトーン：（写真加工／テロップフォント／BGMの方向性）
+
+---セクション：ベンチマーク推奨3選---
+コンセプトが近い or 参考にできそうなアカウントを3パターン提案：
+・ベンチマーク①：〇〇ジャンルで〜〜な発信をしているアカウント／学べる要素：〜〜
+・ベンチマーク②：（同様）
+・ベンチマーク③：（同様）
+
+※1つだけ見ると丸パクリになる。3つ組み合わせてオリジナルを作るのが鉄則。
+※短期間（3ヶ月〜半年）で伸びているアカウントを優先。
+
+---セクション：差別化ポイント---
+このコンセプトがなぜ他と違うのか、3つ以内で端的に。
+「同じジャンルの他のアカウントは〜〜、でも私は〜〜」の形式で。
+
+---セクション：コンセプトキーワード---
+プロフィール作成（STEP4）やハッシュタグに使える重要キーワードを6〜8個。
+
+---セクション：次のステップへの橋渡し---
+STEP4（プロフィール作成）に向けて、このコンセプトから抽出すべき3つの要素：
+1. プロフィール名前欄に入れるべき「発信テーマ」の候補（15字以内）
+2. プロフィール文150字に入れ込むべき「ベネフィット」
+3. アイコンの方向性（世界観と整合するように）
+
+それでは、まずステップ1の6つの質問からスタートしてください。`;
+
+  document.getElementById('promptDisplay').textContent = prompt;
+  goToStep(2);
+}
+
+function generateReport() {
+  const raw = document.getElementById('resultText').value.trim();
+  if (!raw) { alert('コンセプト結果を貼り付けてください！'); return; }
+
+  const s = parseResult(raw);
+  const container = document.getElementById('reportContent');
+
+  if (Object.keys(s).length < 2) {
+    container.innerHTML = `<div class="report-card"><div class="report-card-label">AI REPORT</div><h3>結果</h3><p>${nl2br(escHtml(raw))}</p></div>
+    <div class="card" style="background:#FFF8E1;border-left:4px solid #FFD93D"><p style="font-size:13px">⚠️ セクションマーカーが検出できませんでした。AIの回答に「---SECTION:〜---」が含まれているか確認してください。</p></div>`;
+    saveReport('step3_report', raw);
+    goToStep(4); return;
+  }
+
+  let html = '';
+  html += makeReportCard('TARGET', '🎯 ターゲット像', s['ターゲット像'], '');
+  html += makeReportCard('REAL PAIN', '💥 本当の悩み', s['本当の悩み'], 'orange');
+  html += makeReportCard('FUTURE VISION', '✨ 届ける未来', s['届ける未来'], 'green');
+  html += makeReportCard('SOLUTION', '💡 解決策', s['解決策'], '');
+  html += makeReportCard('4C STORY', '🎬 4Cストーリー（検証）', s['4Cストーリー'], 'navy');
+  html += makeReportCard('CONCEPT A', '🅰️ コンセプトA：共感重視型', s['コンセプトA'], 'purple');
+  html += makeReportCard('CONCEPT B', '🅱️ コンセプトB：ベネフィット重視型', s['コンセプトB'], 'pink');
+  html += makeReportCard('WORLD VIEW', '🌈 世界観・トーン設計', s['世界観'], 'yellow');
+  html += makeReportCard('BENCHMARK', '🔭 ベンチマーク推奨3選', s['ベンチマーク推奨3選'], 'yellow');
+  html += makeReportCard('DIFFERENTIATION', '⚡ 差別化ポイント', s['差別化ポイント'], 'orange');
+  html += makeReportCard('KEYWORDS', '🏷 コンセプトキーワード', s['コンセプトキーワード'], '');
+  html += makeReportCard('NEXT STEP', '🚀 次のステップへの橋渡し', s['次のステップへの橋渡し'], 'green');
+
+  container.innerHTML = html;
+  saveReport('step3_report', raw);
+  goToStep(4);
+  setTimeout(launchConfetti, 300);
+}
+function exportStep3Excel() {
+  const data = collectExportData('step3', [
+    { id: 'input_step2', label: 'STEP2 ジャンルレポート（引継ぎ）' },
+    { id: 'input_genre', label: '選んだ発信ジャンル' },
+    { id: 'input_benchmark', label: 'ベンチマークアカウント' },
+    { id: 'resultText', label: 'AI回答（貼付）' },
+  ]);
+  downloadExcel('STEP3_コンセプト設計レポート', data);
+}
+document.addEventListener('DOMContentLoaded', () => initAutoSave('step3'));
+</script>
+</body>
+</html>

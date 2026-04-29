@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEP 2：発信ジャンルを調査する | iサークル年払い特典</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="header">
+  <span class="deco-sparkle">✨</span>
+  <span class="deco-sparkle">💫</span>
+  <span class="deco-sparkle">⭐</span>
+  <span class="deco-sparkle">✨</span>
+  <div class="badge">STEP 2 / 5</div>
+  <h1>発信<span class="accent">ジャンル</span>を調査する</h1>
+  <p>強みレポートをもとに、あなたに最適なジャンルをAIが分析🎯</p>
+  <div class="hero-chars">
+    <div class="hero-char rikopin"><img src="images/syake_glasses.png" alt=""></div>
+  </div>
+</div>
+
+<div class="progress-bar">
+  <div class="prog-step"><div class="prog-dot active" data-step="1">1</div><div class="prog-label">入力</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="2">2</div><div class="prog-label">プロンプト</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="3">3</div><div class="prog-label">結果貼付</div></div>
+  <div class="prog-line"></div>
+  <div class="prog-step"><div class="prog-dot" data-step="4">4</div><div class="prog-label">レポート</div></div>
+</div>
+<div id="stepLabel">STEP 1：前ステップの結果と興味を入力</div>
+
+<div class="container">
+
+
+<div class="char-intro syake">
+  <div class="avatar"><img src="images/syake_glasses.png" alt="しゃけ"></div>
+  <div class="bubble">
+    <div class="name">しゃけ </div>
+    <p>よし、データで最適解を出していこう🐟<br>強みと興味を組み合わせて、<strong>需要×競合×相性</strong>でジャンルをランキング化していくよ！</p>
+  </div>
+</div>
+
+<!-- ===== Section 1: Input ===== -->
+<div class="section active" id="section1">
+  <div class="card">
+    <div class="card-title"><span class="emoji">📥</span> STEP 1 の強みレポートを入力</div>
+    <div class="card-subtitle">前ステップのレポートが自動で入ります。入っていない場合はコピペしてください。</div>
+    <div class="field">
+      <label>STEP 1：強みレポート</label>
+      <textarea id="input_step1" placeholder="STEP 1の強みレポートをここに貼り付け..." style="min-height:160px"></textarea>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="emoji">📝</span> 13〜15日目の宿題結果を貼り付け</div>
+    <div class="card-subtitle">タブを切り替えて、各日の結果を入力してください。全部でなくてOK！</div>
+
+    <div class="day-tabs">
+      <button class="day-tab active" onclick="switchDay(13, this)">🎯 13日目：好きTOP5</button>
+      <button class="day-tab" onclick="switchDay(14, this)">🔎 14日目：競合分析</button>
+      <button class="day-tab" onclick="switchDay(15, this)">💡 15日目：助けられる人</button>
+    </div>
+
+    <!-- 13日目 -->
+    <div class="day-content active" id="day13">
+      <div style="background:#FFF8E1;border-left:4px solid #FFD93D;padding:10px 14px;border-radius:10px;margin-bottom:16px;font-size:12px;line-height:1.7">
+        宿題シート「13日目」①の <strong>上位5つ</strong>を1つずつ入力してね！
+      </div>
+      <div class="field"><label>1位</label><input type="text" id="input_rank1" placeholder="例）自分の家を建てる"></div>
+      <div class="field"><label>2位</label><input type="text" id="input_rank2" placeholder="例）海外旅行に行く"></div>
+      <div class="field"><label>3位</label><input type="text" id="input_rank3" placeholder="例）自然の中を散歩する"></div>
+      <div class="field"><label>4位</label><input type="text" id="input_rank4" placeholder="例）時短家電を買う"></div>
+      <div class="field"><label>5位</label><input type="text" id="input_rank5" placeholder="例）コスメにこだわる"></div>
+    </div>
+
+    <!-- 14日目 -->
+    <div class="day-content" id="day14">
+      <div style="background:#FFF8E1;border-left:4px solid #FFD93D;padding:10px 14px;border-radius:10px;margin-bottom:16px;font-size:12px;line-height:1.7">
+        宿題シート「13日目②」「14日目」で調べた競合アカウントで気づいたことをまとめて貼り付けてね！
+      </div>
+      <div class="field">
+        <label>見つけた競合アカウントの特徴・共通点</label>
+        <textarea id="input_competitors" placeholder="例）家づくり系では『nami ⚮̈ 家族が笑顔になる家づくり』などが人気。フォロワー29万超え&#10;伸びている投稿：後悔しない家づくりのコツ、時短家事の導線設計&#10;共感悩み：家を建てたいけど何から優先したらいいか分からない..." style="min-height:160px"></textarea>
+        <div class="field-hint">💡 「どんな悩み／どんな未来／解決策／伸びる共通点」をまとめてOK</div>
+      </div>
+    </div>
+
+    <!-- 15日目 -->
+    <div class="day-content" id="day15">
+      <div style="background:#FFF8E1;border-left:4px solid #FFD93D;padding:10px 14px;border-radius:10px;margin-bottom:16px;font-size:12px;line-height:1.7">
+        宿題シート「15日目②」で書いた「助けられる人」を貼り付けてね！12日目の経験と掛け合わせて考えた人物像です。
+      </div>
+      <div class="field">
+        <label>あなたが「助けられそう」と思う人はどんな人？</label>
+        <textarea id="input_helpable" placeholder="例）旅行代理店勤務経験を活かして：&#10;・連休でも安くて人のいない穴場の旅行先を探している人&#10;・コスパがよくてサービスのいいホテルを探している人&#10;・ホテルっぽいインテリアにしたいけどイメージがわかない人..." style="min-height:130px"></textarea>
+      </div>
+      <div class="field">
+        <label>こんなアカウントを作りたいイメージ（任意）</label>
+        <textarea id="input_image" placeholder="例）おしゃれな暮らし系で、見てるだけで癒されるアカウント&#10;例）実用的なノウハウをわかりやすく伝える先生っぽいアカウント" style="min-height:80px"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" onclick="generatePrompt()">ジャンル分析プロンプトを生成 🔍</button>
+</div>
+
+<!-- ===== Section 2: Prompt ===== -->
+<div class="section" id="section2">
+  <div class="card">
+    <div class="card-title"><span class="emoji">🔍</span> ジャンル分析プロンプト</div>
+    <div class="card-subtitle">AIがあなたの強みと興味から最適なジャンルを導き出します</div>
+    <div class="prompt-box" id="promptDisplay"></div>
+    <div class="copy-success" id="copySuccess">コピーしました！ ✅</div>
+    <button class="btn btn-copy" onclick="copyText('promptDisplay','copySuccess')">📋 コピーする</button>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="emoji">💡</span> Claude（おすすめ）、ChatGPT、Geminiに貼り付けて送信してください</div>
+    <div class="howto"><div class="howto-num">1</div><div class="howto-text">Claude（おすすめ）、ChatGPT、Geminiを開いてプロンプトを貼り付け</div></div>
+    <div class="howto"><div class="howto-num">2</div><div class="howto-text">AIがジャンル候補を<strong>一気に分析</strong>してくれます</div></div>
+    <div class="howto"><div class="howto-num">3</div><div class="howto-text">結果が出たら<strong>全文コピー</strong>して次へ！</div></div>
+  </div>
+  <button class="btn btn-primary" onclick="goToStep(3)">結果が出た → 次へ進む</button>
+  <button class="btn btn-outline no-print" onclick="goToStep(1)">← 入力を修正する</button>
+</div>
+
+<!-- ===== Section 3: Paste Result ===== -->
+<div class="section" id="section3">
+  <div class="card">
+    <div class="card-title"><span class="emoji">📥</span> ジャンル分析の結果を貼り付け</div>
+    <div class="card-subtitle">AIから出てきた分析結果を全文コピーして貼り付けてください</div>
+    <textarea id="resultText" placeholder="AIからのジャンル分析結果をここに貼り付け..." style="min-height:200px"></textarea>
+  </div>
+  <div class="card" style="background:#FFF8E1;border-left:4px solid #FFD93D;margin-top:8px">
+    <div class="card-title" style="font-size:14px"><span class="emoji">⚠️</span> レポートが表示されない時は</div>
+    <p style="font-size:13px;line-height:1.8">
+      AIの回答に <strong>「---セクション：〜---」</strong> という区切り線が含まれているか確認してください。<br>
+      もし英語の「SECTION」になっていたら、AIに <strong>「『---セクション：〜---』の形式で出し直して」</strong> とお願いするとうまくいきます✨
+    </p>
+  </div>
+  <button class="btn btn-primary" onclick="generateReport()">ジャンルレポートを表示する 🎉</button>
+  <button class="btn btn-outline no-print" onclick="goToStep(2)">← 戻る</button>
+</div>
+
+<!-- ===== Section 4: Report ===== -->
+<div class="section" id="section4">
+  <canvas id="confetti"></canvas>
+  <div class="report-header">
+    <div class="badge">STEP 2 COMPLETE</div>
+    <h2>🔍 ジャンル分析レポート</h2>
+    <p>あなたの強みと興味から見つけた、最適な発信ジャンル</p>
+  </div>
+  <div id="reportContent"></div>
+  <div class="next-step-banner">
+    <h3>🎯 次のステップ</h3>
+    <p>ジャンルが決まったら、コンセプトを設計しましょう！</p>
+    <a href="step3-concept-design.html" class="btn btn-next" style="display:inline-block;text-decoration:none;padding:14px 32px;">STEP 3 へ進む →</a>
+  </div>
+  <div class="save-options">
+    <div class="save-options-title">💾 レポートを保存・コピー</div>
+    <div class="save-options-grid">
+      <button class="save-btn image no-print" onclick="saveReportAsImage('STEP2_ジャンル分析レポート')">
+        <span class="icon">🖼️</span>
+        <span class="label">画像で保存</span>
+      </button>
+      <button class="save-btn pdf no-print" onclick="saveReportAsPDF()">
+        <span class="icon">📄</span>
+        <span class="label">PDFで保存</span>
+      </button>
+      <button class="save-btn text no-print" onclick="copyReportAsText('step2')">
+        <span class="icon">📋</span>
+        <span class="label">テキスト<br>コピー</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="top-link no-print" style="margin-top:20px;text-align:center">
+    <a href="index.html" class="top-link-btn">🏠 TOPページに戻る</a>
+  </div>
+
+</div>
+<script src="shared.js"></script>
+<script>
+window.stepLabels = {
+  1: 'STEP 1：前ステップの結果と興味を入力',
+  2: 'ジャンル分析プロンプト',
+  3: '分析結果を貼り付け',
+  4: 'ジャンルレポート完成！'
+};
+
+// Auto-load STEP 1 report
+window.addEventListener('DOMContentLoaded', function() {
+  const prev = loadReport('step1_report');
+  if (prev) document.getElementById('input_step1').value = prev;
+});
+
+function generatePrompt() {
+  const g = id => (document.getElementById(id)?.value || '').trim();
+
+  const step1 = g('input_step1');
+  const ranks = [1,2,3,4,5].map(n => g('input_rank' + n)).filter(v => v);
+  const competitors = g('input_competitors');
+  const helpable = g('input_helpable');
+  const image = g('input_image');
+
+  if (!step1) { alert('STEP 1の強みレポートを入力してください！'); return; }
+  if (ranks.length === 0) { alert('「好き」TOP5を最低1つは入力してください！'); return; }
+
+  const interests = ranks.map((v, i) => `${i+1}位：${v}`).join('\n');
+
+  const prompt = `あなたは、Instagram副業で発信を始める人のための「ジャンル選定アドバイザー」です。
+STEP1の自己分析結果と本人の興味をもとに、本気でバズる＆続けられる発信ジャンルを深く分析します。
+
+以下の前提①〜③を必ず守って分析してください。これはInstagram副業で実際に成果を出している発信者が大事にしている考え方です。
+
+# 【前提①】ジャンル選定の絶対原則
+
+1. **「魚のいない釣り堀で釣りをしない」**
+   ニーズのないジャンルで発信しても絶対に伸びない。ニーズ判定は数字で冷静に行う。
+
+2. **「好き × 経験 × ニーズ」の3つ全てが重なる場所だけが成功する**
+   どれか1つでも欠けると伸びない。好きだけ→続くけど伸びない／稼げそうだけ→続かない／経験なし→語れない。
+
+3. **「広く浅く」ではなく「狭く深く刺す」**
+   20年来の親友1人に向けて発信するレベルまでターゲットを絞る。具体例：
+   ・❌「キレイになりたい女性向け」
+   ・⭕「産後のボディスキャン体型に自信を持てないアラフォー母向け」
+
+4. **発信ジャンル ≠ マネタイズジャンル**
+   レシピ発信でダイエット商材を売ってもOK。世界観が多少ズレても「信頼」があれば成立する。
+
+5. **掛け合わせで一次情報を最大化する**
+   実例：
+   ・料理 × 夫婦仲 ＝「23時帰宅の社畜夫の体力超回復レシピ」
+   ・ファッション × 産後太り ＝「大好きな服をかっこよく着こなすためのダイエット」
+   ・インテリア × 旅行代理店経験 ＝「1000軒のホテルを見てきたOLのホテルライク部屋作り」
+   ・ディズニー情報 × 美容商材 ＝「冬ディズニー防寒対策」で売上100万超え
+
+6. **「伸びそう／稼げそう」で選ばない**
+   成果が出ない時期に絶対続けられなくなる。「心が最も惹かれるジャンル」が継続の最大要因。
+
+# 【前提②】ニーズ判定の具体的数字（Instagram発信の現場基準）
+
+- **フォロワー1万人以上のアカウントが5つ以上** → 安定した需要あり（最重要基準）
+- **開設3ヶ月以内 or 100投稿以内で1万フォロワー達成** → 「今」伸びているサイン
+- **半年以内に1万フォロワー達成アカウントが2〜3個** → 新興ジャンルとして狙い目
+- **リールでフォロワー数×5倍の再生数**（例：1000人のアカウントで5000再生以上）→ 需要確定
+
+# 【前提③】競合分析で見るべき5つのポイント
+
+1. どんな悩みを持っている人に届けているか（ペルソナ推測）
+2. フォロワーをどんな理想の未来に連れていっているか
+3. どんな解決策を提示しているか
+4. 伸びている投稿の共通点（リールなら再生数、フィードならいいね・保存）
+5. そのアカウントならではの強み（コメント欄の反応も必ず読む）
+※「投稿の真似」で終わらせない。「なぜ伸びているか」まで踏み込む
+
+# 【入力情報】
+## STEP 1：自己分析（強み）レポート
+${step1}
+
+## 本人の興味・関心（13日目①：「好き」「やりたい」TOP5）
+${interests}
+${helpable ? '\n## 15日目②：助けられそうな人の人物像（経験×助けられる人）\n' + helpable : ''}
+${competitors ? '\n## 13・14日目：競合アカウント調査で気づいたこと\n' + competitors : ''}
+${image ? '\n## 理想のアカウントイメージ\n' + image : ''}
+
+# 【出力ルール】
+- 数字（フォロワー規模、投稿数など）は具体的に示すこと
+- 抽象論ではなく、STEP1のレポートの具体的な記述を根拠にジャンルを提案すること
+- 必ず下記の区切り記号（---セクション：〜---）を使って出力すること
+
+---セクション：ジャンル候補---
+掛け合わせで生まれた6〜8個のジャンル候補を一覧で。
+以下の粒度で（「誰の・どんな状況の・何を発信するアカウントか」が分かるレベル）：
+・料理 × 旦那と仲良い ＝「23時帰宅の社畜夫の体力超回復レシピ」
+・インテリア × 旅行代理店経験 ＝「1000軒のホテルを見た人のホテルライク部屋づくり」
+各候補の1行説明（「このジャンルは〜〜な人に刺さる」）も添える。
+
+---セクション：ニーズ調査のやり方---
+本人が自分でニーズを確認できるよう、具体的な手順を提示：
+1. Instagramの検索欄で「〇〇（候補キーワード）」で検索 → リール動画タブから探す
+2. 見つかったアカウントの「フォロー欄」から芋づる式に探す
+3. 検索欄の「おすすめ」タブからも確認
+4. 「発見欄」のリール・投稿もチェック
+5. コメント欄を必ず読み、ペルソナの本音を読み取る
+※調査時に確認すべき具体的数字（1万×5個、3ヶ月以内達成、リール再生数×5倍 など）を明記
+
+---セクション：詳細分析---
+上位3つのジャンルについて、以下の形式で：
+
+■ ジャンル①：○○○
+・想定ターゲット：「〇〇で悩む〇代〇〇」の形式で親友1人がイメージできるレベルで
+・ペルソナの本当の悩み：表面的悩みの奥にある本音（STEP3で詳しく深掘るが、ここでもヒント提示）
+・ニーズ有無：★★★★☆（根拠：〇〇で検索すると1万フォロワー以上が△個確認できる想定）
+・競合の強さ：★★★☆☆（根拠：先発アカウントの特徴から）
+・初心者向き度：★★★★☆（初心者でも参入しやすいか）
+・本人との相性：★★★★★（STEP1のどの強みがどう活きるか具体的に）
+・本人だからこそ刺せる差別化：本人の一次情報をどう活かすか
+・マネタイズの道筋：フォロワー1000人突破後の収益化イメージ（物販／アフィリ／自社商品／サービスのどれが向くか）
+
+（②③も同様に）
+
+---セクション：おすすめランキング---
+総合評価で上位3ジャンルをランキング形式で。
+
+🥇 第1位：○○
+選んだ理由：本人の強み「△△」× 需要性「□□」の観点から
+向いている人：〜〜
+最初の方向性：〜〜（STEP3コンセプト設計・STEP5投稿計画につながる視点で）
+
+🥈 第2位：○○
+（同様に）
+
+🥉 第3位：○○
+（同様に）
+
+---セクション：避けた方が良いジャンル---
+本人の強み・経験から見て「選ぶと続かない／伸びない可能性が高い」ジャンルを1〜2個、理由つきで。
+「稼げそうだから」で選びがちな罠を具体的に警告する。
+
+---セクション：選び方アドバイス---
+最終的にジャンルを1つに決めるためのアドバイスを4つ：
+1. 心が最も惹かれるジャンルを選ぶ（成果が出ない時期に続けられる基準）
+2. 発信ジャンル≠マネタイズジャンルで良いので、「発信したい」を優先
+3. 迷ったら「親友1人に話したい」ジャンルを選ぶ
+4. （本人の状況に合わせた具体アドバイス）
+
+---セクション：次のステップへの橋渡し---
+STEP3（コンセプト設計）に向けて、選んだジャンルから「誰に・どんな未来を届けるか」を考える準備。
+「なぜ？」を繰り返し深掘る質問を3つ用意して、コンセプト設計で使えるようにする。
+
+それでは、数字と一次情報を駆使して、本人が「このジャンルなら本気でやれる！」と確信できる分析をお願いします。`;
+
+  document.getElementById('promptDisplay').textContent = prompt;
+  goToStep(2);
+}
+
+function generateReport() {
+  const raw = document.getElementById('resultText').value.trim();
+  if (!raw) { alert('分析結果を貼り付けてください！'); return; }
+
+  const s = parseResult(raw);
+  const container = document.getElementById('reportContent');
+
+  if (Object.keys(s).length < 2) {
+    container.innerHTML = `<div class="report-card"><div class="report-card-label">AI REPORT</div><h3>結果</h3><p>${nl2br(escHtml(raw))}</p></div>
+    <div class="card" style="background:#FFF8E1;border-left:4px solid #FFD93D"><p style="font-size:13px">⚠️ セクションマーカーが検出できませんでした。AIの回答に「---SECTION:〜---」が含まれているか確認してください。</p></div>`;
+    saveReport('step2_report', raw);
+    goToStep(4); return;
+  }
+
+  let html = '';
+  html += makeReportCard('GENRE CANDIDATES', '🎯 ジャンル候補一覧', s['ジャンル候補'], '');
+  html += makeReportCard('HOW TO RESEARCH', '🔎 ニーズ調査のやり方', s['ニーズ調査のやり方'], 'yellow');
+  html += makeReportCard('DETAILED ANALYSIS', '📊 詳細分析 TOP3', s['詳細分析'], 'purple');
+  html += makeReportCard('RANKING', '🏆 おすすめランキング', s['おすすめランキング'], 'green');
+  html += makeReportCard('AVOID', '⚠️ 避けた方が良いジャンル', s['避けた方が良いジャンル'], 'orange');
+  html += makeReportCard('ADVICE', '💡 選び方アドバイス', s['選び方アドバイス'], 'pink');
+  html += makeReportCard('NEXT STEP', '🚀 次のステップへの橋渡し', s['次のステップへの橋渡し'], 'navy');
+
+  container.innerHTML = html;
+  saveReport('step2_report', raw);
+  goToStep(4);
+  setTimeout(launchConfetti, 300);
+}
+function exportStep2Excel() {
+  const data = collectExportData('step2', [
+    { id: 'input_step1', label: 'STEP1 強みレポート（引継ぎ）' },
+    { id: 'input_interests', label: '好きなこと・やりたいことTOP5' },
+    { id: 'input_image', label: 'アカウントイメージ' },
+    { id: 'resultText', label: 'AI回答（貼付）' },
+  ]);
+  downloadExcel('STEP2_発信ジャンル分析レポート', data);
+}
+document.addEventListener('DOMContentLoaded', () => initAutoSave('step2'));
+</script>
+</body>
+</html>
