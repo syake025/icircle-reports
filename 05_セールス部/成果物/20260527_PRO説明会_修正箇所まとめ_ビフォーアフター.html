@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRO説明会 修正箇所まとめ｜ビフォーアフター</title>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --card: #ffffff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --before-bg: #fef2f2;
+    --before-border: #fecaca;
+    --before-label: #b91c1c;
+    --after-bg: #ecfdf5;
+    --after-border: #a7f3d0;
+    --after-label: #047857;
+    --intent-bg: #eff6ff;
+    --intent-border: #bfdbfe;
+    --intent-label: #1d4ed8;
+    --accent: #4f46e5;
+    --shadow: 0 4px 14px rgba(0,0,0,0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 32px;
+    padding: 32px 24px;
+  }
+
+  /* Sidebar / TOC */
+  .toc {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    box-shadow: var(--shadow);
+  }
+
+  .toc h2 {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0 0 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc li {
+    margin: 4px 0;
+  }
+
+  .toc a {
+    display: block;
+    padding: 6px 10px;
+    color: var(--text);
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    transition: background 0.15s;
+  }
+
+  .toc a:hover {
+    background: #f3f4f6;
+    color: var(--accent);
+  }
+
+  .toc .toc-section {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Main content */
+  main {
+    min-width: 0;
+  }
+
+  header.hero {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: white;
+    padding: 40px 32px;
+    border-radius: 16px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+  }
+
+  header.hero h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+  header.hero p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 15px;
+  }
+
+  section.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+  }
+
+  section.card h2 {
+    margin: 0 0 16px;
+    font-size: 20px;
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+  }
+
+  .proposals {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: proposal;
+  }
+
+  .proposals li {
+    counter-increment: proposal;
+    padding: 12px 0 12px 48px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .proposals li:last-child {
+    border-bottom: none;
+  }
+
+  .proposals li::before {
+    content: counter(proposal);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  /* Slide block */
+  .slide-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow);
+    scroll-margin-top: 24px;
+  }
+
+  .slide-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .slide-number {
+    background: var(--accent);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .slide-header h3 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .intent {
+    background: var(--intent-bg);
+    border-left: 4px solid var(--intent-label);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+  }
+
+  .intent .label {
+    font-size: 12px;
+    color: var(--intent-label);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .intent .content {
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  .comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 1024px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+    .toc {
+      position: relative;
+      top: 0;
+      max-height: 300px;
+    }
+    .comparison {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .ba-box {
+    border-radius: 8px;
+    padding: 16px 18px;
+    position: relative;
+    border: 1px solid;
+  }
+
+  .ba-box.before {
+    background: var(--before-bg);
+    border-color: var(--before-border);
+  }
+
+  .ba-box.after {
+    background: var(--after-bg);
+    border-color: var(--after-border);
+  }
+
+  .ba-label {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+    color: white;
+  }
+
+  .ba-box.before .ba-label {
+    background: var(--before-label);
+  }
+
+  .ba-box.after .ba-label {
+    background: var(--after-label);
+  }
+
+  .ba-content {
+    white-space: pre-wrap;
+    font-family: "SF Mono", "Menlo", "Consolas", monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text);
+    word-break: break-word;
+  }
+
+  /* Final check */
+  .check-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .check-list li {
+    padding: 10px 10px 10px 36px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+
+  .check-list li:last-child {
+    border-bottom: none;
+  }
+
+  .check-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    background: var(--after-label);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 32px;
+    padding: 16px;
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- Sidebar TOC -->
+  <aside class="toc">
+    <h2>目次</h2>
+    <ul>
+      <li><a href="#proposals">反映した7つの提案</a></li>
+      <li class="toc-section"></li>
+      <li><a href="#slide-003">スライド 003</a></li>
+      <li><a href="#slide-004">スライド 004</a></li>
+      <li><a href="#slide-090">スライド 090</a></li>
+      <li><a href="#slide-100">スライド 100</a></li>
+      <li><a href="#slide-103">スライド 103</a></li>
+      <li><a href="#slide-104">スライド 104</a></li>
+      <li><a href="#slide-105">スライド 105</a></li>
+      <li><a href="#slide-106">スライド 106</a></li>
+      <li><a href="#slide-107">スライド 107</a></li>
+      <li><a href="#slide-108">スライド 108</a></li>
+      <li><a href="#slide-109">スライド 109</a></li>
+      <li><a href="#slide-110">スライド 110</a></li>
+      <li><a href="#slide-124">スライド 124</a></li>
+      <li><a href="#slide-130">スライド 130</a></li>
+      <li><a href="#slide-133">スライド 133</a></li>
+      <li><a href="#slide-134">スライド 134</a></li>
+      <li><a href="#slide-143">スライド 143</a></li>
+      <li><a href="#slide-145">スライド 145</a></li>
+      <li><a href="#slide-149">スライド 149</a></li>
+      <li><a href="#slide-150">スライド 150</a></li>
+      <li><a href="#slide-157">スライド 157</a></li>
+      <li><a href="#slide-159">スライド 159</a></li>
+      <li><a href="#slide-160">スライド 160</a></li>
+      <li><a href="#slide-171">スライド 171</a></li>
+      <li><a href="#slide-181">スライド 181</a></li>
+      <li><a href="#slide-182">スライド 182</a></li>
+      <li><a href="#slide-183">スライド 183</a></li>
+      <li><a href="#slide-184">スライド 184</a></li>
+      <li class="toc-section"></li>
+      <li><a href="#final-check">通しチェック結果</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <header class="hero">
+      <h1>修正箇所まとめ｜ビフォーアフター</h1>
+      <p>元台本の流れを壊さないよう、以下のスライド台本を中心に差し替えました。</p>
+    </header>
+
+    <!-- 7つの提案 -->
+    <section class="card" id="proposals">
+      <h2>反映した7つの提案</h2>
+      <ol class="proposals">
+        <li>月29,800円の回収イメージを価格提示後に追加</li>
+        <li>序盤に「万垢なのに売れない」痛みを自然に追加</li>
+        <li>成果者紹介を4段階で見せ、ブートキャンプ説明を強化</li>
+        <li>クロージングを優しさを残しつつ先延ばし防止へ調整</li>
+        <li>ベンツ例えを機会損失の話に変更</li>
+        <li>Q&Aで4つの不安を事前に解消</li>
+        <li>ｉサークルとPROの棲み分けを明確化</li>
+      </ol>
+    </section>
+
+    <!-- スライド別ビフォーアフター -->
+    <h2 style="font-size:22px; margin: 32px 0 16px; padding-left: 12px; border-left: 4px solid var(--accent);">スライド別ビフォーアフター</h2>
+
+    <!-- スライド 003 -->
+    <div class="slide-block" id="slide-003">
+      <div class="slide-header">
+        <span class="slide-number">スライド 003</span>
+        <h3>1万人達成後の痛みを追加</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">1万人達成後の明るい可能性に加え、「フォロワーは増えたのに売上につながらない」痛みを追加</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">でも、1万人を達成したあとは、
+ある意味、みなさんは何でもできる状態になります😊✨
+
+⭐️PRやアフィリエイトを強化することもできる
+⭐️自社商品を作ることもできる
+⭐️運用代行の案件も取りやすくなっていく
+
+自分の発信を仕事や人生につなげていくフェーズ
+のようなイメージですかね😊！
+
+だからこそ、ここからは
+🔥「自分はどんな人生を作りたいのか」
+🔥「どんな豊かさを手に入れたいのか」
+🔥「そのために、どんな事業やマネタイズを作っていくのか」
+を考えていかないと
+
+「どこに進めばいいのかわからない」
+となっちゃいやすいです...🙌</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">でも、1万人を達成したあとは、
+ある意味、みなさんは何でもできる状態になります😊✨
+
+⭐️PRやアフィリエイトを強化することもできる
+⭐️自社商品を作ることもできる
+⭐️運用代行の案件も取りやすくなっていく
+
+自分の発信を仕事や人生につなげていくフェーズ
+のようなイメージですかね😊！
+
+ただ、同時にこう感じている人もいると思います。
+
+フォロワーは増えた。
+でも、思ったより売上につながらない。
+
+リンクを貼ってみたけど、数件しか売れなかった。
+
+PRやアフィリエイトをやってみても、
+月1万円、数万円くらいで止まってしまう。
+
+周りにはどんどん成果を出している人がいて、
+「自分は何が足りないんだろう」
+と感じている人もいるかもしれません。
+
+でも、まず安心してほしいです。
+
+それは、みなさんに価値がないからではありません。
+フォロワーさんに信用されていないからでもありません。
+
+ただ、フォロワーを増やす技術と、
+売上に変える技術が別物なだけです。
+
+だからこそ、ここからは
+🔥「自分はどんな人生を作りたいのか」
+🔥「どんな豊かさを手に入れたいのか」
+🔥「そのために、どんな事業やマネタイズを作っていくのか」
+を考えていかないと
+
+「どこに進めばいいのかわからない」
+となっちゃいやすいです...🙌</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 004 -->
+    <div class="slide-block" id="slide-004">
+      <div class="slide-header">
+        <span class="slide-number">スライド 004</span>
+        <h3>2週間のナーチャリング企画との接続</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">2週間のナーチャリング企画との接続を強化</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">そのために今回！！！
+
+✅ 目標設定の勉強会
+✅ 自社商品の全体像勉強会
+✅ PRO生で成果を出しているメンバーの限定ラジオ
+
+などなど、万垢マネタイズ応援企画をお届けしてきました！！
+
+皆さんどうでしたか？
+ちょっとコメント欄に目標設定で行った3年後こうなってたいなっていうのを言える範囲で良いのでシェアして欲しいなー
+
+僕もそのみんなの目標を叶えるぞ！！って本気で今日お話しできるので！！笑
+
+ちょっとみなさん書き込んでいただけるのを待ちますね！
+
+あと顔出しもできればしてもらえると嬉しいですー！！
+
+なんか「僕らが伝えて終わり」知識がついたね...じゃなくて
+実際にみなさんがマネタイズとかの成果に繋げていかないと意味なくて！
+
+それって僕らが代わりにやってあげれないから、みなさんが本気になって、みなさんが目標を決めて、みなさんが行動していくしかないんですよねー！！
+
+そのためにも、皆さん自身のために今日はこの目標を叶える第一歩だ！っていう意気込みで短くても良いですし、一言でも良いので書いて欲しいです！！</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">そのために今回！！！
+
+✅ 目標設定の勉強会
+✅ 自社商品の全体像勉強会
+✅ PRO生で成果を出しているメンバーの限定ラジオ
+
+などなど、万垢マネタイズ応援企画をお届けしてきました！！
+
+この2週間で、
+「自分はどうなりたいのか」
+「自社商品にはどんな可能性があるのか」
+「実際に成果を出している人は、どんな苦労を乗り越えてきたのか」
+を少しずつ見てもらってきたと思います。
+
+皆さんどうでしたか？
+ちょっとコメント欄に、目標設定で考えた
+3年後こうなってたいなという姿を、言える範囲で良いのでシェアして欲しいなー
+
+僕もそのみんなの目標を叶えるぞ！！って本気で今日お話しできるので！！笑
+
+ちょっとみなさん書き込んでいただけるのを待ちますね！
+
+あと顔出しもできればしてもらえると嬉しいですー！！
+
+なんか「僕らが伝えて終わり」知識がついたね...じゃなくて
+実際にみなさんがマネタイズとかの成果につなげていかないと意味なくて！
+
+それって僕らが代わりにやってあげれないから、
+みなさんが本気になって、みなさんが目標を決めて、みなさんが行動していくしかないんですよねー！！
+
+そのためにも、皆さん自身のために
+今日はこの目標を叶える第一歩だ！っていう意気込みで
+短くても良いですし、一言でも良いので書いて欲しいです！！</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 090 -->
+    <div class="slide-block" id="slide-090">
+      <div class="slide-header">
+        <span class="slide-number">スライド 090</span>
+        <h3>誤字修正</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">誤字「100e万円」を修正</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">あやさんも100e万円超えてたり</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">あやさんも100万円を超えていたり</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 100 -->
+    <div class="slide-block" id="slide-100">
+      <div class="slide-header">
+        <span class="slide-number">スライド 100</span>
+        <h3>「ｉサークルでも人生は変わる」前提を追加</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">成果者紹介後に「ｉサークルでも人生は変わる」という前提を追加</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">全員は載せきれないんですが
+今紹介させてもらったプロ生のように、
+⭐️収益金額を今よりも増やしたい
+⭐️収入や働き方の自由度をもっと上げたい
+⭐️本気でマネタイズにチャレンジしたい
+⭐️自分の理想や目標を最短で叶えたい
+
+そんなふうに感じている人にとっては、
+一番出費を抑えながら再現性高く学べるのがｉサークルPROだと思います</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">全員は載せきれないんですが、
+今紹介させてもらったプロ生のように、
+⭐️収益金額を今よりも増やしたい
+⭐️収入や働き方の自由度をもっと上げたい
+⭐️本気でマネタイズにチャレンジしたい
+⭐️自分の理想や目標を最短で叶えたい
+
+そんなふうに感じている人にとっては、
+一番出費を抑えながら再現性高く学べるのがｉサークルPROだと思います。
+
+ただ、ここでひとつ大前提として伝えたいのは、
+PROがあるからといって、
+ｉサークルだけでは人生が変わらないとか、
+ｉサークルではマネタイズできない、
+という意味ではまったくありません。
+
+ｉサークルでも人生は変わります。
+
+フォロワー1万人を達成したり、
+PR案件が来るようになったり、
+アフィリエイトで初めて収益が出たり、
+月5万円、10万円、20万円という売上が見えてきたり。
+
+これは本当に大きな変化です。
+
+だから今日は、
+ｉサークルで作った土台を、
+さらに大きな収益や働き方につなげていく場所として、
+PROについて説明させてください。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 103 -->
+    <div class="slide-block" id="slide-103">
+      <div class="slide-header">
+        <span class="slide-number">スライド 103</span>
+        <h3>PROがある理由の前置きを明示</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">PROがある理由の前に「ｉサークルではマネタイズできないわけではない」と明示</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">まず、なんで+PROという別の場所があるの？PROでやってること、全部ｉサークルで教えてくれればいいやんって思っている人もいるかもしれないので、
+私たちの想いや、
+なぜPROという別の場所があるのか、
+その理由からお伝えさせてください。</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">まず、なんで+PROという別の場所があるの？
+PROでやっていることを、全部ｉサークルで教えてくれればいいやんって思っている人もいるかもしれません。
+
+これ、すごく自然な疑問だと思います。
+
+結論から言うと、
+PROは、ｉサークルで作った土台を否定する場所ではありません。
+
+出し惜しみしていた内容を、あとから売っている場所でもありません。
+
+Instagramで成果を出すには、
+学ぶべきことに順番があります。
+
+今日は、なぜPROという別の場所を作っているのか、
+その理由を私たちの想いからお伝えさせてください。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 104 -->
+    <div class="slide-block" id="slide-104">
+      <div class="slide-header">
+        <span class="slide-number">スライド 104</span>
+        <h3>ゼロイチ〜月20万までをｉサークルの価値として</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">月20万円だけでなく、ゼロイチ・月5万・10万・20万までをｉサークルの価値として表現</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">ｉサークルが目標としているマネタイズ金額は、月20万円です。
+
+ゼロの状態から月20万円まで、みんなに稼いでほしい、そう思ってｉサークルのカリキュラムを組んでいます。
+
+これって冷静に考えてめちゃくちゃ大きい金額なんですよね。
+
+月20万円って、1年で 240万円。
+収入が240万円増えたら、できること一気に増えます。
+
+・本業を少し減らす選択肢が増える
+・家族との時間を増やせる
+・「我慢してたこと」ができるようになる
+
+人生の選択肢が増える金額です。
+
+だからｉサークルでは、この月20万円を目指すための 知識も環境も全部用意していて、月20万円を卒業条件の1つにしています。
+それに月20万円稼げたら、それだけでｉサークルの年会費を賄えるどころかかなりのお釣りが来ちゃいますよね。</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">ｉサークルでも、人生は変わります。
+
+フォロワー1万人を達成したり、
+PR案件が来るようになったり、
+アフィリエイトで初めて収益が出たり、
+月5万円、10万円、そして月20万円という売上が見えてきたり。
+
+これは本当に大きな変化です。
+
+月5万円でも、年間で60万円。
+月10万円なら、年間で120万円。
+月20万円なら、年間で240万円です。
+
+これだけ収入が変わると、できることは一気に増えます。
+
+・本業を少し減らす選択肢が増える
+・家族との時間を増やせる
+・今まで我慢していたことができるようになる
+・自分の発信に、もっと自信が持てるようになる
+
+人生の選択肢が増える金額です。
+
+だからｉサークルでは、
+Instagramを仕事につなげる土台を作る場所として、
+まずフォロワー1万人、そして収益のゼロイチや月5万、10万、20万を目指せる環境を作っています。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 105 -->
+    <div class="slide-block" id="slide-105">
+      <div class="slide-header">
+        <span class="slide-number">スライド 105</span>
+        <h3>「月20万じゃ物足りない」表現を変更</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">「月20万じゃ物足りない」を「月数万円で止まらず安定・拡大したい」に変更</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">でも一方で、こういう人もいるんじゃないでしょうか
+
+・月20万じゃ物足りない
+・もっとステップアップしたい
+・副業じゃなくて事業として伸ばしていきたい
+・会社を作るレベルで大きいことにチャレンジしてみたい
+
+こういう人に必要なのは、さっき勉強会で話した 成約率を上げる仕組みを、インスタだけじゃなく事業全体で組むことなんですね。</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">一方で、こう感じている人もいると思います。
+
+月5万円、10万円の収益でも、
+人生はかなり変わります。
+
+自分の力でお金を生み出せた。
+会社以外の収入ができた。
+好きな発信が仕事につながった。
+
+この体験は、本当に大きいです。
+
+でも、その先に、
+この収益を一時的なものではなく、安定して作れるようにしたい。
+
+月数万円で止まらず、
+月30万円、50万円、100万円と伸ばしていきたい。
+
+自分の商品やサービスを持って、
+もっと働き方の自由度を上げていきたい。
+
+発信を副業で終わらせず、
+自分の働き方や人生の選択肢に変えていきたい。
+
+そう思ったときに必要になるのが、
+フォロワーを増やす力とは別の、
+“売上を設計する力”です。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 106 -->
+    <div class="slide-block" id="slide-106">
+      <div class="slide-header">
+        <span class="slide-number">スライド 106</span>
+        <h3>「難しすぎる」を「学ぶ順番」へ言い換え</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">「難しすぎる」よりも「学ぶ順番が違う」へ言い換え</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">ただ、その知識やノウハウ、具体例をｉサークルで出しちゃうと、ぶっちゃけ難しすぎるし、初心者さんが萎縮しちゃうレベルの話なんですよ。
+
+だから今日の勉強会も、レベルが高いみんなが集まる万アカチャット限定でやっています。
+
+そんな高みを目指したい人たちのために作ったのがPROなんですね。</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">じゃあ、なぜこれをｉサークルで全部やらないのか。
+
+これは出し惜しみではありません。
+
+理由はシンプルで、
+学ぶ順番が違うからです。
+
+Instagramを始めたばかりの段階で、
+投稿設計も、リールも、アカウント設計も、商品設計も、導線設計も、セールスも全部やろうとすると、
+ほとんどの人が情報量が多すぎて動けなくなります。
+
+だからｉサークルでは、
+まずInstagramで人を集める力、
+見てもらえる発信を作る力、
+信用を積み上げる力に集中しています。
+
+そして、その土台ができた人が、
+次に売上を本格的に伸ばしていくための場所として作ったのがPROです。
+
+だからPROは、
+ｉサークルに足りない部分を補う場所ではありません。
+
+ｉサークルで作った土台を使って、
+収益・働き方・人生の選択肢をさらに大きく広げていく場所です。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 107 -->
+    <div class="slide-block" id="slide-107">
+      <div class="slide-header">
+        <span class="slide-number">スライド 107</span>
+        <h3>ｉサークル＝人を集める／PRO＝売上に変える、を明文化</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">ｉサークル＝人を集める、PRO＝売上に変える、という棲み分けを明文化</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">PROではもちろんストーリーズや投稿などの、インスタ関連のことも、マネタイズに特化してお伝えしています。
+
+でも、それだけじゃなくて、
+
+⭐️どこで深く教育するのかなどの導線設計
+⭐️1回で複数人に届けて効率よく売上を上げるための
+　セミナーセールス
+⭐️自社商品で高い成約率を目指すための個別セールス
+
+こういった、インスタの外も含めた手法も扱うので、ｉサークルとは場所を分けているんですね。
+混ぜちゃうと迷子になっちゃう人が出てくるからです。</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">ｉサークルとPROの違いをシンプルに言うと、
+
+ｉサークルは、
+Instagramで人を集める力を作る場所です。
+
+アカウントを整えて、
+投稿を作れるようになって、
+リールを改善して、
+フォロワーさんに見てもらえる発信を作っていく。
+
+一方でPROは、
+集まったフォロワーさんにどう価値を届けて、
+どう売上や仕事につなげていくかを学ぶ場所です。
+
+だからPROでは、
+マネタイズに特化したストーリーズや投稿、
+導線設計、
+セミナーセールス、
+個別セールス、
+自社商品やサービス設計なども扱います。
+
+これは、ｉサークルの上位互換というより、
+ｉサークルで作った土台を活かす次のステージです。
+
+混ぜちゃうと迷子になっちゃう人が出てくるから、
+あえて場所を分けています。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 108 -->
+    <div class="slide-block" id="slide-108">
+      <div class="slide-header">
+        <span class="slide-number">スライド 108</span>
+        <h3>迷っている人の自分ごと化を追加</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">参加しない選択を肯定しすぎず、迷っている人の自分ごと化を追加</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">だから、私たちはｉサークルPROにはここにいる全員が絶対に参加するべき、とは思ってません。
+
+今の状態・今の売上で満足していて、
+「別に何も変えたくない」って人は、参加しなくてOKです。
+
+それはそれで最高だし、正解なんですよ。</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">だから、私たちはｉサークルPROには
+ここにいる全員が絶対に参加するべき、とは思ってません。
+
+今はまずｉサークルの内容を進めたい。
+今のペースでInstagramを続けたい。
+今はマネタイズより発信を整えたい。
+
+そういう人は、無理に参加しなくて大丈夫です。
+
+それも正解です。
+
+ただ、もし心のどこかで、
+「このまま月数千円、月1万円、月数万円で止まりたくない」
+「1万人の影響力をちゃんと収益につなげたい」
+と思っているなら、ここからの話はかなり大事になると思います。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 109 -->
+    <div class="slide-block" id="slide-109">
+      <div class="slide-header">
+        <span class="slide-number">スライド 109</span>
+        <h3>PRO対象者を「月数千円〜数万円で止まりたくない人」へ拡張</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">PRO対象者を「高みを目指す人」だけでなく「月数千円・1万円で止まりたくない人」へ拡張</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">でも逆に、もし
+
+・今の売上を2倍、3倍、10倍に伸ばしていきたい
+・現状に満足せず、より高みを目指す仲間と切磋琢磨しあいたい
+
+こう思ってる人にとっては、PROはめちゃくちゃ合う場所です。
+
+今日の話を聞いてちょっとでも
+「私、そっち側に行きたいかも」って思ったなら、
+このあとPROの中身を見てから判断してもらえたら嬉しいです。</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">でも逆に、もし
+
+・今の月数千円、月1万円、月数万円で止まりたくない
+・フォロワー1万人の影響力を、ちゃんと収益につなげたい
+・売れる流れを自分で作れるようになりたい
+・発信を、仕事や人生の選択肢に変えていきたい
+
+こう思っている人にとっては、PROはかなり合う場所です。
+
+今日の話を聞いてちょっとでも
+「私、そっち側に行きたいかも」って思ったなら、
+このあとPROの中身を見てから判断してもらえたら嬉しいです。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 110 -->
+    <div class="slide-block" id="slide-110">
+      <div class="slide-header">
+        <span class="slide-number">スライド 110</span>
+        <h3>PROを「土台で収益を伸ばす場所」として接続</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">PROを「さらなる高み」ではなく「作った土台で収益を伸ばす場所」として接続</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">では次に、そんなさらなる高みを目指す場所、ｉサークルプロでは何ができるのか
+説明していきます</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">では次に、
+ｉサークルで作った土台を使って、
+収益を本格的に伸ばしていく場所、
+ｉサークルプロでは何ができるのか
+説明していきます。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 124 -->
+    <div class="slide-block" id="slide-124">
+      <div class="slide-header">
+        <span class="slide-number">スライド 124</span>
+        <h3>ブートキャンプ説明に4段階を追加</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">ブートキャンプ説明に、初売上→月10万→月50〜100万→100万超えの4段階を追加</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">そしてもう一つが、
+全講座を見終えた人だけが参加できる
+ブートキャンプ企画です。
+
+これは、
+・アフィリエイト10万／100万
+・自社商品10万／100万
+
+など、自分が一番力を入れたいマネタイズに絞って、少人数で短期集中で取り組む企画です。
+
+イメージとしては、
+ｉサークルの「めざ1000」や楽天アフィリエイト企画を、
+さらに少人数にして、大きなマネタイズ特化でやっていくって感じですね
+
+「講座を見て終わり」じゃなく、
+実際に数字を作るところまでやり切るための環境です。</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">そしてもう一つが、
+全講座を見終えた人だけが参加できる
+ブートキャンプ企画です。
+
+これは、講座を見て終わりではなく、
+実際に数字を作るところまでやり切るための短期集中企画です。
+
+たとえば、
+・アフィリエイト10万／100万
+・自社商品10万／100万
+
+など、自分が一番力を入れたいマネタイズに絞って、
+少人数で取り組んでいきます。
+
+ここで大事にしたいのは、
+いきなり全員が月100万円を目指す、ということではありません。
+
+人によって今のフェーズは違います。
+
+① まず初めて売れる経験を作る人
+② 月10万円を超えて、発信が仕事になる感覚を掴む人
+③ 月50万円〜100万円を目指して、収益の柱を作る人
+④ 月100万円以上を目指して、事業として大きくしていく人
+
+それぞれの段階があります。
+
+だからブートキャンプでは、
+「自分は今どの段階を取りにいくのか」
+を明確にして、そこに絞って取り組んでいきます。
+
+イメージとしては、
+ｉサークルの「めざ1000」や楽天アフィリエイト企画を、
+さらに少人数にして、マネタイズ特化でやっていく感じですね。
+
+「講座を見て終わり」じゃなく、
+初めての1件、月10万円、月100万円など、
+自分の今のフェーズに合わせて数字を作るところまでやり切るための環境です。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 130 -->
+    <div class="slide-block" id="slide-130">
+      <div class="slide-header">
+        <span class="slide-number">スライド 130</span>
+        <h3>初期成果の段階を追加</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">8割以上が会費以上の成果という説明に、初期成果の段階を追加</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">そんな環境を用意しているからこそ、
+最後まで続けてくれたPRO0期生のうち、8割以上の人が、ｉサークル+PROの会費以上をマネタイズできています。
+
+つまり、多くの方が「参加して終わり」ではなく、
+しっかり成果につなげて会費の元をちゃんと取ってくれてるってことですね。
+
+ちなみに、残りの約2割の方については、
+成果報告をまだいただいていないだけで、
+実際に達成できているかどうかが分からない、というのが正直なところです。
+
+なので少なくとも8割以上の方が、会費以上の成果を出していると思ってもらって大丈夫です。
+
+私たちとしても、みんなが投資した分以上ちゃんと稼いでくれて、参加してよかったって思ってもらために
+全力でサポートしているので、
+こうした結果が出ていることはめちゃくちゃ嬉しいですね</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">そんな環境を用意しているからこそ、
+最後まで続けてくれたPRO0期生のうち、8割以上の人が、ｉサークル+PROの会費以上をマネタイズできています。
+
+つまり、多くの方が「参加して終わり」ではなく、
+しっかり成果につなげて会費の元をちゃんと取ってくれてるってことですね。
+
+もちろん、全員がいきなり月100万円を達成したという話ではありません。
+
+初めてアフィリエイトで1万円を超えた人。
+初めて自社商品が1件売れた人。
+月10万円を超えて、発信が仕事になってきた人。
+月50万円、100万円以上を超えて、働き方の選択肢が広がった人。
+
+それぞれのフェーズで、ちゃんと前に進んでくれています。
+
+ちなみに、残りの約2割の方については、
+成果報告をまだいただいていないだけで、
+実際に達成できているかどうかが分からない、というのが正直なところです。
+
+なので少なくとも8割以上の方が、会費以上の成果を出していると思ってもらって大丈夫です。
+
+私たちとしても、みんなが投資した分以上ちゃんと稼いでくれて、
+参加してよかったって思ってもらうために全力でサポートしているので、
+こうした結果が出ていることはめちゃくちゃ嬉しいですね。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 133 -->
+    <div class="slide-block" id="slide-133">
+      <div class="slide-header">
+        <span class="slide-number">スライド 133</span>
+        <h3>成果者紹介を階段として説明</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">成果者紹介の見え方を、すごい人だけでなくゼロイチ・月10万からの階段として説明</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">みんなお値段がそろそろ気になってきたころだと思うんですけど、
+
+その前に、ひとつだけ考えてみてほしいことがあります。
+
+今スライドに映しているのは、
+実際にPROの中で出てきた成果報告の一部です。
+
+・初めて自分の商品が売れた
+・月10万、30万、100万と伸びていった
+・自分がこんなことができるなんて想像もしてなかった
+
+こんな声がありがたいことに次々届いています</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">みんなお値段がそろそろ気になってきたころだと思うんですけど、
+
+その前に、ひとつだけ考えてみてほしいことがあります。
+
+今スライドに映しているのは、
+実際にPROの中で出てきた成果報告の一部です。
+
+成果と聞くと、どうしても月100万円とか、月600万円とか、
+大きな金額に目がいきやすいと思います。
+
+もちろん、そういう大きな成果も素晴らしいです。
+
+でもPROで大事にしているのは、
+そこだけではありません。
+
+・初めて自分の商品が売れた
+・初めてアフィリエイトで1万円を超えた
+・月10万円、30万円と少しずつ伸びていった
+・月50万円、100万円以上になって働き方が変わった
+・自分がこんなことができるなんて想像もしていなかった
+
+こんなふうに、
+今のフェーズから一段ずつ前に進む人が増えています。
+
+だから、今まだ月1万円に届いていない人も、
+「自分には関係ないすごい人たちの話」ではなく、
+まずは最初の1件、月10万円、その先の月30万円、50万円を取りにいく場所だと思って聞いてほしいです。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 134 -->
+    <div class="slide-block" id="slide-134">
+      <div class="slide-header">
+        <span class="slide-number">スライド 134</span>
+        <h3>価値の問いかけに「初めての1件〜100万超えまでの道筋」追加</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">価値の問いかけに「初めての1件〜100万超えまでの道筋」を追加</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">ここで、ちょっとだけ問いかけをさせてください。
+
+もしみんなが
+✔ 売れる型をそのまま使えて
+✔ 一人で迷わず進めて
+✔ 同じフェーズの仲間と切磋琢磨できて
+✔ 実際に成果が出ている人たちと同じ環境に身を置ける
+
+そんな場所があったとしたら、
+その環境に、いくらの価値を感じますか？</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">ここで、ちょっとだけ問いかけをさせてください。
+
+もしみんなが
+✔ 売れる型をそのまま使えて
+✔ 一人で迷わず進めて
+✔ 同じフェーズの仲間と切磋琢磨できて
+✔ 初めての1件から月10万円、月50万円、月100万円以上まで目指せる道筋があって
+✔ 実際に成果が出ている人たちと同じ環境に身を置ける
+
+そんな場所があったとしたら、
+その環境に、いくらの価値を感じますか？</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 143 -->
+    <div class="slide-block" id="slide-143">
+      <div class="slide-header">
+        <span class="slide-number">スライド 143</span>
+        <h3>月29,800円の回収イメージを追加</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">月29,800円の回収イメージを追加</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">できるだけリスクを小さく挑戦してほしいので、
+一括払いではなく、月額制にしています。
+
+これなら「私には合わないかも…！」
+と思っても、高額な損失なく
+途中で辞められます
+
+３方よしを実現しつつも、
+最もｉサークル生に寄り添う仕組みを実現しました！！
+
+正直、こんな形で提供してる場所はここだけです。それでも、ｉサークルとしての理念と、ｉサークル生を何より大事にしたい思いからこの形がベストだと思っています</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">できるだけリスクを小さく挑戦してほしいので、
+一括払いではなく、月額制にしています。
+
+これなら「私には合わないかも…！」
+と思っても、高額な損失なく
+途中で辞められます。
+
+ただ、月29,800円って、
+決して軽い金額ではありません。
+
+だからこそ、私たちは
+「気合いで払ってください」
+とは思っていません。
+
+大事なのは、
+この29,800円をどう回収していくかです。
+
+たとえば、
+単価3,000円のアフィリエイトなら、月10件。
+単価10,000円の商品なら、月3件。
+運用代行なら、月1件の案件。
+自社商品なら、3万円の商品が1件売れるだけでも回収できます。
+
+もちろん、簡単に売れると言いたいわけではありません。
+
+でも、ここにいるみんなは、
+すでにフォロワー1万人以上の影響力を持っています。
+
+だからこそ、
+正しい売り方を身につければ、
+月29,800円を回収する現実味は十分にあります。
+
+PROは、
+その回収の道筋を一緒に作っていく場所です。
+
+３方よしを実現しつつも、
+最もｉサークル生に寄り添う仕組みを実現しました！！
+
+正直、こんな形で提供してる場所はここだけです。
+それでも、ｉサークルとしての理念と、
+ｉサークル生を何より大事にしたい思いからこの形がベストだと思っています。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 145 -->
+    <div class="slide-block" id="slide-145">
+      <div class="slide-header">
+        <span class="slide-number">スライド 145</span>
+        <h3>ベンツ例えを機会損失の話に変更</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">ベンツ例えを使わず、機会損失と1万人の影響力を眠らせる損失で説明</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">ぶっちゃけ、やり方を知ってるか知らないかで、1回のリリースで売れる数って、めっちゃ変わるんですよね。
+
+ちゃんと教育ストーリーズの順番と証明を押さえてやれば、本来20人、30人、50人と買ってくれるはずなんですよ。
+でも、これを知らないまま走っちゃうと…10人とか、5人とかで終わっちゃう。
+そうすると、本来買ってくれたはずの10人、20人に、自分の商品が届かないってことなんですよね。
+
+自分の売上が数十万〜数百万減っちゃうって視点でももちろん大きいんですけど、僕がもったいないなって思うのは、本来助けられたはずのお客さんに、自分の商品を届けられないってことですね
+
+アフィリも同じで、教育ストーリーズの型で出していったら、毎月の売上が早く変わってくる。
+逆に、これを知らないままがむしゃらにリンク貼ったりストーリーズのマネタイズを走り続けると、1年後に「あの時、ちゃんと学んでたら…もっと早く知ってたら...」っていう機会損失にもなり得るるんですよね
+
+そういう意味で、PROに参加することは、未来の数十万、数百万をより早く手にしていくことになって
+結局、得する可能性が高かったりします！
+
+っていうか、そもそもフォロワー1万人以上の人にしかPROって案内してないんで
+
+そもそも元を取れる、入った方が結果的にお得というか、手元に残る金額は大きくなるようになってもらうためにやってるんでね</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">ぶっちゃけ、やり方を知ってるか知らないかで、1回のリリースで売れる数って、めっちゃ変わるんですよね。
+
+ちゃんと教育ストーリーズの順番と証明を押さえてやれば、本来20人、30人、50人と買ってくれるはずなんですよ。
+でも、これを知らないまま走っちゃうと…10人とか、5人とかで終わっちゃう。
+
+そうすると、本来買ってくれたはずの10人、20人に、自分の商品が届かないってことなんですよね。
+
+自分の売上が数十万〜数百万減っちゃうって視点でももちろん大きいんですけど、
+僕がもったいないなって思うのは、
+本来助けられたはずのお客さんに、自分の商品を届けられないってことです。
+
+月29,800円が高いか安いかは、
+今の財布だけで見ると、正直高く感じると思います。
+
+でも、ここで考えてほしいのは、
+今の1万人の影響力を、このまま売上に変えられないまま半年過ごすことです。
+
+ストーリーズを見てくれる人がいる。
+商品を紹介できる場所がある。
+信用を積み上げてきたアカウントがある。
+
+それなのに、売り方がわからないまま、
+毎月1万円、数万円で止まり続けてしまう。
+
+この機会損失の方が、実は大きいんです。
+
+アフィリも同じで、教育ストーリーズの型で出していったら、毎月の売上が早く変わってくる。
+逆に、これを知らないままがむしゃらにリンク貼ったりストーリーズのマネタイズを走り続けると、
+1年後に「あの時、ちゃんと学んでたら…もっと早く知ってたら...」っていう機会損失にもなり得るんですよね。
+
+そういう意味で、PROに参加することは、
+未来の数十万、数百万をより早く手にしていくことにつながる可能性があります。
+
+そもそもPROは、フォロワー1万人以上の人にしか案内していません。
+
+それは、すでに影響力があるみんなだからこそ、
+正しい売り方を身につければ、回収できる可能性が高いと思っているからです。
+
+入った方が結果的にお得というか、
+手元に残る金額が大きくなるようになってもらうために、私たちはこの環境を作っています。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 149 -->
+    <div class="slide-block" id="slide-149">
+      <div class="slide-header">
+        <span class="slide-number">スライド 149</span>
+        <h3>募集期限の修正</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">募集期限の誤表記を5/28(木)23:59に修正</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">そんなｉサークルプロの募集期間は
+1/10(土)23:59まで
+48時間限定
+
+今回の募集は約5か月ぶりです
+
+今回参加してくれるプロ生に対して、じっくりグルコンしたりブートキャンプ企画をしたり、しっかり向き合いたいので
+次の募集があるとしたら少なくとも半年以上は先になるかもしれません
+
+もし少しでもがんばっていきたい気持ちがあれば、今回の機会を見逃さないようにしてくださいね</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">そんなｉサークルプロの募集期間は
+5/28(木)23:59まで
+50時間限定です。
+
+今回の募集は約5か月ぶりです。
+
+今回参加してくれるプロ生に対して、
+じっくりグルコンしたり、ブートキャンプ企画をしたり、
+しっかり向き合いたいので、
+次の募集があるとしたら少なくとも半年以上は先になるかもしれません。
+
+もし少しでもがんばっていきたい気持ちがあれば、
+今回の機会を見逃さないようにしてくださいね。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 150 -->
+    <div class="slide-block" id="slide-150">
+      <div class="slide-header">
+        <span class="slide-number">スライド 150</span>
+        <h3>申し込み前の不安を受け止め意思決定へ</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">申し込み前の不安を受け止めつつ、先延ばしではなく意思決定へ進める流れに変更</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">はい、ここまでの説明を聞いて
+
+・やってみたいけどついていけるか自信がない
+・でも48時間限定だし・・・
+
+と悩んでる方へ
+
+結論、自分の気持ちに正直に選んでくださいね
+
+私たちは、自分たちが必死こいて歩んできた道を振り返って、
+
+「こんな知識をもっと早く知りたかった」
+「こんな環境がほしかった」「こんな人にもっと早く出会いたかった」
+と思うもの全てを
+
+ｉサークルやｉサークルPROに詰め込んでいます
+
+なんでかっていうと、
+自分たちと同じように人生が豊かに変化していく人が増えて喜んでくれたら嬉しいし、そんなみんなと友達になれたらますます人生が楽しいと知ってるから
+
+このｉサークルPROはみんなの「こんな環境が欲しかった」が叶い、成果につがなる場所です。ｉサークルと同じです
+
+お！いいな！と思う方は、不安でも自信なくても大丈夫なので直感で飛び込んできてください🫶
+
+10ヶ月後のあなたは、きっとあの時はいってよかったー！と言ってくれてると思います</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">はい、ここまでの説明を聞いて
+
+・やってみたいけど、ついていけるか自信がない
+・まだ自社商品がないけど大丈夫かな
+・月1万円も稼げていないのに早くないかな
+・月29,800円を払うのが不安
+
+と悩んでる方もいると思います。
+
+不安があるのは自然です。
+むしろ、それだけ本気で考えてくれている証拠だと思います。
+
+ただ、怖さがゼロになるまで待っていたら、
+行動するタイミングはどんどん先延ばしになってしまいます。
+
+だから、今ここで考えてほしいのは、
+「不安があるかどうか」ではなく、
+「本当に今のマネタイズを変えたいかどうか」です。
+
+少しでも、
+フォロワー1万人の影響力をちゃんと収益につなげたい。
+このまま何となくリンクを貼り続ける未来を変えたい。
+そう思うなら、今回のタイミングで一歩踏み出してほしいです。
+
+このあと申し込みリンクを送ります。
+サービス内容や利用規約も必ず確認したうえで、
+自分の気持ちに正直に選んでくださいね。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 157 -->
+    <div class="slide-block" id="slide-157">
+      <div class="slide-header">
+        <span class="slide-number">スライド 157</span>
+        <h3>募集期限の曜日修正</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">募集期限の曜日を5/28(木)に修正</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">ｉサークルプロお申込みは
+5/28(金)23:59まで
+50時間限定
+
+先ほどもお伝えしたとおり、今回参加してくれるプロ生に真剣に向き合いたいので、次の募集は早くても半年以上先になる予定です</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">ｉサークルプロお申込みは
+5/28(木)23:59まで
+50時間限定です。
+
+先ほどもお伝えしたとおり、
+今回参加してくれるプロ生に真剣に向き合いたいので、
+次の募集は早くても半年以上先になる予定です。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 159 -->
+    <div class="slide-block" id="slide-159">
+      <div class="slide-header">
+        <span class="slide-number">スライド 159</span>
+        <h3>クロージングを「今学ぶ意味」へ調整</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">クロージングを「入らない選択も尊重」から「今学ぶ意味」に寄せて調整</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">今日の話を聞いて「今のフェーズじゃないかも」「もうちょっと自分のペースでやってみたい」って思った人へ。それは全然正解です。
+
+自社商品作りも、マネタイズも、「自分の最適なタイミング」があるものだと、僕は本当に思ってます。無理して入っても、自分のフェーズが合ってなかったら、せっかくの環境を活かしきれない。それより、「あ、今だ」って自分の感覚で動ける時の方が、圧倒的に成果が出やすいんですよね
+
+だからPROに入らないという選択も、私たちは尊敬してます。
+
+半年後、1年後にまた万垢チャットでお会いできたら、それで嬉しいです</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">今日の話を聞いて
+「今のフェーズじゃないかも」
+「もうちょっと自分のペースでやってみたい」
+って思った人へ。
+
+もちろん、今じゃないと思う人は無理に入らなくて大丈夫です。
+
+自社商品作りも、マネタイズも、
+自分の最適なタイミングがあるものだと、僕は本当に思っています。
+
+ただ、もし心のどこかで、
+
+本当はマネタイズを変えたい。
+フォロワー1万人を、ちゃんと収益につなげたい。
+今のまま何となくリンクを貼り続ける未来は変えたい。
+
+そう思っているなら、
+今回のタイミングで一歩踏み出してほしいです。
+
+なぜなら、売り方を学ぶタイミングが早ければ早いほど、
+この先の1回1回の投稿、ストーリーズ、商品紹介の結果が変わるからです。
+
+半年後に学ぶより、
+今学んだ方が、
+半年分の投稿と訴求を改善できます。
+
+だから、怖さがゼロになってからではなく、
+“変わりたい気持ちがあるかどうか”
+で決めてほしいです。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 160 -->
+    <div class="slide-block" id="slide-160">
+      <div class="slide-header">
+        <span class="slide-number">スライド 160</span>
+        <h3>ベンツ例えを削除し機会損失・少人数伴走を補強</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">ベンツ例えを削除し、機会損失・少人数伴走の価値を補強</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">皆さん、
+月29800円って高いって思いました？
+
+じゃあ、仮に800万円のベンツが新車50万で売ってたら高いって感じますか？
+
+多分安いって感じると思うんですが
+これって相場の価値に対して価格を比較してますよね！
+
+皆さんは相場ってあんまり実感ないと思うんですが、自社商品のスクールとか学べる場所って
+100万くらいが普通なんですよね！
+
+だって、100万払って500万円とか稼げるなら安いもんだから！！
+
+僕も今まで、何百万も学びに払ってきましたし、それこそこの前70万とかのマネジメント講座に入ったりもしました！
+
+それら全ての知識、全ての「型」やテンプレなどを皆さんは手に入れられるんですよね！
+
+このPROはなんとかｉサークルの万垢全員がマネタイズをとてつもなく大きく成功して、理想って思う人生に進んでもらうために作った場所です。
+
+正直、僕も2年前くらいは自社商品やりたいけどなーアフィリで成果も出てるしなー、って腰重い時期がずっと続いてました。
+
+でも、ゼロから準備してリリースして８桁超えれたんですよね！
+
+ここまで頑張ってフォロワー1万人などの一定の成果を出してる皆さんだからこそ、再現性高く全員がマネタイズの成果を出してもらえると思ってます！
+
+あとは、なんか僕たち運営と同期みたいな関係になれなって
+一緒に事業考えていける！！
+ってところが僕はお伝えしたいこのPROの魅力かなって思いますね〜
+
+ｉサークルはやっぱり1000人くらいいるから、皆さん1人1人の悩みに具体的に載っていくことって限界あるんですが
+
+PROは30人とかですからね！！
+
+密な関係で事業を一緒に作っていくかのように進めるので、全員が成果まで一緒に進んでいけると思ってます！！
+
+みんなと一緒に、フォロワーさんをワクワクさせるような事業を作ったり、
+皆さん自身にも想像もついてないようなマネタイズ成果出して
+...</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">皆さん、
+月29,800円って高いって思いました？
+
+正直、今の財布だけで見たら高く感じると思います。
+
+だからこそ、ここで考えてほしいのは、
+今の1万人の影響力を、このまま売上に変えられないまま半年、1年と過ごすことです。
+
+ストーリーズを見てくれる人がいる。
+商品を紹介できる場所がある。
+信用を積み上げてきたアカウントがある。
+
+それなのに、売り方がわからないまま、
+毎月1万円、数万円で止まり続けてしまう。
+
+この機会損失の方が、実は大きいと思っています。
+
+僕も正直、2年前くらいは
+自社商品やりたいけどなー、アフィリで成果も出てるしなー、
+って腰が重い時期がずっと続いてました。
+
+でも、ゼロから準備してリリースして、8桁を超えることができました。
+
+もちろん、全員が同じ金額になると言いたいわけではありません。
+
+でも、ここまで頑張ってフォロワー1万人という一定の成果を出している皆さんだからこそ、
+正しい売り方を学べば、今とは全く違うマネタイズの景色を見られる可能性はかなりあると思っています。
+
+そして、僕がPROで一番伝えたい魅力は、
+僕たち運営と、かなり近い距離で一緒に事業を考えていけることです。
+
+ｉサークルはやっぱり1000人くらいいるから、
+皆さん1人1人の悩みに具体的に乗っていくことには限界があります。
+
+でもPROは少人数です。
+
+密な関係で、事業を一緒に作っていくように進めるので、
+全員が成果まで一緒に進んでいける環境にしています。
+
+みんなと一緒に、フォロワーさんをワクワクさせるような事業を作ったり、
+皆さん自身にも想像もついていないようなマネタイズ成果を出してもらえるのを楽しみにしています！！</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 171 -->
+    <div class="slide-block" id="slide-171">
+      <div class="slide-header">
+        <span class="slide-number">スライド 171</span>
+        <h3>誤字修正</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">誤字「100e万円」を修正</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">あやさんも100e万円超えてたり</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">あやさんも100万円を超えていたり</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 181 -->
+    <div class="slide-block" id="slide-181">
+      <div class="slide-header">
+        <span class="slide-number">スライド 181</span>
+        <h3>Q&A①：自社商品がない人でも大丈夫か</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">Q&A①：自社商品がない人でも大丈夫かを追加</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">では最後に質問タイムに入っていくんですがその前に！
+プロについてよくいただく質問を先に答えますね
+
+みんなも何か聞きたいことや気になることがあったらなんでも気軽に聞いてね！</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">では最後に質問タイムに入っていくんですが、その前に！
+プロについてよくいただく質問を先に答えますね。
+
+1つ目は、
+「まだ自社商品がない人でも入っていいですか？」
+という質問です。
+
+結論、大丈夫です。
+
+PROは、自社商品がすでにある人だけの場所ではありません。
+
+アフィリエイトを伸ばしたい人、
+PRをもっと収益化したい人、
+運用代行に挑戦したい人、
+これから自社商品を作りたい人、
+
+それぞれのルートでマネタイズを伸ばしていけるようにしています。
+
+なので、今の時点で自社商品がないからといって、
+「自分にはまだ早い」と思わなくて大丈夫です。
+
+むしろ、これから何を収益の柱にしていくのかを一緒に整理していく場所だと思ってください。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 182 -->
+    <div class="slide-block" id="slide-182">
+      <div class="slide-header">
+        <span class="slide-number">スライド 182</span>
+        <h3>Q&A②：月1万円未満でも早くないか</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">Q&A②：月1万円未満でも早くないかを追加</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">【メモ欄なし】</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">2つ目は、
+「まだ月1万円も稼げていないのに、PROは早くないですか？」
+という質問です。
+
+これも、全然早すぎません。
+
+むしろ、早い段階で学んだ方がいいです。
+
+自己流で何ヶ月も遠回りしてから学ぶより、
+フォロワー1万人を達成した今、
+正しい売り方を学ぶ方が、今後の伸びが早くなります。
+
+PROは、売れてから学ぶ場所ではありません。
+
+売れる状態を作るための場所です。
+
+今月1万円も稼げていない人でも、
+フォロワー1万人という影響力はすでにあります。
+
+あとは、その影響力を売上に変える方法を学べばいいだけです。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 183 -->
+    <div class="slide-block" id="slide-183">
+      <div class="slide-header">
+        <span class="slide-number">スライド 183</span>
+        <h3>Q&A③：ついていけるか不安への回答</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">Q&A③：ついていけるか不安への回答を追加</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">【メモ欄なし】</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">3つ目は、
+「講座についていけるか不安です」
+という質問です。
+
+これも、すごく自然な不安だと思います。
+
+だからPROでは、
+一気に全部を学ぶ形ではなく、
+10ヶ月かけて月2回ずつ講座を解放していきます。
+
+さらに、週1回のグルコンで相談できるようにしています。
+
+一気に全部やる必要はありません。
+
+今の自分に必要な順番で進めれば大丈夫です。
+
+分からないところが出てきたら、
+質問チャットやグルコンで確認しながら進められます。
+
+一人で抱え込まなくていい環境にしているので、
+不安な人ほど、むしろ活用してほしいです。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スライド 184 -->
+    <div class="slide-block" id="slide-184">
+      <div class="slide-header">
+        <span class="slide-number">スライド 184</span>
+        <h3>Q&A④：月29,800円が不安への回答</h3>
+      </div>
+      <div class="intent">
+        <div class="label">修正意図</div>
+        <div class="content">Q&A④：月29,800円が不安への回答を追加</div>
+      </div>
+      <div class="comparison">
+        <div class="ba-box before">
+          <span class="ba-label">BEFORE</span>
+          <div class="ba-content">【メモ欄なし】</div>
+        </div>
+        <div class="ba-box after">
+          <span class="ba-label">AFTER</span>
+          <div class="ba-content">4つ目は、
+「月29,800円が不安です」
+という質問です。
+
+これは本当に自然です。
+
+月29,800円は、決して軽い金額ではありません。
+
+だからこそ、一括ではなく月額にしています。
+
+まずは1ヶ月、本気で取り組んでみてください。
+
+自分には合わないと思ったら途中で止められます。
+
+高額一括で逃げ場がない形ではなく、
+挑戦しやすい形にしています。
+
+そして、単価3,000円のアフィリエイトなら月10件、
+単価10,000円の商品なら月3件、
+3万円の商品なら1件売れるだけでも回収できます。
+
+もちろん、簡単に売れると言いたいわけではありません。
+
+でも、ここにいるみんなは、すでに1万人以上の影響力があります。
+
+正しい売り方を学べば、
+回収していく現実味は十分にあります。
+
+不安がゼロになってからではなく、
+「変わりたい」という気持ちがあるかどうかで判断してもらえたら嬉しいです。
+
+みんなも何か聞きたいことや気になることがあったら、
+ここから何でも気軽に聞いてくださいね！</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 通しチェック結果 -->
+    <section class="card" id="final-check">
+      <h2>通しチェック結果</h2>
+      <ul class="check-list">
+        <li>修正後は、序盤の悩み提示 → 売り方勉強会 → PROとの棲み分け → 環境説明 → 価格 → 回収イメージ → 申込導線 → クロージング → Q&A、という流れになっています。</li>
+        <li>「ｉサークルだけではマネタイズできない」という誤解が出ないよう、ｉサークルでも人生が変わる・月5万/10万/20万を目指せる前提を追加しました。</li>
+        <li>月1万円未満の人が「自分には早い」と感じないよう、ゼロイチ・月10万・月50万・100万超えの段階設計を追加しました。</li>
+        <li>価格部分は「安いです」ではなく、「回収できる道筋がある」と感じられる流れに変更しました。</li>
+        <li>ベンツ例えは削除し、1万人の影響力を眠らせる機会損失の話に変更しました。</li>
+        <li>Q&Aで「自社商品なし」「月1万円未満」「ついていけるか」「月額不安」の4つを事前に解消しています。</li>
+        <li>NG表現・誤字チェック：残存なし</li>
+      </ul>
+    </section>
+
+    <footer>
+      PRO説明会 修正箇所まとめ｜ビフォーアフター
+    </footer>
+
+  </main>
+</div>
+
+</body>
+</html>
